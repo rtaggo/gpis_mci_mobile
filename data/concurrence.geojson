@@ -1,0 +1,1153 @@
+{
+	"type" : "FeatureCollection",
+	"features" : [{
+			"type" : "Feature",
+			"properties" : {
+				"id" : "33850035800068",
+				"nom" : "LAVOSELF",
+				"adresse" : "23 B RUE ANDRE MALRAUX",
+				"code_postal" : "67150",
+				"ville" : "ERSTEIN",
+				"code_commune" : "67130"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.70238304138184, 48.4164619445801]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "38324713700060",
+				"nom" : "CAR WASH",
+				"adresse" : "RUE DU COLLEGE",
+				"code_postal" : "67850",
+				"ville" : "HERRLISHEIM",
+				"code_commune" : "67194"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.89967107772827, 48.7318077087402]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "39414900900018",
+				"nom" : "CAR WASH",
+				"adresse" : "4 RUE EDMOND MARIN LA MESLEE",
+				"code_postal" : "68000",
+				"ville" : "COLMAR",
+				"code_commune" : "68066"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.36045503616333, 48.102970123291]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "39985454600013",
+				"nom" : "TOP LAVAGE",
+				"adresse" : "9 RUE DES PROMENADES",
+				"code_postal" : "67120",
+				"ville" : "MOLSHEIM",
+				"code_commune" : "67300"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.48689889907837, 48.5469398498535]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "39985454600021",
+				"nom" : "TOP LAVAGE",
+				"adresse" : "47 RUE DU GENERAL LECLERC",
+				"code_postal" : "67210",
+				"ville" : "OBERNAI",
+				"code_commune" : "67348"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.49362516403198, 48.4702568054199]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "39985454600039",
+				"nom" : "TOP LAVAGE",
+				"adresse" : "33 RUE DU PRINTEMPS",
+				"code_postal" : "67150",
+				"ville" : "ERSTEIN",
+				"code_commune" : "67130"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.65876579284667, 48.4261703491211]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "40031584200015",
+				"nom" : "LAVAEST",
+				"adresse" : "RTE DE WEYERSHEIM",
+				"code_postal" : "67760",
+				"ville" : "GAMBSHEIM",
+				"code_commune" : "67151"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.88297414779663, 48.6966400146484]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "40971215500012",
+				"nom" : "LAVAGE DE L EST",
+				"adresse" : "9 RUE DE CHERBOURG",
+				"code_postal" : "67100",
+				"ville" : "STRASBOURG",
+				"code_commune" : "67482"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.78403186798096, 48.5405426025391]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "41285514000015",
+				"nom" : "SOCIETE DE DISTRIBUTION ET DE LAVAGE SELESTADIENNE",
+				"adresse" : "16 RUE DE LA MAISON ROUGE",
+				"code_postal" : "67600",
+				"ville" : "SELESTAT",
+				"code_commune" : "67462"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.46182918548583, 48.2811546325684]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "41511264800407",
+				"nom" : "LAVANCE EXPLOITATION",
+				"adresse" : "170 RUE DES ROMAINS",
+				"code_postal" : "68200",
+				"ville" : "MULHOUSE",
+				"code_commune" : "68224"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.32480001449584, 47.7752647399902]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "41852137300021",
+				"nom" : "PRESTI LAV 'AUTO",
+				"adresse" : "11 C RTE DE BRUMATH",
+				"code_postal" : "67550",
+				"ville" : "VENDENHEIM",
+				"code_commune" : "67506"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.71790313720703, 48.6719245910645]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "41884349600021",
+				"nom" : "ALSA-LAVAGE",
+				"adresse" : "7 RUE DES VOSGES",
+				"code_postal" : "68500",
+				"ville" : "MERXHEIM",
+				"code_commune" : "68203"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.28826808929443, 47.908561706543]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "42085593400014",
+				"nom" : "AUTO MATIC LAVAGE",
+				"adresse" : "5 RUE STANISLAS",
+				"code_postal" : "68000",
+				"ville" : "COLMAR",
+				"code_commune" : "68066"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.35289621353149, 48.0783958435059]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "42085593400022",
+				"nom" : "AUTO MATIC LAVAGE",
+				"adresse" : "PARKING CORA HOUSSEN",
+				"code_postal" : "68125",
+				"ville" : "HOUSSEN",
+				"code_commune" : "68146"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.36462497711182, 48.1202239990234]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "42085593400030",
+				"nom" : "AUTO MATIC LAVAGE",
+				"adresse" : "RTE DE NEUF BRISACH",
+				"code_postal" : "68000",
+				"ville" : "COLMAR",
+				"code_commune" : "68066"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.37023115158081, 48.0798301696777]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "42085593400048",
+				"nom" : "AUTO MATIC LAVAGE",
+				"adresse" : "106 RTE DE GUEMAR",
+				"code_postal" : "68150",
+				"ville" : "RIBEAUVILLE",
+				"code_commune" : "68269"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.34015893936157, 48.1914978027344]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "42303763900014",
+				"nom" : "ESPACE LAVAGE NORD ALSACE",
+				"adresse" : "7 B RUE DES TROIS FONTAINES",
+				"code_postal" : "67310",
+				"ville" : "COSSWILLER",
+				"code_commune" : "67077"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.39861822128296, 48.6277351379395]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "42303763900071",
+				"nom" : "ESPACE LAVAGE NORD ALSACE",
+				"adresse" : "2 RTE DE BOURGHEIM",
+				"code_postal" : "67140",
+				"ville" : "GERTWILLER",
+				"code_commune" : "67155"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.47611713409424, 48.4162673950195]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "42303763900105",
+				"nom" : "ESPACE LAVAGE NORD ALSACE",
+				"adresse" : "RUE DE LA FONTAINE",
+				"code_postal" : "67800",
+				"ville" : "HOENHEIM",
+				"code_commune" : "67204"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.74835300445557, 48.6237106323242]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "42414465700014",
+				"nom" : "CAP'LAV",
+				"adresse" : "2 RUE DES CIGOGNES",
+				"code_postal" : "67270",
+				"ville" : "HOCHFELDEN",
+				"code_commune" : "67202"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.57275199890137, 48.7636032104492]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "43778660100017",
+				"nom" : "CENTER WASH DU GRIESS",
+				"adresse" : "RTE DE KIRCHHEIM",
+				"code_postal" : "67520",
+				"ville" : "MARLENHEIM",
+				"code_commune" : "67282"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.49841117858887, 48.6167907714844]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "44335618300022",
+				"nom" : "BMC LAVAGE",
+				"adresse" : "NIEDERFELD",
+				"code_postal" : "67230",
+				"ville" : "BENFELD",
+				"code_commune" : "67028"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.58041095733643, 48.3750762939453]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "44527822900023",
+				"nom" : "LAV' EAU JET",
+				"adresse" : "12 RUE MERCURE",
+				"code_postal" : "67120",
+				"ville" : "DORLISHEIM",
+				"code_commune" : "67101"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.49379014968872, 48.5254936218262]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "44887190500023",
+				"nom" : "CRYSTAL WASH",
+				"adresse" : "88 RTE DE BISCHWILLER",
+				"code_postal" : "67500",
+				"ville" : "HAGUENAU",
+				"code_commune" : "67180"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.81168794631958, 48.8028564453125]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "44887190500031",
+				"nom" : "CRYSTAL WASH",
+				"adresse" : "RUE TAUBENHOF",
+				"code_postal" : "67500",
+				"ville" : "HAGUENAU",
+				"code_commune" : "67180"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.83877086639404, 48.801025390625]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "44887190500049",
+				"nom" : "CRYSTAL WASH",
+				"adresse" : "5 RUE DU COMMERCE",
+				"code_postal" : "67240",
+				"ville" : "OBERHOFFEN SUR MODER",
+				"code_commune" : "67345"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.87011003494263, 48.7712745666504]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "44887190500056",
+				"nom" : "CRYSTAL WASH",
+				"adresse" : "19 RTE DE STRASBOURG",
+				"code_postal" : "67270",
+				"ville" : "HOCHFELDEN",
+				"code_commune" : "67202"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.5878119468689, 48.7549591064453]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "45294614800023",
+				"nom" : "E.L.A. (ESPACE LAVAGE AUTO)",
+				"adresse" : "16 RUE ANDRE KIENER",
+				"code_postal" : "68000",
+				"ville" : "COLMAR",
+				"code_commune" : "68066"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.37057209014893, 48.1068153381348]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "47807512000012",
+				"nom" : "LAVAGE MULLER",
+				"adresse" : "2 RUE DE L OBERLACH",
+				"code_postal" : "68520",
+				"ville" : "BURNHAUPT LE BAS",
+				"code_commune" : "68059"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.16635179519653, 47.7122421264648]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "47849517900044",
+				"nom" : "LAVAGE PLUS",
+				"adresse" : "57 RTE DE PHALSBOURG",
+				"code_postal" : "67260",
+				"ville" : "SARRE UNION",
+				"code_commune" : "67434"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.09195709228516, 48.9325408935547]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "47869029000018",
+				"nom" : "LAVAGE DU CHATEAU D'EAU",
+				"adresse" : "6 RUE DU POILU",
+				"code_postal" : "68600",
+				"ville" : "VOLGELSHEIM",
+				"code_commune" : "68352"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.53819799423218, 48.0125122070313]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "47869029000026",
+				"nom" : "LAVAGE DU CHATEAU D'EAU",
+				"adresse" : "2 CHE DE LA KRUTENAU",
+				"code_postal" : "68320",
+				"ville" : "MUNTZENHEIM",
+				"code_commune" : "68227"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.4705867767334, 48.1047592163086]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "48468325500034",
+				"nom" : "MOREAU LAVAGE",
+				"adresse" : "ILE NAPOLEON",
+				"code_postal" : "68110",
+				"ville" : "ILLZACH",
+				"code_commune" : "68154"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.38806295394897, 47.7694702148438]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "48468325500059",
+				"nom" : "MOREAU LAVAGE",
+				"adresse" : "4 RUE BAECHEL",
+				"code_postal" : "68470",
+				"ville" : "MITZACH",
+				"code_commune" : "68211"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.00293111801147, 47.8701324462891]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "48472036200025",
+				"nom" : "LE LAVAGE BLEU",
+				"adresse" : "RUE DU GENERAL DE GAULLE",
+				"code_postal" : "68290",
+				"ville" : "MASEVAUX-NIEDERBRUCK",
+				"code_commune" : "68201"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.00003290176392, 47.7738227844238]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "48837950400027",
+				"nom" : "LAVAGE DU RIED",
+				"adresse" : "8 RUE DU HERON",
+				"code_postal" : "67300",
+				"ville" : "SCHILTIGHEIM",
+				"code_commune" : "67447"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.76961898803711, 48.6196022033691]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "49422610300013",
+				"nom" : "MV.LAVAGE",
+				"adresse" : "1 IMP VICTORIA",
+				"code_postal" : "68780",
+				"ville" : "SOPPE LE BAS",
+				"code_commune" : "68313"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.09094905853271, 47.7157745361328]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "49497983400012",
+				"nom" : "LAVAGE PLURIEL",
+				"adresse" : "18 RTE ECOSPACE",
+				"code_postal" : "67120",
+				"ville" : "MOLSHEIM",
+				"code_commune" : "67300"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.5042929649353, 48.5320892333984]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "49798006000022",
+				"nom" : "MERCIER LAVAGE",
+				"adresse" : "130 RUE DE SOULTZ",
+				"code_postal" : "68270",
+				"ville" : "WITTENHEIM",
+				"code_commune" : "68376"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.31130886077881, 47.8114433288574]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "49887067400021",
+				"nom" : "LAVAGE DE LA PLAINE",
+				"adresse" : "19 RUE LA FAYETTE",
+				"code_postal" : "67100",
+				"ville" : "STRASBOURG",
+				"code_commune" : "67482"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.74009609222412, 48.5631790161133]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "49887067400039",
+				"nom" : "LAVAGE DE LA PLAINE",
+				"adresse" : "RUE SAGLIO",
+				"code_postal" : "67100",
+				"ville" : "STRASBOURG",
+				"code_commune" : "67482"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.7408242225647, 48.5561180114746]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "50186617200015",
+				"nom" : "AUTO SLAVIO",
+				"adresse" : "6 RUE JEAN SEBASTIEN DREHER",
+				"code_postal" : "67500",
+				"ville" : "HAGUENAU",
+				"code_commune" : "67180"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.81072616577148, 48.8071060180664]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "50288577500028",
+				"nom" : "M.O. LAVAGE",
+				"adresse" : "RUE DU RIED",
+				"code_postal" : "67310",
+				"ville" : "WASSELONNE",
+				"code_commune" : "67520"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.4538688659668, 48.6328887939453]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "50288577500036",
+				"nom" : "M.O. LAVAGE",
+				"adresse" : "9 RUE DES ANCIENNES CARRIERES",
+				"code_postal" : "67310",
+				"ville" : "COSSWILLER",
+				"code_commune" : "67077"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.39777898788452, 48.6322250366211]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "50288577500044",
+				"nom" : "M.O. LAVAGE",
+				"adresse" : "AV DE LA GARE",
+				"code_postal" : "67560",
+				"ville" : "ROSHEIM",
+				"code_commune" : "67411"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.4836368560791, 48.5002136230469]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "50389871000044",
+				"nom" : "BOUMEDIENE LAVAGE",
+				"adresse" : "RUE DE BERNE",
+				"code_postal" : "68110",
+				"ville" : "ILLZACH",
+				"code_commune" : "68154"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.38392686843872, 47.770923614502]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "52065587900028",
+				"nom" : "LAVAGE AUTO HEIMLICH",
+				"adresse" : "RUE PRINCIPALE",
+				"code_postal" : "67690",
+				"ville" : "HATTEN",
+				"code_commune" : "67184"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.97391796112061, 48.9022254943848]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "52274937300034",
+				"nom" : "CAR WASH 68",
+				"adresse" : "10 RTE DEPARTEMENTALE 201",
+				"code_postal" : "68390",
+				"ville" : "SAUSHEIM",
+				"code_commune" : "68300"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.38706398010254, 47.78857421875]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "53437566200010",
+				"nom" : "LAVAGE MERTZ",
+				"adresse" : "1 CHE DU CUIVRE",
+				"code_postal" : "67200",
+				"ville" : "STRASBOURG",
+				"code_commune" : "67482"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.70994091033936, 48.5836029052734]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "53437566200028",
+				"nom" : "LAVAGE MERTZ",
+				"adresse" : "RUE LOUISE MICHEL",
+				"code_postal" : "67200",
+				"ville" : "STRASBOURG",
+				"code_commune" : "67482"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.70969581604004, 48.584358215332]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "53753771400017",
+				"nom" : "LAVOISIER AUTOS",
+				"adresse" : "45 RUE LAVOISIER",
+				"code_postal" : "68200",
+				"ville" : "MULHOUSE",
+				"code_commune" : "68224"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.32430601119995, 47.7543106079102]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "78927090700023",
+				"nom" : "LAVAGE DE LA CROISIERE",
+				"adresse" : "RUE DE NORMANDIE",
+				"code_postal" : "68700",
+				"ville" : "CERNAY",
+				"code_commune" : "68063"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.17260599136353, 47.7928161621094]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "78959473600017",
+				"nom" : "REMY LAVAGES AUTOS",
+				"adresse" : "43 LE PRE D ARGENT",
+				"code_postal" : "68120",
+				"ville" : "RICHWILLER",
+				"code_commune" : "68270"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.25995588302612, 47.783145904541]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "79790460400015",
+				"nom" : "LAVAGE AUTO MOBILE",
+				"adresse" : "25 AV ARISTIDE BRIAND",
+				"code_postal" : "67100",
+				"ville" : "STRASBOURG",
+				"code_commune" : "67482"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.77659320831299, 48.5689125061035]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "79833339900011",
+				"nom" : "ATC LAVAGE",
+				"adresse" : "RUE DE HABSHEIM",
+				"code_postal" : "68400",
+				"ville" : "RIEDISHEIM",
+				"code_commune" : "68271"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.36691904067993, 47.742259979248]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "79912636200018",
+				"nom" : "SB LAVAGE",
+				"adresse" : "12 RUE DES MESANGES",
+				"code_postal" : "68560",
+				"ville" : "HIRSINGUE",
+				"code_commune" : "68138"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.25568008422852, 47.5889015197754]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "79940435500015",
+				"nom" : "DZ LAVAGE",
+				"adresse" : "ZONE COMMERCIALE DU BUHLFELD",
+				"code_postal" : "68125",
+				"ville" : "HOUSSEN",
+				"code_commune" : "68146"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.36762380599976, 48.1285514831542]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "79952033300011",
+				"nom" : "ROMA LAVAGE",
+				"adresse" : "19 RTE DE SCHNERSHEIM",
+				"code_postal" : "67370",
+				"ville" : "NEUGARTHEIM ITTLENHEIM",
+				"code_commune" : "67228"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.55024480819702, 48.6568908691406]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "80005032000012",
+				"nom" : "ECO WASH",
+				"adresse" : "23 RUE DE MULHOUSE",
+				"code_postal" : "68110",
+				"ville" : "ILLZACH",
+				"code_commune" : "68154"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.34752702713013, 47.7767601013184]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "80023464300016",
+				"nom" : "DOLLINGER LAVAGES SERVICES",
+				"adresse" : "5 RUE DES ROSES",
+				"code_postal" : "67350",
+				"ville" : "MORSCHWILLER",
+				"code_commune" : "67304"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.62725019454956, 48.8202934265137]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "80438935100011",
+				"nom" : "MAGIC LAVAGE",
+				"adresse" : "5 RUE PAUL HENRI SPAAK",
+				"code_postal" : "68390",
+				"ville" : "SAUSHEIM",
+				"code_commune" : "68300"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.38418483734131, 47.7795677185059]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "80968365900019",
+				"nom" : "TOP LAVAGE SERVICES",
+				"adresse" : "89 RUE DU MOULIN",
+				"code_postal" : "67520",
+				"ville" : "KIRCHHEIM",
+				"code_commune" : "67240"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.4955677986145, 48.6113815307617]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "80968365900027",
+				"nom" : "TOP LAVAGE SERVICES",
+				"adresse" : "51 B RUE JOSUE HOFER",
+				"code_postal" : "68200",
+				"ville" : "MULHOUSE",
+				"code_commune" : "68224"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.32576417922974, 47.7618179321289]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "81024040800023",
+				"nom" : "LAVAUTO-MOBILE 67",
+				"adresse" : "89 RTE DE MARIENTHAL",
+				"code_postal" : "67500",
+				"ville" : "HAGUENAU",
+				"code_commune" : "67180"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.80420780181885, 48.7962379455566]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "81030010300027",
+				"nom" : "BELFIL LAVAGE",
+				"adresse" : "130 RUE DE SOULTZ",
+				"code_postal" : "68270",
+				"ville" : "WITTENHEIM",
+				"code_commune" : "68376"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.31130886077881, 47.8114433288574]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "81030010300043",
+				"nom" : "BELFIL LAVAGE",
+				"adresse" : "26 RUE HENRI MATISSE",
+				"code_postal" : "68200",
+				"ville" : "MULHOUSE",
+				"code_commune" : "68224"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.29578495025635, 47.7341041564941]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "81220633200015",
+				"nom" : "U WASH",
+				"adresse" : "13 BD CLEMENCEAU",
+				"code_postal" : "67000",
+				"ville" : "STRASBOURG",
+				"code_commune" : "67482"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.74679517745972, 48.591194152832]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "81224087700017",
+				"nom" : "JL LAVAGE",
+				"adresse" : "34 RUE PRINCIPALE",
+				"code_postal" : "67350",
+				"ville" : "VAL-DE-MODER",
+				"code_commune" : "67372"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.610191822052, 48.8479537963867]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "81919962100023",
+				"nom" : "LAVAGE SCHOTT",
+				"adresse" : "RUE DES BOSQUETS",
+				"code_postal" : "67930",
+				"ville" : "BEINHEIM",
+				"code_commune" : "67025"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [8.08870124816895, 48.8549728393555]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "81976570200017",
+				"nom" : "PRESTI LAV'AUTO PRO",
+				"adresse" : "3 RUE EMILE MATHIS",
+				"code_postal" : "67800",
+				"ville" : "HOENHEIM",
+				"code_commune" : "67204"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.72897815704346, 48.6198120117188]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "82309575700014",
+				"nom" : "SK LAVAGE",
+				"adresse" : "DE L'UFFRIED NORD",
+				"code_postal" : "67480",
+				"ville" : "ROESCHWOOG",
+				"code_commune" : "67405"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [8.02732181549072, 48.821849822998]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "82309575700022",
+				"nom" : "SK LAVAGE",
+				"adresse" : "4 RUE DE DRUSENHEIM",
+				"code_postal" : "67620",
+				"ville" : "SOUFFLENHEIM",
+				"code_commune" : "67472"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.96446895599365, 48.8190460205078]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "82810454700025",
+				"nom" : "STRASWASH",
+				"adresse" : "1 RUE JEAN FREYSZ",
+				"code_postal" : "67113",
+				"ville" : "BLAESHEIM",
+				"code_commune" : "67049"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.60889005661011, 48.5047149658203]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "82972150500016",
+				"nom" : "MULLER LAVAGE",
+				"adresse" : "1 RUE DES TISSERANDS",
+				"code_postal" : "67600",
+				"ville" : "HILSENHEIM",
+				"code_commune" : "67196"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.55478191375732, 48.2825088500977]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "82981984600017",
+				"nom" : "LAVAGE AUTO NIEDER (LAN)",
+				"adresse" : "12 RUE DES TULIPES",
+				"code_postal" : "67500",
+				"ville" : "HAGUENAU",
+				"code_commune" : "67180"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.78627777099609, 48.8032760620117]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "83107294700011",
+				"nom" : "AUTOWASH PARK",
+				"adresse" : "11 RUE DES TOURTERELLES",
+				"code_postal" : "67205",
+				"ville" : "OBERHAUSBERGEN",
+				"code_commune" : "67343"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.67544603347778, 48.6097412109375]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "83135479000014",
+				"nom" : "PEPANWASH LAVAGE",
+				"adresse" : "CENTRE COMMERCIAL INTERMARCHE",
+				"code_postal" : "67230",
+				"ville" : "BENFELD",
+				"code_commune" : "67028"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.59295606613159, 48.3717613220215]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "83268584600012",
+				"nom" : "LAVAUTO",
+				"adresse" : "25 RUE DES MUGUETS",
+				"code_postal" : "68190",
+				"ville" : "ENSISHEIM",
+				"code_commune" : "68082"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.32796001434326, 47.8551254272461]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "83768361400015",
+				"nom" : "QUALIWASH",
+				"adresse" : "89 RUE DU GENERAL DE GAULLE",
+				"code_postal" : "68470",
+				"ville" : "RANSPACH",
+				"code_commune" : "68262"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.01201295852661, 47.8901405334473]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "83845549100012",
+				"nom" : "SELF AUTO WASH",
+				"adresse" : "5 RUE SAINT EXUPERY",
+				"code_postal" : "67500",
+				"ville" : "HAGUENAU",
+				"code_commune" : "67180"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.8083381652832, 48.7939033508301]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "84211241900010",
+				"nom" : "ECF CARWASH",
+				"adresse" : "21 RUE DE WESTHOUSE",
+				"code_postal" : "67230",
+				"ville" : "BENFELD",
+				"code_commune" : "67028"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.59324884414673, 48.3741645812988]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "95046041000042",
+				"nom" : "SARLAV",
+				"adresse" : "59 RTE DE PHALSBOURG",
+				"code_postal" : "67260",
+				"ville" : "SARRE UNION",
+				"code_commune" : "67434"
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.09172105789185, 48.9324073791504]
+			}
+		}
+	]
+}

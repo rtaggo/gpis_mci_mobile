@@ -1,0 +1,31 @@
+{
+  "name": "elephantbleubygaligeo",
+  "version": "0.0.1",
+  "description": "Elephant Bleu App powered by Galigeo",
+  "engines": {
+    "node": "10.x"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "@turf/turf": "^5.1.6",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "nconf": "^0.10.0",
+    "request-promise": "^4.2.4"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rtaggo/elephantbleubygaligeo.git"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "license": "MIT"
+}

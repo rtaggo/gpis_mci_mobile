@@ -1,0 +1,8555 @@
+{
+	"type" : "FeatureCollection",
+	"features" : [{
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2803",
+				"nom" : "LE POINCONNET",
+				"adresse" : "Zone Le Forum",
+				"code_postal" : "36330",
+				"ville" : "Le Poinconnet",
+				"piste_hp" : 4,
+				"piste_pl" : false,
+				"rouleau_lavage" : 1,
+				"aspirateur" : 3,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.735147, 46.793488]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2875",
+				"nom" : "DEOLS",
+				"adresse" : "171 route d'Issoudun",
+				"code_postal" : "36130",
+				"ville" : "Déols",
+				"piste_hp" : 4,
+				"piste_pl" : false,
+				"rouleau_lavage" : 1,
+				"aspirateur" : 3,
+				"gonfleur" : true,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.714528, 46.831163]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2576",
+				"nom" : "CHATEAUROUX - BRYAS",
+				"adresse" : "14 - 16 BOULEVARD BRYAS",
+				"code_postal" : "36000",
+				"ville" : "CHATEAUROUX",
+				"piste_hp" : 6,
+				"piste_pl" : true,
+				"rouleau_lavage" : 1,
+				"aspirateur" : 3,
+				"gonfleur" : true,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.705088, 46.809091]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2575",
+				"nom" : "CHATEAUROUX - ARGENTON",
+				"adresse" : "88 AVENUE D'ARGENTON",
+				"code_postal" : "36000",
+				"ville" : "CHATEAUROUX",
+				"piste_hp" : 5,
+				"piste_pl" : false,
+				"rouleau_lavage" : 0,
+				"aspirateur" : 3,
+				"gonfleur" : true,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.672604, 46.803487]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2627",
+				"nom" : "LE PECHEREAU",
+				"adresse" : "RUE DE LA CROIX DE L'AUMAY",
+				"code_postal" : "36200",
+				"ville" : "LE PECHEREAU",
+				"piste_hp" : 2,
+				"piste_pl" : false,
+				"rouleau_lavage" : 1,
+				"aspirateur" : 0,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.530868, 46.579975]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2390",
+				"nom" : "BOURGES",
+				"adresse" : "BOULEVARD DE L'AVENIR",
+				"code_postal" : "18000",
+				"ville" : "BOURGES",
+				"piste_hp" : 4,
+				"piste_pl" : true,
+				"rouleau_lavage" : 0,
+				"aspirateur" : 4,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.383244, 47.081257]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2647",
+				"nom" : "SAINT DOULCHARD",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.380794, 47.101287]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2644",
+				"nom" : "VIERZON",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.087335, 47.236784]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2385",
+				"nom" : "DOMERAT",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.572447, 46.33839]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2830",
+				"nom" : "MONTMORILLON",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.854433, 46.418624]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2651",
+				"nom" : "COSNE COURS SUR LOIRE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.922092, 47.395392]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2560",
+				"nom" : "CHATELLERAULT",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.5489, 46.84127]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2650",
+				"nom" : "CHATELLERAULT - FEU VERT",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.524806, 46.788287]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2680",
+				"nom" : "AVERMES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.317543, 46.58478]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2591",
+				"nom" : "BEAUNE LES MINES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.2978, 45.909103]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2645",
+				"nom" : "YZEURE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.342013, 46.545255]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2793",
+				"nom" : "TOURS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.704573, 47.424146]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2716",
+				"nom" : "LIMOGES Nord",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.261813, 45.848471]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2534",
+				"nom" : "DECIZE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.469692, 46.83569]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2661",
+				"nom" : "LIMOGES - CASSEAUX",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.275143, 45.835681]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2653",
+				"nom" : "LIMOGES (Sud)",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.276053, 45.821059]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2625",
+				"nom" : "SAINT JEAN LE BLANC",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.943523, 47.873911]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2687",
+				"nom" : "CHATEAUNEUF SUR LOIRE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.200068, 47.861195]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2972",
+				"nom" : "CHASSENEUIL DU POITOU",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.363959, 46.650143]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2989",
+				"nom" : "CHECY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.03253, 47.90628]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2783",
+				"nom" : "SAINT JUNIEN",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.920416, 45.899975]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2642",
+				"nom" : "POITIERS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.30927, 46.552957]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2951",
+				"nom" : "SARAN",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.8907, 47.958175]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2595",
+				"nom" : "AMILLY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.733855, 47.979504]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2596",
+				"nom" : "CHALETTE SUR LOING",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.722412, 48.006958]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2511",
+				"nom" : "RUFFEC",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.183471, 46.025655]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2776",
+				"nom" : "SAUMUR",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-0.05453, 47.281003]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2425",
+				"nom" : "DIGOIN",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.985784, 46.479096]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2433",
+				"nom" : "AUXERRE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.558113, 47.797368]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2434",
+				"nom" : "AVALLON",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.902756, 47.492171]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2699",
+				"nom" : "PARAY LE MONIAL",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.108135, 46.451622]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2439",
+				"nom" : "THIVIERS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.926066, 45.422648]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2438",
+				"nom" : "NONTRON",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.659694, 45.530194]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2669",
+				"nom" : "NEMOURS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.71381, 48.2674]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2436",
+				"nom" : "ILLIERS COMBRAY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.255021, 48.305947]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2521",
+				"nom" : "MILLY LA FORET",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.426363, 48.397432]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2799",
+				"nom" : "CHAMPNIERS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.182368, 45.685438]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2568",
+				"nom" : "ETAMPES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.138084, 48.440465]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2629",
+				"nom" : "LE MANS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.220011, 47.983187]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2728",
+				"nom" : "CHARTRES LE COUDRAY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.510684, 48.43024]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2435",
+				"nom" : "SENS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.265243, 48.195648]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2519",
+				"nom" : "LUCE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.464371, 48.430765]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2648",
+				"nom" : "ANGOULEME - SAINT ANTOINE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.162976, 45.660568]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2737",
+				"nom" : "MONTCEAU LES MINES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.36353, 46.681286]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2762",
+				"nom" : "NIORT",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-0.41062, 46.335478]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2613",
+				"nom" : "CHARTRES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.518865, 48.451126]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2566",
+				"nom" : "SAINT DENIS LES SENS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.274177, 48.21308]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2530",
+				"nom" : "ECUELLES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.827523, 48.368973]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2641",
+				"nom" : "ANGOULEME",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.132297, 45.640018]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2490",
+				"nom" : "CHAMPHOL",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.510242, 48.472033]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2398",
+				"nom" : "MARGON",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.833872, 48.332282]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2757",
+				"nom" : "AVON",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.739409, 48.423201]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2607",
+				"nom" : "VILLENEUVE LA GUYARD",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.06493, 48.334739]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2475",
+				"nom" : "ITTEVILLE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.35091, 48.499737]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2598",
+				"nom" : "VILLIERS EN BIERE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.579735, 48.500683]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2470",
+				"nom" : "CHARTRETTES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.69689, 48.483421]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2428",
+				"nom" : "DAMMARIE LES LYS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.644497, 48.525899]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2817",
+				"nom" : "LA NORVILLE",
+				"adresse" : "2 ALLEE DE LA MARE JACOB",
+				"code_postal" : "91290",
+				"ville" : "LA NORVILLE",
+				"piste_hp" : 5,
+				"piste_pl" : true,
+				"rouleau_lavage" : 1,
+				"aspirateur" : 5,
+				"gonfleur" : true,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.256674, 48.578609]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2571",
+				"nom" : "LE MEE SUR SEINE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.616023, 48.532592]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2851",
+				"nom" : "SAINT BARTHELEMY D'ANJOU",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-0.519317, 47.469626]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2792",
+				"nom" : "TRELISSAC",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.736367, 45.195962]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2759",
+				"nom" : "MAINTENON",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.569604, 48.579855]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2457",
+				"nom" : "MENNECY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.445674, 48.566363]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2689",
+				"nom" : "ANGERS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-0.524222, 47.481147]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2838",
+				"nom" : "PERIGUEUX",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.67805, 45.199731]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2588",
+				"nom" : "VAUX LE PENIL",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.679729, 48.541359]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2505",
+				"nom" : "JARNAC",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-0.159597, 45.680737]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2551",
+				"nom" : "VILLABE",
+				"adresse" : "PARKING CARREFOUR ROUTE DE VILLOISON",
+				"code_postal" : "91100",
+				"ville" : "VILLABE",
+				"piste_hp" : 4,
+				"piste_pl" : false,
+				"rouleau_lavage" : 2,
+				"aspirateur" : 5,
+				"gonfleur" : false,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.449129, 48.585785]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2587",
+				"nom" : "RUBELLES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.671157, 48.552657]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2498",
+				"nom" : "MARSAC SUR L'ISLE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.661521, 45.184512]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2866",
+				"nom" : "RAMBOUILLET",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.827958, 48.629243]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2394",
+				"nom" : "MONTBARD",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.345975, 47.621417]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2639",
+				"nom" : "SAVIGNY LE TEMPLE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.591587, 48.58582]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2780",
+				"nom" : "SAINT MICHEL SUR ORGE",
+				"adresse" : "RUE DES PROCESSIONS",
+				"code_postal" : "91240",
+				"ville" : "SAINT MICHEL SUR ORGE",
+				"piste_hp" : 5,
+				"piste_pl" : true,
+				"rouleau_lavage" : null,
+				"aspirateur" : 5,
+				"gonfleur" : true,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.297957, 48.629323]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2542",
+				"nom" : "LIEUSAINT",
+				"adresse" : "PARKING CARREFOUR CENTRE COMMERCIAL CARRE SENART",
+				"code_postal" : "77127",
+				"ville" : "LIEUSAINT",
+				"piste_hp" : 4,
+				"piste_pl" : false,
+				"rouleau_lavage" : 2,
+				"aspirateur" : 3,
+				"gonfleur" : false,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.549962, 48.616777]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2982",
+				"nom" : "SAINT JEAN D'ANGELY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-0.502052, 45.949855]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2715",
+				"nom" : "SAINT JEAN D'ANGELY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-0.509094, 45.945044]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2541",
+				"nom" : "LES ULIS",
+				"adresse" : "PARKING CARREFOUR CENTRE COMMECIAL DES ULIS II",
+				"code_postal" : "91940",
+				"ville" : "LES ULIS",
+				"piste_hp" : 3,
+				"piste_pl" : false,
+				"rouleau_lavage" : 1,
+				"aspirateur" : 2,
+				"gonfleur" : false,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.175397, 48.675911]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2750",
+				"nom" : "EPINAY SUR ORGE",
+				"adresse" : "23 RUE DE GRAND VAUX",
+				"code_postal" : "91360",
+				"ville" : "EPINAY SUR ORGE",
+				"piste_hp" : 3,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : 2,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.337761, 48.667926]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2968",
+				"nom" : "VILLEBON SUR YVETTE",
+				"adresse" : "1 CHEMIN DEPARTEMENTAL 118",
+				"code_postal" : "91140",
+				"ville" : "VILLEBON SUR YVETTE",
+				"piste_hp" : 6,
+				"piste_pl" : true,
+				"rouleau_lavage" : 1,
+				"aspirateur" : 10,
+				"gonfleur" : true,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.218366, 48.685669]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2465",
+				"nom" : "RIBERAC",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.344706, 45.24141]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2529",
+				"nom" : "CHOLET",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-0.832649, 47.077509]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2608",
+				"nom" : "SAULX LES CHARTREUX",
+				"adresse" : "RUE DE LA LIBERATION",
+				"code_postal" : "91160",
+				"ville" : "SAULX LES CHARTREUX",
+				"piste_hp" : 4,
+				"piste_pl" : false,
+				"rouleau_lavage" : 2,
+				"aspirateur" : 4,
+				"gonfleur" : true,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.286955, 48.688096]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2823",
+				"nom" : "VIRY CHATILLON",
+				"adresse" : "107 AV. DU GAL DE GAULLE",
+				"code_postal" : "91170",
+				"ville" : "VIRY CHATILLON",
+				"piste_hp" : 5,
+				"piste_pl" : true,
+				"rouleau_lavage" : null,
+				"aspirateur" : 4,
+				"gonfleur" : false,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.380197, 48.680075]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2796",
+				"nom" : "NANGIS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.022927, 48.557409]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2868",
+				"nom" : "DRAVEIL",
+				"adresse" : "46 RUE DU BOUT DES CREUSES",
+				"code_postal" : "91210",
+				"ville" : "DRAVEIL",
+				"piste_hp" : 6,
+				"piste_pl" : true,
+				"rouleau_lavage" : 1,
+				"aspirateur" : 6,
+				"gonfleur" : true,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.428706, 48.681187]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2713",
+				"nom" : "COGNAC",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-0.329046, 45.684385]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2471",
+				"nom" : "FONTENAY LE COMTE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-0.825351, 46.465094]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2974",
+				"nom" : "CHAGNY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.750012, 46.92]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2593",
+				"nom" : "MONTGERON",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.454795, 48.696015]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2829",
+				"nom" : "PARAY VIEILLE POSTE",
+				"adresse" : "ANGLE RN7",
+				"code_postal" : "91550",
+				"ville" : "PARAY VIEILLE POSTE",
+				"piste_hp" : 5,
+				"piste_pl" : true,
+				"rouleau_lavage" : null,
+				"aspirateur" : 4,
+				"gonfleur" : false,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.370893, 48.710782]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2594",
+				"nom" : "MASSY",
+				"adresse" : "13 AVENUE DU MARECHAL JUIN CONCESSION OPEL",
+				"code_postal" : "91300",
+				"ville" : "MASSY",
+				"piste_hp" : 3,
+				"piste_pl" : false,
+				"rouleau_lavage" : 1,
+				"aspirateur" : 3,
+				"gonfleur" : false,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.284256, 48.721556]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2837",
+				"nom" : "VILLENEUVE LE ROI",
+				"adresse" : "47 AV. LE FOLL",
+				"code_postal" : "94290",
+				"ville" : "VILLENEUVE LE ROI",
+				"piste_hp" : 5,
+				"piste_pl" : true,
+				"rouleau_lavage" : null,
+				"aspirateur" : 4,
+				"gonfleur" : false,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.436117, 48.727665]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2862",
+				"nom" : "DREUX - CHURCHILL",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.387532, 48.741613]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2670",
+				"nom" : "PROVINS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.310181, 48.55766]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2863",
+				"nom" : "DREUX - BATES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.344865, 48.740401]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2753",
+				"nom" : "CHALON SUR SAONE - CC LA THALIE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.835633, 46.79709]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2391",
+				"nom" : "BEAUNE - CC CASINO",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.840239, 47.019282]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2725",
+				"nom" : "CHALON SUR SAONE - CC LECLERC",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.85523, 46.812527]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2532",
+				"nom" : "CHALON  SUR  SAONE - CC CARREFOUR",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.859358, 46.773609]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2818",
+				"nom" : "BEAUNE - RTE DE SEURRE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.856603, 47.019353]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2643",
+				"nom" : "FONTENAY TRESIGNY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.856375, 48.711746]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2553",
+				"nom" : "NONANCOURT",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.21232, 48.76422]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2811",
+				"nom" : "PLAISIR",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.965766, 48.826482]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2546",
+				"nom" : "PONTAULT COMBAULT",
+				"adresse" : "CENTRE COMMERCIAL CARREFOUR",
+				"code_postal" : "77340",
+				"ville" : "PONTAULT COMBAULT",
+				"piste_hp" : 4,
+				"piste_pl" : true,
+				"rouleau_lavage" : 1,
+				"aspirateur" : 2,
+				"gonfleur" : true,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.604244, 48.776394]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2533",
+				"nom" : "CRECHES SUR SAONE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.789521, 46.252427]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2825",
+				"nom" : "MACON - LA CHANAYE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.808135, 46.280604]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2477",
+				"nom" : "VERNEUIL SUR AVRE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.93656, 48.737705]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2763",
+				"nom" : "CHAMPIGNY SUR MARNE",
+				"adresse" : "150 AV. DU GENERAL DE GAULLE",
+				"code_postal" : "94500",
+				"ville" : "CHAMPIGNY SUR MARNE",
+				"piste_hp" : 6,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : 6,
+				"gonfleur" : false,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.497681, 48.823935]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2484",
+				"nom" : "ROISSY EN BRIE",
+				"adresse" : "CENTRE DE LAVAGE ELEPHANT BLEU 5 SQUARE LOUIS BLANC - ZAC DU",
+				"code_postal" : "77680",
+				"ville" : "ROISSY EN BRIE",
+				"piste_hp" : 5,
+				"piste_pl" : true,
+				"rouleau_lavage" : 1,
+				"aspirateur" : 5,
+				"gonfleur" : true,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.629503, 48.80152]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2386",
+				"nom" : "TROYES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.075714, 48.288591]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2775",
+				"nom" : "SAINTES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-0.674243, 45.747187]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2486",
+				"nom" : "CHATILLON/SEINE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.575001, 47.862624]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2423",
+				"nom" : "VILLEFRANCHE  SUR  SAONE - BLAZET",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.719051, 45.981056]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2544",
+				"nom" : "MONTREUIL",
+				"adresse" : "PARKING CARREFOUR 280 RUE DE PARIS",
+				"code_postal" : "93556",
+				"ville" : "MONTREUIL",
+				"piste_hp" : 4,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : 2,
+				"gonfleur" : false,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.417364, 48.855275]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2808",
+				"nom" : "TROYES - VANIER",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.072428, 48.303915]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2969",
+				"nom" : "ANET",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.455485, 48.862418]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2504",
+				"nom" : "ROMILLY SUR SEINE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.715371, 48.509863]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2688",
+				"nom" : "VILLEFRANCHE  SUR  SAONE - FRANS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.734394, 45.984774]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2708",
+				"nom" : "NUITS SAINT GEORGES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.967723, 47.133772]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2634",
+				"nom" : "TROYES - 78 AV ROBERT SCHUMANN",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.093106, 48.305454]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2797",
+				"nom" : "TROYES - 155 AV. ROBERT SCHUMANN",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.096585, 48.310101]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2429",
+				"nom" : "CHAMBOURCY",
+				"adresse" : "36 ROUTE DE MANTES",
+				"code_postal" : "78240",
+				"ville" : "CHAMBOURCY",
+				"piste_hp" : 6,
+				"piste_pl" : true,
+				"rouleau_lavage" : null,
+				"aspirateur" : 5,
+				"gonfleur" : true,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.048949, 48.906649]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2960",
+				"nom" : "SAINT THIBAULT DES VIGNES",
+				"adresse" : "31 AVENUE ST GERMAIN DES NOYERS ZAC DE ST THIBAULT DES VIGNES",
+				"code_postal" : "77400",
+				"ville" : "SAINT THIBAULT DES VIGNES",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : 2,
+				"aspirateur" : 3,
+				"gonfleur" : false,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.672053, 48.860488]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2705",
+				"nom" : "ORGEVAL",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.974444, 48.930713]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2857",
+				"nom" : "MONTESSON",
+				"adresse" : "PARKING CARREFOUR AVENUE GABRIEL PERI",
+				"code_postal" : "78360",
+				"ville" : "MONTESSON",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : 1,
+				"aspirateur" : 2,
+				"gonfleur" : true,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.145241, 48.929993]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2456",
+				"nom" : "SAINT SULPICE SUR RISLE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.642504, 48.761076]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2393",
+				"nom" : "CHENOVE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.019572, 47.287175]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2574",
+				"nom" : "MOUROUX",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.05337, 48.817664]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2476",
+				"nom" : "COULOMMIERS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.092812, 48.808418]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2577",
+				"nom" : "LE CHAMBON FEUGEROLLES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.312246, 45.395042]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2611",
+				"nom" : "ST DENIS",
+				"adresse" : "14 AVENUE JEAN MOULIN",
+				"code_postal" : "93200",
+				"ville" : "ST DENIS",
+				"piste_hp" : 4,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : 4,
+				"gonfleur" : true,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.364684, 48.941242]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2474",
+				"nom" : "FLINS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.865814, 48.965901]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2985",
+				"nom" : "VILLETANEUSE",
+				"adresse" : "68 ROUTE DE SAINT LEU",
+				"code_postal" : "93430",
+				"ville" : "VILLETANEUSE",
+				"piste_hp" : 3,
+				"piste_pl" : true,
+				"rouleau_lavage" : 2,
+				"aspirateur" : 5,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.338729, 48.95197]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2636",
+				"nom" : "MASSIEUX",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.818269, 45.903852]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2392",
+				"nom" : "AHUY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.035451, 47.356497]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2752",
+				"nom" : "MAGNANVILLE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.693217, 48.977968]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2706",
+				"nom" : "SANNOIS",
+				"adresse" : "170 BLD GAMBETTA",
+				"code_postal" : "95110",
+				"ville" : "SANNOIS",
+				"piste_hp" : 5,
+				"piste_pl" : true,
+				"rouleau_lavage" : null,
+				"aspirateur" : 5,
+				"gonfleur" : true,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.236955, 48.97964]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2615",
+				"nom" : "SEVRAN",
+				"adresse" : "AVENUE MARTIN LUTHER KING - C.C. CARREFOUR",
+				"code_postal" : "93270",
+				"ville" : "SEVRAN",
+				"piste_hp" : 4,
+				"piste_pl" : false,
+				"rouleau_lavage" : 1,
+				"aspirateur" : 3,
+				"gonfleur" : false,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.528749, 48.951282]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2672",
+				"nom" : "BERGERAC",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.475403, 44.846355]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2469",
+				"nom" : "SAINT GEREON",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-1.188232, 47.372462]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2807",
+				"nom" : "DIJON",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.064285, 47.338517]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2592",
+				"nom" : "GARGES LES GONESSE",
+				"adresse" : "BOULEVARD DE LA MUETTE C/C CORA",
+				"code_postal" : "95140",
+				"ville" : "GARGES LES GONESSE",
+				"piste_hp" : 5,
+				"piste_pl" : false,
+				"rouleau_lavage" : 1,
+				"aspirateur" : 6,
+				"gonfleur" : true,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.416182, 48.976132]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2535",
+				"nom" : "ECULLY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.775858, 45.786085]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2970",
+				"nom" : "EAUBONNE",
+				"adresse" : "1 AV.DE LA 1ERE ARMEE FRANCAISE",
+				"code_postal" : "95600",
+				"ville" : "EAUBONNE",
+				"piste_hp" : 2,
+				"piste_pl" : false,
+				"rouleau_lavage" : 1,
+				"aspirateur" : 1,
+				"gonfleur" : false,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.271233, 48.995222]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2531",
+				"nom" : "CLAYE SOUILLY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.665995, 48.951918]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2472",
+				"nom" : "BRIVES CHARENSAC",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.911771, 45.049717]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2987",
+				"nom" : "PIERRELAYE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.142472, 49.021663]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2567",
+				"nom" : "MENUCOURT",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.991315, 49.029308]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2789",
+				"nom" : "SAINT BERTHEVIN",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-0.802445, 48.06926]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2751",
+				"nom" : "SAINT AQUILIN DE PACY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.372966, 49.011809]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2427",
+				"nom" : "MEAUX - AVENUE FOCH",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.894562, 48.955921]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2489",
+				"nom" : "CONCHES EN OUCHE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.948067, 48.953232]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2668",
+				"nom" : "MEAUX - AVENUE VICTOIRE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.909172, 48.956835]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2453",
+				"nom" : "PUISEUX PONTOISE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.017147, 49.055127]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2578",
+				"nom" : "SEZANNE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.732009, 48.713035]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2834",
+				"nom" : "EVREUX - ANATOLE FRANCE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.158019, 49.005101]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2828",
+				"nom" : "IS SUR TILLE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.113277, 47.528418]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2880",
+				"nom" : "OSNY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.076634, 49.077042]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2884",
+				"nom" : "OSNY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.076634, 49.077042]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2747",
+				"nom" : "GENLIS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.220826, 47.245805]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2396",
+				"nom" : "EVREUX - MARECHAL FOCH",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.127058, 49.024118]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2983",
+				"nom" : "SAINT MARD",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.6859485, 49.0403099]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2874",
+				"nom" : "MOUILLERON LE CAPTIF",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-1.427459, 46.724611]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2455",
+				"nom" : "LA ROCHE SUR YON",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-1.442141, 46.65821]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2487",
+				"nom" : "ROYAN",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-1.005236, 45.63065]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2443",
+				"nom" : "BASSE GOULAINE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-1.454417, 47.186313]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2782",
+				"nom" : "MAGNY EN VEXIN - RUE GUTENBERG",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.785599, 49.147288]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2561",
+				"nom" : "BAR SUR AUBE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.701617, 48.237996]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2445",
+				"nom" : "MAGNY EN VEXIN - RUE DE ROUEN",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.783577, 49.15785]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2652",
+				"nom" : "AUXONNE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.391073, 47.191632]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2787",
+				"nom" : "GAILLON",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.350229, 49.169282]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2978",
+				"nom" : "BEAUMONT LE ROGER",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.764061, 49.080138]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2523",
+				"nom" : "CHATEAUBRIANT",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-1.384183, 47.706751]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2824",
+				"nom" : "DOLE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.474643, 47.080165]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2671",
+				"nom" : "BERNAY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.578834, 49.070183]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2500",
+				"nom" : "CROSVILLE LA VIEILLE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.916288, 49.15484]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2781",
+				"nom" : "LA MONTAGNE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-1.678704, 47.174853]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2744",
+				"nom" : "LONS LE SAUNIER",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.573198, 46.670724]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2573",
+				"nom" : "LE VAUDREUIL",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.193502, 49.252801]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2630",
+				"nom" : "CREPY EN VALOIS - CC BRICOMARCHE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.905798, 49.224456]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2603",
+				"nom" : "CREPY EN VALOIS - CC INTERMARCHE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.891452, 49.231835]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2590",
+				"nom" : "SAINTE EULALIE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-0.487838, 44.906689]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2570",
+				"nom" : "SAINTS GEOSMES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.335723, 47.833627]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2640",
+				"nom" : "SAINT PIERRE DES FLEURS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.963551, 49.247754]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2612",
+				"nom" : "BRIONNE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.71622, 49.201522]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2473",
+				"nom" : "CHATEAU D'OLONNE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-1.750421, 46.492997]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2401",
+				"nom" : "LANGRES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.341187, 47.870987]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2518",
+				"nom" : "PONT STE MAXENCE 943",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.590281, 49.307106]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2826",
+				"nom" : "PONT STE MAXENCE 853",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.592738, 49.307352]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2624",
+				"nom" : "OLONNE SUR MER",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-1.772913, 46.542495]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2726",
+				"nom" : "CAUDEBEC LES ELBEUF",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.033521, 49.288952]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2424",
+				"nom" : "ARC LES GRAY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.590136, 47.454123]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2955",
+				"nom" : "GRAY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.6001974, 47.4355763]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2550",
+				"nom" : "TOURVILLE LA RIVIERE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.099048, 49.327948]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2491",
+				"nom" : "BOURGTHEROULDE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.877824, 49.291963]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2610",
+				"nom" : "CHALLANS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-1.871965, 46.835453]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2387",
+				"nom" : "LISIEUX",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.239749, 49.14592]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2885",
+				"nom" : "FOUGERES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-1.1853306, 48.3514828]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2801",
+				"nom" : "NOGENT",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.350478, 48.032993]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2881",
+				"nom" : "LA CROIX SAINT OUEN",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.776611, 49.361011]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2977",
+				"nom" : "BEGLES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-0.535995, 44.789351]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2605",
+				"nom" : "GRAND COURONNE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.014768, 49.364376]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2675",
+				"nom" : "MERIGNAC",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-0.638601, 44.833131]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2589",
+				"nom" : "SAINT ETIENNE DU ROUVRAY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.102394, 49.397147]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2448",
+				"nom" : "MOYVILLIERS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.646299, 49.414027]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2543",
+				"nom" : "MERIGNAC Soleil",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-0.654843, 44.831442]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2806",
+				"nom" : "JAUX-COMPIEGNE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.77706, 49.404483]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2674",
+				"nom" : "VILLENAVE D'ORNON",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-0.57762, 44.77038]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2609",
+				"nom" : "SAINT VIT",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.828387, 47.186125]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2522",
+				"nom" : "FERRIERES EN BRAY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.73986, 49.478357]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2827",
+				"nom" : "COMPIEGNE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.817368, 49.418862]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2991",
+				"nom" : "DARNETAL",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.138032, 49.435991]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2620",
+				"nom" : "ROUTOT",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.72407, 49.379107]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2772",
+				"nom" : "SAINT CLAUDE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.830403, 46.381997]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2397",
+				"nom" : "PONT AUDEMER",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.534218, 49.349204]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2426",
+				"nom" : "BOIS GUILLAUME",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.122907, 49.462503]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2638",
+				"nom" : "SOISSONS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.327419, 49.370643]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2413",
+				"nom" : "LONGUEIL ANNEL",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.862002, 49.469654]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2555",
+				"nom" : "BEUZEVILLE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.355178, 49.346263]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2619",
+				"nom" : "SOYONS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.861376, 44.919527]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2458",
+				"nom" : "BESANCON - ZAC CHATEAUFARINE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.955961, 47.219884]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2527",
+				"nom" : "LE TRAIT",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.809195, 49.480958]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2732",
+				"nom" : "MONTAUBAN",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.36949, 44.02867]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2794",
+				"nom" : "BESANCON - TILLEROYES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.984754, 47.244025]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2833",
+				"nom" : "SAINT PAUL LES ROMANS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.099549, 45.056217]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2528",
+				"nom" : "CORMONTREUIL",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.061445, 49.216734]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2400",
+				"nom" : "REIMS TINQUEUX",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.976222, 49.250296]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2720",
+				"nom" : "REIMS - BVD WILSON",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.01717, 49.241545]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2865",
+				"nom" : "BARENTIN",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.964901, 49.536236]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2975",
+				"nom" : "REIMS - BVD LUMIERE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.041289, 49.239898]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2764",
+				"nom" : "TOUQUES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.098158, 49.348849]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2864",
+				"nom" : "REIMS - CROIX BLANDIN",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.08299, 49.236437]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2628",
+				"nom" : "REIMS LA NEUVILLETTE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.006772, 49.287418]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2835",
+				"nom" : "REIMS - RTE DE WITRY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.062873, 49.266215]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2749",
+				"nom" : "CAEN",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-0.411017, 49.186291]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2667",
+				"nom" : "NOYON",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.978778, 49.569937]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2887",
+				"nom" : "SAINT GENIS POUILLY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [6.029271, 46.262433]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2525",
+				"nom" : "BAR LE DUC",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.193008, 48.756933]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2562",
+				"nom" : "LE HAVRE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.155991, 49.489078]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2721",
+				"nom" : "CHAUNY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.213318, 49.625039]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2513",
+				"nom" : "MONTELIMAR",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.74347, 44.578249]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2618",
+				"nom" : "LAON - AV POMPIDOU",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.618018, 49.549748]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2440",
+				"nom" : "CHAMBERY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.892443, 45.604023]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2383",
+				"nom" : "CONDREN",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.27348, 49.648375]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2495",
+				"nom" : "HOUTAUD",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [6.3183, 46.914198]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2384",
+				"nom" : "LAON - RUE D'ALEMBERT",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.646774, 49.571356]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2702",
+				"nom" : "TERGNIER",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.321982, 49.655882]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2461",
+				"nom" : "LA FERE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.380178, 49.661072]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2389",
+				"nom" : "SAINT VIGOR LE GRAND",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-0.687078, 49.283687]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2767",
+				"nom" : "VITTEL",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.941047, 48.201053]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2774",
+				"nom" : "ROSIERES EN SANTERRE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.711815, 49.825986]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2559",
+				"nom" : "GLISY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.393769, 49.865023]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2430",
+				"nom" : "AMIENS - JULES FERRY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.342094, 49.877111]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2655",
+				"nom" : "GRANVILLE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-1.556473, 48.837658]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2734",
+				"nom" : "AMIENS - SAINT PIERRE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.301928, 49.90254]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2790",
+				"nom" : "FOUILLOY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.492992, 49.898021]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2773",
+				"nom" : "AMIENS NORD",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.30188, 49.925055]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2954",
+				"nom" : "LANVALLAY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-2.0265954, 48.4535524]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2760",
+				"nom" : "TOULOUSE (ATLANTA)",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.467585, 43.64135]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2673",
+				"nom" : "SAINT QUENTIN",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.31345, 49.840491]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2730",
+				"nom" : "COUTANCES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-1.434175, 49.06176]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2549",
+				"nom" : "TOULOUSE (Purpan)",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.395683, 43.609503]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2736",
+				"nom" : "MORTEAU",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [6.608676, 47.056514]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2804",
+				"nom" : "PERONNE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.931654, 49.94125]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2703",
+				"nom" : "BISCAROSSE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-1.162534, 44.404277]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2468",
+				"nom" : "VILLERS LE LAC",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [6.673907, 47.059748]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2539",
+				"nom" : "LABEGE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.50506, 43.550318]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2460",
+				"nom" : "PORTET SUR GARONNE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.403587, 43.530155]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2761",
+				"nom" : "FRIVILLE ESCARBOTIN",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.538077, 50.075268]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2406",
+				"nom" : "HAUDAINVILLE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.409581, 49.144273]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2497",
+				"nom" : "VERDUN",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.381061, 49.166353]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2431",
+				"nom" : "ABBEVILLE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.831337, 50.112882]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2657",
+				"nom" : "ORANGE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.803123, 44.147212]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2779",
+				"nom" : "SALLANCHES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [6.639274, 45.927765]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2526",
+				"nom" : "DOULLENS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.347394, 50.159627]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2604",
+				"nom" : "SAINT VALERY SUR SOMME",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.632949, 50.173899]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2481",
+				"nom" : "MONTBELIARD",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [6.812215, 47.498043]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2564",
+				"nom" : "LOCMINE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-2.825303, 47.876377]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2662",
+				"nom" : "MIMIZAN",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-1.224268, 44.204606]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2547",
+				"nom" : "SAINT CLEMENT DE RIVIERE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.843786, 43.64693]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2872",
+				"nom" : "NANCY MIRECOURT",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [6.193829, 48.672451]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2873",
+				"nom" : "NANCY LOBAU",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [6.195057, 48.687387]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2871",
+				"nom" : "MAXEVILLE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [6.16888, 48.715466]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2585",
+				"nom" : "PLUNERET",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-2.961945, 47.667575]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2565",
+				"nom" : "FROUARD",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [6.149562, 48.742955]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2545",
+				"nom" : "NIMES SUD",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.393745, 43.817]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2769",
+				"nom" : "LES ANGLES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.763749, 43.957901]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2745",
+				"nom" : "AURAY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-3.006215, 47.663126]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2405",
+				"nom" : "ESSEY LES NANCY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [6.2377, 48.708384]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2580",
+				"nom" : "LE CATEAU CAMBRESIS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.548168, 50.103379]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2464",
+				"nom" : "RUE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.660842, 50.27548]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2548",
+				"nom" : "SAINT JEAN VEDAS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.846083, 43.570917]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2649",
+				"nom" : "AVIGNON",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [4.835309, 43.952238]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2540",
+				"nom" : "LATTES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.931086, 43.580535]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2601",
+				"nom" : "AVESNES LE COMTE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.54735, 50.283014]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2606",
+				"nom" : "RAMBERVILLERS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [6.634313, 48.338751]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2839",
+				"nom" : "SOLESMES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.489883, 50.189223]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2729",
+				"nom" : "VALOGNES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-1.500321, 49.514214]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2451",
+				"nom" : "LUNEVILLE - CC LECLERC",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [6.493113, 48.598269]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2467",
+				"nom" : "SAINTE CATHERINE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.761935, 50.313665]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2402",
+				"nom" : "LUNEVILLE - CC CORA",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [6.514584, 48.579523]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2686",
+				"nom" : "MEZE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.608793, 43.430241]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2579",
+				"nom" : "BEZIERS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.252711, 43.350691]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2986",
+				"nom" : "BARNEVILLE CARTERET",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-1.752836, 49.386223]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2524",
+				"nom" : "ARLEUX",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.097278, 50.284473]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2632",
+				"nom" : "CHANTEHEUX",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [6.524559, 48.591838]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2786",
+				"nom" : "MARCONNELLE HESDIN",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.027194, 50.371638]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2765",
+				"nom" : "ST POL SUR TERNOISE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.349129, 50.387886]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2798",
+				"nom" : "LONGUYON",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.615247, 49.432046]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2691",
+				"nom" : "SAINT BRIEUC",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-2.781556, 48.518072]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2517",
+				"nom" : "LANDRES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.799349, 49.318456]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2516",
+				"nom" : "RANG DU FLIERS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.609416, 50.414276]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2692",
+				"nom" : "AULNOYE AYMERIES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.822606, 50.202923]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2717",
+				"nom" : "SCY-CHAZELLES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [6.127344, 49.109966]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2444",
+				"nom" : "BRIEY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.946878, 49.254844]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2952",
+				"nom" : "LE QUESNOY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.630829, 50.2577]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2800",
+				"nom" : "LE QUESNOY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.633862, 50.257209]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2719",
+				"nom" : "ROUVROY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.908823, 50.391947]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2482",
+				"nom" : "AGDE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.485981, 43.303976]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2743",
+				"nom" : "AVION",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.818457, 50.40949]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2711",
+				"nom" : "HENNEBONT",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-3.26714, 47.803333]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2718",
+				"nom" : "LIEVIN",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.779311, 50.423978]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2815",
+				"nom" : "HENIN BEAUMONT",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.9601, 50.407394]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2586",
+				"nom" : "NOYELLES GODAULT",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.986247, 50.411981]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2563",
+				"nom" : "SOMAIN",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.263459, 50.371496]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2971",
+				"nom" : "RIANTEC",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-3.321629, 47.726776]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2740",
+				"nom" : "TOURLAVILLE/CHERBOURG",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-1.601226, 49.635286]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2861",
+				"nom" : "ROBION",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.133539, 43.869059]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2685",
+				"nom" : "LENS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.839921, 50.436161]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2843",
+				"nom" : "SAINT DIE - CC LECLERC",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [6.934205, 48.293523]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2822",
+				"nom" : "DIVION",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.50893, 50.470118]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2990",
+				"nom" : "PERNES EN ARTOIS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.401733, 50.483348]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2432",
+				"nom" : "SAINT DIE - KELLERMANN",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [6.957441, 48.27887]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2766",
+				"nom" : "BELLAING",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.434976, 50.364726]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2791",
+				"nom" : "SAINTE MARGUERITE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [6.970465, 48.27197]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2770",
+				"nom" : "COURRIERES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.945703, 50.441735]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2600",
+				"nom" : "CLOUANGE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [6.083888, 49.258333]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2616",
+				"nom" : "FRUGES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.130484, 50.50913]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2819",
+				"nom" : "MARLY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.553342, 50.346886]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2502",
+				"nom" : "CHERBOURG-OCTEVILLE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-1.6534, 49.636328]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2407",
+				"nom" : "LANESTER",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-3.347435, 47.781138]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2677",
+				"nom" : "BRUAY LA BUISSIERE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.559652, 50.486926]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2656",
+				"nom" : "NOEUX LES MINES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.658811, 50.484272]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2785",
+				"nom" : "VERMELLES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.735089, 50.47874]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2707",
+				"nom" : "LORIENT - TOULLEC",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-3.379747, 47.73236]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2411",
+				"nom" : "VALENCIENNES - AV DE LIEGE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.541063, 50.365387]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2597",
+				"nom" : "VALENCIENNES - RUE MACAREZ",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.537981, 50.373359]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2681",
+				"nom" : "AUCHEL",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.476603, 50.509328]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2809",
+				"nom" : "ETAPLES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.628736, 50.521393]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2693",
+				"nom" : "MAUBEUGE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.963728, 50.282525]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2602",
+				"nom" : "LORIENT - MENDES FRANCE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-3.395667, 47.764419]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2976",
+				"nom" : "PLOEMEUR",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-3.41686, 47.729663]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2727",
+				"nom" : "SOULTZ",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.222413, 47.8974]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2622",
+				"nom" : "LIBERCOURT",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.00494, 50.476795]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2842",
+				"nom" : "BETHUNE - AV DE BRUAY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.622318, 50.519806]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2678",
+				"nom" : "WINGLES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.867367, 50.497437]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2485",
+				"nom" : "BEUVRY",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.671192, 50.51688]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2459",
+				"nom" : "ISSENHEIM",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.239676, 47.90232]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2416",
+				"nom" : "BETHUNE - RUE DE LILLE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.652755, 50.524558]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2583",
+				"nom" : "BRUAY SUR L ESCAUT",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.544708, 50.401565]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2514",
+				"nom" : "CARVIN",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.944047, 50.499029]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2683",
+				"nom" : "AUCHY LES MINES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.794526, 50.520266]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2499",
+				"nom" : "ORCHIES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.227786, 50.467274]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2633",
+				"nom" : "SAINT AMAND LES EAUX",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.425637, 50.44224]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2695",
+				"nom" : "SAINT AMAND LES EAUX - RUE PASTEUR",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.408956, 50.444271]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2466",
+				"nom" : "LILLERS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.498858, 50.554672]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2684",
+				"nom" : "QUIEVRECHAIN",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.673049, 50.403483]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2700",
+				"nom" : "TARBES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [0.05573, 43.237156]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2556",
+				"nom" : "GUIDEL",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-3.476535, 47.800065]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2771",
+				"nom" : "ENSISHEIM",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.340988, 47.859249]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2441",
+				"nom" : "RIXHEIM",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.391726, 47.754095]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2805",
+				"nom" : "CONDE SUR ESCAUT",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.586888, 50.454739]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2980",
+				"nom" : "IDRON",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-0.3021, 43.2982]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2635",
+				"nom" : "WAVRIN",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.935475, 50.573271]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2449",
+				"nom" : "ISBERGUES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.444734, 50.626487]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2520",
+				"nom" : "QUIMPERLE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-3.532802, 47.865535]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2536",
+				"nom" : "GUINGAMP",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-3.164589, 48.562099]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2676",
+				"nom" : "PAIMPOL",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-3.039952, 48.770158]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2614",
+				"nom" : "MERVILLE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.631598, 50.647121]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2802",
+				"nom" : "FACHES THUMESNIL",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.076554, 50.601487]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2812",
+				"nom" : "PONT DE BRIQUES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.635147, 50.671085]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2646",
+				"nom" : "MELLAC QUIMPERLE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-3.584631, 47.868637]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2621",
+				"nom" : "CAMPAGNE LES WARDRECQUES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.327052, 50.712689]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2850",
+				"nom" : "LEZARDRIEUX",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-3.122617, 48.782285]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2506",
+				"nom" : "WAMBRECHIES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.048951, 50.676663]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2710",
+				"nom" : "LONGUENESSE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.261998, 50.740529]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2584",
+				"nom" : "BAILLEUL - CC LECLERC",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.74082, 50.723515]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2665",
+				"nom" : "BOUZONVILLE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [6.536741, 49.293929]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2631",
+				"nom" : "BAILLEUL - CENTRE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.744652, 50.733561]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2988",
+				"nom" : "MINIHY TREGUIER",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-3.245877, 48.775787]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2552",
+				"nom" : "EPERLECQUES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.199355, 50.821387]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2889",
+				"nom" : "TERDEGHEM",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.581609, 50.804016]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2501",
+				"nom" : "BARR",
+				"adresse" : "2 ALLEE DE L'EUROPE ZAC DU MUCKENTHAL",
+				"code_postal" : "67140",
+				"ville" : "BARR",
+				"piste_hp" : 2,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : 1,
+				"gonfleur" : false,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.4576199, 48.3984677]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2554",
+				"nom" : "HILSENHEIM",
+				"adresse" : "ROUTE DE MUTTERSHOLTZ",
+				"code_postal" : "67600",
+				"ville" : "HILSENHEIM",
+				"piste_hp" : 2,
+				"piste_pl" : false,
+				"rouleau_lavage" : 1,
+				"aspirateur" : 2,
+				"gonfleur" : false,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.554884, 48.281353]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2664",
+				"nom" : "PHALSBOURG",
+				"adresse" : "RUE DES GLACIS",
+				"code_postal" : "57370",
+				"ville" : "PHALSBOURG",
+				"piste_hp" : 2,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : 2,
+				"gonfleur" : true,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.253948, 48.764808]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2795",
+				"nom" : "AUDRUICQ",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.076665, 50.875071]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2755",
+				"nom" : "CONCARNEAU - LANRIEC",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-3.893044, 47.868292]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2496",
+				"nom" : "HAMBACH",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.034372, 49.047332]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2419",
+				"nom" : "OBERNAI",
+				"adresse" : "RUE DE L'ARTISANAT ZI",
+				"code_postal" : "67210",
+				"ville" : "OBERNAI",
+				"piste_hp" : 3,
+				"piste_pl" : true,
+				"rouleau_lavage" : 1,
+				"aspirateur" : 3,
+				"gonfleur" : true,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.49153, 48.454776]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2660",
+				"nom" : "VITROLLES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.263824, 43.432729]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2572",
+				"nom" : "MUTZIG",
+				"adresse" : "RUE MATTFELD",
+				"code_postal" : "67190",
+				"ville" : "MUTZIG",
+				"piste_hp" : 3,
+				"piste_pl" : false,
+				"rouleau_lavage" : 1,
+				"aspirateur" : 2,
+				"gonfleur" : true,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.4466, 48.536134]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2582",
+				"nom" : "CONCARNEAU - KERAMPERU",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-3.91501, 47.894372]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2462",
+				"nom" : "DORLISHEIM",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.493799, 48.525576]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2778",
+				"nom" : "OTTERSWILLER",
+				"adresse" : "RN 4/ANGLE CD218",
+				"code_postal" : "67700",
+				"ville" : "OTTERSWILLER",
+				"piste_hp" : 4,
+				"piste_pl" : true,
+				"rouleau_lavage" : null,
+				"aspirateur" : 3,
+				"gonfleur" : true,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.372389, 48.718487]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2414",
+				"nom" : "CALAIS - RUE DE TUNIS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.836771, 50.943315]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2626",
+				"nom" : "LES PENNES MIRABEAU",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.356768, 43.419048]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2696",
+				"nom" : "CALAIS (Rue Maubeuge)",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [1.877836, 50.947371]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2854",
+				"nom" : "PERPIGNAN",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.943954, 42.701285]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2844",
+				"nom" : "QUAEDYPRE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.433731, 50.955587]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2867",
+				"nom" : "BOOFZHEIM",
+				"adresse" : "RUE DU CAMPING C.C. SUPER U",
+				"code_postal" : "67860",
+				"ville" : "BOOFZHEIM",
+				"piste_hp" : 2,
+				"piste_pl" : false,
+				"rouleau_lavage" : 1,
+				"aspirateur" : 1,
+				"gonfleur" : false,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.69144, 48.328852]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2437",
+				"nom" : "ERSTEIN",
+				"adresse" : "ROUTE DE NORDHOUSE",
+				"code_postal" : "67150",
+				"ville" : "ERSTEIN",
+				"piste_hp" : 3,
+				"piste_pl" : true,
+				"rouleau_lavage" : 1,
+				"aspirateur" : 2,
+				"gonfleur" : true,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.661833, 48.429791]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2507",
+				"nom" : "KRAFFT",
+				"adresse" : "PARKING ALDI RUE ANDRE MALRAUX",
+				"code_postal" : "67150",
+				"ville" : "KRAFFT",
+				"piste_hp" : 3,
+				"piste_pl" : true,
+				"rouleau_lavage" : null,
+				"aspirateur" : 2,
+				"gonfleur" : false,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.703054, 48.416305]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2701",
+				"nom" : "COUDEKERQUE (Bergues)",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.3772, 51.016113]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2483",
+				"nom" : "ROHRBACH LES BITCHE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.283302, 49.047169]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2690",
+				"nom" : "GRANDE SYNTHE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.296865, 51.021056]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2682",
+				"nom" : "QUIMPER - TI DOUAR",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-4.074488, 47.981671]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2492",
+				"nom" : "HOLTZHEIM",
+				"adresse" : "RUE JOSEPH GRAFF PARKING CARREFOUR MARKET",
+				"code_postal" : "67810",
+				"ville" : "HOLTZHEIM",
+				"piste_hp" : 3,
+				"piste_pl" : true,
+				"rouleau_lavage" : null,
+				"aspirateur" : 2,
+				"gonfleur" : true,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.651576, 48.562596]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2479",
+				"nom" : "TRUCHTERSHEIM",
+				"adresse" : "29 RUE DE LA GARE SUPER U",
+				"code_postal" : "67370",
+				"ville" : "TRUCHTERSHEIM",
+				"piste_hp" : 3,
+				"piste_pl" : false,
+				"rouleau_lavage" : 1,
+				"aspirateur" : 4,
+				"gonfleur" : true,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.607045, 48.654656]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2399",
+				"nom" : "QUIMPER - ROUTE DE BREST",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [-4.082315, 48.01586]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2738",
+				"nom" : "COUDEKERQUES (Furnes)",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.396142, 51.032316]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2421",
+				"nom" : "OSTWALD",
+				"adresse" : "CENTRE COMMERCIAL \"LA VIGIE\"",
+				"code_postal" : "67540",
+				"ville" : "OSTWALD",
+				"piste_hp" : 4,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : 5,
+				"gonfleur" : true,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.696386, 48.533312]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2480",
+				"nom" : "ELNE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.978237, 42.606445]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2418",
+				"nom" : "WOLFISHEIM",
+				"adresse" : "2 RUE ANDRE WENGER - C.C. SUPER U",
+				"code_postal" : "67200",
+				"ville" : "WOLFISHEIM",
+				"piste_hp" : 3,
+				"piste_pl" : true,
+				"rouleau_lavage" : null,
+				"aspirateur" : 2,
+				"gonfleur" : true,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.670485, 48.590153]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2417",
+				"nom" : "STRASBOURG - MONTAGNE VERTE",
+				"adresse" : "ROUTE DE SCHIRMECK ARRIERE PARKING AUCHAN",
+				"code_postal" : "67200",
+				"ville" : "STRASBOURG",
+				"piste_hp" : 4,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : 3,
+				"gonfleur" : true,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.695272, 48.562407]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2679",
+				"nom" : "STRASBOURG - CRONENBOURG",
+				"adresse" : "ROUTE DE MITTELHAUSBERGEN",
+				"code_postal" : "67200",
+				"ville" : "STRASBOURG",
+				"piste_hp" : 5,
+				"piste_pl" : true,
+				"rouleau_lavage" : 1,
+				"aspirateur" : 6,
+				"gonfleur" : true,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.706324, 48.604045]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2810",
+				"nom" : "STRASBOURG - GARE",
+				"adresse" : "23 RUE DES MAGASINS",
+				"code_postal" : "67000",
+				"ville" : "STRASBOURG",
+				"piste_hp" : 4,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : 4,
+				"gonfleur" : true,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.740703, 48.590899]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2494",
+				"nom" : "ARGELES SUR MER",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.012466, 42.555197]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2831",
+				"nom" : "ARGELES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [3.012466, 42.555197]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2722",
+				"nom" : "STRASBOURG (PORT DU RHIN)",
+				"adresse" : "47A ROUTE DU RHIN",
+				"code_postal" : "67000",
+				"ville" : "STRASBOURG",
+				"piste_hp" : 6,
+				"piste_pl" : true,
+				"rouleau_lavage" : 1,
+				"aspirateur" : 4,
+				"gonfleur" : true,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.786863, 48.571998]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2623",
+				"nom" : "SAINT ZACHARIE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.702441, 43.381355]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2420",
+				"nom" : "SCHILTIGHEIM",
+				"adresse" : "8 RUE DU HERON",
+				"code_postal" : "67300",
+				"ville" : "STRASBOURG",
+				"piste_hp" : 5,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : 4,
+				"gonfleur" : true,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.769029, 48.619227]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2422",
+				"nom" : "HOERDT",
+				"adresse" : "15 RUE DU TRAVAIL B.P. 147",
+				"code_postal" : "67723",
+				"ville" : "HOERDT CEDEX",
+				"piste_hp" : 3,
+				"piste_pl" : true,
+				"rouleau_lavage" : 1,
+				"aspirateur" : 2,
+				"gonfleur" : true,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.783286, 48.67407]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2888",
+				"nom" : "KILSTETT",
+				"adresse" : "RUE DE L'INDUSTRIE",
+				"code_postal" : "67840",
+				"ville" : "KILSTETT",
+				"piste_hp" : 2,
+				"piste_pl" : false,
+				"rouleau_lavage" : 1,
+				"aspirateur" : 2,
+				"gonfleur" : false,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.843582, 48.677064]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2840",
+				"nom" : "LA CIOTAT - LES MATAGOTS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.612295, 43.195832]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2537",
+				"nom" : "LA CIOTAT - CC CARREFOUR",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.60254, 43.187643]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2450",
+				"nom" : "HERRLISHEIM",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.902833, 48.731108]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2739",
+				"nom" : "DRUSENHEIM",
+				"adresse" : "ZONE D'ACTIVITES HERDLACH",
+				"code_postal" : "67410",
+				"ville" : "DRUSENHEIM",
+				"piste_hp" : 3,
+				"piste_pl" : true,
+				"rouleau_lavage" : 1,
+				"aspirateur" : 3,
+				"gonfleur" : false,
+				"carte_pro" : true
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.946105, 48.755876]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2731",
+				"nom" : "DRAGUIGNAN",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [6.454762, 43.526967]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2754",
+				"nom" : "OLLIOULES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [5.848397, 43.122476]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2746",
+				"nom" : "LE CANNET DES MAURES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [6.331268, 43.394879]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2557",
+				"nom" : "LES ARCS SUR ARGENS",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [6.490086, 43.452474]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2538",
+				"nom" : "LA VALETTE DU VAR",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [6.014628, 43.139907]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2742",
+				"nom" : "GRASSE",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [6.94394, 43.653648]
+			}
+		}, {
+			"type" : "Feature",
+			"properties" : {
+				"id" : "2659",
+				"nom" : "ANTIBES",
+				"adresse" : "",
+				"code_postal" : "",
+				"ville" : "",
+				"piste_hp" : null,
+				"piste_pl" : false,
+				"rouleau_lavage" : null,
+				"aspirateur" : null,
+				"gonfleur" : false,
+				"carte_pro" : false
+			},
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [7.089644, 43.597315]
+			}
+		}
+	]
+}
