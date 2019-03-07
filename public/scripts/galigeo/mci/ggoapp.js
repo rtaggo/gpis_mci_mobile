@@ -14,7 +14,7 @@
       };
 
       this._mapManager = new GGO.MapManager(modulesOptions);
-      //this._dataManager = new GGO.DataManager(modulesOptions);
+      this._missionManager = new GGO.MissionManager(modulesOptions);
       GGO.EventBus.dispatch(GGO.EVENTS.APPISREADY);
     },
   };

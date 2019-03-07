@@ -36,14 +36,35 @@
 		<div id="appContainer" class="ggoslds" style="top:33%;">
 			<div id="mainContainer" class="slds-grid slds-gutters slds-p-around_xx-small">
 				<article class="slds-card slds-p-around-medium" style="display: block;width: 100%;">
-					<div id="waiting4Mission" class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_info" role="alert">
-						<div role="status" class="slds-spinner slds-spinner_x-small slds-spinner_inline" style=" top: 8px; left: -10px; ">
-							<span class="slds-assistive-text">Loading</span>
-							<div class="slds-spinner__dot-a"></div>
-							<div class="slds-spinner__dot-b"></div>
+					<div class="slds-card__body slds-card__body_inner">
+						<div id="waiting4Mission" class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_info" role="alert">
+							<div role="status" class="slds-spinner slds-spinner_x-small slds-spinner_inline" style=" top: 8px; left: -10px; ">
+								<span class="slds-assistive-text">Loading</span>
+								<div class="slds-spinner__dot-a"></div>
+								<div class="slds-spinner__dot-b"></div>
+							</div>
+							<h2>en attente de mission ... </h2>					
 						</div>
-						<h2>en attente de mission ... </h2>					
+						<div id="missionContent" class="slds-hide">
+
+						</div>
 					</div>
+					<footer id="missionFooter" class="slds-card__footer slds-hide" style="position: absolute; bottom: 0px; left: 0px; right: 0px;">
+						<ul class="slds-button-group-row">
+							<li class="slds-button-group-item">
+								<button id="btnMissionEnRoute" class="slds-button slds-button_brand">En route</button>
+							</li>
+							<li class="slds-button-group-item">
+								<button id="btnMissionDebut" class="slds-button slds-button_brand">Début</button>
+							</li>
+							<li class="slds-button-group-item">
+								<button id="btnMissionFin" class="slds-button slds-button_success">Fin</button>
+							</li>
+							<li class="slds-button-group-item">
+								<button id="btnMissionSignalement" class="slds-button slds-button_destructive">Signalement</button>
+							</li>
+						</ul>
+					</footer>
 				</article>
 		</div>
 	</div>

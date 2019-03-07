@@ -9,6 +9,14 @@ const router = express.Router();
 
 const maxRadiusFiltering = 30; // max radius in KM when results need to be filtered i.e when sending coordinates
 
+let currentMission = {
+  id : 0,
+  code_site : 'SITE_XXX',
+  statut: 'En attente',
+  address : '19 Boulevard Ornano 75018 Paris',
+  coordinates : [48.892740, 2.348840],
+}
+
 // Automatically parse request body as JSON
 router.use(bodyParser.json());
 
@@ -23,6 +31,12 @@ router.get('/secteur', (req, res, next) => {
   secteurs.features = secteurs.features.filter(f=>f.properties.secteur_id === 0)
   res.header('Content-Type', 'application/json'); 
 	res.json(secteurs); 
+});
+
+
+router.get('/mission', (req, res, next) => {
+  res.header('Content-Type', 'application/json'); 
+	res.json(currentMission); 
 });
 
 /*
