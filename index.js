@@ -1,9 +1,9 @@
 'use strict';
 
-const express = require('express')
-const path = require('path')
+const express = require('express');
+var session = require('express-session');
+const path = require('path');
 const bodyParser = require('body-parser');
-
 
 const config = require('./config');
 
@@ -11,18 +11,56 @@ const PORT = process.env.PORT || 5000
 
 const app = express();
 
+app.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
+
 app.disable('etag');
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 // [END enable_parser]
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/views/index.html'));
+  if (req.session.loggedin) {
+    res.sendFile(path.join(__dirname, '/views/index.html'));
+  } else {
+    res.sendFile(path.join(__dirname, '/views/login.html'));
+  }
+});
+
+
+
+app.post('/login', (req, res, next) => {
+  console.log(`/login ${JSON.stringify(req.body)}`);
+  var username = req.body.username;
+  var password = req.body.password;
+  req.session.loggedin = true;
+  req.session.username = username;
+  res.redirect('/');
+  res.end();
+});
+
+app.get('/logout', (req, res, next) => {
+  console.log(`/logout`);
+  if (req.session) {
+    req.session.destroy(function(err) {
+      if (err) {
+        console.log(`Error while destroying session ${err}`);
+        return next(err);
+      } else {
+        return res.redirect('/');
+      }
+    });
+  }
 });
 
 app.get('/mobile', (req, res) => {
+
   res.sendFile(path.join(__dirname, '/views/mobile.html'));
 });
 
@@ -32,8 +70,14 @@ app.use('/services/wakeup', (req, res) =>{
   res.json({message : 'alive', code:200}); 
 });
 
+// GPIS MCI SERVICES
+app.use('/services/rest/user', require('./api/user/api'));
+
+// GPIS MCI SERVICES
+app.use('/services/rest/mci', require('./api/mci/api'));
+
 // ELEPHANTBLEU SERVICES
-app.use('/services/rest/elephantbleu', require('./api/elephantbleu/api'));
+// app.use('/services/rest/elephantbleu', require('./api/elephantbleu/api'));
 
 // GEOSERVICE
 app.use('/services/rest/geoservice', require('./api/geoservice/api'));

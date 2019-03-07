@@ -1,9 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<script src="/scripts/vendors/jquery/jquery-3.3.1.min.js"></script>
-</head>
-<body>
-<h4>Elephant bleu Desktop App Powered by Galigeo</h4>
+		<!--
+		<script src="/scripts/vendors/jquery/jquery.mobile-1.5.0-alpha.1.min.js"></script>
+		<script src="/scripts/vendors/jquery/jquery.touchSwipe.min.js"></script>
+		<script src="/scripts/vendors/jquery/jquery.scrollTo.min.js"></script>
+		-->
+
+		<script src='/scripts/vendors/mapbox/V3.1.1/mapbox.js'></script>
+		<link rel="stylesheet" type="text/css" href="/scripts/vendors/mapbox/V3.1.1/mapbox.css" />
+		
+		<link rel="stylesheet" type="text/css" href="/styles/slds/assets/styles/salesforce-lightning-design-system-vf.css" />
+	
+		<link rel="stylesheet" type="text/css" href="/styles/galigeo.css" />	
+
+		<script type="module" src="./scripts/galigeo/mci/mci.js"></script>
+
+	</head>
+	<body>
+		<div id="map"></div>
+		<div class="ggoslds" style="position:absolute; top: 0px; right: 0px">
+			<div id="logoutBtn">
+				<div class="slds-icon_container" style="position: absolute; right: 2px; top: 4px;">
+					<svg class="slds-icon slds-icon_x-small slds-icon-text-default" style="fill: red;">
+						<use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#logout"></use>
+					</svg>
+				</div>
+			</div>
+		</div>
+		<div id="appContainer" class="ggoslds" style="top:33%;">
+			<div id="mainContainer" class="slds-grid slds-gutters slds-p-around_xx-small">
+				<article class="slds-card slds-p-around-medium" style="display: block;width: 100%;">
+					<div class="slds-spinner_container">
+						<div role="status" class="slds-spinner slds-spinner_medium">
+							<span class="slds-assistive-text">Loading</span>
+							<div class="slds-spinner__dot-a"></div>
+							<div class="slds-spinner__dot-b"></div>
+						</div>
+					</div>
+					<div></div>
+				</article>
+		</div>
+	</div>
+	<script>
+		var self = this;
+		$(document).ready(function(e){
+			console.log(' >> document is ready');
+			$('#logoutBtn').click(function(e){
+				var logoutForm = $('<form action="/logout" />');
+				$('body').append(logoutForm);
+				logoutForm.submit();
+			});
+
+			var windowH = $(window).height();
+			$('body').css({
+				'height':  windowH+'px',
+				'max-height':  windowH+'px',
+			})
+			self.galigeo = new GGO.GGOApp ({
+				windowHeight: windowH
+			});
+		});
+	</script>
 </body>
 </html>

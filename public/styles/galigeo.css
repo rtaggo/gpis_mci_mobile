@@ -1,213 +1,34 @@
 @charset "UTF-8";
 html,body {
-  margin: 0px;
-  height: 100%;
+	margin: 0px;
+	height: 100%;
+}
+#appContainer{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
   overflow: hidden;
 }
 
-body {
-  padding: 5px;
-}
-#map {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-}
-
-.eb-ggo .mainContainer {
-  
-}
-
-.appLogoLauncher {
+#mainContainer{
   position: absolute;
   top: 0px;
   left: 0px;
   bottom: 0px;
   right: 0px;
 }
-
-.appLogoLauncher img {
-  width: 200px;
+#map {
+  width:100%;
+  height: 33%;
 }
 
-.top-right_container {
-  position: absolute;
-  right: 5px;
-  top: 5px;
-}
-
-.locate-user_container {
-  position: absolute;
-  right: 5px;
-  top: -40px;
-}
-
-.bottom-card {
-  position: absolute !important;
-  left: 0px !important;
-  right: 0px !important;
-  bottom: 0px !important;
-}
-
-.bottom-card  .slds-card__header {
-  padding-top: 0px;
-}
-
-#layerSwitcherCard {
-  margin-top: 0px !important;
-}
-#layerSwitcherCard .slds-card__body{
-  position: absolute;
-    left: 5px;
-    right: 5px;
-    bottom: 5px;
-}
-
-#layerSwitcherCard .slds-card__header, #dataExplorerCard .slds-card__header{
-  margin-bottom: 0px;
-  margin-top: 0px;
-  padding: 0px;
-}
-
-#dataExplorerCard .slds-card__body_inner{
-  padding: 0 0.5rem;
-}
-
-#locateUserIcon {
-  /*background-color: white; */
-}
-
-#locateUserIcon svg{
-/*  transform: rotate(-30deg); */
-}
-
-.userLocationMarker {
-	background-color: #73cfff;
-	border: 2px solid #EFEFEF;
-	border-radius: 50%;
-	box-shadow: 2px 2px 2px #ADADAD;
-}
-
-#layerSwitcherIcon, #locateUserIcon {
-  background-color: #73cfff;
-}
-
-.basemap_icons_container {
-  text-align: center;
-  font-size: 11px;
-}
-.basemap_icon {
-  width : 32%;
-  display : inline-block;
-}
-
-.basemap_icon img {
-  width: 50px;
-  border-radius: 10px;
-}
-
-.basemap_icon.selected img {
-  border: 2px solid #73cfff;
-}
-
-.map_details_container {
-  text-align: center;
-  font-size: 11px;
-}
-
-.layer_details {
-  width : 48%;
-  display : inline-block;
-}
-
-.layer_details img {
-  width: 50px;
-  border-radius: 10px;
-}
-
-.layer_details.selected img {
-  border: 2px solid #73cfff;
-}
-
-#elephantbleuStations_Container .slds-item {
-  padding: 0.25rem;
-}
-
-.slds-item.selected {
-  border: 1px solid #73cfff !important;
-}
-
-.station-title_container {
-  position: relative;
-}
-
-.station-title_container .station-title {
-  margin-left: 25px;
-}
-
-.station-title_container .station-icon {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  width: 20px;
-  height: 20px;
-}
-
-.station-title_container .station-distance {
-  font-size: 9px;
-  margin-left : 5px;
-  display: block;
-}
-
-.station-title_container svg {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-}
-
-.service-type {
-  width : 32%;
-  display : inline-block; 
-  font-size: 10px;
-  vertical-align: top;
-  padding: 2px;
-}
-
-.service-type img {
-  width : 20px;
-  float: left;
-}
-
-.service-type div {
-  margin-left: 25px;
-}
-
-.station-details_panel{
-  z-index: 5;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-}
-
-.station-edition_snapshotdiv {
-  line-height: 80px;
-  border: 1px solid #73cfff;
-  background-color: #EFEFEF;
-  width: 84px;
-  height: 84px;
-  position: absolute;
-  right: 15px;
-  text-align: center;
-}
-.station-edition_snapshotdiv svg, .station-edition_snapshotdiv img {
-  vertical-align: middle;
-  line-height: 80px;
-}
-.station-edition_snapshotdiv img {
-  max-height: 80px;
-  max-width: 80px;
+#logoutBtn {
+  width: 28px;
+  height: 28px;
+  background: #EFEFEF;
+  border-radius: 0 0 0 20px;
+  -moz-border-radius: 0 0 0 20px;
+  -webkit-border-radius: 0 0 0 20px;
 }

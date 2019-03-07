@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script src="/scripts/vendors/jquery/jquery-3.3.1.min.js"></script>
+  <!--
+	<script src="/scripts/vendors/jquery/jquery.mobile-1.5.0-alpha.1.min.js"></script>
+	<script src="/scripts/vendors/jquery/jquery.touchSwipe.min.js"></script>
+	<script src="/scripts/vendors/jquery/jquery.scrollTo.min.js"></script>
+  -->
+	<link rel="stylesheet" type="text/css" href="/styles/slds/assets/styles/salesforce-lightning-design-system-vf.css" />
+
+	<link rel="stylesheet" type="text/css" href="/styles/galigeo.css" />
+
+</head>
+<body>
+	<div id="appContainer" class="ggoslds">
+    <div style="position:absolute; top: 5px; left: 5px">
+      <img src="/images/logo_gpis.png" style="height: 50px;"/>
+    </div>
+		<div id="mainContainer" class="slds-grid slds-gutters slds-p-around_small">
+      <div class="slds-align_absolute-center" style="height: 50%;">
+        <div class="">    
+          <div class="slds-text-heading_large slds-p-around_medium" style="display: block;text-align: center;">MCI Mobile</div>
+          <article class="slds-card slds-p-around-medium" style="display: block;">
+            <div class="slds-card__body slds-card__body_inner">
+              <div class="slds-form">
+                <div class="slds-form-element slds-form-element_stacked">
+                  <abbr class="slds-required" title="required">* </abbr><label class="slds-form-element__label" for="user-login-input">Nom d'utilisateur</label>
+                  <div class="slds-form-element__control">
+                    <input type="text" id="user-login-input" placeholder="Login" class="slds-input">
+                  </div>
+                </div>
+                <div class="slds-form-element slds-form-element_stacked">
+                  <abbr class="slds-required" title="required">* </abbr><label class="slds-form-element__label" for="user-password-input">Mot de passe</label>
+                  <div class="slds-form-element__control">
+                    <input type="password" id="user-password-input" placeholder="Password" class="slds-input">
+                  </div>
+                </div>
+                <div id="error-message-login" class="slds-form-element slds-has-error slds-hide">
+                  <div class="slds-form-element__help" >Login et mot de passe doivent être renseignés.</div>
+                </div>      
+              </div>
+            </div>
+            <footer class="slds-card__footer">
+              <button id="login-btn" class="slds-button slds-button_neutral">Connexion</button>
+            </footer>
+          </article>
+        </div>
+      </div>
+    </div>
+    <div class='slds-hide'>
+      <form id='formAuth' action='/login' method='POST'>
+        <input type='text' name='username' required>
+        <input type='password' name='password' required>
+        <input type='submit'/>
+      </form>
+    </div>
+	</div>
+	
+	<script>
+		var self = this;
+		$(document).ready(function(e){
+      console.log(' >> document is ready');
+      $('#login-btn').click(function(e){
+        let loginVal = $('#user-login-input').val();
+        let pwdVal = $('#user-password-input').val();
+        let allFilled = true;
+        if (loginVal.trim() === '') {
+          allFilled = false;
+          $('#user-login-input').parent().parent().addClass('slds-has-error');
+        } 
+        if (pwdVal.trim() === '') {
+          allFilled = false;
+          $('#user-password-input').parent().parent().addClass('slds-has-error');
+        } 
+        if (allFilled) {
+          let loginRequest = {
+            user: loginVal,
+            passwword : pwdVal
+          };
+          $('#formAuth input[name="username"]').val(loginVal)
+          $('#formAuth input[name="password"]').val(pwdVal)
+          $('#formAuth input[type="submit"]').trigger('click');
+          
+          /*
+          $.ajax({
+            type: "POST",
+            url: '/login',
+            data: JSON.stringify(loginRequest),
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            success: function (response) {
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+              console.log(textStatus, errorThrown);
+            }
+          });
+          */
+
+        } else {
+          $('#error-message-login').removeClass('slds-hide');
+        }
+      });
+		});
+	</script>
+</body>
+</html>

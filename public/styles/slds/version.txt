@@ -1,2 +1,2 @@
-Salesforce Lightning Design System: Spring '19
-scope: eb-ggo
+Version: Spring '19 (SLDS 2.8.0) 
+scope: ggoslds
