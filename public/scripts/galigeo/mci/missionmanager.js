@@ -65,10 +65,10 @@
           <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Signalement</h2>
         </header>
         <div class="slds-modal__content slds-p-around_medium" id="modal-signalement-content">
-          <div class="slds-form" role="list">
+        <div class="slds-form" role="list">
           <div class="slds-form__row">
             <div class="slds-form__item" role="listitem">
-              <div class="slds-form-element slds-form-element_horizontal slds-is-editing">
+              <div class="slds-form-element slds-form-element_stacked slds-is-editing">
                 <label class="slds-form-element__label" for="signalement-input-categorie">Catégorie</label>
                 <div class="slds-form-element__control">
               <div class="slds-select_container">
@@ -83,7 +83,7 @@
               </div>
             </div>
             <div class="slds-form__item" role="listitem">
-              <div class="slds-form-element slds-form-element_horizontal slds-is-editing">
+              <div class="slds-form-element slds-form-element_stacked slds-is-editing">
                 <label class="slds-form-element__label" for="signalement-input-souscategorie">Sous-Catégorie</label>
                 <div class="slds-form-element__control">
               <div class="slds-select_container">
@@ -100,7 +100,7 @@
           </div>
           <div class="slds-form__row">
             <div class="slds-form__item" role="listitem">
-              <div class="slds-form-element slds-form-element_horizontal slds-is-editing">
+              <div class="slds-form-element slds-form-element_stacked slds-is-editing">
                 <label class="slds-form-element__label" for="signalement-input-categorie2nd">Catégorie 2nd</label>
                 <div class="slds-form-element__control">
               <div class="slds-select_container">
@@ -115,7 +115,7 @@
               </div>
             </div>
             <div class="slds-form__item" role="listitem">
-              <div class="slds-form-element slds-form-element_horizontal slds-is-editing">
+              <div class="slds-form-element slds-form-element_stacked slds-is-editing">
                 <label class="slds-form-element__label" for="signalement-input-typelieu">Type de lieu</label>
                 <div class="slds-form-element__control">
               <div class="slds-select_container">
@@ -132,7 +132,7 @@
           </div>
           <div class="slds-form__row">
             <div class="slds-form__item" role="listitem">
-              <div class="slds-form-element slds-form-element_horizontal slds-is-editing">
+              <div class="slds-form-element slds-form-element_stacked slds-is-editing">
                 <label class="slds-form-element__label" for="signalement-input-niveau">Niveau</label>
                 <div class="slds-form-element__control">
               <div class="slds-select_container">
@@ -147,7 +147,7 @@
               </div>
             </div>
             <div class="slds-form__item" role="listitem">
-              <div class="slds-form-element slds-form-element_horizontal slds-is-editing">
+              <div class="slds-form-element slds-form-element_stacked slds-is-editing">
                 <label class="slds-form-element__label" for="signalement-input-niveau">Image</label>
                 <div class="slds-form-element__control">
               <div class="snapshotdiv">
@@ -160,7 +160,7 @@
           
           <div class="slds-form__row">
             <div class="slds-form__item" role="listitem">
-              <div class="slds-form-element slds-form-element_horizontal slds-is-editing slds-form-element_1-col">
+              <div class="slds-form-element slds-form-element_stacked slds-is-editing slds-form-element_1-col">
                 <label class="slds-form-element__label" for="signalement-input-observation">Observations / Caractéristique</label>
                 <div class="slds-form-element__control">
                   <textarea id="signalement-input-observation" class="slds-textarea" placeholder="Renseigner Observations / Caractéristiques"></textarea>
