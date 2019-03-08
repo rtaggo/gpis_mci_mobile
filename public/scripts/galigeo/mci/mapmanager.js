@@ -108,7 +108,7 @@
 			let missionGeoJSON = turf.point(mission.coordinates);
 			$.extend(missionGeoJSON.properties, markerProperties);
 			this._missionLayer.setGeoJSON(missionGeoJSON);
-			this._map.fitBounds(this._missionLayer.getBounds());
+			this._map.fitBounds(this._missionLayer.getBounds(), {maxZoom: 14});
 		},
 		clearMission: function() {
 			if ((typeof(this._missionLayer) !== 'undefined') && (this._missionLayer !== null)) {
