@@ -59,7 +59,7 @@
     openSignalementModal: function() {
       let self = this;
       let modal = `
-      <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-signalement-content" class="slds-modal slds-fade-in-open">
+      <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-signalement-content" class="slds-modal slds-fade-in-open slds-modal_large">
       <div class="slds-modal__container">
         <header class="slds-modal__header">
           <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Signalement</h2>
@@ -352,7 +352,7 @@
         </div>
         <div class="slds-form__row">
           <div class="slds-form__item" role="listitem">
-            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
+            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent slds-form-element_1-col">
               <span class="slds-form-element__label">Status</span>
               <div class="slds-form-element__control">
                 <div class="slds-form-element__static">
