@@ -11,7 +11,7 @@
 			"stroke-width": 1,
 			"stroke-opacity": 1,
 			"fill": "#FF00FF",
-			"fill-opacity": 0.2,
+			"fill-opacity": 0.1,
 		};
 	
 		this.init();
@@ -27,6 +27,16 @@
 			GGO.EventBus.addEventListener(GGO.EVENTS.APPISREADY, function(e) {
 				console.log('Received GGO.EVENTS.APPISREADY');
 				self.fetchSecteur();
+			});
+			GGO.EventBus.addEventListener(GGO.EVENTS.SHOWMISSIONMLOCATION, function(e) {
+				console.log('Received GGO.EVENTS.SHOWMISSIONMLOCATION');
+				let mission = e.target;
+				self.displayMission(mission);
+			});
+			// MISSIONCOMPLETED
+			GGO.EventBus.addEventListener(GGO.EVENTS.MISSIONCOMPLETED, function(e) {
+				console.log('Received GGO.EVENTS.MISSIONCOMPLETED');
+				self.clearMission();
 			});
 		},
 		getMap: function() {
@@ -86,6 +96,28 @@
 			$.extend(geojson.features[0].properties, this._secteurDrawingProperties);
 			this._secteurLayer.setGeoJSON(geojson);
 			this._map.fitBounds(this._secteurLayer.getBounds());
+		},
+		displayMission: function(mission) {
+			if ((typeof(this._missionLayer) === 'undefined') || (this._missionLayer === null)) {
+				this._missionLayer = L.mapbox.featureLayer().addTo(this._options.app._mapManager._map);
+			}
+			let markerProperties = {
+				"marker-color": (mission.statut === 'En attente' ? '#FF0000' : (mission.statut === 'En direction' ? '#00FF00': '#0000FF')),
+        "marker-size": "small"
+			};
+			let missionGeoJSON = turf.point(mission.coordinates);
+			$.extend(missionGeoJSON.properties, markerProperties);
+			this._missionLayer.setGeoJSON(missionGeoJSON);
+			this._map.fitBounds(this._missionLayer.getBounds());
+		},
+		clearMission: function() {
+			if ((typeof(this._missionLayer) !== 'undefined') && (this._missionLayer !== null)) {
+				this._missionLayer.clearLayers()
+			}	
+			
+			if ((typeof(this._secteurLayer) !== 'undefined') && (this._secteurLayer !== null)) {
+				this._map.fitBounds(this._secteurLayer.getBounds());
+			}
 		},
 		updateMapSize: function() {
 			$('#map').addClass('halfheight_map');

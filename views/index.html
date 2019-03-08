@@ -11,9 +11,9 @@
 		<script src="/scripts/vendors/jquery/jquery.scrollTo.min.js"></script>
 		-->
 
-
 		<script src='/scripts/vendors/mapbox/V3.1.1/mapbox.js'></script>
 		<link rel="stylesheet" type="text/css" href="/scripts/vendors/mapbox/V3.1.1/mapbox.css" />
+		<script src='/scripts/vendors/turfjs/turf.min.js'></script>
 		
 		<link rel="stylesheet" type="text/css" href="/styles/slds/assets/styles/salesforce-lightning-design-system-vf.css" />
 	
@@ -36,7 +36,7 @@
 		<div id="appContainer" class="ggoslds" style="top:33%;">
 			<div id="mainContainer" class="slds-grid slds-gutters slds-p-around_xx-small">
 				<article class="slds-card slds-p-around-medium" style="display: block;width: 100%;">
-					<div class="slds-card__body slds-card__body_inner">
+					<div id="mainContainer-card-body" class="slds-card__body slds-card__body_inner" style="max-height: calc(100%);">
 						<div id="waiting4Mission" class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_info" role="alert">
 							<div role="status" class="slds-spinner slds-spinner_x-small slds-spinner_inline" style=" top: 8px; left: -10px; ">
 								<span class="slds-assistive-text">Loading</span>
@@ -45,7 +45,7 @@
 							</div>
 							<h2>en attente de mission ... </h2>					
 						</div>
-						<div id="missionContent" class="slds-hide">
+						<div id="missionContent" class="slds-scrollable_y slds-hide" style="position: absolute; top: 0px; left: 18px; right: 13px; bottom: 60px;">
 
 						</div>
 					</div>
