@@ -78,13 +78,16 @@
         if (allFilled) {
           let loginRequest = {
             user: loginVal,
-            passwword : pwdVal
+            password : pwdVal
           };
+          /*
           $('#formAuth input[name="username"]').val(loginVal)
           $('#formAuth input[name="password"]').val(pwdVal)
           $('#formAuth input[type="submit"]').trigger('click');
+          */
           
           /*
+          */
           $.ajax({
             type: "POST",
             url: '/login',
@@ -92,13 +95,12 @@
             contentType: "application/json; charset=utf-8",
             dataType: 'json',
             success: function (response) {
-
+              console.log(`Response: ${response}`);
             },
             error: function(jqXHR, textStatus, errorThrown) {
               console.log(textStatus, errorThrown);
             }
           });
-          */
 
         } else {
           $('#error-message-login').removeClass('slds-hide');

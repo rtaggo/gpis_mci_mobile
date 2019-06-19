@@ -1,4 +1,4 @@
-/* This is the main JS file for the London Bike App */
+/* This is the main JS file for the GPIS MCI Mobile App */
 console.log('Importing stuff');
 import * as GGO from '../galigeo.js';
 import * as EventBus from '../eventbus.js';

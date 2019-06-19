@@ -7,15 +7,19 @@ const bodyParser = require('body-parser');
 
 const config = require('./config');
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5000;
 
 const app = express();
 
-app.use(session({
-	secret: 'secret',
-	resave: true,
-	saveUninitialized: true
-}));
+var fakeUsers = [{ id: 1, username: 'mana', password: 'mana' }, { id: 2, username: 'laura', password: 'laura' }];
+
+app.use(
+  session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+  })
+);
 
 app.disable('etag');
 
@@ -33,8 +37,7 @@ app.get('/', (req, res) => {
   }
 });
 
-
-
+/*
 app.post('/login', (req, res, next) => {
   console.log(`/login ${JSON.stringify(req.body)}`);
   var username = req.body.username;
@@ -43,6 +46,31 @@ app.post('/login', (req, res, next) => {
   req.session.username = username;
   res.redirect('/');
   res.end();
+});
+*/
+
+app.post('/login', (req, res, next) => {
+  console.log(`/login ${JSON.stringify(req.body)}`);
+  const username = req.body.username;
+  const password = req.body.password;
+  let filteredUsers = fakeUsers.filter(u => {
+    console.log(`u.name === username = ${u.name === username}`);
+    console.log(`u.password === password = ${u.password === password}`);
+    return u.name === username && u.password === password;
+  });
+  console.log(`Filtered users: ${filteredUsers.length}`);
+  if (filteredUsers.length === 0) {
+    return res.status(500).json({
+      error: 'User not found'
+    });
+  }
+  req.session.loggedin = true;
+  req.session.username = username;
+
+  return res.status(200).json({
+    message: 'Auth successful',
+    user: filteredUsers[0]
+  });
 });
 
 app.get('/logout', (req, res, next) => {
@@ -60,14 +88,12 @@ app.get('/logout', (req, res, next) => {
 });
 
 app.get('/mobile', (req, res) => {
-
   res.sendFile(path.join(__dirname, '/views/mobile.html'));
 });
 
-
 // WAKEME UP SERVICES
-app.use('/services/wakeup', (req, res) =>{
-  res.json({message : 'alive', code:200}); 
+app.use('/services/wakeup', (req, res) => {
+  res.json({ message: 'alive', code: 200 });
 });
 
 // GPIS MCI SERVICES
@@ -81,7 +107,6 @@ app.use('/services/rest/mci', require('./api/mci/api'));
 
 // GEOSERVICE
 app.use('/services/rest/geoservice', require('./api/geoservice/api'));
-
 
 // Basic 404 handler
 app.use((req, res) => {
@@ -97,8 +122,7 @@ app.use((err, req, res) => {
   res.status(500).send(err.response || 'Something broke!');
 });
 
-app
-	.listen(PORT, () => console.log(`Listening on ${ PORT }`));
+app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 /*
 app
   .use(express.static(path.join(__dirname, 'public')))
@@ -107,4 +131,3 @@ app
   .get('/', (req, res) => res.render('pages/index'))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 */
-

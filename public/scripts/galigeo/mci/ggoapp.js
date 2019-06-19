@@ -13,9 +13,9 @@
         app: this
       };
 
-      this._mapManager = new GGO.MapManager(modulesOptions);
-      this._missionManager = new GGO.MissionManager(modulesOptions);
+      this._mapManager = new GGO.MapManagerSingleton.getInstance(modulesOptions);
+      this._missionManager = new GGO.MapManagerSingleton.getInstance(modulesOptions);
       GGO.EventBus.dispatch(GGO.EVENTS.APPISREADY);
-    },
+    }
   };
 })();

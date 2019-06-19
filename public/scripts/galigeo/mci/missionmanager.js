@@ -1,50 +1,54 @@
 (function() {
-	'use strict';
-	GGO.MissionManager = function(options){
-		this._options = options || {};
-		this._options.mciurl = '/services/rest/mci';
-		this._init();
-	};
+  'use strict';
+  GGO.MissionManager = function(options) {
+    this._options = options || {};
+    this._options.mciurl = '/services/rest/mci';
+    this._init();
+  };
 
-	GGO.MissionManager.prototype = {
-    _init:function() {
-			this.setupListeners();
-		},
-		setupListeners: function() {
+  GGO.MissionManager.prototype = {
+    _init: function() {
+      this.setupListeners();
+    },
+    setupListeners: function() {
       let self = this;
       GGO.EventBus.addEventListener(GGO.EVENTS.APPISREADY, function(e) {
-				console.log('Received GGO.EVENTS.APPISREADY');
-				self.fakeTimeOutbeforeFetchingMission();
+        console.log('Received GGO.EVENTS.APPISREADY');
+        self.fakeTimeOutbeforeFetchingMission();
       });
-      $('#btnMissionEnRoute').click(function(e){
+      $('#btnMissionEnRoute').click(function(e) {
         self._currentMission.statut = 'En direction';
-        $('#mainContainer-card-body').prepend($(`<div id="udpate-mission-spinner" class="slds-spinner_container">
+        $('#mainContainer-card-body').prepend(
+          $(`<div id="udpate-mission-spinner" class="slds-spinner_container">
         <div role="status" class="slds-spinner slds-spinner_medium">
         <span class="slds-assistive-text">Loading</span>
         <div class="slds-spinner__dot-a"></div>
         <div class="slds-spinner__dot-b"></div>
         </div>
-        </div>`));
-        setTimeout(function(e){
+        </div>`)
+        );
+        setTimeout(function(e) {
           self.renderMissionViewMode();
           $('#udpate-mission-spinner').remove();
         }, 1000);
       });
-      $('#btnMissionDebut').click(function(e){
+      $('#btnMissionDebut').click(function(e) {
         self._currentMission.statut = 'Début';
-        $('#mainContainer-card-body').prepend($(`<div id="udpate-mission-spinner" class="slds-spinner_container">
+        $('#mainContainer-card-body').prepend(
+          $(`<div id="udpate-mission-spinner" class="slds-spinner_container">
         <div role="status" class="slds-spinner slds-spinner_medium">
         <span class="slds-assistive-text">Loading</span>
         <div class="slds-spinner__dot-a"></div>
         <div class="slds-spinner__dot-b"></div>
         </div>
-        </div>`));
-        setTimeout(function(e){
+        </div>`)
+        );
+        setTimeout(function(e) {
           self.renderMissionViewMode();
           $('#udpate-mission-spinner').remove();
         }, 1000);
       });
-      $('#btnMissionFin').click(function(e){
+      $('#btnMissionFin').click(function(e) {
         GGO.EventBus.dispatch(GGO.EVENTS.MISSIONCOMPLETED);
 
         $('#missionContent').addClass('slds-hide');
@@ -52,7 +56,7 @@
         $('#waiting4Mission').removeClass('slds-hide');
         self.fakeTimeOutbeforeFetchingMission();
       });
-      $('#btnMissionSignalement').click(function(e){
+      $('#btnMissionSignalement').click(function(e) {
         self.openSignalementModal();
       });
     },
@@ -178,14 +182,15 @@
       </section>
       `;
 
-      $('body').append($('<div id="signalement-modal" class="ggoslds"></div>')
-        .append($(modal))
-        .append($('<div class="slds-backdrop slds-backdrop_open"></div>'))
+      $('body').append(
+        $('<div id="signalement-modal" class="ggoslds"></div>')
+          .append($(modal))
+          .append($('<div class="slds-backdrop slds-backdrop_open"></div>'))
       );
-      $('#btnSignalementCancel').click(function(e){
+      $('#btnSignalementCancel').click(function(e) {
         $('#signalement-modal').remove();
       });
-      $('#btnSignalementOk').click(function(e){
+      $('#btnSignalementOk').click(function(e) {
         $('#signalement-modal').remove();
         $('#missionContent').addClass('slds-hide');
         $('#missionFooter').addClass('slds-hide');
@@ -193,8 +198,7 @@
         GGO.EventBus.dispatch(GGO.EVENTS.MISSIONCOMPLETED);
         self.fakeTimeOutbeforeFetchingMission();
       });
-
-    }, 
+    },
     fakeTimeOutbeforeFetchingMission: function() {
       var self = this;
       setTimeout(function() {
@@ -203,7 +207,7 @@
     },
     fetchMission: function() {
       let self = this;
-      let missionUrl = 	this._options.mciurl + '/mission';
+      let missionUrl = this._options.mciurl + '/mission';
       $.ajax({
         type: 'GET',
         url: missionUrl,
@@ -211,7 +215,7 @@
           console.log('/rest/mci/mission Response : ', response);
           self.handleMissionFetched(response);
         },
-        error:  function(jqXHR, textStatus, errorThrown) { 
+        error: function(jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
             console.warn('/rest/mci/mission Request aborted');
           } else {
@@ -394,7 +398,24 @@
         </div>
       </div>
       `;
-      $('#missionContent').empty().append($(content));
+      $('#missionContent')
+        .empty()
+        .append($(content));
     }
   };
+  GGO.MissionManagerSingleton = (function() {
+    let instance;
+    function createInstance(options) {
+      let missionMgr = new GGO.MissionManager(options);
+      return missionMgr;
+    }
+    return {
+      getInstance: function(options) {
+        if (!instance) {
+          instance = createInstance(options);
+        }
+        return instance;
+      }
+    };
+  })();
 })();
