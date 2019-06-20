@@ -1,6 +1,6 @@
 # GPIS MCI Mobile App REST Specs
 
-## Login
+## Authentification
 `POST <BASE_SERVER_URL>/connexion.php`
 
 **Request body**
@@ -31,7 +31,7 @@
 **Example**
 ```json
 {
-  "authentification" : true
+  "authentification" : true,
   "role": "india"
 }
 ```
@@ -50,9 +50,9 @@
 ```json
 {
   "patrouilles": [
-    {"name": "GOLF 03", "id": 3 },
+    {"name": "GOLF 03", "id": 3},
     {"name": "GOLF 11", "id": 11},
-    {"name": "GOLF 14", "id": 14 }
+    {"name": "GOLF 14", "id": 14}
   ]
 }
 ```
@@ -88,7 +88,7 @@
 **Example**
 ```json
 {
-  "secteurs"  : ["Nord", "Sud" , "Est"]
+  "secteurs"  : ["Nord", "Sud", "Est"]
 }
 ```
 
@@ -148,13 +148,13 @@
 }
 ```
 
-## reaffectation
+## Réaffectation
 `GET <BASE_SERVER_URL>/reaffectation.php?signalement=<id signalement>`
 
 **Request response**
 ```json
 {
-  ... ensemble des infos de la mission
+  "... ensemble des infos de la mission"
 }
 ```
 
