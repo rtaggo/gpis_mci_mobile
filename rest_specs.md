@@ -57,7 +57,7 @@
 }
 ```
 ## Sous-secteurs
-`GET <BASE_SERVER_URL>/sous_secteurs.php?patrouille=<ID_patrouille>`
+`GET <BASE_SERVER_URL>/sous_secteurs.php`
 
 **Request response**
 ```json

@@ -53,7 +53,7 @@ app.post('/login', (req, res, next) => {
 });
 */
 
-app.post('/login', (req, res, next) => {
+app.post('/connexion.php', (req, res, next) => {
   console.log(`/login ${JSON.stringify(req.body)}`);
   const username = req.body.username;
   const password = req.body.password;

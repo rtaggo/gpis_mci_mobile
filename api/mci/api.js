@@ -26,10 +26,7 @@ const fakePatrouilles = [
 
 const fakeSecteurs = ['Nord', 'Sud', 'Est'];
 
-const fakeSousSecteurs = {
-  '3': [{ name: 'EST-01', id: 3 }, { name: 'EST-02', id: 11 }, { name: 'EST-03', id: 14 }],
-  '11': [{ name: 'NORD-01', id: 4 }, { name: 'NORD-02', id: 12 }, { name: 'NORD-03', id: 15 }]
-};
+const fakeSousSecteurs = [{ name: 'EST-01', id: 1 }, { name: 'EST-02', id: 2 }, { name: 'EST-03', id: 3 }, { name: 'NORD-01', id: 4 }, { name: 'NORD-02', id: 5 }, { name: 'NORD-03', id: 6 }, { name: 'SUD-01', id: 7 }, { name: 'SUD-02', id: 8 }, { name: 'SUD-03', id: 9 }];
 
 const missions = [
   {
@@ -80,15 +77,9 @@ router.get('/patrouilles', (req, res, next) => {
 
 router.get('/patrouilles/soussecteurs', (req, res, next) => {
   console.log(`[MCI API] /patrouilles/soussecteurs ${JSON.stringify(req.query)}`);
-  const patrouilleId = req.query.patrouilleid;
-  const patrouille = fakePatrouilles.filter(p => {
-    return p.id === parseInt(patrouilleId);
-  })[0];
-  const sssecteurs = fakeSousSecteurs[patrouilleId];
   res.header('Content-Type', 'application/json');
   res.json({
-    patrouille: patrouille,
-    'sous-secteurs': sssecteurs || []
+    'sous-secteurs': fakeSousSecteurs
   });
 });
 

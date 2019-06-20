@@ -64,7 +64,7 @@
       let self = this;
       $.ajax({
         type: 'POST',
-        url: '/login',
+        url: '/connexion.php',
         data: JSON.stringify(loginRequest),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
