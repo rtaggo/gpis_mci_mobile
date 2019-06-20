@@ -6,25 +6,33 @@
 **Request body**
 ```json
 { 
-    "login": "[nom utilisateur]", 
-    "password": "[mot de passe]"
+  "login": "[nom utilisateur]", 
+  "password": "[mot de passe]"
 }
 ```
 
 **Example**
 ```json
 { 
-    "login": "john", 
-    "password": "doe"
+  "login": "john", 
+  "password": "doe"
 }
 ```
 
 **Request response**
 ```json
 {
-    "authentification" : true | false
-    "role": "india" | "charly" | "alpha",
-    "token": "<TOKEN> pour plus tard utiliser les headers des requetes" 
+  "authentification" : "booléan indiquant si l'authentification est correct: true | false",
+  "role": "Rôle associé à l'utilisateur: india | charly | alpha",
+  "token": "<TOKEN> pour plus tard utiliser les headers des requetes" 
+}
+```
+
+**Example**
+```json
+{
+  "authentification" : true
+  "role": "india"
 }
 ```
 
@@ -34,18 +42,18 @@
 **Request response**
 ```json
 {
-    "patrouilles": [] // tableau des patrouilles
+  "patrouilles": ["tableau des patrouilles"] 
 }
 ```
 
 **Example**
 ```json
 {
-    "patrouilles": [
-        {"name": "GOLF 03", "id": 3 },
-        {"name": "GOLF 11", "id": 11},
-        {"name": "GOLF 14", "id": 14 }
-    ]
+  "patrouilles": [
+    {"name": "GOLF 03", "id": 3 },
+    {"name": "GOLF 11", "id": 11},
+    {"name": "GOLF 14", "id": 14 }
+  ]
 }
 ```
 ## Sous-secteurs
@@ -54,17 +62,17 @@
 **Request response**
 ```json
 {
-    "sous-secteurs"  : []  // tableau des sous-secteurs de la patrouille
+  "sous-secteurs"  : ["tableau des sous-secteurs de la patrouille"] 
 }
 ```
 **Example**
 ```json
 {
-    "sous-secteurs"  : [    
-        {"name": " EST-01 ",    "id": 3},    
-        {"name": " EST-02",     "id": 11},   
-        {"name": " EST-03",     "id": 14}  
-    ]  
+  "sous-secteurs"  : [    
+    {"name": " EST-01 ",    "id": 3},    
+    {"name": " EST-02",     "id": 11},   
+    {"name": " EST-03",     "id": 14}  
+  ]  
 }
 ```
 
@@ -74,13 +82,13 @@
 **Request response**
 ```json
 {
-    "secteurs"  : []  // tableau des secteurs
+  "secteurs"  : ["tableau des secteurs"]  
 }
 ```
 **Example**
 ```json
 {
-    "secteurs"  : ["Nord", "Sud" , "Est"]
+  "secteurs"  : ["Nord", "Sud" , "Est"]
 }
 ```
 
@@ -104,9 +112,9 @@
 **Request response**
 ```json
 {
- "code": "200 | 300 (200: ok, 300:ko)"
- "message": "<message erreur si 300>"
- "mission": "<geojons de la mission>"
+  "code": "200 | 300 (200: ok, 300:ko)",
+  "message": "<message erreur si 300>",
+  "mission": "<geojons de la mission>"
 }
 ```
 
@@ -116,16 +124,16 @@
 **Request body**
 ```json
 {
-    "mission_id": "Identifiant de la mission",
-    "code" : "Code de l'action: 1 | 3 | 5"
+  "mission_id": "Identifiant de la mission",
+  "code" : "Code de l'action: 1 | 3 | 5"
 }
 ```
 
 **Request response**
 ```json
 {
- "code": "200 | 300 (200: ok, 300:ko)",
- "message": "<message erreur si 300>"
+  "code": "200 | 300 (200: ok, 300:ko)",
+  "message": "<message erreur si 300>"
 }
 ```
 
@@ -135,8 +143,8 @@
 **Request response**
 ```json
 {
-    "types_signalement": "[list des types de signalement]",
-    "types_lieux":  "[list des types de lieu]"
+  "types_signalement": "[list des types de signalement]",
+  "types_lieux":  "[list des types de lieu]"
 }
 ```
 
@@ -146,7 +154,7 @@
 **Request response**
 ```json
 {
-    ... ensemble des infos de la mission
+  ... ensemble des infos de la mission
 }
 ```
 
@@ -155,17 +163,17 @@
 **Request body**
 ```json
 {
-    "signalement" : <id signalement>,
-    "mission": <id misson>
-    "photo": String png base64 si modif
+  "signalement" : "id signalement",
+  "mission": "id misson",
+  "photo": "String png base64 si modif"
 }
 ```
 
 **Request response**
 ```json
 {
- "code": 200 | 300 (200: ok, 300:ko)
- "message": <message erreur si 300>
+  "code": "200 | 300 (200: ok, 300:ko)",
+  "message": "<message erreur si 300>"
 }
 ```
 
