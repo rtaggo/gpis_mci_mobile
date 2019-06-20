@@ -1,21 +1,45 @@
 # GPIS MCI Mobile App REST Specs
 
 ## Login
-URL     :<BASE>/connexion.php
-Methodes: POST 
-Request body: { login: 'john', password: 'doe'}
-Request response:
-{
-    authentification : true | false
-    role: 'india' | 'charly' | 'alpha',
-    token: <TOKEN> pour plus tard utiliser les headers des requetes 
-}
+`POST <BASE_SERVER_URL>/connexion.php`
 
+**Request body**
+```json
+{ 
+    "login": "[nom utilisateur]", 
+    "password": "[mot de passe]"
+}
+```
+
+**Example**
+```json
+{ 
+    "login": "john", 
+    "password": "doe"
+}
+```
+
+**Request response**
+```json
+{
+    "authentification" : true | false
+    "role": "india" | "charly" | "alpha",
+    "token": "<TOKEN> pour plus tard utiliser les headers des requetes" 
+}
+```
 
 ## Patrouilles
-URL     :<BASE>/patrouilles.php
-Methodes: GET
-Request response:
+`GET <BASE_SERVER_URL>/patrouilles.php`
+
+**Request response**
+```json
+{
+    "patrouilles": [] // tableau des patrouilles
+}
+```
+
+**Example**
+```json
 {
     "patrouilles": [
         {"name": "GOLF 03", "id": 3 },
@@ -23,93 +47,138 @@ Request response:
         {"name": "GOLF 14", "id": 14 }
     ]
 }
-
+```
 ## Sous-secteurs
-URL     :<BASE>/sous_secteurs.php?patrouille=<ID_patrouille>
-Methodes: GET
-Request response:
+`GET <BASE_SERVER_URL>/sous_secteurs.php?patrouille=<ID_patrouille>`
+
+**Request response**
+```json
 {
-    "sous-secteurs"  : []  // cf power point la reponse
+    "sous-secteurs"  : []  // tableau des sous-secteurs de la patrouille
 }
+```
+**Example**
+```json
+{
+    "sous-secteurs"  : [    
+        {"name": " EST-01 ",    "id": 3},    
+        {"name": " EST-02",     "id": 11},   
+        {"name": " EST-03",     "id": 14}  
+    ]  
+}
+```
 
 ## secteurs
-URL     :<BASE>/secteurs.php
-Methodes: GET
-Request response:
-{
-    "secteurs"  : []  // cf power point la reponse
-}
+`GET <BASE_SERVER_URL>/secteurs.php`
 
+**Request response**
+```json
+{
+    "secteurs"  : []  // tableau des secteurs
+}
+```
+**Example**
+```json
+{
+    "secteurs"  : ["Nord", "Sud" , "Est"]
+}
+```
 
 ## Patrimoine Sous secteur
-/patrimoine_sous_secteur.php?patrouille=<idpatrouille>&sssecteurs=3,11,14
-Methodes: GET
-Request response:
+`GET <BASE_SERVER_URL>/patrimoine_sous_secteur.php?patrouille=<idpatrouille>&sssecteurs=<Liste des secteurs>`
+
+**Example**
+
+`GET <BASE_SERVER_URL>/patrimoine_sous_secteur.php?patrouille=3&sssecteurs=3,11,14`
+
+**Request response**
+```json
 {
 
 }
+```
 
-## Patrimoine Sous secteur
-/misson_sous_secteur.php?patrouille=<idpatrouille>
-Methodes: GET
-Request response:
+## Mission Sous secteur
+`GET <BASE_SERVER_URL>/misson_sous_secteur.php?patrouille=<idpatrouille>`
+
+**Request response**
+```json
 {
- code: 200 | 300 (200: ok, 300:ko)
- message: <message erreur si 300>
- mission: <geojons de la mission>
+ "code": "200 | 300 (200: ok, 300:ko)"
+ "message": "<message erreur si 300>"
+ "mission": "<geojons de la mission>"
 }
-
+```
 
 ## MaJ Mission
-/maj_mission.php
-Methodes: POST
-Request body : 
-{
-    mission_id: <ID Mission>,
-    code : 1 | 3 | 5
-}
-Request response:
-{
- code: 200 | 300 (200: ok, 300:ko)
- message: <message erreur si 300>
-}
+`POST <BASE_SERVER_URL>/maj_mission.php`
 
+**Request body**
+```json
+{
+    "mission_id": "Identifiant de la mission",
+    "code" : "Code de l'action: 1 | 3 | 5"
+}
+```
 
+**Request response**
+```json
+{
+ "code": "200 | 300 (200: ok, 300:ko)",
+ "message": "<message erreur si 300>"
+}
+```
 
 ## signalement.php
-GET 
-    => 
-    {
-        types_signalement: [list des types de signalement],
-        types_lieux [list des types de lieu],
+`GET <BASE_SERVER_URL>/signalement.php`
 
-    }
-
-
-## Reaffectation
-GET /reaffectation.php?signalement=<id signalement>
- => ensemble des infos
-
-
-/reaffectation.php
-POST
-Request body 
+**Request response**
+```json
 {
-    signalement : <id signalement>,
-    mission: <id misson>
-    photo: String png base64 si modif
+    "types_signalement": "[list des types de signalement]",
+    "types_lieux":  "[list des types de lieu]"
 }
+```
 
-Request response:
+## reaffectation
+`GET <BASE_SERVER_URL>/reaffectation.php?signalement=<id signalement>`
+
+**Request response**
+```json
 {
- code: 200 | 300 (200: ok, 300:ko)
- message: <message erreur si 300>
+    ... ensemble des infos de la mission
 }
+```
+
+`POST/reaffectation.php`
+
+**Request body**
+```json
+{
+    "signalement" : <id signalement>,
+    "mission": <id misson>
+    "photo": String png base64 si modif
+}
+```
+
+**Request response**
+```json
+{
+ "code": 200 | 300 (200: ok, 300:ko)
+ "message": <message erreur si 300>
+}
+```
 
 ## Voisinage
-/voisinage.php?patrouille=<idpatrouille>&sssecteurs=3,11,14
-Methodes: GET
-Request response:
+`GET /voisinage.php?patrouille=<idpatrouille>&sssecteurs=<Liste des secteurs>`
+
+**Example**
+
+`GET <BASE_SERVER_URL>//voisinage.php?patrouille=<idpatrouille>&sssecteurs=3,11,14`
+
+**Request response**
+```json
 {
 
 }
+```
