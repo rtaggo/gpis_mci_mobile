@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 5000;
 
 const app = express();
 
-var fakeUsers = [{ id: 1, username: 'mana', password: 'mana' }, { id: 2, username: 'laura', password: 'laura' }];
+const fakeUsers = [{ id: 1, username: 'mana', password: 'mana', role: 'india' }, { id: 2, username: 'laura', password: 'laura', role: 'charly' }, { id: 3, username: 'pdx', password: 'pdx', role: 'alpha' }];
 
 app.use(
   session({
@@ -30,11 +30,15 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-  if (req.session.loggedin) {
+  if (req.session.loggedin && req.session.soussecteur) {
     res.sendFile(path.join(__dirname, '/views/index.html'));
   } else {
     res.sendFile(path.join(__dirname, '/views/login.html'));
   }
+});
+
+app.get('/map.html', (req, res) => {
+  res.sendFile(path.join(__dirname, '/views/index.html'));
 });
 
 /*
@@ -54,22 +58,21 @@ app.post('/login', (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
   let filteredUsers = fakeUsers.filter(u => {
-    console.log(`u.name === username = ${u.name === username}`);
-    console.log(`u.password === password = ${u.password === password}`);
     return u.name === username && u.password === password;
   });
   console.log(`Filtered users: ${filteredUsers.length}`);
   if (filteredUsers.length === 0) {
     return res.status(500).json({
-      error: 'User not found'
+      code: 5001,
+      message: "Nom d'utilisateur et mot de passe ne correspondent pas"
     });
   }
   req.session.loggedin = true;
   req.session.username = username;
 
   return res.status(200).json({
-    message: 'Auth successful',
-    user: filteredUsers[0]
+    authentification: true,
+    role: filteredUsers[0].role
   });
 });
 
@@ -87,10 +90,11 @@ app.get('/logout', (req, res, next) => {
   }
 });
 
+/*
 app.get('/mobile', (req, res) => {
   res.sendFile(path.join(__dirname, '/views/mobile.html'));
 });
-
+*/
 // WAKEME UP SERVICES
 app.use('/services/wakeup', (req, res) => {
   res.json({ message: 'alive', code: 200 });

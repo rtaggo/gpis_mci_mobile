@@ -69,11 +69,13 @@
 		</div>
 	</div>
 	<script>
-		var self = this;
+		var self = this;		
 		$(document).ready(function(e){
 			console.log(' >> document is ready');
 			$('#logoutBtn').click(function(e){
+				sessionStorage.clear();
 				var logoutForm = $('<form action="/logout" />');
+
 				$('body').append(logoutForm);
 				logoutForm.submit();
 			});
@@ -82,9 +84,33 @@
 			$('body').css({
 				'height':  windowH+'px',
 				'max-height':  windowH+'px',
-			})
+			});
+			let userRole = sessionStorage.getItem('role');
+
+			if (!userRole) {
+				GGO.SessionIssuePrompt('Rôle utilisateur indéfini', 'Votre rôle utilisateur n\'est pas défini. Veuillez vous reconnecter.', $('#appContainer').empty());
+				return;
+			}
+			let patrouille = sessionStorage.getItem('patrouille');
+			if (!patrouille) {
+				GGO.SessionIssuePrompt('Patrouille non définie', 'Aucun patrouille n\'est pas défini. Veuillez vous reconnecter.', $('#appContainer').empty());
+			}
+			
+			let secteurs = null;
+			switch(userRole) {
+				case 'india' : 
+					secteurs = sessionStorage.soussecteurs;
+					break;
+				case 'charly' :
+					secteurs = sessionStorage.secteurs;
+					break;
+				default:
+				
+			}
+
 			self.galigeo = new GGO.GGOApp ({
-				windowHeight: windowH
+				windowHeight: windowH,
+				patrouille: JSON.parse(patrouille)
 			});
 		});
 	</script>
