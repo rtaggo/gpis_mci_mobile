@@ -2,6 +2,15 @@
 
 GPIS MCI Mobile Node.js app using [Express 4](http://expressjs.com/).
 
+## Clone the repository
+```sh
+$ git clone https://github.com/rtaggo/gpis_mci_mobile.git
+```
+Once the project is fetched, 
+```sh
+$ cd gpis_mci_mobile
+```
+
 ## Running Locally
 
 Make sure you have [Node.js](http://nodejs.org/) 
