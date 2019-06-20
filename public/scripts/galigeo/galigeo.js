@@ -12,7 +12,7 @@
       window.GGO = oldGGO;
       return this;
     };
-
+    
     window.GGO = GGO;
   }
 
