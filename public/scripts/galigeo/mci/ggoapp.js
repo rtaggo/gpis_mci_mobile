@@ -10,7 +10,9 @@
       var self = this;
 
       var modulesOptions = {
-        app: this
+        app: this,
+        patrouille: this._options.patrouille,
+        secteurs: this._options.secteurs
       };
 
       this._mapManager = new GGO.MapManagerSingleton.getInstance(modulesOptions);

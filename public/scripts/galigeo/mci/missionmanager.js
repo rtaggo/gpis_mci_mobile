@@ -2,7 +2,8 @@
   'use strict';
   GGO.MissionManager = function(options) {
     this._options = options || {};
-    this._options.mciurl = '/services/rest/mci';
+    //this._options.mciurl = '/services/rest/mci';
+    this._options.baseRESTServicesURL = this._options.baseRESTServicesURL || '/services/rest/mci';
     this._init();
   };
 
@@ -207,34 +208,45 @@
     },
     fetchMission: function() {
       let self = this;
-      let missionUrl = this._options.mciurl + '/mission';
+      let missionUrl = `${this._options.baseRESTServicesURL}/mission_sous_secteur.php?patrouille=${this._options.patrouille.id}`;
       $.ajax({
         type: 'GET',
         url: missionUrl,
         success: function(response) {
-          console.log('/rest/mci/mission Response : ', response);
+          console.log(`${missionUrl}: `, response);
           self.handleMissionFetched(response);
         },
         error: function(jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
-            console.warn('/rest/mci/mission Request aborted');
+            console.warn(`[GET] ${missionUrl} Request aborted`);
           } else {
-            console.error('Error for /rest/mci/mission request: ' + textStatus, errorThrown);
+            console.error(`${missionUrl} request error : ${textStatus}`, errorThrown);
           }
         }
       });
     },
-    handleMissionFetched: function(mission) {
-      var self = this;
-      self._currentMission = mission;
-      self.renderMissionViewMode();
-      $('#waiting4Mission').addClass('slds-hide');
-      $('#missionContent').removeClass('slds-hide');
-      $('#missionFooter').removeClass('slds-hide');
+    handleMissionFetched: function(response) {
+      if (response.code === 200) {
+        //self._currentMission = mission;
+        if (response.features.length > 0) {
+          this._currentMission = {
+            type: 'FeatureCollection',
+            features: response.features
+          };
+          this.renderMissionViewMode();
+          $('#waiting4Mission').addClass('slds-hide');
+          $('#missionContent').removeClass('slds-hide');
+          $('#missionFooter').removeClass('slds-hide');
+        } else {
+          console.warn(`TODO: treat case of no mission`);
+        }
+      } else {
+        console.warn(`TODO: treat case of code !== 200`);
+      }
     },
     renderMissionViewMode: function() {
       GGO.EventBus.dispatch(GGO.EVENTS.SHOWMISSIONMLOCATION, this._currentMission);
-      let mission = this._currentMission;
+      let mission = this._currentMission.features[0];
       let content = `
       <div class="slds-form" role="list">
         <div class="slds-form__row">
@@ -242,7 +254,7 @@
             <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
               <div class="slds-form-element__control">
                 <div class="slds-form-element__static">
-                  <div class="">Mission ${mission.id}</div>
+                  <div class="">Mission ${mission.properties.mission_id}</div>
                 </div>
               </div>
             </div>
@@ -252,7 +264,7 @@
               <span class="slds-form-element__label">Code Site</span>
               <div class="slds-form-element__control">
                 <div class="slds-form-element__static">
-                  ${mission.code_site}
+                  ${mission.properties.codesite}
                 </div>
               </div>
             </div>
@@ -263,7 +275,7 @@
             <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent slds-form-element_1-col">
               <span class="slds-form-element__label">Adresse</span>
               <div class="slds-form-element__control">
-                <div class="slds-form-element__static slds-text-longform">${mission.address}</div>
+                <div class="slds-form-element__static slds-text-longform">${mission.properties.adresse}</div>
               </div>
             </div>
           </div>
@@ -273,9 +285,7 @@
             <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
               <span class="slds-form-element__label">Type de lieu</span>
               <div class="slds-form-element__control">
-                <div class="slds-form-element__static">
-            Type de lieu
-            </div>
+                <div class="slds-form-element__static">${mission.properties.type_lieu}</div>
               </div>
             </div>
           </div>
@@ -283,9 +293,7 @@
             <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
               <span class="slds-form-element__label">Type de lieu secondaire</span>
               <div class="slds-form-element__control">
-                <div class="slds-form-element__static">
-            Type de lieu 2
-            </div>
+                <div class="slds-form-element__static">${mission.properties.type_lieu_sec}</div>
               </div>
             </div>
           </div>
@@ -295,9 +303,7 @@
             <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
               <span class="slds-form-element__label">Code d'accès Hall</span>
               <div class="slds-form-element__control">
-                <div class="slds-form-element__static">
-            9876
-            </div>
+                <div class="slds-form-element__static">${mission.properties.codeacces_hall}</div>
               </div>
             </div>
           </div>
@@ -305,9 +311,7 @@
             <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
               <span class="slds-form-element__label">Code d'accès Grille</span>
               <div class="slds-form-element__control">
-                <div class="slds-form-element__static">
-            1234
-            </div>
+                <div class="slds-form-element__static">${mission.properties.codeacces_grille}</div>
               </div>
             </div>
           </div>

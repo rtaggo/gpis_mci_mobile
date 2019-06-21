@@ -75,7 +75,7 @@
     },
     fetchPatrimoine_SousSecteurs: function() {
       var self = this;
-      var restURL = `${this._options.baseRESTServicesURL}/patrimoine_sous_secteur.php`;
+      var restURL = `${this._options.baseRESTServicesURL}/patrimoine_sous_secteur.php?patrouille=${this._options.patrouille.id}&sssecteurs=${this._options.secteurs.map(s => s.id).join(',')}`;
       $.ajax({
         type: 'GET',
         url: restURL,
@@ -93,22 +93,61 @@
       });
     },
     handleSectorFetched: function(response) {
-      this._secteurLayer = L.mapbox.featureLayer().addTo(this._map);
-      let sous_secteurs = response['sous-secteurs'];
-      //$.extend(sous_secteurs.features[0].properties, this._secteurDrawingProperties);
-      this._secteurLayer.setGeoJSON(sous_secteurs);
-      this._map.fitBounds(this._secteurLayer.getBounds());
+      if (response.code === 200) {
+        let patrimoineGgeoJSON = response['patrimoine'];
+        if (typeof patrimoineGgeoJSON !== 'undefined') {
+          this._classifyPatrimoine(patrimoineGgeoJSON);
+          this._patrimoineLayer = L.mapbox.featureLayer().addTo(this._map);
+          //this._patrimoineLayer.on('layeradd', this.onFeatureAddedToPatrimoineLayer.bind(this));
+          this._patrimoineLayer.setGeoJSON(patrimoineGgeoJSON);
+        }
+
+        let sous_secteursGeoJSON = response['sous-secteur'];
+        if (typeof sous_secteursGeoJSON !== 'undefined') {
+          this._secteurLayer = L.mapbox.featureLayer().addTo(this._map);
+
+          //$.extend(sous_secteurs.features[0].properties, this._secteurDrawingProperties);
+          this._secteurLayer.setGeoJSON(sous_secteursGeoJSON);
+          this._map.fitBounds(this._secteurLayer.getBounds());
+        }
+      }
     },
-    displayMission: function(mission) {
+    _getColorForNiveauOpe: function(no) {
+      const rdYlBu = ['#d73027', '#fc8d59', '#fee090', '#e0f3f8', '#91bfdb', '#4575b4'];
+      //const colorPalette = ['#d73027', '#fc8d59', '#fee08b', '#d9ef8b', '#91cf60', '#1a9850'];
+      const colorPalette = rdYlBu;
+      let noInt = parseInt(no);
+      noInt = noInt % colorPalette.length;
+      return colorPalette.reverse()[noInt];
+    },
+    _classifyPatrimoine: function(geojson) {
+      geojson.features.forEach(f => {
+        f.properties['marker-size'] = 'small';
+        f.properties['marker-symbol'] = f.properties['niveau_operationnel'];
+        f.properties['marker-color'] = this._getColorForNiveauOpe(f.properties['niveau_operationnel']);
+      });
+    },
+    onFeatureAddedToPatrimoineLayer: function(e) {
+      let marker = e.layer;
+      let feature = marker.feature;
+      let props = feature.properties;
+    },
+    displayMission: function(missionGeoJSON) {
       if (typeof this._missionLayer === 'undefined' || this._missionLayer === null) {
         this._missionLayer = L.mapbox.featureLayer().addTo(this._options.app._mapManager._map);
       }
+      let mission = missionGeoJSON.features[0];
       let markerProperties = {
         'marker-color': mission.statut === 'En attente' ? '#FF0000' : mission.statut === 'En direction' ? '#00FF00' : '#0000FF',
         'marker-size': 'small'
       };
+      /*
       let missionGeoJSON = turf.point(mission.coordinates);
       $.extend(missionGeoJSON.properties, markerProperties);
+      this._missionLayer.setGeoJSON(missionGeoJSON);
+      this._map.fitBounds(this._missionLayer.getBounds(), { maxZoom: 14 });
+      */
+      $.extend(mission.properties, markerProperties);
       this._missionLayer.setGeoJSON(missionGeoJSON);
       this._map.fitBounds(this._missionLayer.getBounds(), { maxZoom: 14 });
     },

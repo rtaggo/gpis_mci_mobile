@@ -118,12 +118,22 @@ router.get('/secteurs.php', (req, res, next) => {
 
 // patrimoine_sous_secteur.php
 router.get('/patrimoine_sous_secteur.php', (req, res, next) => {
-  console.log(`/[MCI_REST_API]/patrimoine_sous_secteur.php`);
-  let ss_secteurs = JSON.parse(fs.readFileSync('./data/secteurs.geojson'));
+  console.log(`/[MCI_REST_API]/patrimoine_sous_secteur.php ${JSON.stringify(req.query)}`);
+  const patrimoine_file = './data/mock/patrimoine.json';
+  // old: './data/secteurs.geojson'
+  let patrimoine_sssecteurs = JSON.parse(fs.readFileSync(patrimoine_file));
+  let patrimoine = patrimoine_sssecteurs['patrimoine'];
+  const no_min = 0;
+  const no_max = 5;
+
+  patrimoine.features.forEach(f => {
+    f.properties.niveau_operationnel = (Math.floor(Math.random() * (no_max - no_min + 1)) + no_min).toFixed(0);
+  });
   res.header('Content-Type', 'application/json');
   res.json({
-    'sous-secteurs': ss_secteurs,
-    patrimoine: {}
+    code: 200,
+    'sous-secteur': patrimoine_sssecteurs['sous_secteur'],
+    patrimoine: patrimoine
   });
 });
 
@@ -137,14 +147,17 @@ router.get('/secteur', (req, res, next) => {
 });
 */
 
-router.get('/mission', (req, res, next) => {
+router.get('/mission_sous_secteur.php', (req, res, next) => {
   idxMission++;
   if (idxMission >= missions.length) {
     idxMission = 0;
   }
   let mission = missions[idxMission];
   res.header('Content-Type', 'application/json');
-  res.json(mission);
+  const mision_file = './data/mock/mission.json';
+  let missionGeoJSON = JSON.parse(fs.readFileSync(mision_file));
+
+  res.json(missionGeoJSON);
 });
 
 /*

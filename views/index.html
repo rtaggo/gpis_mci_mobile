@@ -99,10 +99,10 @@
 			let secteurs = null;
 			switch(userRole) {
 				case 'india' : 
-					secteurs = sessionStorage.soussecteurs;
+					secteurs = sessionStorage.getItem('soussecteurs');
 					break;
 				case 'charly' :
-					secteurs = sessionStorage.secteurs;
+					secteurs = sessionStorage.getItem('secteurs');
 					break;
 				default:
 				
@@ -110,7 +110,8 @@
 
 			self.galigeo = new GGO.GGOApp ({
 				windowHeight: windowH,
-				patrouille: JSON.parse(patrouille)
+				patrouille: JSON.parse(patrouille),
+				secteurs: JSON.parse(secteurs)
 			});
 		});
 	</script>
