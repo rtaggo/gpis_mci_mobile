@@ -2,6 +2,7 @@
   'use strict';
   GGO.SessionManager = function(options) {
     this._options = options || {};
+    this._options.baseRESTServicesURL = this._options.baseRESTServicesURL || '/services/rest/mci';
     this._init();
   };
 
@@ -64,7 +65,7 @@
       let self = this;
       $.ajax({
         type: 'POST',
-        url: '/connexion.php',
+        url: `${this._options.baseRESTServicesURL}/connexion.php`,
         data: JSON.stringify(loginRequest),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
@@ -129,19 +130,19 @@
     fetchPatrouilles: function() {
       let self = this;
       $('#patrouille-form-element').removeClass('slds-hide');
-      const patrouillesUrl = '/services/rest/mci/patrouilles';
+      const patrouillesUrl = `${this._options.baseRESTServicesURL}/patrouilles.php`;
       $.ajax({
         type: 'GET',
         url: patrouillesUrl,
         success: function(response) {
-          console.log('/rest/mci/patrouilles : ', response);
+          console.log(`${patrouillesUrl}`, response);
           self.handlePatrouillesFetched(response);
         },
         error: function(jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
-            console.warn('/rest/mci/patrouilles Request aborted');
+            console.warn(`${patrouillesUrl} Request aborted`);
           } else {
-            console.error('Error for /rest/mci/patrouilles request: ' + textStatus, errorThrown);
+            console.error(`Error for ${patrouillesUrl} request: ${textStatus}`, errorThrown);
           }
         }
       });
@@ -207,7 +208,8 @@
 
     fetchSousSecteurs: function(patrouille) {
       const self = this;
-      const sousSecteursUrl = `/services/rest/mci/patrouilles/soussecteurs?patrouilleid=${patrouille.id}`;
+      //const sousSecteursUrl = `/services/rest/mci/patrouilles/soussecteurs?patrouilleid=${patrouille.id}`;
+      const sousSecteursUrl = `${this._options.baseRESTServicesURL}/sous_secteurs.php`;
       $.ajax({
         type: 'GET',
         url: sousSecteursUrl,
@@ -217,9 +219,9 @@
         },
         error: function(jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
-            console.warn('[GET] /services/rest/mci/patrouilles/soussecteurs Request aborted');
+            console.warn(`[GET] ${sousSecteursUrl} Request aborted`);
           } else {
-            console.error('[GET] /services/rest/mci/patrouilles/soussecteurs ERROR: ' + textStatus, errorThrown);
+            console.error(`[GET] ${sousSecteursUrl} ERROR: ${textStatus}`, errorThrown);
           }
         }
       });

@@ -9,6 +9,8 @@ const router = express.Router();
 
 const maxRadiusFiltering = 30; // max radius in KM when results need to be filtered i.e when sending coordinates
 
+const fakeUsers = [{ id: 1, username: 'mana', password: 'mana', role: 'india' }, { id: 2, username: 'laura', password: 'laura', role: 'charly' }, { id: 3, username: 'pdx', password: 'pdx', role: 'alpha' }];
+
 const fakePatrouilles = [
   {
     name: 'GOLF 03',
@@ -69,21 +71,44 @@ router.get('/', (req, res, next) => {
   res.json({ message: 'GPIS MCI Mobile services are running ...', code: 200 });
 });
 
-router.get('/patrouilles', (req, res, next) => {
+router.post('/connexion.php', (req, res, next) => {
+  console.log(`/login ${JSON.stringify(req.body)}`);
+  const username = req.body.username;
+  const password = req.body.password;
+  let filteredUsers = fakeUsers.filter(u => {
+    return u.name === username && u.password === password;
+  });
+  console.log(`Filtered users: ${filteredUsers.length}`);
+  if (filteredUsers.length === 0) {
+    return res.status(500).json({
+      code: 5001,
+      message: "Nom d'utilisateur et mot de passe ne correspondent pas"
+    });
+  }
+  req.session.loggedin = true;
+  req.session.username = username;
+
+  return res.status(200).json({
+    authentification: true,
+    role: filteredUsers[0].role
+  });
+});
+
+router.get('/patrouilles.php', (req, res, next) => {
   console.log(`[MCI API] /patrouilles ${JSON.stringify(fakePatrouilles)}`);
   res.header('Content-Type', 'application/json');
   res.json({ patrouille: fakePatrouilles, code: 200 });
 });
 
-router.get('/patrouilles/soussecteurs', (req, res, next) => {
-  console.log(`[MCI API] /patrouilles/soussecteurs ${JSON.stringify(req.query)}`);
+router.get('/sous_secteurs.php', (req, res, next) => {
+  console.log(`[MCI API] /sous_secteurs.php`);
   res.header('Content-Type', 'application/json');
   res.json({
     'sous-secteurs': fakeSousSecteurs
   });
 });
 
-router.get('/secteurs', (req, res, next) => {
+router.get('/secteurs.php', (req, res, next) => {
   console.log(`/[MCI_REST_API]/secteurs`);
   res.header('Content-Type', 'application/json');
   res.json({
@@ -91,6 +116,18 @@ router.get('/secteurs', (req, res, next) => {
   });
 });
 
+// patrimoine_sous_secteur.php
+router.get('/patrimoine_sous_secteur.php', (req, res, next) => {
+  console.log(`/[MCI_REST_API]/patrimoine_sous_secteur.php`);
+  let ss_secteurs = JSON.parse(fs.readFileSync('./data/secteurs.geojson'));
+  res.header('Content-Type', 'application/json');
+  res.json({
+    'sous-secteurs': ss_secteurs,
+    patrimoine: {}
+  });
+});
+
+/*
 router.get('/secteur', (req, res, next) => {
   console.log(`/[MCI_REST_API]/secteur' + ${JSON.stringify(req.query)}`);
   let secteurs = JSON.parse(fs.readFileSync('./data/secteurs.geojson'));
@@ -98,6 +135,7 @@ router.get('/secteur', (req, res, next) => {
   res.header('Content-Type', 'application/json');
   res.json(secteurs);
 });
+*/
 
 router.get('/mission', (req, res, next) => {
   idxMission++;

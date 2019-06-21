@@ -2,6 +2,7 @@
   'use strict';
   GGO.MapManager = function(options) {
     this._options = options || {};
+    this._options.baseRESTServicesURL = this._options.baseRESTServicesURL || '/services/rest/mci';
     this._options.mapboxAccessToken = this._options.mapboxAccessToken || 'pk.eyJ1IjoicnRhZ2dvIiwiYSI6Ijg5YWI5YzlkYzJiYzg2Mjg2YWQyMTQyZjRkZWFiMWM5In0._yZGbo26CQle1_JfHPxWzg';
     this._options.mapDivId = this._options.mapDivId || 'map';
     L.mapbox.accessToken = this._options.mapboxAccessToken;
@@ -26,7 +27,7 @@
       var self = this;
       GGO.EventBus.addEventListener(GGO.EVENTS.APPISREADY, function(e) {
         console.log('Received GGO.EVENTS.APPISREADY');
-        self.fetchSecteur();
+        self.fetchPatrimoine_SousSecteurs();
       });
       GGO.EventBus.addEventListener(GGO.EVENTS.SHOWMISSIONMLOCATION, function(e) {
         console.log('Received GGO.EVENTS.SHOWMISSIONMLOCATION');
@@ -72,29 +73,30 @@
         layers: [self._basemaps['streets']]
       }).setView([0, 0], 2);
     },
-    fetchSecteur: function() {
+    fetchPatrimoine_SousSecteurs: function() {
       var self = this;
-      var wakeupUrl = '/services/rest/mci/secteur';
+      var restURL = `${this._options.baseRESTServicesURL}/patrimoine_sous_secteur.php`;
       $.ajax({
         type: 'GET',
-        url: wakeupUrl,
+        url: restURL,
         success: function(response) {
-          console.log('/rest/mci/secteur Response : ', response);
+          console.log(`${restURL} Response : `, response);
           self.handleSectorFetched(response);
         },
         error: function(jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
-            console.warn('/rest/mci/secteur Request aborted');
+            console.warn(`${restURL} Request aborted`);
           } else {
-            console.error('Error for /rest/mci/secteur request: ' + textStatus, errorThrown);
+            console.error(`${restURL} Error request: ${textStatus}`, errorThrown);
           }
         }
       });
     },
-    handleSectorFetched: function(geojson) {
+    handleSectorFetched: function(response) {
       this._secteurLayer = L.mapbox.featureLayer().addTo(this._map);
-      $.extend(geojson.features[0].properties, this._secteurDrawingProperties);
-      this._secteurLayer.setGeoJSON(geojson);
+      let sous_secteurs = response['sous-secteurs'];
+      //$.extend(sous_secteurs.features[0].properties, this._secteurDrawingProperties);
+      this._secteurLayer.setGeoJSON(sous_secteurs);
       this._map.fitBounds(this._secteurLayer.getBounds());
     },
     displayMission: function(mission) {

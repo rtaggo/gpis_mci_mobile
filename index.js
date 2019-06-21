@@ -52,7 +52,7 @@ app.post('/login', (req, res, next) => {
   res.end();
 });
 */
-
+/*
 app.post('/connexion.php', (req, res, next) => {
   console.log(`/login ${JSON.stringify(req.body)}`);
   const username = req.body.username;
@@ -75,7 +75,7 @@ app.post('/connexion.php', (req, res, next) => {
     role: filteredUsers[0].role
   });
 });
-
+*/
 app.get('/logout', (req, res, next) => {
   console.log(`/logout`);
   if (req.session) {
