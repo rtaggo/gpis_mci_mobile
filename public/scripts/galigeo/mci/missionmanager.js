@@ -65,7 +65,7 @@
       let self = this;
       let modal = `
       <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-signalement-content" class="slds-modal slds-fade-in-open slds-modal_large">
-      <div class="slds-modal__container">
+      <div class="slds-modal__container" style="margin: 0px; padding: 0px;">
         <header class="slds-modal__header">
           <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Signalement</h2>
         </header>
@@ -74,16 +74,31 @@
           <div class="slds-form__row">
             <div class="slds-form__item" role="listitem">
               <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                <label class="slds-form-element__label" for="signalement-input-type">Type de signalement</label>
+                <div class="slds-form-element__control">
+                  <div class="slds-select_container">
+                    <select class="slds-select" id="signalement-input-type">
+                      <option value="">Choisir un type de signalement</option>
+                      <option>TODO: mettre liste des signalements</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>          
+          <div class="slds-form__row">
+            <div class="slds-form__item" role="listitem">
+              <div class="slds-form-element slds-form-element_stacked slds-is-editing">
                 <label class="slds-form-element__label" for="signalement-input-categorie">Catégorie</label>
                 <div class="slds-form-element__control">
-              <div class="slds-select_container">
-                <select class="slds-select" id="signalement-input-categorie">
-                <option value="">Choisir une catégorie</option>
-                <option>Catégorie 1</option>
-                <option>Catégorie 2</option>
-                <option>Catégorie 3</option>
-                </select>
-              </div>
+                  <div class="slds-select_container">
+                    <select class="slds-select" id="signalement-input-categorie">
+                      <option value="">Choisir une catégorie</option>
+                      <option>Catégorie 1</option>
+                      <option>Catégorie 2</option>
+                      <option>Catégorie 3</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
@@ -91,14 +106,14 @@
               <div class="slds-form-element slds-form-element_stacked slds-is-editing">
                 <label class="slds-form-element__label" for="signalement-input-souscategorie">Sous-Catégorie</label>
                 <div class="slds-form-element__control">
-              <div class="slds-select_container">
-                <select class="slds-select" id="signalement-input-souscategorie">
-                <option value="">Choisir une sous-catégorie</option>
-                <option>Sous-Catégorie 1</option>
-                <option>Sous-Catégorie 2</option>
-                <option>Sous-Catégorie 3</option>
-                </select>
-              </div>
+                <div class="slds-select_container">
+                  <select class="slds-select" id="signalement-input-souscategorie">
+                    <option value="">Choisir une sous-catégorie</option>
+                    <option>Sous-Catégorie 1</option>
+                    <option>Sous-Catégorie 2</option>
+                    <option>Sous-Catégorie 3</option>
+                  </select>
+                </div>
                 </div>
               </div>
             </div>
@@ -108,14 +123,14 @@
               <div class="slds-form-element slds-form-element_stacked slds-is-editing">
                 <label class="slds-form-element__label" for="signalement-input-categorie2nd">Catégorie 2nd</label>
                 <div class="slds-form-element__control">
-              <div class="slds-select_container">
-                <select class="slds-select" id="signalement-input-categorie2nd">
-                <option value="">Choisir une catégorie</option>
-                <option>Catégorie 2nd 1</option>
-                <option>Catégorie 2nd 2</option>
-                <option>Catégorie 2nd 3</option>
-                </select>
-              </div>
+                  <div class="slds-select_container">
+                    <select class="slds-select" id="signalement-input-categorie2nd">
+                      <option value="">Choisir une catégorie</option>
+                      <option>Catégorie 2nd 1</option>
+                      <option>Catégorie 2nd 2</option>
+                      <option>Catégorie 2nd 3</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
@@ -123,14 +138,14 @@
               <div class="slds-form-element slds-form-element_stacked slds-is-editing">
                 <label class="slds-form-element__label" for="signalement-input-typelieu">Type de lieu</label>
                 <div class="slds-form-element__control">
-              <div class="slds-select_container">
-                <select class="slds-select" id="signalement-input-typelieu">
-                <option value="">Choisir un type</option>
-                <option>Type 1</option>
-                <option>Type 2</option>
-                <option>Type 3</option>
-                </select>
-              </div>
+                  <div class="slds-select_container">
+                    <select class="slds-select" id="signalement-input-typelieu">
+                      <option value="">Choisir un type</option>
+                      <option>Type 1</option>
+                      <option>Type 2</option>
+                      <option>Type 3</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
@@ -140,14 +155,14 @@
               <div class="slds-form-element slds-form-element_stacked slds-is-editing">
                 <label class="slds-form-element__label" for="signalement-input-niveau">Niveau</label>
                 <div class="slds-form-element__control">
-              <div class="slds-select_container">
-                <select class="slds-select" id="signalement-input-niveau">
-                <option value="">Choisir un niveau</option>
-                <option>Niveau 1</option>
-                <option>Niveau 2</option>
-                <option>Niveau 3</option>
-                </select>
-              </div>
+                  <div class="slds-select_container">
+                    <select class="slds-select" id="signalement-input-niveau">
+                      <option value="">Choisir un niveau</option>
+                      <option>Niveau 1</option>
+                      <option>Niveau 2</option>
+                      <option>Niveau 3</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
@@ -155,9 +170,9 @@
               <div class="slds-form-element slds-form-element_stacked slds-is-editing">
                 <label class="slds-form-element__label" for="signalement-input-niveau">Image</label>
                 <div class="slds-form-element__control">
-              <div class="snapshotdiv">
-                <svg class="slds-icon slds-icon_large slds-icon-text-default slds-shrink-none" aria-hidden="true"><use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#photo"></use></svg>
-              </div>
+                  <div class="snapshotdiv">
+                    <svg class="slds-icon slds-icon_large slds-icon-text-default slds-shrink-none" aria-hidden="true"><use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#photo"></use></svg>
+                  </div>
                 </div>
               </div>
             </div>
