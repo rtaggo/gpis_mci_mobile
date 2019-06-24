@@ -1,3 +1,4 @@
 {
-  "GEOSERVICE" : "openrouteservice"
+  "GEOSERVICE" : "openrouteservice",
+  "BACKEND_URL" : "https://gpis-mci-mobile.herokuapp.com/services/rest/mci"
 }

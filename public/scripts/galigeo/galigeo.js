@@ -12,7 +12,7 @@
       window.GGO = oldGGO;
       return this;
     };
-    
+
     window.GGO = GGO;
   }
 
@@ -85,7 +85,8 @@
     MAPISREADY: 'mapisready',
     MAPMARKERCLICKED: 'mapmarkerclicked',
     SHOWMISSIONMLOCATION: 'showmissionlocation',
-    MISSIONCOMPLETED: 'missioncompleted'
+    MISSIONCOMPLETED: 'missioncompleted',
+    INVALIDATEMAPSIZE: 'invalidemapsize'
   };
 })();
 /* end GGO: put code below in galigeo.js */

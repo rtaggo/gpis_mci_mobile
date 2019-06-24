@@ -39,6 +39,12 @@
         console.log('Received GGO.EVENTS.MISSIONCOMPLETED');
         self.clearMission();
       });
+
+      // INVALIDATEMAPSIZE
+      GGO.EventBus.addEventListener(GGO.EVENTS.INVALIDATEMAPSIZE, function(e) {
+        console.log('Received GGO.EVENTS.INVALIDATEMAPSIZE');
+        self.invalidateMapSize();
+      });
     },
     getMap: function() {
       return this._map;

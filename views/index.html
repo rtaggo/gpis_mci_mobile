@@ -5,12 +5,16 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<script src="/scripts/vendors/jquery/jquery-3.3.1.min.js"></script>
+
 		<!--
 		<script src="/scripts/vendors/jquery/jquery.mobile-1.5.0-alpha.1.min.js"></script>
-		<script src="/scripts/vendors/jquery/jquery.touchSwipe.min.js"></script>
-		<script src="/scripts/vendors/jquery/jquery.scrollTo.min.js"></script>
 		-->
-
+		<script src="/scripts/vendors/jquery/jquery.touchSwipe.min.js"></script>
+		<!--
+		<script src="/scripts/vendors/jquery/jquery.scrollTo.min.js"></script>
+		<script src="/scripts/vendors/jquery/jquerymobile-swipeupdown.js"></script>
+		-->
+		
 		<script src='/scripts/vendors/mapbox/V3.1.1/mapbox.js'></script>
 		<link rel="stylesheet" type="text/css" href="/scripts/vendors/mapbox/V3.1.1/mapbox.css" />
 		<script src='/scripts/vendors/turfjs/turf.min.js'></script>
@@ -24,49 +28,62 @@
 	</head>
 	<body>
 		<div id="map"></div>
-		<div class="ggoslds" style="position:absolute; top: 0px; right: 0px">
-			<div id="logoutBtn">
-				<div class="slds-icon_container" style="position: absolute; right: 2px; top: 4px;">
-					<svg class="slds-icon slds-icon_x-small slds-icon-text-default" style="fill: red;">
-						<use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#logout"></use>
-					</svg>
+		<div id="appContainer" class="ggoslds" style="">
+			<div class="ggoslds" style="position:absolute; top: 0px; right: 0px">
+				<div id="logoutBtn">
+					<div class="slds-icon_container" style="position: absolute; right: 2px; top: 4px;">
+						<svg class="slds-icon slds-icon_x-small slds-icon-text-default" style="fill: red;">
+							<use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#logout"></use>
+						</svg>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div id="appContainer" class="ggoslds" style="top:33%;">
-			<div id="mainContainer" class="slds-grid slds-gutters slds-p-around_xx-small">
-				<article class="slds-card slds-p-around-medium" style="display: block;width: 100%;">
-					<div id="mainContainer-card-body" class="slds-card__body slds-card__body_inner" style="max-height: calc(100%);">
-						<div id="waiting4Mission" class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_info" role="alert">
-							<div role="status" class="slds-spinner slds-spinner_x-small slds-spinner_inline" style=" top: 8px; left: -10px; ">
-								<span class="slds-assistive-text">Loading</span>
-								<div class="slds-spinner__dot-a"></div>
-								<div class="slds-spinner__dot-b"></div>
+			<article id="mission-card-Container" class="slds-card bottom-card" style="display: block;width: 100%;">
+				<div class="slds-card__header slds-grid">
+					<header id="maincard-header" class="slds-media slds-media_center slds-has-flexi-truncate">
+						<div class="slds-media__body">
+							<div id="swiper_handle" style="text-align:center;">
+								<span class="slds-icon_container slds-icon-utility-assignment">
+									<svg class="slds-icon slds-icon-text-default slds-icon_xx-small" aria-hidden="true">
+										<use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#assignment"></use>
+									</svg>
+									<span class="slds-assistive-text">Description of icon when needed</span>
+								</span>
 							</div>
-							<h2>en attente de mission ... </h2>					
 						</div>
-						<div id="missionContent" class="slds-scrollable_y slds-hide" style="position: absolute; top: 0px; left: 18px; right: 13px; bottom: 60px;">
-
+					</header>
+				</div>
+				<div id="mainContainer-card-body" class="slds-card__body slds-card__body_inner" style="max-height: calc(100%);">
+					<div id="waiting4Mission" class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_info" role="alert">
+						<div role="status" class="slds-spinner slds-spinner_x-small slds-spinner_inline" style=" top: 8px; left: -10px; ">
+							<span class="slds-assistive-text">Loading</span>
+							<div class="slds-spinner__dot-a"></div>
+							<div class="slds-spinner__dot-b"></div>
 						</div>
+						<h2>en attente de mission ... </h2>					
 					</div>
-					<footer id="missionFooter" class="slds-card__footer slds-hide" style="position: absolute; bottom: 0px; left: 0px; right: 0px;">
-						<ul class="slds-button-group-row">
-							<li class="slds-button-group-item">
-								<button id="btnMissionEnRoute" class="slds-button slds-button_brand">En route</button>
-							</li>
-							<li class="slds-button-group-item">
-								<button id="btnMissionDebut" class="slds-button slds-button_brand">Début</button>
-							</li>
-							<li class="slds-button-group-item">
-								<button id="btnMissionFin" class="slds-button slds-button_success">Fin</button>
-							</li>
-							<li class="slds-button-group-item">
-								<button id="btnMissionSignalement" class="slds-button slds-button_destructive">Signalement</button>
-							</li>
-						</ul>
-					</footer>
-				</article>
-		</div>
+					<div id="missionContent" class="slds-scrollable_y slds-hide" style="position: absolute; top: 15px; left: 18px; right: 13px; bottom: 60px;">
+
+					</div>
+				</div>
+				<footer id="missionFooter" class="slds-card__footer slds-hide" style="position: absolute; bottom: 0px; left: 0px; right: 0px; padding: 0.5rem 0.5rem;">
+					<ul class="slds-button-group-row">
+						<li class="slds-button-group-item">
+							<button id="btnMissionEnRoute" class="slds-button slds-button_brand">En route</button>
+						</li>
+						<li class="slds-button-group-item">
+							<button id="btnMissionDebut" class="slds-button slds-button_brand">Début</button>
+						</li>
+						<li class="slds-button-group-item">
+							<button id="btnMissionFin" class="slds-button slds-button_success">Fin</button>
+						</li>
+						<li class="slds-button-group-item">
+							<button id="btnMissionSignalement" class="slds-button slds-button_destructive">Signalement</button>
+						</li>
+					</ul>
+				</footer>
+			</article>
+			<div id="mainContainer" class=""></div>
 	</div>
 	<script>
 		var self = this;		
@@ -113,6 +130,8 @@
 				patrouille: JSON.parse(patrouille),
 				secteurs: JSON.parse(secteurs)
 			});
+			$('.ui-loader').remove();
+			
 		});
 	</script>
 </body>
