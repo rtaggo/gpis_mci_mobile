@@ -15,7 +15,7 @@
       let self = this;
       GGO.EventBus.addEventListener(GGO.EVENTS.APPISREADY, function(e) {
         console.log('Received GGO.EVENTS.APPISREADY');
-        self.fakeTimeOutbeforeFetchingMission();
+        self.checkMission();
       });
       $('#btnMissionEnRoute').click(function(e) {
         self._currentMission.statut = 'En direction';
@@ -212,14 +212,22 @@
         $('#missionFooter').addClass('slds-hide');
         $('#waiting4Mission').removeClass('slds-hide');
         GGO.EventBus.dispatch(GGO.EVENTS.MISSIONCOMPLETED);
-        self.fakeTimeOutbeforeFetchingMission();
+        self.checkMission();
       });
     },
+    /*
     fakeTimeOutbeforeFetchingMission: function() {
-      var self = this;
+      let self = this;
       setTimeout(function() {
         self.fetchMission();
-      }, 5000);
+      }, GGO.CHECK_MISSION_INTERVALLE);
+    },
+    */
+    checkMission: function() {
+      let self = this;
+      setTimeout(function() {
+        self.fetchMission();
+      }, GGO.CHECK_MISSION_INTERVALLE);
     },
     fetchMission: function() {
       let self = this;
@@ -241,22 +249,34 @@
       });
     },
     handleMissionFetched: function(response) {
-      if (response.code === 200) {
-        //self._currentMission = mission;
-        if (response.features.length > 0) {
-          this._currentMission = {
-            type: 'FeatureCollection',
-            features: response.features
-          };
-          this.renderMissionViewMode();
-          $('#waiting4Mission').addClass('slds-hide');
-          $('#missionContent').removeClass('slds-hide');
-          $('#missionFooter').removeClass('slds-hide');
-        } else {
-          console.warn(`TODO: treat case of no mission`);
-        }
+      switch (response.code) {
+        case 200:
+          this.handleMissionResponseOK(response);
+          break;
+        case 300:
+          $('#waiting4Mission h2').text(response.message);
+          this.checkMission();
+          break;
+        default:
+          console.error(`Unhandled code error ${response.code}: ${JSON.stringify(response)}`);
+          const errMsg = response.message || 'Erreur non reconnue';
+          $('#waiting4Mission h2').text(response.message);
+      }
+    },
+    handleMissionResponseOK: function(response) {
+      if (response.features.length > 0) {
+        this._currentMission = {
+          type: 'FeatureCollection',
+          features: response.features
+        };
+        this.renderMissionViewMode();
+        $('#waiting4Mission').addClass('slds-hide');
+        $('#missionContent').removeClass('slds-hide');
+        $('#missionFooter').removeClass('slds-hide');
       } else {
-        console.warn(`TODO: treat case of code !== 200`);
+        console.warn(`TODO: treat case of no mission`);
+        $('#waiting4Mission h2').text(response.message);
+        this.checkMission();
       }
     },
     renderMissionViewMode: function() {

@@ -1,38 +1,62 @@
 'use strict';
 
 const express = require('express');
+const request = require('request');
 const rp = require('request-promise');
 const bodyParser = require('body-parser');
 
 const doAsyncGET = async url => {
   let res = await rp(url);
-  var jsonRes = typeof res === 'string' ? JSON.parse(res) : res;
+  console.log(res);
+  let jsonRes = typeof res === 'string' ? JSON.parse(res) : res;
   return jsonRes;
 };
 
 const doAsyncPOST = async options => {
   try {
     let res = await rp(options);
+    console.log(res);
     var jsonRes = typeof res === 'string' ? JSON.parse(res) : res;
+    jsonRes.code = 200;
     return jsonRes;
   } catch (err) {
     console.log('Error: ', err);
-    return { ode: 500 };
+    return { code: 500 };
   }
 };
 
-const _login = async (username, password) => {
+const doAsyncPostREQUEST = async (url, data) => {
+  console.log(`doAsyncPostREQUEST: ${JSON.stringify(data)}`);
+  request.post(
+    url,
+    {
+      json: data
+    },
+    (error, res, body) => {
+      console.log(body);
+      if (error) {
+        console.error(error);
+        return { code: 500 };
+      }
+      return body;
+    }
+  );
+};
+
+const _login = async (loginInput, passwordInput) => {
   let loginUrl = `${require('../../config').get('BACKEND_URL')}/connexion.php`;
+
   let options = {
     method: 'POST',
     uri: loginUrl,
     body: {
-      username: username,
-      password: password
+      login: loginInput,
+      password: passwordInput
     },
     json: true // Automatically stringifies the body to JSON
   };
   let loginResponse = await doAsyncPOST(options);
+  //let loginResponse = await doAsyncPostREQUEST(loginUrl, { login: usernameInput, password: passwordInput });
   console.log('Resp: ' + loginResponse);
   return loginResponse;
 };

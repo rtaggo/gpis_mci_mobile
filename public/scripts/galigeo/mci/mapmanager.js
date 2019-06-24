@@ -106,6 +106,7 @@
           this._patrimoineLayer = L.mapbox.featureLayer().addTo(this._map);
           //this._patrimoineLayer.on('layeradd', this.onFeatureAddedToPatrimoineLayer.bind(this));
           this._patrimoineLayer.setGeoJSON(patrimoineGgeoJSON);
+          this._buildLegend();
         }
 
         let sous_secteursGeoJSON = response['sous-secteur'];
@@ -116,15 +117,48 @@
           this._secteurLayer.setGeoJSON(sous_secteursGeoJSON);
           this._map.fitBounds(this._secteurLayer.getBounds());
         }
+      } else {
       }
+    },
+    _buildLegend: function() {
+      const colorPalette = GGO.getDefaultColorPalette();
+      let self = this;
+      let lgdContent = $(`
+        <div>
+          <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[0]};" data-no="0"></div><div class="legend-label"> Niveau opérationnel 0</div></div>
+          <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[1]};" data-no="1"></div><div class="legend-label"> Niveau opérationnel 1</div></div>
+          <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[2]};" data-no="2"></div><div class="legend-label"> Niveau opérationnel 2</div></div>
+          <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[3]};" data-no="3"></div><div class="legend-label"> Niveau opérationnel 3</div></div>
+          <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[4]};" data-no="4"></div><div class="legend-label"> Niveau opérationnel 4</div></div>
+          <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[5]};" data-no="5"></div><div class="legend-label"> Niveau opérationnel 5</div></div>
+        </div>
+      `);
+      //
+      lgdContent.find('.slds-badge').click(function(e) {
+        $(this)
+          .parent()
+          .toggleClass('disabled-legend-item');
+        $(this).toggleClass('filtered_no');
+        self._filterPatrimoineLayer();
+      });
+      $('#dialog-body-legend')
+        .empty()
+        .append(lgdContent);
+    },
+    _filterPatrimoineLayer: function() {
+      let filteredNO = $('#dialog-body-legend .filtered_no');
+      const filteredNOValues = new Set(filteredNO.toArray().map(b => $(b).attr('data-no')));
+      this._patrimoineLayer.setFilter(function(f) {
+        return !filteredNOValues.has(f.properties.niveau_operationnel);
+      });
     },
     _getColorForNiveauOpe: function(no) {
       const rdYlBu = ['#d73027', '#fc8d59', '#fee090', '#e0f3f8', '#91bfdb', '#4575b4'];
       //const colorPalette = ['#d73027', '#fc8d59', '#fee08b', '#d9ef8b', '#91cf60', '#1a9850'];
-      const colorPalette = rdYlBu;
+      const colorPalette = GGO.getDefaultColorPalette(); //rdYlBu;
       let noInt = parseInt(no);
       noInt = noInt % colorPalette.length;
-      return colorPalette.reverse()[noInt];
+      return colorPalette[noInt];
     },
     _classifyPatrimoine: function(geojson) {
       geojson.features.forEach(f => {
