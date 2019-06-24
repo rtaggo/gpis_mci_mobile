@@ -37,46 +37,28 @@ const _getPatrouilles = async () => {
   return patrouilles;
 };
 
-const _getSousSecteurs = function() {
-  return {
-    'sous-secteurs': fakeSousSecteurs
-  };
+const _getSousSecteurs = async () => {
+  let sousSecteurseUrl = `${require('../../config').get('BACKEND_URL')}/sous_secteurs.php`;
+  let sssecteurs = await doAsyncGET(sousSecteurseUrl);
+  return sssecteurs;
 };
 
-const _getSecteurs = function() {
-  return {
-    secteurs: fakeSecteurs
-  };
+const _getSecteurs = async () => {
+  let secteurseUrl = `${require('../../config').get('BACKEND_URL')}/secteurs.php`;
+  let secteurs = await doAsyncGET(secteurseUrl);
+  return secteurs;
 };
 
-const _getPatrimoineSousSecteur = function(patrimoine, soussecteurs) {
-  const patrimoine_file = './data/mock/patrimoine.json';
-  // old: './data/secteurs.geojson'
-  let patrimoine_sssecteurs = JSON.parse(fs.readFileSync(patrimoine_file));
-  let patrimoine_geojson = patrimoine_sssecteurs['patrimoine'];
-  const no_min = 0;
-  const no_max = 5;
-
-  patrimoine_geojson.features.forEach(f => {
-    f.properties.niveau_operationnel = (Math.floor(Math.random() * (no_max - no_min + 1)) + no_min).toFixed(0);
-  });
-  return {
-    code: 200,
-    'sous-secteur': patrimoine_sssecteurs['sous_secteur'],
-    patrimoine: patrimoine_geojson
-  };
+const _getPatrimoineSousSecteur = async (patrouilleId, soussecteurs) => {
+  let patrimoineUrl = `${require('../../config').get('BACKEND_URL')}/patrimoine_sous_secteur.php?patrouille=${patrouilleId}&sssecteurs=${soussecteurs}`;
+  let patrimoineResponse = await doAsyncGET(patrimoineUrl);
+  return patrimoineResponse;
 };
 
-const _getMission = function(patrouilleId) {
-  idxMission++;
-  if (idxMission >= missions.length) {
-    idxMission = 0;
-  }
-  let mission = missions[idxMission];
-  const mision_file = './data/mock/mission.json';
-  let missionGeoJSON = JSON.parse(fs.readFileSync(mision_file));
-
-  return missionGeoJSON;
+const _getMission = async patrouilleId => {
+  let patrimoineUrl = `${require('../../config').get('BACKEND_URL')}/mission_sous_secteur.php?patrouille=${patrouilleId}`;
+  let patrimoineResponse = await doAsyncGET(patrimoineUrl);
+  return patrimoineResponse;
 };
 
 module.exports = {

@@ -95,7 +95,7 @@ const _getSecteurs = async () => {
   };
 };
 
-const _getPatrimoineSousSecteur = async (patrimoine, soussecteurs) => {
+const _getPatrimoineSousSecteur = async (patrouilleId, soussecteurs) => {
   const patrimoine_file = './data/mock/patrimoine.json';
   // old: './data/secteurs.geojson'
   let patrimoine_sssecteurs = JSON.parse(fs.readFileSync(patrimoine_file));
