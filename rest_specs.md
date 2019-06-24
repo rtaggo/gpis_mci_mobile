@@ -148,6 +148,19 @@
 }
 ```
 
+`POST <BASE_SERVER_URL>/signalement.php`
+
+**Request body**
+```json
+{
+  "mission_id": "Identifiant de la mission",
+  "type_signalement": "id",
+  "type_lieux":  "id",
+  ...
+}
+```
+
+
 ## Réaffectation
 `GET <BASE_SERVER_URL>/reaffectation.php?signalement=<id signalement>`
 
@@ -164,7 +177,6 @@
 ```json
 {
   "signalement" : "id signalement",
-  "mission": "id misson",
   "photo": "String png base64 si modif"
 }
 ```
