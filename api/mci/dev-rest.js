@@ -11,9 +11,14 @@ const doAsyncGET = async url => {
 };
 
 const doAsyncPOST = async options => {
-  let res = await rp(options);
-  var jsonRes = typeof res === 'string' ? JSON.parse(res) : res;
-  return jsonRes;
+  try {
+    let res = await rp(options);
+    var jsonRes = typeof res === 'string' ? JSON.parse(res) : res;
+    return jsonRes;
+  } catch (err) {
+    console.log('Error: ', err);
+    return { ode: 500 };
+  }
 };
 
 const _login = async (username, password) => {
@@ -28,6 +33,7 @@ const _login = async (username, password) => {
     json: true // Automatically stringifies the body to JSON
   };
   let loginResponse = await doAsyncPOST(options);
+  console.log('Resp: ' + loginResponse);
   return loginResponse;
 };
 
