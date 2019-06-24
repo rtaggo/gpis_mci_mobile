@@ -106,6 +106,7 @@
           this._patrimoineLayer = L.mapbox.featureLayer().addTo(this._map);
           //this._patrimoineLayer.on('layeradd', this.onFeatureAddedToPatrimoineLayer.bind(this));
           this._patrimoineLayer.setGeoJSON(patrimoineGgeoJSON);
+          this._buildLegend();
         }
 
         let sous_secteursGeoJSON = response['sous-secteur'];
@@ -118,13 +119,29 @@
         }
       }
     },
+    _buildLegend: function() {
+      const colorPalette = GGO.getDefaultColorPalette();
+      let lgdContent = $(`
+        <div>
+          <div><div class="slds-badge legend-badge" style="background-color: ${colorPalette[0]}"></div><div class="legend-label"> Niveau opérationnel 0</div></div>
+          <div class="slds-p-top_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[1]}"></div><div class="legend-label"> Niveau opérationnel 1</div></div>
+          <div class="slds-p-top_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[2]}"></div><div class="legend-label"> Niveau opérationnel 2</div></div>
+          <div class="slds-p-top_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[3]}"></div><div class="legend-label"> Niveau opérationnel 3</div></div>
+          <div class="slds-p-top_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[4]}"></div><div class="legend-label"> Niveau opérationnel 4</div></div>
+          <div class="slds-p-top_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[5]}"></div><div class="legend-label"> Niveau opérationnel 5</div></div>
+        </div>
+      `);
+      $('#dialog-body-legend')
+        .empty()
+        .append(lgdContent);
+    },
     _getColorForNiveauOpe: function(no) {
       const rdYlBu = ['#d73027', '#fc8d59', '#fee090', '#e0f3f8', '#91bfdb', '#4575b4'];
       //const colorPalette = ['#d73027', '#fc8d59', '#fee08b', '#d9ef8b', '#91cf60', '#1a9850'];
-      const colorPalette = rdYlBu;
+      const colorPalette = GGO.getDefaultColorPalette(); //rdYlBu;
       let noInt = parseInt(no);
       noInt = noInt % colorPalette.length;
-      return colorPalette.reverse()[noInt];
+      return colorPalette[noInt];
     },
     _classifyPatrimoine: function(geojson) {
       geojson.features.forEach(f => {

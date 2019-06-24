@@ -39,7 +39,7 @@
         if (allFilled) {
           $('#error-message').addClass('slds-hide');
           let loginRequest = {
-            user: loginVal,
+            login: loginVal,
             password: pwdVal
           };
           self.authenticateUser(loginRequest);

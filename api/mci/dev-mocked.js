@@ -61,9 +61,10 @@ let currentMission = {
   coordinates: [2.34884, 48.89274]
 };
 
-const _login = async (username, password) => {
+const _login = async (loginInput, passwordInput) => {
+  console.log(`[DEV_MOCKED] >> login. '${loginInput}'  '${passwordInput}'`);
   let filteredUsers = fakeUsers.filter(u => {
-    return u.name === username && u.password === password;
+    return u.username === loginInput && u.password === passwordInput;
   });
   console.log(`Filtered users: ${filteredUsers.length}`);
   if (filteredUsers.length === 0) {

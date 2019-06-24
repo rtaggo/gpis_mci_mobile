@@ -29,10 +29,14 @@
     },
     _setupListeners: function() {
       let self = this;
-
+      $('#legendIcon').click(function(e) {
+        $('#legend_popover').toggleClass('slds-hide');
+      });
       $('#swiper_handle').swipe({
         swipeStatus: function(event, phase, direction, distance, duration, fingers, fingerData, currentDirection) {
           if (phase !== 'cancel' && phase !== 'end') {
+            $('#legend_popover').addClass('slds-hide');
+
             if (fingerData[0].end.y < self._viewSize.height - 20) {
               var tempCardHeight = self._viewSize.height - fingerData[0].end.y;
               $('#mission-card-Container').css({

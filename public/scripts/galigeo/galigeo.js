@@ -80,6 +80,14 @@
     }
   };
 
+  GGO.COLORPALETTES = {
+    rdYlBu: ['#d73027', '#fc8d59', '#fee090', '#e0f3f8', '#91bfdb', '#4575b4']
+  };
+
+  GGO.getDefaultColorPalette = function() {
+    return GGO.COLORPALETTES['rdYlBu'];
+  };
+
   GGO.EVENTS = {
     APPISREDAY: 'appisready',
     MAPISREADY: 'mapisready',
