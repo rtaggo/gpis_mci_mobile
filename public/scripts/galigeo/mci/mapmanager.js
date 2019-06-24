@@ -133,7 +133,7 @@
           <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[5]};" data-no="5"></div><div class="legend-label"> Niveau opérationnel 5</div></div>
         </div>
       `);
-
+      //
       lgdContent.find('.slds-badge').click(function(e) {
         $(this)
           .parent()
