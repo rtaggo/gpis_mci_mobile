@@ -18,7 +18,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/connexion.php', (req, res, next) => {
-  console.log(`/login ${JSON.stringify(req.body)}`);
+  console.log(`[POST] /login ${JSON.stringify(req.body)}`);
   const mcimodule = getMCIModule();
   mcimodule.login(req.body.username, req.body.password).then(loginResponse => {
     if (loginResponse.code !== 200) {
