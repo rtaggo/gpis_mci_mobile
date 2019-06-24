@@ -7,7 +7,8 @@ const bodyParser = require('body-parser');
 
 const doAsyncGET = async url => {
   let res = await rp(url);
-  var jsonRes = typeof res === 'string' ? JSON.parse(res) : res;
+  console.log(res);
+  let jsonRes = typeof res === 'string' ? JSON.parse(res) : res;
   return jsonRes;
 };
 
@@ -16,6 +17,7 @@ const doAsyncPOST = async options => {
     let res = await rp(options);
     console.log(res);
     var jsonRes = typeof res === 'string' ? JSON.parse(res) : res;
+    jsonRes.code = 200;
     return jsonRes;
   } catch (err) {
     console.log('Error: ', err);

@@ -81,7 +81,7 @@ const _login = async (loginInput, passwordInput) => {
 };
 
 const _getPatrouilles = async () => {
-  return { patrouille: fakePatrouilles, code: 200 };
+  return { patrouilles: fakePatrouilles, code: 200 };
 };
 
 const _getSousSecteurs = async function() {

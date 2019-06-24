@@ -158,7 +158,7 @@
       selectCtnr.append(
         $(`
         <option value="">Sélectionner une patrouille</option> 
-        ${response.patrouille.map(p => `<option value="${p.id}" data-patrouilleid="${p.id}" data-patrouillename="${p.name}">${p.name}</option>`).join('')}
+        ${response.patrouilles.map(p => `<option value="${p.id}" data-patrouilleid="${p.id}" data-patrouillename="${p.name}">${p.name}</option>`).join('')}
       `)
       );
       $('#patrouille-validate-btn')
