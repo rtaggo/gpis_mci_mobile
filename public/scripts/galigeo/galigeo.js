@@ -95,7 +95,8 @@
     MAPMARKERCLICKED: 'mapmarkerclicked',
     SHOWMISSIONMLOCATION: 'showmissionlocation',
     MISSIONCOMPLETED: 'missioncompleted',
-    INVALIDATEMAPSIZE: 'invalidemapsize'
+    INVALIDATEMAPSIZE: 'invalidemapsize',
+    NEIGHBORHOOD: 'neighborhood'
   };
 })();
 /* end GGO: put code below in galigeo.js */

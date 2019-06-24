@@ -208,8 +208,8 @@
 
     fetchSousSecteurs: function(patrouille) {
       const self = this;
-      //const sousSecteursUrl = `/services/rest/mci/patrouilles/soussecteurs?patrouilleid=${patrouille.id}`;
-      const sousSecteursUrl = `${this._options.baseRESTServicesURL}/sous_secteurs.php`;
+      //const sousSecteursUrl = `/services/rest/mci/patrouilles/soussecteurs?patrouille=${patrouille.id}`;
+      const sousSecteursUrl = `${this._options.baseRESTServicesURL}/sous_secteurs.php?patrouille=${patrouille.id}`;
       $.ajax({
         type: 'GET',
         url: sousSecteursUrl,
@@ -233,6 +233,18 @@
     handleSousSecteursFetched: function(response) {
       console.log(`>> handleSousSecteursFetched`, response);
       const self = this;
+      if (response.code !== 200) {
+        $('#error-message > .slds-form-element__help').text(`${response.message}`);
+        $('#error-message').removeClass('slds-hide');
+
+        $('#sous-secteurs-cancel-btn')
+          .off()
+          .click(function(e) {
+            self.handleClickCancelSubSectors();
+          })
+          .removeClass('slds-hide');
+        return;
+      }
       let ssUL = $('<ul class="slds-listbox slds-listbox_vertical" role="presentation"></ul>');
       ssUL.append(
         $(`
@@ -376,6 +388,17 @@
     },
     handleClickCancelSubSectors: function() {
       console.warn('TODO: click cancel selected sectors : what to do');
+      $('#sous-secteurs-form-element').addClass('slds-hide');
+      $('#sous-secteurs-validate-btn')
+        .off()
+        .addClass('slds-hide');
+      $('#sous-secteurs-cancel-btn')
+        .off()
+        .addClass('slds-hide');
+      $('#error-message').addClass('slds-hide');
+
+      $('#patrouille-form-element').removeClass('slds-hide');
+      $('#patrouille-validate-btn').removeClass('slds-hide');
     }
   };
 

@@ -11,26 +11,25 @@ html,body {
 body {
   overflow: hidden;
 }
+
+/*
 #appContainer{
-  /*
   position: absolute;
   top: 0px;
   left: 0px;
   bottom: 0px;
   right: 0px;
   overflow: hidden;
-  */
 }
 
 #mainContainer{
-  /*
   position: absolute;
   top: 0px;
   left: 0px;
   bottom: 0px;
   right: 0px;
-  */
 }
+*/
 
 .top-left_container {
   position: absolute;

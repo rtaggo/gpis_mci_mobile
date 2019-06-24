@@ -17,6 +17,7 @@
       GGO.UIManagerSingleton.getInstance({});
       this._mapManager = new GGO.MapManagerSingleton.getInstance(modulesOptions);
       this._missionManager = new GGO.MissionManagerSingleton.getInstance(modulesOptions);
+      this._neighborhoodMapManager = new GGO.NeighborhoodMapManagerSingleton.getInstance(modulesOptions);
       GGO.EventBus.dispatch(GGO.EVENTS.APPISREADY);
     }
   };
