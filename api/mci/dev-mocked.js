@@ -61,7 +61,7 @@ let currentMission = {
   coordinates: [2.34884, 48.89274]
 };
 
-const _login = function(username, password) {
+const _login = async (username, password) => {
   let filteredUsers = fakeUsers.filter(u => {
     return u.name === username && u.password === password;
   });
@@ -79,23 +79,23 @@ const _login = function(username, password) {
   };
 };
 
-const _getPatrouilles = function() {
+const _getPatrouilles = async () => {
   return { patrouille: fakePatrouilles, code: 200 };
 };
 
-const _getSousSecteurs = function() {
+const _getSousSecteurs = async function() {
   return {
     'sous-secteurs': fakeSousSecteurs
   };
 };
 
-const _getSecteurs = function() {
+const _getSecteurs = async () => {
   return {
     secteurs: fakeSecteurs
   };
 };
 
-const _getPatrimoineSousSecteur = function(patrimoine, soussecteurs) {
+const _getPatrimoineSousSecteur = async (patrimoine, soussecteurs) => {
   const patrimoine_file = './data/mock/patrimoine.json';
   // old: './data/secteurs.geojson'
   let patrimoine_sssecteurs = JSON.parse(fs.readFileSync(patrimoine_file));
@@ -113,7 +113,7 @@ const _getPatrimoineSousSecteur = function(patrimoine, soussecteurs) {
   };
 };
 
-const _getMission = function(patrouilleId) {
+const _getMission = async patrouilleId => {
   idxMission++;
   if (idxMission >= missions.length) {
     idxMission = 0;

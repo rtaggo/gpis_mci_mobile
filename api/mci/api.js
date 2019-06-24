@@ -20,6 +20,7 @@ router.get('/', (req, res, next) => {
 router.post('/connexion.php', (req, res, next) => {
   console.log(`/login ${JSON.stringify(req.body)}`);
   const mcimodule = getMCIModule();
+  /*
   const loginResponse = mcimodule.login(req.body.username, req.body.password);
   console.log(`RESPONSE: ${JSON.stringify(loginResponse)}`);
   if (loginResponse.code !== 200) {
@@ -28,68 +29,85 @@ router.post('/connexion.php', (req, res, next) => {
   req.session.loggedin = true;
   req.session.username = req.body.username;
   return res.status(200).json(loginResponse);
-
-  /*
-  const username = req.body.username;
-  const password = req.body.password;
-  let filteredUsers = fakeUsers.filter(u => {
-    return u.name === username && u.password === password;
-  });
-  console.log(`Filtered users: ${filteredUsers.length}`);
-  if (filteredUsers.length === 0) {
-    return res.status(500).json({
-      code: 5001,
-      message: "Nom d'utilisateur et mot de passe ne correspondent pas"
-    });
-  }
-  req.session.loggedin = true;
-  req.session.username = username;
-
-  return res.status(200).json({
-    authentification: true,
-    role: filteredUsers[0].role
-  });
   */
+  mcimodule.login(req.body.username, req.body.password).then(loginResponse => {
+    if (loginResponse.code !== 200) {
+      res.status(500).json(loginResponse);
+    } else {
+      req.session.loggedin = true;
+      req.session.username = req.body.username;
+      res.status(200).json(loginResponse);
+    }
+  });
 });
 
 router.get('/patrouilles.php', (req, res, next) => {
   console.log(`[MCI API] /patrouilles.php`);
   const mcimodule = getMCIModule();
+  /*
   const patrouilles = mcimodule.getPatrouilles();
   res.header('Content-Type', 'application/json');
   res.json(patrouilles);
+  */
+  mcimodule.getPatrouilles().then(patrouilles => {
+    res.header('Content-Type', 'application/json');
+    res.json(patrouilles);
+  });
 });
 
 router.get('/sous_secteurs.php', (req, res, next) => {
   console.log(`[MCI API] /sous_secteurs.php`);
   const mcimodule = getMCIModule();
+  mcimodule.getSousSecteurs().then(sssecteurs => {
+    res.header('Content-Type', 'application/json');
+    res.json(sssecteurs);
+  });
+  /*
   const sssecteurs = mcimodule.getSousSecteurs();
   res.header('Content-Type', 'application/json');
   res.json(sssecteurs);
+  */
 });
 
 router.get('/secteurs.php', (req, res, next) => {
   console.log(`/[MCI_REST_API]/secteurs`);
   const mcimodule = getMCIModule();
+  mcimodule.getSecteurs().then(secteurs => {
+    res.header('Content-Type', 'application/json');
+    res.json(secteurs);
+  });
+  /*
   const secteurs = mcimodule.getSecteurs();
   res.header('Content-Type', 'application/json');
   res.json(secteurs);
+  */
 });
 
 router.get('/patrimoine_sous_secteur.php', (req, res, next) => {
   console.log(`/[MCI_REST_API]/patrimoine_sous_secteur.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
+  mcimodule.getPatrimoineSousSecteur(req.query.patrouille, req.query.sssecteurs).then(patrimoineResponse => {
+    res.header('Content-Type', 'application/json');
+    res.json(patrimoineResponse);
+  });
+  /*
   const patrimoineResponse = mcimodule.getPatrimoineSousSecteur(req.query.patrouille, req.query.sssecteurs);
   res.header('Content-Type', 'application/json');
   res.json(patrimoineResponse);
+  */
 });
 
 router.get('/mission_sous_secteur.php', (req, res, next) => {
   console.log(`/[MCI_REST_API]/mission_sous_secteur.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
+  mcimodule.getMission(req.query.patrouille).then(missionResponse => {
+    res.header('Content-Type', 'application/json');
+    res.json(missionResponse);
+  });
+  /*
   const missionResponse = mcimodule.getMission(req.query.patrouille);
   res.header('Content-Type', 'application/json');
-  res.json(missionResponse);
+  res.json(missionResponse);*/
 });
 
 /**
