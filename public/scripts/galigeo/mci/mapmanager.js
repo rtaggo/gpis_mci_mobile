@@ -162,16 +162,6 @@
       return colorPalette[noInt];
     },
     _classifySecteurs: function(geojson) {
-      /*
-        this._secteurDrawingProperties = {
-      stroke: '#FF00FF',
-      'stroke-width': 1,
-      'stroke-opacity': 1,
-      fill: '#FF00FF',
-      'fill-opacity': 0.1
-    };
-    */
-
       let colors = GGO.getColorPalette('secteurs');
       geojson.features.forEach((f, i) => {
         let col = colors[i];

@@ -12,7 +12,7 @@
       'stroke-width': 1,
       'stroke-opacity': 1,
       fill: '#FF00FF',
-      'fill-opacity': 0.1
+      'fill-opacity': 0.7
     };
 
     this.init();
@@ -92,9 +92,12 @@
     handleNeighborhoodFetched: function(response) {
       console.log('handleNeighborhoodFetched', response);
       let zoomDone = false;
+	  let colors = GGO.getColorPalette('secteurs_voisinages');
       if (typeof response.sous_secteur !== 'undefined') {
-        response.sous_secteur.features.forEach(f => {
+        response.sous_secteur.features.forEach((f,i) => {
           f.properties['description'] = `Sous-Secteur ${f.properties.name_sous_secteur}`;
+		  let col = colors[i];
+		  $.extend(f.properties, this._secteurDrawingProperties, { fill: col, stroke: col });
         });
         this._secteurLayer = L.mapbox
           .featureLayer()
