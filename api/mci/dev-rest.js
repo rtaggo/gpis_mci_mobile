@@ -113,6 +113,12 @@ const _getNeighborhood = async (patrouilleId, sssecteurs) => {
   let neighborhoodResponse = await doAsyncGET(neighborhoodUrl);
   return neighborhoodResponse;
 };
+const _getSignalement= async (type_signalement, categorie) => {
+  console.log(`[dev-rest] _getSignalement`);
+  let signalementUrl = `${require('../../config').get('BACKEND_URL')}/signalement.php?type_signalement=${type_signalement}&categorie=${categorie}`;
+  let signalementResponse = await doAsyncGET(signalementUrl);
+  return signalementResponse;
+};
 /* list to exports */
 module.exports = {
   login: _login,
@@ -122,5 +128,6 @@ module.exports = {
   getSecteurs: _getSecteurs,
   getPatrimoineSousSecteur: _getPatrimoineSousSecteur,
   getMission: _getMission,
-  getNeighborhood: _getNeighborhood
+  getNeighborhood: _getNeighborhood,
+  getSignalement: _getSignalement
 };

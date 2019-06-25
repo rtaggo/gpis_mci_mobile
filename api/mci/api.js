@@ -94,6 +94,14 @@ router.get('/voisinage.php', (req, res, next) => {
   });
 });
 
+router.get('/signalement.php', (req, res, next) => {
+  console.log(`/[MCI_REST_API]/signalement.php ${JSON.stringify(req.query)}`);
+  const mcimodule = getMCIModule();
+  mcimodule.getSignalement(req.query.type_signalement, req.query.categorie).then(missionResponse => {
+    res.header('Content-Type', 'application/json');
+    res.json(missionResponse);
+  });
+});
 /**
  * Errors on "/elephantbleu/*" routes.
  */

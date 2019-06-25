@@ -60,6 +60,7 @@
       });
       $('#btnMissionSignalement').click(function(e) {
         self.openSignalementModal();
+		self.fetchTypeSignalements();
       });
     },
     openSignalementModal: function() {
@@ -78,16 +79,16 @@
                 <label class="slds-form-element__label" for="signalement-input-type">Type de signalement</label>
                 <div class="slds-form-element__control">
                   <div class="slds-select_container">
-                    <select class="slds-select" id="signalement-input-type">
-                      <option value="">Choisir un type de signalement</option>
-                      <option>TODO: mettre liste des signalements</option>
-                    </select>
+                       <select class="slds-select" id="select-type-signalement" required="">
+																			  
+																		  
+                      </select>
                   </div>
                 </div>
               </div>
             </div>
           </div>          
-          <div class="slds-form__row">
+          <div class="slds-form__row slds-hide">
             <div class="slds-form__item" role="listitem">
               <div class="slds-form-element slds-form-element_stacked slds-is-editing">
                 <label class="slds-form-element__label" for="signalement-input-categorie">Catégorie</label>
@@ -103,6 +104,8 @@
                 </div>
               </div>
             </div>
+			</div>
+		 <div class="slds-form__row slds-hide">
             <div class="slds-form__item" role="listitem">
               <div class="slds-form-element slds-form-element_stacked slds-is-editing">
                 <label class="slds-form-element__label" for="signalement-input-souscategorie">Sous-Catégorie</label>
@@ -119,7 +122,7 @@
               </div>
             </div>
           </div>
-          <div class="slds-form__row">
+          <div class="slds-form__row slds-hide">
             <div class="slds-form__item" role="listitem">
               <div class="slds-form-element slds-form-element_stacked slds-is-editing">
                 <label class="slds-form-element__label" for="signalement-input-categorie2nd">Catégorie 2nd</label>
@@ -151,7 +154,7 @@
               </div>
             </div>
           </div>
-          <div class="slds-form__row">
+          <div class="slds-form__row slds-hide">
             <div class="slds-form__item" role="listitem">
               <div class="slds-form-element slds-form-element_stacked slds-is-editing">
                 <label class="slds-form-element__label" for="signalement-input-niveau">Niveau</label>
@@ -216,14 +219,58 @@
         self.checkMission();
       });
     },
-    /*
-    fakeTimeOutbeforeFetchingMission: function() {
+
+	
+	/**
+     * Récupération de la liste type de signalements
+     * Ex.:
+     *  Méthode: GET
+     *  Request response:
+     *    {
+     *      "patrouille": [
+     *        {"name": "GOLF 03", "id": 3 },
+     *        {"name": "GOLF 11", "id": 11},
+     *        {"name": "GOLF 14", "id": 14 }
+     *      ]
+     *    }
+     */
+    fetchTypeSignalements: function() {
       let self = this;
-      setTimeout(function() {
-        self.fetchMission();
-      }, GGO.CHECK_MISSION_INTERVALLE);
+      const typeSignalementUrl = `${this._options.baseRESTServicesURL}/signalement.php?type_signalement=&categorie=`;
+      $.ajax({
+        type: 'GET',
+        url: typeSignalementUrl,
+        success: function(response) {
+          console.log(`${typeSignalementUrl}`, response);
+          self.handleTypeSignalementFetched(response);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`${typeSignalementUrl} Request aborted`);
+          } else {
+            console.error(`Error for ${typeSignalementUrl} request: ${textStatus}`, errorThrown);
+          }
+        }
+      });
     },
-    */
+	/**
+     * Handle Type Signalement fetch response
+     * @param {Object} response Request response
+     */
+    handleTypeSignalementFetched: function(response) {
+      console.log(`>> handlePatrouillesFetched`, response);
+      const self = this;
+      let selectCtnr = $('#select-type-signalement').empty();
+      selectCtnr.append(
+        $(`
+        <option value="">Sélectionner un type de signalement</option> 
+        ${response.type_signalement.map(p => `<option value="${p.id}" >${p.libelle}</option>`).join('')}
+      `)
+      );
+    },
+	
+	
+	
     checkMission: function() {
       let self = this;
       setTimeout(function() {
@@ -283,168 +330,168 @@
     renderMissionViewMode: function() {
       GGO.EventBus.dispatch(GGO.EVENTS.SHOWMISSIONMLOCATION, this._currentMission);
       let mission = this._currentMission.features[0];
-      /*
-      let content = `
-      <div class="slds-form" role="list">
-        <div class="slds-form__row">
-          <div class="slds-form__item" role="listitem">
-            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
-              <div class="slds-form-element__control">
-                <div class="slds-form-element__static">
-                  <div class="">Mission ${mission.properties.mission_id}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="slds-form__item" role="listitem">
-            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
-              <span class="slds-form-element__label">Code Site</span>
-              <div class="slds-form-element__control">
-                <div class="slds-form-element__static">
-                  ${mission.properties.codesite}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="slds-form__row">
-          <div class="slds-form__item" role="listitem">
-            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent slds-form-element_1-col">
-              <span class="slds-form-element__label">Adresse</span>
-              <div class="slds-form-element__control">
-                <div class="slds-form-element__static slds-text-longform">${mission.properties.adresse}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="slds-form__row">
-          <div class="slds-form__item" role="listitem">
-            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
-              <span class="slds-form-element__label">Type de lieu</span>
-              <div class="slds-form-element__control">
-                <div class="slds-form-element__static">${mission.properties.type_lieu}</div>
-              </div>
-            </div>
-          </div>
-          <div class="slds-form__item" role="listitem">
-            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
-              <span class="slds-form-element__label">Type de lieu secondaire</span>
-              <div class="slds-form-element__control">
-                <div class="slds-form-element__static">${mission.properties.type_lieu_sec}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="slds-form__row">
-          <div class="slds-form__item" role="listitem">
-            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
-              <span class="slds-form-element__label">Code d'accès Hall</span>
-              <div class="slds-form-element__control">
-                <div class="slds-form-element__static">${mission.properties.codeacces_hall}</div>
-              </div>
-            </div>
-          </div>
-          <div class="slds-form__item" role="listitem">
-            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
-              <span class="slds-form-element__label">Code d'accès Grille</span>
-              <div class="slds-form-element__control">
-                <div class="slds-form-element__static">${mission.properties.codeacces_grille}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="slds-form__row">
-          <div class="slds-form__item" role="listitem">
-            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent slds-form-element_1-col">
-              <span class="slds-form-element__label">Motif</span>
-              <div class="slds-form-element__control">
-                <div class="slds-form-element__static slds-text-longform">Le motif de la mission</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="slds-form__row">
-          <div class="slds-form__item" role="listitem">
-            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
-              <span class="slds-form-element__label">Moyen d'accès</span>
-              <div class="slds-form-element__control">
-                <div class="slds-form-element__static">
-                  <span class="slds-icon_container slds-icon-utility-steps slds-current-color" title="False">
-                    <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
-                      <use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#steps"></use>
-                    </svg>
-                    <span class="slds-assistive-text">False</span>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="slds-form__item" role="listitem">
-            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
-              <span class="slds-form-element__label">Vigik GPIS</span>
-              <div class="slds-form-element__control">
-                <div class="slds-form-element__static">
-                  <span class="slds-icon_container slds-icon-utility-steps slds-current-color" title="False">
-                    <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
-                      <use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#${mission.properties.vigik_gpis ? 'check' : 'steps'}"></use>
-                    </svg>
-                    <span class="slds-assistive-text">True</span>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="slds-form__row">
-          <div class="slds-form__item" role="listitem">
-            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent slds-form-element_1-col">
-              <span class="slds-form-element__label">Statut</span>
-              <div class="slds-form-element__control">
-                <div class="slds-form-element__static">
-                  <span class="slds-icon_container slds-icon-utility-steps slds-current-color" title="False">
-                  <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
-                    <use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#${mission.properties.statut ? 'check' : 'steps'}"></use>
-                  </svg>
-                  <span class="slds-assistive-text">True</span>
-                </span>
-              </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="slds-form__row">
-          <div class="slds-form__item" role="listitem">
-            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
-              <span class="slds-form-element__label">Derniers signalements</span>
-              <div class="slds-form-element__control">
-                <div class="slds-form-element__static">
-                  <ul class="slds-list_dotted">
-                    <li>xx/03/2019: Signalement du jour xx</li>
-                    <li>yy/02/2019: Signalement du jour yy</li>
-                    <li>zz/01/2019: Signalement du jour zz</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="slds-form__item" role="listitem">
-            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
-              <span class="slds-form-element__label">Dernières observations</span>
-              <div class="slds-form-element__control">
-                <div class="slds-form-element__static">
-                  <ul class="slds-list_dotted">
-                    <li>xx/03/2019: observation du jour</li>
-                    <li>xx/02/2019: observation du jour</li>
-                    <li>xx/01/2019: observation du jour</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      `;
-      */
+		
+					 
+										 
+									
+													   
+																																		   
+													  
+													   
+																			  
+					  
+					
+				  
+				
+													   
+																																		   
+																	 
+													  
+													   
+												
+					  
+					
+				  
+				
+			  
+									
+													   
+																																								   
+																   
+													  
+																											 
+					
+				  
+				
+			  
+									
+													   
+																																		   
+																		
+													  
+																							
+					
+				  
+				
+													   
+																																		   
+																				   
+													  
+																								
+					
+				  
+				
+			  
+									
+													   
+																																		   
+																			  
+													  
+																								 
+					
+				  
+				
+													   
+																																		   
+																				
+													  
+																								   
+					
+				  
+				
+			  
+									
+													   
+																																								   
+																 
+													  
+																									  
+					
+				  
+				
+			  
+									
+													   
+																																		   
+																		  
+													  
+													   
+																											 
+																				
+																											 
+						  
+																  
+						 
+					  
+					
+				  
+				
+													   
+																																		   
+																	  
+													  
+													   
+																											 
+																				
+																																							
+						  
+																 
+						 
+					  
+					
+				  
+				
+			  
+									
+													   
+																																								   
+																  
+													  
+													   
+																											 
+																			  
+																																					  
+						
+															   
+					   
+					
+					
+				  
+				
+			  
+									
+													   
+																																		   
+																				 
+													  
+													   
+											   
+															   
+															   
+															   
+					   
+					  
+					
+				  
+				
+													   
+																																		   
+																				   
+													  
+													   
+											   
+															
+															
+															
+					   
+					  
+					
+				  
+				
+			  
+			
+		
+		
       let content = $(`<div class="slds-form" role="list"></div>`);
       content.append(
         $(`
@@ -667,13 +714,19 @@
           </div>
         `)
       );
-      if (mission.properties.renfort) {
+	if (mission.properties.renfort) {
         $('#mission-btn-list').addClass('slds-hide');
         $('#mission-renfort-info').removeClass('slds-hide');
       } else {
         $('#mission-renfort-info').addClass('slds-hide');
         $('#mission-btn-list').removeClass('slds-hide');
-      }
+      }							   
+													 
+															
+			  
+														 
+														
+	   
 
       $('#missionContent')
         .empty()
