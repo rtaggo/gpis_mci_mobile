@@ -92,12 +92,17 @@
     handleNeighborhoodFetched: function(response) {
       console.log('handleNeighborhoodFetched', response);
       let zoomDone = false;
-	  let colors = GGO.getColorPalette('secteurs_voisinages');
+      /*
+        on pourrait faire: 
+        let colors = [...GGO.getColorPalette('secteurs')].reverse()
+        [...GGO.getColorPalette('secteurs')] : clone du tableau (car reverse affecte le tableau source)
+      */
+      let colors = GGO.getColorPalette('secteurs_voisinages');
       if (typeof response.sous_secteur !== 'undefined') {
-        response.sous_secteur.features.forEach((f,i) => {
+        response.sous_secteur.features.forEach((f, i) => {
           f.properties['description'] = `Sous-Secteur ${f.properties.name_sous_secteur}`;
-		  let col = colors[i];
-		  $.extend(f.properties, this._secteurDrawingProperties, { fill: col, stroke: col });
+          let col = colors[i];
+          $.extend(f.properties, this._secteurDrawingProperties, { fill: col, stroke: col });
         });
         this._secteurLayer = L.mapbox
           .featureLayer()
@@ -109,16 +114,28 @@
       if (typeof response.mission_ronde !== 'undefined') {
         response.mission_ronde.features.forEach(f => {
           f.properties['marker-size'] = 'small';
-          f.properties['description'] = `Patrouille ${f.properties.patrouille_id}`;
+          //f.properties['description'] = `Patrouille ${f.properties.patrouille_id}`;
         });
         this._lastMissionsLayer = L.mapbox
           .featureLayer()
           .addTo(this._map)
+          .on('layeradd', this.onMissionsAdded.bind(this))
           .setGeoJSON(response.mission_ronde);
         if (!zoomDone) {
           this._map.fitBounds(this._lastMissionsLayer.getBounds());
         }
       }
+    },
+    onMissionsAdded: function(e) {
+      let marker = e.layer;
+      marker
+        .bindTooltip(`Patrouille ${marker.feature.properties['patrouille_id']}`, {
+          offset: L.point(0, -22),
+          direction: 'top',
+          noHide: true,
+          permanent: true
+        })
+        .openTooltip();
     }
   };
 
