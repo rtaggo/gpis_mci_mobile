@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const doAsyncGET = async url => {
   try {
     let res = await rp(url);
-    console.log(res);
+    //console.log(res);
     let jsonRes = typeof res === 'string' ? JSON.parse(res) : res;
     return jsonRes;
   } catch (err) {
@@ -20,7 +20,7 @@ const doAsyncGET = async url => {
 const doAsyncPOST = async options => {
   try {
     let res = await rp(options);
-    console.log(res);
+    //console.log(res);
     var jsonRes = typeof res === 'string' ? JSON.parse(res) : res;
     jsonRes.code = 200;
     return jsonRes;
@@ -107,6 +107,13 @@ const _getMission = async patrouilleId => {
   return patrimoineResponse;
 };
 
+const _getNeighborhood = async (patrouilleId, sssecteurs) => {
+  console.log(`[dev-rest] _getNeighborhood`);
+  let neighborhoodUrl = `${require('../../config').get('BACKEND_URL')}/voisinage.php?patrouille=${patrouilleId}&sssecteurs=${sssecteurs}`;
+  let neighborhoodResponse = await doAsyncGET(neighborhoodUrl);
+  return neighborhoodResponse;
+};
+
 module.exports = {
   login: _login,
   getPatrouilles: _getPatrouilles,
@@ -114,5 +121,6 @@ module.exports = {
   getSousSecteurs: _getSousSecteurs,
   getSecteurs: _getSecteurs,
   getPatrimoineSousSecteur: _getPatrimoineSousSecteur,
-  getMission: _getMission
+  getMission: _getMission,
+  getNeighborhood: _getNeighborhood
 };

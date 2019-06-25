@@ -1,0 +1,25 @@
+{
+	"code" : 200,
+	"features" : [{
+			"type" : "Feature",
+			"geometry" : {
+				"type" : "Point",
+				"coordinates" : [2.36115, 48.8858604]
+			},
+			"properties" : {
+				"mission_id" : "2176232",
+				"renfort" : false,
+				"codesite" : "TANGO 041",
+				"adresse" : "Ensemble du site, PARIS",
+				"type_lieu" : null,
+				"type_lieu_sec" : null,
+				"codeacces_hall" : "",
+				"codeacces_grille" : "11A56",
+				"motif_nom" : null,
+				"access" : false,
+				"vigik_gpis" : true,
+				"statut" : "Fin"
+			}
+		}
+	]
+}

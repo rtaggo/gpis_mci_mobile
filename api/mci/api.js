@@ -85,6 +85,15 @@ router.get('/mission_sous_secteur.php', (req, res, next) => {
   });
 });
 
+router.get('/voisinage.php', (req, res, next) => {
+  console.log(`/[MCI_REST_API]/voisinage.php ${JSON.stringify(req.query)}`);
+  const mcimodule = getMCIModule();
+  mcimodule.getNeighborhood(req.query.patrouille, req.query.sssecteurs).then(missionResponse => {
+    res.header('Content-Type', 'application/json');
+    res.json(missionResponse);
+  });
+});
+
 /**
  * Errors on "/elephantbleu/*" routes.
  */

@@ -417,12 +417,12 @@
               <span class="slds-form-element__label">Derniers signalements</span>
               <div class="slds-form-element__control">
                 <div class="slds-form-element__static">
-            <ul class="slds-list_dotted">
-              <li>xx/03/2019: Signalement du jour xx</li>
-              <li>yy/02/2019: Signalement du jour yy</li>
-              <li>zz/01/2019: Signalement du jour zz</li>
-            </ul>
-            </div>
+                  <ul class="slds-list_dotted">
+                    <li>xx/03/2019: Signalement du jour xx</li>
+                    <li>yy/02/2019: Signalement du jour yy</li>
+                    <li>zz/01/2019: Signalement du jour zz</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -431,12 +431,12 @@
               <span class="slds-form-element__label">Dernières observations</span>
               <div class="slds-form-element__control">
                 <div class="slds-form-element__static">
-            <ul class="slds-list_dotted">
-              <li>xx/03/2019: observation du jour</li>
-              <li>xx/02/2019: observation du jour</li>
-              <li>xx/01/2019: observation du jour</li>
-            </ul>
-            </div>
+                  <ul class="slds-list_dotted">
+                    <li>xx/03/2019: observation du jour</li>
+                    <li>xx/02/2019: observation du jour</li>
+                    <li>xx/01/2019: observation du jour</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -461,6 +461,30 @@
           <div class="slds-form__row">
             <div class="slds-form__item" role="listitem">
               <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
+                <span class="slds-form-element__label">Type de mission</span>
+                <div class="slds-form-element__control">
+                  <div class="slds-form-element__static">
+                    ${mission.properties.type_mission}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slds-form__row">
+            <div class="slds-form__item" role="listitem">
+              <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
+                <span class="slds-form-element__label">Motif de mission</span>
+                <div class="slds-form-element__control">
+                  <div class="slds-form-element__static">
+                    ${mission.properties.motif_nom}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slds-form__row">
+            <div class="slds-form__item" role="listitem">
+              <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
                 <span class="slds-form-element__label">Code Site</span>
                 <div class="slds-form-element__control">
                   <div class="slds-form-element__static">
@@ -470,8 +494,190 @@
               </div>
             </div>
           </div>
+          <div class="slds-form__row">
+            <div class="slds-form__item" role="listitem">
+              <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
+                <span class="slds-form-element__label">Adresse</span>
+                <div class="slds-form-element__control">
+                  <div class="slds-form-element__static">
+                    ${mission.properties.adresse}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         `)
       );
+      if (mission.properties.type_lieu !== null) {
+        content.append(
+          $(`
+          <div class="slds-form__row">
+            <div class="slds-form__item" role="listitem">
+              <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
+                <span class="slds-form-element__label">Type de lieu</span>
+                <div class="slds-form-element__control">
+                  <div class="slds-form-element__static">
+                    ${mission.properties.type_lieu}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `)
+        );
+
+        if (mission.properties.type_lieu_sec !== null) {
+          content.append(
+            $(`
+            <div class="slds-form__row">
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
+                  <span class="slds-form-element__label">Type de lieu secondaire/span>
+                  <div class="slds-form-element__control">
+                    <div class="slds-form-element__static">
+                      ${mission.properties.type_lieu_sec}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `)
+          );
+        }
+      }
+
+      content.append(
+        $(`
+        <div class="slds-form__row">
+          <div class="slds-form__item" role="listitem">
+            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
+              <span class="slds-form-element__label">Code d'accès Hall</span>
+              <div class="slds-form-element__control">
+                <div class="slds-form-element__static">${mission.properties.codeacces_hall}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-form__row">
+          <div class="slds-form__item" role="listitem">
+            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
+              <span class="slds-form-element__label">Code d'accès Grille</span>
+              <div class="slds-form-element__control">
+                <div class="slds-form-element__static">${mission.properties.codeacces_grille}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-form__row">
+          <div class="slds-form__item" role="listitem">
+            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
+              <span class="slds-form-element__label">Moyen d'accès</span>
+              <div class="slds-form-element__control">
+                <div class="slds-form-element__static">
+                  <span class="slds-icon_container slds-icon-utility-steps slds-current-color" title="False">
+                    <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+                      <use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#${mission.properties.access ? 'check' : 'steps'}"></use>
+                    </svg>
+                    <span class="slds-assistive-text">True</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-form__row">
+          <div class="slds-form__item" role="listitem">
+            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
+              <span class="slds-form-element__label">Vigik GPIS</span>
+              <div class="slds-form-element__control">
+                <div class="slds-form-element__static">
+                  <span class="slds-icon_container slds-icon-utility-steps slds-current-color" title="False">
+                    <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+                      <use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#${mission.properties.vigik_gpis ? 'check' : 'steps'}"></use>
+                    </svg>
+                    <span class="slds-assistive-text">True</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-form__row">
+          <div class="slds-form__item" role="listitem">
+            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
+              <span class="slds-form-element__label">Statut</span>
+              <div class="slds-form-element__control">
+                <div class="slds-form-element__static">${mission.properties.statut}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `)
+      );
+
+      // incidentes
+      let incidContent = '<div class="slds-form-element__static"><p>Aucune incidente</p></div>';
+      if (typeof mission.properties.incidente !== 'undefined' && Array.isArray(mission.properties.incidente) && mission.properties.incidente.length > 0) {
+        incidContent = `
+        <div class="slds-form-element__static">
+          <ul class="slds-list_dotted">
+            ${mission.properties.incidente
+              .map(s => {
+                return `
+                <li>${moment(s.date).format('DD/MM/YYYY')} : ${s.libelle}
+                  <span class="incidente-observation">${s.observations}</span>
+                </li>`;
+              })
+              .join('')}
+          </ul>
+        </div>
+        `;
+      }
+      content.append(
+        $(`
+          <div class="slds-form__row">
+            <div class="slds-form__item" role="listitem">
+              <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
+                <span class="slds-form-element__label">Dernières incidentes</span>
+                <div class="slds-form-element__control">
+                  ${incidContent}
+                </div>
+              </div>
+            </div>
+          </div>
+        `)
+      );
+
+      // signalements
+      let signalementContent = '<div class="slds-form-element__static"><p>Aucun signalement</p></div>';
+      if (typeof mission.properties.signalement !== 'undefined' && Array.isArray(mission.properties.signalement) && mission.properties.signalement.length > 0) {
+        signalementContent = `
+        <div class="slds-form-element__static">
+          <ul class="slds-list_dotted">
+            ${mission.properties.signalement
+              .map(s => {
+                return `<li>${moment(s.date).format('DD/MM/YYYY')} : ${s.libelle}</li>`;
+              })
+              .join('')}
+          </ul>
+        </div>
+        `;
+      }
+      content.append(
+        $(`
+          <div class="slds-form__row">
+            <div class="slds-form__item" role="listitem">
+              <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
+                <span class="slds-form-element__label">Derniers signalements</span>
+                <div class="slds-form-element__control">
+                  ${signalementContent}
+                </div>
+              </div>
+            </div>
+          </div>
+        `)
+      );
+
       $('#missionContent')
         .empty()
         .append(content);

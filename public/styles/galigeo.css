@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 html,body {
 	margin: 0px;
   height: 100%;
@@ -105,4 +106,10 @@ body {
   margin-bottom: 0px;
   margin-top: 0px;
   padding: 0px;
+}
+
+.incidente-observation {
+  display: block;
+  margin-left: 0.5rem;
+  font-size: smaller;
 }

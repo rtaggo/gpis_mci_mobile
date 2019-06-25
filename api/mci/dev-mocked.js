@@ -30,7 +30,7 @@ const fakePatrouilles = [
 const fakeSecteurs = ['Nord', 'Sud', 'Est'];
 
 const fakeSousSecteurs = [{ name: 'EST-01', id: 1 }, { name: 'EST-02', id: 2 }, { name: 'EST-03', id: 3 }, { name: 'NORD-01', id: 4 }, { name: 'NORD-02', id: 5 }, { name: 'NORD-03', id: 6 }, { name: 'SUD-01', id: 7 }, { name: 'SUD-02', id: 8 }, { name: 'SUD-03', id: 9 }];
-
+/*
 const missions = [
   {
     id: 1,
@@ -63,6 +63,10 @@ let currentMission = {
   address: '19 Boulevard Ornano 75018 Paris',
   coordinates: [2.34884, 48.89274]
 };
+*/
+
+const missionsFilesMocked = ['mission_signalement_incidente.json', 'mission_no_renfort.json'];
+let idxMission = 0;
 
 const _login = async (loginInput, passwordInput) => {
   console.log(`[DEV_MOCKED] >> login. '${loginInput}'  '${passwordInput}'`);
@@ -123,15 +127,27 @@ const _getPatrimoineSousSecteur = async (patrouilleId, soussecteurs) => {
 };
 
 const _getMission = async patrouilleId => {
+  /*
   idxMission++;
   if (idxMission >= missions.length) {
     idxMission = 0;
   }
   let mission = missions[idxMission];
-  const mision_file = './data/mock/mission.json';
-  let missionGeoJSON = JSON.parse(fs.readFileSync(mision_file));
+  */
+  idxMission = ++idxMission % missionsFilesMocked.length;
+  //const mission_file = './data/mock/mission.json';
+  const mission_file = `./data/mock/${missionsFilesMocked[idxMission]}`;
+  console.log(`Loading mocked mission file ${mission_fle}`);
+  let missionGeoJSON = JSON.parse(fs.readFileSync(mission_file));
 
   return missionGeoJSON;
+};
+
+const _getNeighborhood = async (patrouilleId, sssecteurs) => {
+  console.log(`[dev-mocked] _getNeighborhood`);
+  const voisinage_file = './data/mock/voisinage.json';
+  let voisinage = JSON.parse(fs.readFileSync(voisinage_file));
+  return voisinage;
 };
 
 module.exports = {
@@ -141,5 +157,6 @@ module.exports = {
   getSousSecteurs: _getSousSecteurs,
   getSecteurs: _getSecteurs,
   getPatrimoineSousSecteur: _getPatrimoineSousSecteur,
-  getMission: _getMission
+  getMission: _getMission,
+  getNeighborhood: _getNeighborhood
 };
