@@ -12,7 +12,7 @@
       'stroke-width': 1,
       'stroke-opacity': 1,
       fill: '#FF00FF',
-      'fill-opacity': 0.1
+      'fill-opacity': 0.5
     };
 
     this.init();
@@ -112,7 +112,7 @@
         let sous_secteursGeoJSON = response['sous-secteur'];
         if (typeof sous_secteursGeoJSON !== 'undefined') {
           this._secteurLayer = L.mapbox.featureLayer().addTo(this._map);
-
+          this._classifySecteurs(sous_secteursGeoJSON);
           //$.extend(sous_secteurs.features[0].properties, this._secteurDrawingProperties);
           this._secteurLayer.setGeoJSON(sous_secteursGeoJSON);
           this._map.fitBounds(this._secteurLayer.getBounds());
@@ -160,6 +160,23 @@
       let noInt = parseInt(no);
       noInt = noInt % colorPalette.length;
       return colorPalette[noInt];
+    },
+    _classifySecteurs: function(geojson) {
+      /*
+        this._secteurDrawingProperties = {
+      stroke: '#FF00FF',
+      'stroke-width': 1,
+      'stroke-opacity': 1,
+      fill: '#FF00FF',
+      'fill-opacity': 0.1
+    };
+    */
+
+      let colors = GGO.getColorPalette('secteurs');
+      geojson.features.forEach((f, i) => {
+        let col = colors[i];
+        $.extend(f.properties, this._secteurDrawingProperties, { fill: col, stroke: col });
+      });
     },
     _classifyPatrimoine: function(geojson) {
       geojson.features.forEach(f => {
