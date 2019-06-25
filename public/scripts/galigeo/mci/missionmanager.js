@@ -470,6 +470,118 @@
               </div>
             </div>
           </div>
+		  <div class="slds-form__row">
+          <div class="slds-form__item" role="listitem">
+            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent slds-form-element_1-col">
+              <span class="slds-form-element__label">Type de mission</span>
+              <div class="slds-form-element__control">
+                <div class="slds-form-element__static slds-text-longform">${mission.properties.type_mission}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+		<div class="slds-form__row">
+          <div class="slds-form__item" role="listitem">
+            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent slds-form-element_1-col">
+              <span class="slds-form-element__label">Motif de la mission</span>
+              <div class="slds-form-element__control">
+                <div class="slds-form-element__static slds-text-longform">${mission.properties.motif_nom}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+		<div class="slds-form__row">
+          <div class="slds-form__item" role="listitem">
+            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent slds-form-element_1-col">
+              <span class="slds-form-element__label">Adresse</span>
+              <div class="slds-form-element__control">
+                <div class="slds-form-element__static slds-text-longform">${mission.properties.adresse}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+		<div class="slds-form__row">
+          <div class="slds-form__item" role="listitem">
+            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent slds-form-element_1-col">
+              <span class="slds-form-element__label">Type de lieu</span>
+              <div class="slds-form-element__control">
+                <div class="slds-form-element__static slds-text-longform">${mission.properties.type_lieu}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+		<div class="slds-form__row">
+          <div class="slds-form__item" role="listitem">
+            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent slds-form-element_1-col">
+              <span class="slds-form-element__label">Type de lieu secondaire</span>
+              <div class="slds-form-element__control">
+                <div class="slds-form-element__static slds-text-longform">${mission.properties.type_lieu_sec}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+				<div class="slds-form__row">
+          <div class="slds-form__item" role="listitem">
+            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent slds-form-element_1-col">
+              <span class="slds-form-element__label">Code accès hall</span>
+              <div class="slds-form-element__control">
+                <div class="slds-form-element__static slds-text-longform">${mission.properties.codeacces_hall}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+				<div class="slds-form__row">
+          <div class="slds-form__item" role="listitem">
+            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent slds-form-element_1-col">
+              <span class="slds-form-element__label">Code accès grille</span>
+              <div class="slds-form-element__control">
+                <div class="slds-form-element__static slds-text-longform">${mission.properties.codeacces_grille}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+		<div class="slds-form__row">
+          <div class="slds-form__item" role="listitem">
+            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
+              <span class="slds-form-element__label">Moyen d'accès</span>
+              <div class="slds-form-element__control">
+                <div class="slds-form-element__static">
+                  <span class="slds-icon_container slds-icon-utility-steps slds-current-color" title="False">
+                    <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+                      <use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#steps"></use>
+                    </svg>
+                    <span class="slds-assistive-text">False</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+		<div class="slds-form__item" role="listitem">
+            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
+              <span class="slds-form-element__label">Vigik GPIS</span>
+              <div class="slds-form-element__control">
+                <div class="slds-form-element__static">
+                  <span class="slds-icon_container slds-icon-utility-steps slds-current-color" title="False">
+                    <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+                      <use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#${mission.properties.vigik_gpis ? 'check' : 'steps'}"></use>
+                    </svg>
+                    <span class="slds-assistive-text">True</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+		<div class="slds-form__row">
+          <div class="slds-form__item" role="listitem">
+            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent slds-form-element_1-col">
+              <span class="slds-form-element__label">Statut de la mission</span>
+              <div class="slds-form-element__control">
+                <div class="slds-form-element__static slds-text-longform">${mission.properties.statut}</div>
+              </div>
+            </div>
+          </div>
+        </div>
         `)
       );
       $('#missionContent')
