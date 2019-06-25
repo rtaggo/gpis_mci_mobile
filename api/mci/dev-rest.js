@@ -73,7 +73,7 @@ const _getPatrouilles = async () => {
 };
 
 const _libererPatrouille = async patrouilleId => {
-  let revokePatrouilleUrl = `${require('../../config').get('BACKEND_URL')}/liberer_patrouilles.php?patrouille=${patrouilleId}`;
+  let revokePatrouilleUrl = `${require('../../config').get('BACKEND_URL')}/liberer_patrouille.php?patrouille=${patrouilleId}`;
   let resp = await doAsyncGET(revokePatrouilleUrl);
   return reps;
 };
@@ -110,6 +110,7 @@ const _getMission = async patrouilleId => {
 module.exports = {
   login: _login,
   getPatrouilles: _getPatrouilles,
+  libererPatrouille: _libererPatrouille,
   getSousSecteurs: _getSousSecteurs,
   getSecteurs: _getSecteurs,
   getPatrimoineSousSecteur: _getPatrimoineSousSecteur,

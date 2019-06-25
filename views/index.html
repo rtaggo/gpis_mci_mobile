@@ -111,11 +111,12 @@
 		$(document).ready(function(e){
 			console.log(' >> document is ready');
 			$('#logoutBtn').click(function(e){
-				sessionStorage.clear();
-				var logoutForm = $('<form action="/logout" />');
-
-				$('body').append(logoutForm);
-				logoutForm.submit();
+				GGO.disconnect(
+					self.galigeo.getPatrouille().id, 
+					{
+						'baseRESTServicesURL': '/services/rest/mci'
+					}
+				);
 			});
 
 			var windowH = $(window).height();

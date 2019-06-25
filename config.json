@@ -1,4 +1,5 @@
 {
-  "GEOSERVICE" : "openrouteservice",
-  "BACKEND_URL" : "https://gpis-mci-mobile.herokuapp.com/services/rest/mci"
+  "MCI_MODE"  : "dev-mocked",
+  "BACKEND_URL" : "http://192.168.10.52:8081/MCI_mobile/fichierPHP",
+  "GEOSERVICE" : "openrouteservice"
 }

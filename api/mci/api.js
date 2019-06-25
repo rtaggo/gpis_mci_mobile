@@ -41,7 +41,7 @@ router.get('/patrouilles.php', (req, res, next) => {
 });
 
 router.get('/liberer_patrouille.php', (req, res, next) => {
-  console.log(`[MCI API] /patrouilles.php`);
+  console.log(`[MCI API] /liberer_patrouille.php`);
   const mcimodule = getMCIModule();
   mcimodule.libererPatrouille(req.query.patrouille).then(resp => {
     res.header('Content-Type', 'application/json');
