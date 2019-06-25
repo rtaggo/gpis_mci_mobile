@@ -55,7 +55,8 @@
         $('#missionContent').addClass('slds-hide');
         $('#missionFooter').addClass('slds-hide');
         $('#waiting4Mission').removeClass('slds-hide');
-        self.fakeTimeOutbeforeFetchingMission();
+        //self.fakeTimeOutbeforeFetchingMission();
+        self.checkMission();
       });
       $('#btnMissionSignalement').click(function(e) {
         self.openSignalementModal();
@@ -447,23 +448,13 @@
       let content = $(`<div class="slds-form" role="list"></div>`);
       content.append(
         $(`
-		<div class="slds-form__row">
-          <div class="slds-form__item" role="listitem">
-            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent slds-form-element_1-col">
-              <span class="slds-form-element__label">Type de mission</span>
-              <div class="slds-form-element__control">
-                <div class="slds-form-element__static slds-text-longform">${mission.properties.type_mission}</div>
-              </div>
-            </div>
-          </div>
-        </div>
           <div class="slds-form__row">
             <div class="slds-form__item" role="listitem">
               <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
                 <span class="slds-form-element__label">Type de mission</span>
                 <div class="slds-form-element__control">
                   <div class="slds-form-element__static">
-                    ${mission.properties.type_mission}
+                    ${mission.properties.type_mission || ''}
                   </div>
                 </div>
               </div>
@@ -475,7 +466,7 @@
                 <span class="slds-form-element__label">Motif de mission</span>
                 <div class="slds-form-element__control">
                   <div class="slds-form-element__static">
-                    ${mission.properties.motif_nom}
+                    ${mission.properties.motif_nom || ''}
                   </div>
                 </div>
               </div>
@@ -507,41 +498,41 @@
           </div>
         `)
       );
-      if (mission.properties.type_lieu !== null) {
-        content.append(
-          $(`
-          <div class="slds-form__row">
-            <div class="slds-form__item" role="listitem">
-              <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
-                <span class="slds-form-element__label">Type de lieu</span>
-                <div class="slds-form-element__control">
-                  <div class="slds-form-element__static">
-                    ${mission.properties.type_lieu}
-                  </div>
+
+      content.append(
+        $(`
+        <div class="slds-form__row">
+          <div class="slds-form__item" role="listitem">
+            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
+              <span class="slds-form-element__label">Type de lieu</span>
+              <div class="slds-form-element__control">
+                <div class="slds-form-element__static">
+                  ${mission.properties.type_lieu || ''}
                 </div>
               </div>
             </div>
           </div>
-        `)
-        );
-
-        if (mission.properties.type_lieu_sec !== null) {
-          content.append(
-            $(`
-            <div class="slds-form__row">
-              <div class="slds-form__item" role="listitem">
-                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
-                  <span class="slds-form-element__label">Type de lieu secondaire/span>
-                  <div class="slds-form-element__control">
-                    <div class="slds-form-element__static">
-                      ${mission.properties.type_lieu_sec}
-                    </div>
-                  </div>
+        </div>
+      `)
+      );
+      content.append(
+        $(`
+        <div class="slds-form__row">
+          <div class="slds-form__item" role="listitem">
+            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
+              <span class="slds-form-element__label">Type de lieu secondaire/span>
+              <div class="slds-form-element__control">
+                <div class="slds-form-element__static">
+                  ${mission.properties.type_lieu_sec || ''}
                 </div>
               </div>
             </div>
-          `)
-          );
+          </div>
+        </div>
+      `)
+      );
+      if (mission.properties.type_lieu !== null) {
+        if (mission.properties.type_lieu_sec !== null) {
         }
       }
 

@@ -134,10 +134,11 @@ const _getMission = async patrouilleId => {
   }
   let mission = missions[idxMission];
   */
-  idxMission = ++idxMission % missionsFilesMocked.length;
   //const mission_file = './data/mock/mission.json';
+  //idxMission = 1;
   const mission_file = `./data/mock/${missionsFilesMocked[idxMission]}`;
-  console.log(`Loading mocked mission file ${mission_fle}`);
+  console.log(`Loading mocked mission file ${mission_file}`);
+  idxMission = ++idxMission % missionsFilesMocked.length;
   let missionGeoJSON = JSON.parse(fs.readFileSync(mission_file));
 
   return missionGeoJSON;
