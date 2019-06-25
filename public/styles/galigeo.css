@@ -113,3 +113,12 @@ body {
   margin-left: 0.5rem;
   font-size: smaller;
 }
+
+.mission-renfort {
+  color: white;
+  background-color: black;
+  height: 32px;
+  vertical-align: middle;
+  line-height: 32px;
+  font-size: 24px;
+}

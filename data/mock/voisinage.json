@@ -861,7 +861,8 @@
                   ]
               },
               "properties": {
-                  "patrouille_id": "58"
+                  "patrouille_id": "58",
+                  "name_patrouille": "GOLF XXX"                  
               }
           }
       ]

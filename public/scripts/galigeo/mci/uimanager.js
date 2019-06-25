@@ -116,6 +116,9 @@
           console.log("Direction '" + direction + "' not supported");
           bCardHeight = this._viewSize.twothirdHeight;
       }
+      if (bCardHeight < 72) {
+        bCardHeight = 72;
+      }
       $('#mission-card-Container').css({
         height: bCardHeight + 'px',
         'max-height': bCardHeight + 'px'
@@ -125,11 +128,13 @@
         height: bCardHeight + 'px',
         'max-height': bCardHeight + 'px'
       });
-      if (bCardHeight < 10) {
+      /*
+      if (bCardHeight < 32) {
         $('#missionFooter').addClass('slds-hide');
       } else {
         $('#missionFooter').removeClass('slds-hide');
       }
+      */
       $('#map').css({
         height: this._viewSize.height - bCardHeight + 'px'
       });

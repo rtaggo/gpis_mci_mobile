@@ -667,6 +667,13 @@
           </div>
         `)
       );
+      if (mission.properties.renfort) {
+        $('#mission-btn-list').addClass('slds-hide');
+        $('#mission-renfort-info').removeClass('slds-hide');
+      } else {
+        $('#mission-renfort-info').addClass('slds-hide');
+        $('#mission-btn-list').removeClass('slds-hide');
+      }
 
       $('#missionContent')
         .empty()

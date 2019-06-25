@@ -65,7 +65,7 @@ let currentMission = {
 };
 */
 
-const missionsFilesMocked = ['mission_signalement_incidente.json', 'mission_no_renfort.json'];
+const missionsFilesMocked = ['mission_signalement_incidente_renfort.json', 'mission_signalement_incidente.json', 'mission_no_renfort.json'];
 let idxMission = 0;
 
 const _login = async (loginInput, passwordInput) => {
