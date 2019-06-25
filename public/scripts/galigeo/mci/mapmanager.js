@@ -134,7 +134,7 @@
         </div>
       `);
       //
-      lgdContent.find('.slds-badge').click(function(e) {
+      lgdContent.find('.slds-badge[data-no="0"]').click(function(e) {
         $(this)
           .parent()
           .toggleClass('disabled-legend-item');

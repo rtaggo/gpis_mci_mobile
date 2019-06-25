@@ -92,6 +92,31 @@
     return GGO.COLORPALETTES['rdYlBu'];
   };
 
+  GGO.revokePatrouille = function(patrouilleId, options) {
+    if (typeof patrouilleId !== 'undefined') {
+      const patrouillesUrl = `${options.baseRESTServicesURL}/liberer_patrouille.php?patrouille=${patrouilleId}`;
+      $.ajax({
+        type: 'GET',
+        url: patrouillesUrl,
+        success: function(response) {
+          if (typeof options.callback === 'function') {
+            options.callback.apply(options.context);
+          }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`REVOKEPATROUILLE  ${patrouillesUrl} Request aborted`);
+          } else {
+            console.error(`REVOKEPATROUILLE Error for ${patrouillesUrl} request: ${textStatus}`, errorThrown);
+          }
+          if (typeof options.callback === 'function') {
+            options.callback.apply(options.context);
+          }
+        }
+      });
+    }
+  };
+
   GGO.disconnect = function(patrouilleId, options) {
     sessionStorage.clear();
     if (typeof patrouilleId !== 'undefined') {
@@ -100,7 +125,7 @@
         type: 'GET',
         url: patrouillesUrl,
         success: function(response) {
-          console.log(`Logout response: `, response);
+          console.log(`Revoke Patrouille response: `, response);
           GGO.postLogoutForm();
         },
         error: function(jqXHR, textStatus, errorThrown) {

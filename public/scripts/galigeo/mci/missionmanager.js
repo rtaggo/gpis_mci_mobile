@@ -282,6 +282,7 @@
     renderMissionViewMode: function() {
       GGO.EventBus.dispatch(GGO.EVENTS.SHOWMISSIONMLOCATION, this._currentMission);
       let mission = this._currentMission.features[0];
+      /*
       let content = `
       <div class="slds-form" role="list">
         <div class="slds-form__row">
@@ -379,12 +380,12 @@
           </div>
           <div class="slds-form__item" role="listitem">
             <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
-              <span class="slds-form-element__label">Vigil GPIS</span>
+              <span class="slds-form-element__label">Vigik GPIS</span>
               <div class="slds-form-element__control">
                 <div class="slds-form-element__static">
                   <span class="slds-icon_container slds-icon-utility-steps slds-current-color" title="False">
                     <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
-                      <use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#check"></use>
+                      <use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#${mission.properties.vigik_gpis ? 'check' : 'steps'}"></use>
                     </svg>
                     <span class="slds-assistive-text">True</span>
                   </span>
@@ -396,11 +397,16 @@
         <div class="slds-form__row">
           <div class="slds-form__item" role="listitem">
             <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent slds-form-element_1-col">
-              <span class="slds-form-element__label">Status</span>
+              <span class="slds-form-element__label">Statut</span>
               <div class="slds-form-element__control">
                 <div class="slds-form-element__static">
-            ${mission.statut}
-            </div>
+                  <span class="slds-icon_container slds-icon-utility-steps slds-current-color" title="False">
+                  <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+                    <use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#${mission.properties.statut ? 'check' : 'steps'}"></use>
+                  </svg>
+                  <span class="slds-assistive-text">True</span>
+                </span>
+              </div>
               </div>
             </div>
           </div>
@@ -437,9 +443,38 @@
         </div>
       </div>
       `;
+      */
+      let content = $(`<div class="slds-form" role="list"></div>`);
+      content.append(
+        $(`
+          <div class="slds-form__row">
+            <div class="slds-form__item" role="listitem">
+              <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
+                <div class="slds-form-element__control">
+                  <div class="slds-form-element__static">
+                    <div class="">Mission ${mission.properties.mission_id}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slds-form__row">
+            <div class="slds-form__item" role="listitem">
+              <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
+                <span class="slds-form-element__label">Code Site</span>
+                <div class="slds-form-element__control">
+                  <div class="slds-form-element__static">
+                    ${mission.properties.codesite}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `)
+      );
       $('#missionContent')
         .empty()
-        .append($(content));
+        .append(content);
     }
   };
   GGO.MissionManagerSingleton = (function() {

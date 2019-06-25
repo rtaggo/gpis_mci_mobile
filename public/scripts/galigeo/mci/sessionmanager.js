@@ -387,7 +387,11 @@
       location.href = mapUrl;
     },
     handleClickCancelSubSectors: function() {
-      console.warn('TODO: click cancel selected sectors : what to do');
+      GGO.revokePatrouille(this._selectedPatrouille.id, {
+        baseRESTServicesURL: this._options.baseRESTServicesURL,
+        callback: this.fetchPatrouilles.bind(this),
+        context: this
+      });
       $('#sous-secteurs-form-element').addClass('slds-hide');
       $('#sous-secteurs-validate-btn')
         .off()
@@ -396,9 +400,10 @@
         .off()
         .addClass('slds-hide');
       $('#error-message').addClass('slds-hide');
-
+      /*
       $('#patrouille-form-element').removeClass('slds-hide');
       $('#patrouille-validate-btn').removeClass('slds-hide');
+      */
     }
   };
 
