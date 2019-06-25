@@ -223,6 +223,53 @@
 {
   "code": 200,
   "sous-secteur": "<geojson du ou des sous-secteurs>",
-  "mission_ronde":  "<geojons des derniers positionnements des patrouilles>"
+  "mission_ronde": "<geojons des derniers positionnements des patrouilles>"
+}
+```
+
+## Missions Secteurs
+`GET /missions_secteurs.php?secteurs=<Liste des secteurs>`
+
+**Example**
+
+`GET <BASE_SERVER_URL>/missions_secteurs.php?secteurs='EST'`
+
+**Request response**
+```json
+{
+  "code": 200,
+  "secteur" : "<geojson du ou des secteurs>",
+  "patrimoine" : "<geojson du patrimoine>",
+  "mission_ronde": "<geojons de toutes les missions en cours sur le ou les secteurs>"
+}
+```
+
+## Selection mission
+`GET /selection_mission.php?mission=<id de la mission>`
+
+**Example**
+
+`GET <BASE_SERVER_URL>/selection_mission.php?mission=2190025
+
+**Request response**
+```json
+{
+  "code": 200,
+  "mission" : "<geojson de la mission>"
+}
+```
+
+## Rejoindre mission
+`GET /rejoindre.php?mission=<id de la mission>&chef_groupe=<id du chef de groupe = login>`
+
+**Example**
+
+`GET <BASE_SERVER_URL>/rejoindre.php?mission=2190025&chef_groupe=CHARLY01
+
+
+**Request response**
+```json
+{
+  "code": 200,
 }
 ```

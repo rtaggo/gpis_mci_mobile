@@ -447,17 +447,16 @@
       let content = $(`<div class="slds-form" role="list"></div>`);
       content.append(
         $(`
-          <div class="slds-form__row">
-            <div class="slds-form__item" role="listitem">
-              <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
-                <div class="slds-form-element__control">
-                  <div class="slds-form-element__static">
-                    <div class="">Mission ${mission.properties.mission_id}</div>
-                  </div>
-                </div>
+		<div class="slds-form__row">
+          <div class="slds-form__item" role="listitem">
+            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent slds-form-element_1-col">
+              <span class="slds-form-element__label">Type de mission</span>
+              <div class="slds-form-element__control">
+                <div class="slds-form-element__static slds-text-longform">${mission.properties.type_mission}</div>
               </div>
             </div>
           </div>
+        </div>
           <div class="slds-form__row">
             <div class="slds-form__item" role="listitem">
               <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
