@@ -1,5 +1,8 @@
 'use strict';
 
+/**
+ * Mock MCI module for dev
+ */
 const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -84,8 +87,13 @@ const _getPatrouilles = async () => {
   return { patrouilles: fakePatrouilles, code: 200 };
 };
 
-const _getSousSecteurs = async function() {
+const _libererPatrouille = async patrouilleId => {
+  return { code: 200 };
+};
+
+const _getSousSecteurs = async patrouilleId => {
   return {
+    code: 200,
     'sous-secteurs': fakeSousSecteurs
   };
 };
@@ -129,6 +137,7 @@ const _getMission = async patrouilleId => {
 module.exports = {
   login: _login,
   getPatrouilles: _getPatrouilles,
+  libererPatrouille: _libererPatrouille,
   getSousSecteurs: _getSousSecteurs,
   getSecteurs: _getSecteurs,
   getPatrimoineSousSecteur: _getPatrimoineSousSecteur,

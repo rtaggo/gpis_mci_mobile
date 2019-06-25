@@ -48,11 +48,14 @@
         <div class="slds-backdrop slds-backdrop_open"></div>
     `);
     $('#appContainer footer > button.slds-button').click(function(e) {
+      GGO.disconnect();
+      /*
       sessionStorage.clear();
       var logoutForm = $('<form action="/logout" />');
 
       $('body').append(logoutForm);
       logoutForm.submit();
+      */
     });
   };
 
@@ -89,13 +92,45 @@
     return GGO.COLORPALETTES['rdYlBu'];
   };
 
+  GGO.disconnect = function(patrouilleId, options) {
+    sessionStorage.clear();
+    if (typeof patrouilleId !== 'undefined') {
+      const patrouillesUrl = `${options.baseRESTServicesURL}/liberer_patrouille.php?patrouille=${patrouilleId}`;
+      $.ajax({
+        type: 'GET',
+        url: patrouillesUrl,
+        success: function(response) {
+          console.log(`Logout response: `, response);
+          GGO.postLogoutForm();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`${patrouillesUrl} Request aborted`);
+          } else {
+            console.error(`Error for ${patrouillesUrl} request: ${textStatus}`, errorThrown);
+          }
+          GGO.postLogoutForm();
+        }
+      });
+    } else {
+      GGO.postLogoutForm();
+    }
+  };
+
+  GGO.postLogoutForm = function() {
+    var logoutForm = $('<form action="/logout" />');
+    $('body').append(logoutForm);
+    logoutForm.submit();
+  };
+
   GGO.EVENTS = {
     APPISREDAY: 'appisready',
     MAPISREADY: 'mapisready',
     MAPMARKERCLICKED: 'mapmarkerclicked',
     SHOWMISSIONMLOCATION: 'showmissionlocation',
     MISSIONCOMPLETED: 'missioncompleted',
-    INVALIDATEMAPSIZE: 'invalidemapsize'
+    INVALIDATEMAPSIZE: 'invalidemapsize',
+    NEIGHBORHOOD: 'neighborhood'
   };
 })();
 /* end GGO: put code below in galigeo.js */

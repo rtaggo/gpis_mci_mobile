@@ -6,10 +6,15 @@ const rp = require('request-promise');
 const bodyParser = require('body-parser');
 
 const doAsyncGET = async url => {
-  let res = await rp(url);
-  console.log(res);
-  let jsonRes = typeof res === 'string' ? JSON.parse(res) : res;
-  return jsonRes;
+  try {
+    let res = await rp(url);
+    console.log(res);
+    let jsonRes = typeof res === 'string' ? JSON.parse(res) : res;
+    return jsonRes;
+  } catch (err) {
+    console.log('Error: ', err);
+    return { code: 500 };
+  }
 };
 
 const doAsyncPOST = async options => {
@@ -67,9 +72,20 @@ const _getPatrouilles = async () => {
   return patrouilles;
 };
 
-const _getSousSecteurs = async () => {
-  let sousSecteurseUrl = `${require('../../config').get('BACKEND_URL')}/sous_secteurs.php`;
+const _libererPatrouille = async patrouilleId => {
+  let revokePatrouilleUrl = `${require('../../config').get('BACKEND_URL')}/liberer_patrouille.php?patrouille=${patrouilleId}`;
+  let resp = await doAsyncGET(revokePatrouilleUrl);
+  return reps;
+};
+
+const _getSousSecteurs = async patrouilleId => {
+  let sousSecteurseUrl = `${require('../../config').get('BACKEND_URL')}/sous_secteurs.php?patrouille=${patrouilleId}`;
   let sssecteurs = await doAsyncGET(sousSecteurseUrl);
+  if (sssecteurs.code !== 200) {
+    if (!sssecteurs.message) {
+      sssecteurs.message = 'Erreur lors de la récupération des sous-secteurs';
+    }
+  }
   return sssecteurs;
 };
 
@@ -94,6 +110,7 @@ const _getMission = async patrouilleId => {
 module.exports = {
   login: _login,
   getPatrouilles: _getPatrouilles,
+  libererPatrouille: _libererPatrouille,
   getSousSecteurs: _getSousSecteurs,
   getSecteurs: _getSecteurs,
   getPatrimoineSousSecteur: _getPatrimoineSousSecteur,

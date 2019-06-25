@@ -40,10 +40,19 @@ router.get('/patrouilles.php', (req, res, next) => {
   });
 });
 
+router.get('/liberer_patrouille.php', (req, res, next) => {
+  console.log(`[MCI API] /liberer_patrouille.php`);
+  const mcimodule = getMCIModule();
+  mcimodule.libererPatrouille(req.query.patrouille).then(resp => {
+    res.header('Content-Type', 'application/json');
+    res.json(resp);
+  });
+});
+
 router.get('/sous_secteurs.php', (req, res, next) => {
   console.log(`[MCI API] /sous_secteurs.php`);
   const mcimodule = getMCIModule();
-  mcimodule.getSousSecteurs().then(sssecteurs => {
+  mcimodule.getSousSecteurs(req.query.patrouille).then(sssecteurs => {
     res.header('Content-Type', 'application/json');
     res.json(sssecteurs);
   });

@@ -31,18 +31,23 @@
 		<div id="appContainer" class="ggoslds" style="">
 			<div class="ggoslds" style="">
 				<div id="topleft_container" class="top-left_container">
-					<span id="legendIcon" class="slds-icon_container slds-icon_container_circle slds-icon-action-map" style="margin-top: 5px;">
+					<span id="legendIcon" class="slds-icon_container slds-icon_container_circle slds-icon-action-map" style="margin-top: 5px; display: block;">
 						<svg class="slds-icon slds-icon_x-small" aria-hidden="true">
 							<use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#standard_objects"></use>
 						</svg>
-					<span class="slds-assistive-text">Description of icon when needed</span>
+						<span class="slds-assistive-text">Description of icon when needed</span>
+					</span>
+					<span id="neighborhoodIcon" class="slds-icon_container slds-icon_container_circle slds-icon-action-map" style="margin-top: 5px; display: block;">
+						<svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+							<use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#standard_objects"></use>
+						</svg>
+						<span class="slds-assistive-text">Description of icon when needed</span>
 					</span>
 					<section id="legend_popover" aria-describedby="dialog-body-legend" aria-labelledby="dialog-heading-legend" class="slds-popover slds-nubbin_left-top slds-popover_small slds-hide" role="dialog">
 						<header class="slds-popover__header">
 							<h2 class="slds-text-heading_small" id="dialog-heading-legend">Légende</h2>
 						</header>
-						<div class="slds-popover__body" id="dialog-body-legend">
-							
+						<div class="slds-popover__body" id="dialog-body-legend">							
 						</div>
 					</section>
 				</div>
@@ -106,11 +111,12 @@
 		$(document).ready(function(e){
 			console.log(' >> document is ready');
 			$('#logoutBtn').click(function(e){
-				sessionStorage.clear();
-				var logoutForm = $('<form action="/logout" />');
-
-				$('body').append(logoutForm);
-				logoutForm.submit();
+				GGO.disconnect(
+					self.galigeo.getPatrouille().id, 
+					{
+						'baseRESTServicesURL': '/services/rest/mci'
+					}
+				);
 			});
 
 			var windowH = $(window).height();

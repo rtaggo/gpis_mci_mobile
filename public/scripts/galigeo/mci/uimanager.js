@@ -29,6 +29,9 @@
     },
     _setupListeners: function() {
       let self = this;
+      $('#neighborhoodIcon').click(function(e) {
+        GGO.EventBus.dispatch(GGO.EVENTS.NEIGHBORHOOD);
+      });
       $('#legendIcon').click(function(e) {
         $('#legend_popover').toggleClass('slds-hide');
       });
