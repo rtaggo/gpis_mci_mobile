@@ -56,6 +56,21 @@
   ]
 }
 ```
+
+## Libérer Patrouilles
+`GET <BASE_SERVER_URL>/liberer_patrouille.php`
+
+**Request response**
+```json
+{
+  "code": 200
+}
+```
+
+**Example**
+
+`GET <BASE_SERVER_URL>/liberer_patrouille.php?patrouille=55`
+
 ## Sous-secteurs
 `GET <BASE_SERVER_URL>/sous_secteurs.php`
 
@@ -102,7 +117,15 @@
 **Request response**
 ```json
 {
-
+	"code"  : 200,
+	"patrimoine"  : {
+		"type": "FeatureCollection",
+		"features": [..]
+	},
+	"sous-secteur" : {
+		"type": "FeatureCollection",
+		"features": [..]
+	}
 }
 ```
 
@@ -114,7 +137,7 @@
 {
   "code": "200 | 300 (200: ok, 300:ko)",
   "message": "<message erreur si 300>",
-  "mission": "<geojons de la mission>"
+  "mission": "<geojson de la mission>"
 }
 ```
 
@@ -155,8 +178,7 @@
 {
   "mission_id": "Identifiant de la mission",
   "type_signalement": "id",
-  "type_lieux":  "id",
-  ...
+  "type_lieux":  "id"
 }
 ```
 
@@ -194,11 +216,13 @@
 
 **Example**
 
-`GET <BASE_SERVER_URL>//voisinage.php?patrouille=<idpatrouille>&sssecteurs=3,11,14`
+`GET <BASE_SERVER_URL>/voisinage.php?patrouille=<idpatrouille>&sssecteurs=3,11,14`
 
 **Request response**
 ```json
 {
-
+  "code": 200,
+  "sous-secteur": "<geojson du ou des sous-secteurs>",
+  "mission_ronde":  "<geojons des derniers positionnements des patrouilles>"
 }
 ```
