@@ -75,7 +75,7 @@ const _getPatrouilles = async () => {
 const _libererPatrouille = async patrouilleId => {
   let revokePatrouilleUrl = `${require('../../config').get('BACKEND_URL')}/liberer_patrouille.php?patrouille=${patrouilleId}`;
   let resp = await doAsyncGET(revokePatrouilleUrl);
-  return reps;
+  return resp;
 };
 
 const _getSousSecteurs = async patrouilleId => {
