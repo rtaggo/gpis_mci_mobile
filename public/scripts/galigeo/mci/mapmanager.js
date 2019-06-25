@@ -125,12 +125,13 @@
       let self = this;
       let lgdContent = $(`
         <div>
-          <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[0]};" data-no="0"></div><div class="legend-label"> Niveau opérationnel 0</div></div>
-          <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[1]};" data-no="1"></div><div class="legend-label"> Niveau opérationnel 1</div></div>
-          <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[2]};" data-no="2"></div><div class="legend-label"> Niveau opérationnel 2</div></div>
-          <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[3]};" data-no="3"></div><div class="legend-label"> Niveau opérationnel 3</div></div>
-          <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[4]};" data-no="4"></div><div class="legend-label"> Niveau opérationnel 4</div></div>
-          <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[5]};" data-no="5"></div><div class="legend-label"> Niveau opérationnel 5</div></div>
+		  <div class="legend-label"> Niveau Opérationnel (NO) </div></div>
+          <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[0]};" data-no="0"></div><div class="legend-label">0</div></div>
+          <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[1]};" data-no="1"></div><div class="legend-label">1</div></div>
+          <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[2]};" data-no="2"></div><div class="legend-label">2</div></div>
+          <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[3]};" data-no="3"></div><div class="legend-label">3</div></div>
+          <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[4]};" data-no="4"></div><div class="legend-label">4</div></div>
+          <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[5]};" data-no="5"></div><div class="legend-label">5</div></div>
         </div>
       `);
       //
