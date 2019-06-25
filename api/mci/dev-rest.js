@@ -113,7 +113,7 @@ const _getNeighborhood = async (patrouilleId, sssecteurs) => {
   let neighborhoodResponse = await doAsyncGET(neighborhoodUrl);
   return neighborhoodResponse;
 };
-
+/* list to exports */
 module.exports = {
   login: _login,
   getPatrouilles: _getPatrouilles,
