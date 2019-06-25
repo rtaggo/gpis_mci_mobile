@@ -106,8 +106,8 @@
           this.fetchPatrouilles();
           break;
         case 'charly':
-          break;
         case 'alpha':
+          GGO.SessionIssuePrompt('Rôle utilisateur non disponible', `Le rôle '<b>${authResponse.role}</b>' n\'est pas disponible pour le moment.<br /> Veuillez vous reconnecter.`, $('#appContainer').empty());
           break;
         default:
           $('#error-message > .slds-form-element__help').text(`Le rôle ${authResponse.role} n'est pas un rôle valide.`);
