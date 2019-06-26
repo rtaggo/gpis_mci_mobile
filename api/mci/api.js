@@ -31,6 +31,20 @@ router.post('/connexion.php', (req, res, next) => {
   });
 });
 
+
+router.post('/signalement.php', (req, res, next) => {
+  console.log(`[POST] /signalement ${JSON.stringify(req.body)}`);
+  const mcimodule = getMCIModule();
+  mcimodule.getSignalementPost(req).then(resp => {
+	  //console.log(resp)
+    if (resp.code !== 200) {
+      res.status(500).json(resp);
+    } else {
+      res.status(200).json(resp);
+    }
+  });
+});
+
 router.get('/patrouilles.php', (req, res, next) => {
   console.log(`[MCI API] /patrouilles.php`);
   const mcimodule = getMCIModule();

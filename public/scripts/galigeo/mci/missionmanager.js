@@ -74,81 +74,65 @@
         <div class="slds-modal__content slds-p-around_medium" id="modal-signalement-content">
         <div class="slds-form" role="list">
           <div class="slds-form__row">
-            <div class="slds-form__item" role="listitem">
+            <div class="slds-form__item" role="listitem" >
               <div class="slds-form-element slds-form-element_stacked slds-is-editing">
                 <label class="slds-form-element__label" for="signalement-input-type">Type de signalement</label>
-                <div class="slds-form-element__control">
+                <div class="slds-form-element__control" >
                   <div class="slds-select_container">
-                       <select class="slds-select" id="select-type-signalement" required="">
-																			  
-																		  
+                       <select class="slds-select" id="select-type-signalement" required="">													  
                       </select>
                   </div>
                 </div>
               </div>
             </div>
           </div>          
-          <div class="slds-form__row slds-hide">
+          <div id="parent_categorie" class="slds-form__row slds-hide">
             <div class="slds-form__item" role="listitem">
               <div class="slds-form-element slds-form-element_stacked slds-is-editing">
                 <label class="slds-form-element__label" for="signalement-input-categorie">Catégorie</label>
                 <div class="slds-form-element__control">
                   <div class="slds-select_container">
-                    <select class="slds-select" id="signalement-input-categorie">
-                      <option value="">Choisir une catégorie</option>
-                      <option>Catégorie 1</option>
-                      <option>Catégorie 2</option>
-                      <option>Catégorie 3</option>
-                    </select>
+                    <select class="slds-select" id="select-categorie" required="">													  
+                     </select>
                   </div>
                 </div>
               </div>
             </div>
 			</div>
-		 <div class="slds-form__row slds-hide">
+		 <div id="parent_sous_categorie" class="slds-form__row slds-hide">
             <div class="slds-form__item" role="listitem">
               <div class="slds-form-element slds-form-element_stacked slds-is-editing">
                 <label class="slds-form-element__label" for="signalement-input-souscategorie">Sous-Catégorie</label>
                 <div class="slds-form-element__control">
                 <div class="slds-select_container">
-                  <select class="slds-select" id="signalement-input-souscategorie">
-                    <option value="">Choisir une sous-catégorie</option>
-                    <option>Sous-Catégorie 1</option>
-                    <option>Sous-Catégorie 2</option>
-                    <option>Sous-Catégorie 3</option>
-                  </select>
+					<select class="slds-select" id="select-sous-categorie" required="">													  
+                     </select>
                 </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="slds-form__row slds-hide">
+          <div id="parent_categorie2s" class="slds-form__row slds-hide">
             <div class="slds-form__item" role="listitem">
               <div class="slds-form-element slds-form-element_stacked slds-is-editing">
                 <label class="slds-form-element__label" for="signalement-input-categorie2nd">Catégorie 2nd</label>
                 <div class="slds-form-element__control">
                   <div class="slds-select_container">
-                    <select class="slds-select" id="signalement-input-categorie2nd">
-                      <option value="">Choisir une catégorie</option>
-                      <option>Catégorie 2nd 1</option>
-                      <option>Catégorie 2nd 2</option>
-                      <option>Catégorie 2nd 3</option>
-                    </select>
+						<select class="slds-select" id="select-categorie2s" required="">													  
+                     </select>
                   </div>
                 </div>
               </div>
             </div>
+		 </div>
+		 <div class="slds-form__row">
             <div class="slds-form__item" role="listitem">
               <div class="slds-form-element slds-form-element_stacked slds-is-editing">
                 <label class="slds-form-element__label" for="signalement-input-typelieu">Type de lieu</label>
                 <div class="slds-form-element__control">
                   <div class="slds-select_container">
-                    <select class="slds-select" id="signalement-input-typelieu">
-                      <option value="">Choisir un type</option>
-                      <option>Type 1</option>
-                      <option>Type 2</option>
-                      <option>Type 3</option>
-                    </select>
+                     <select class="slds-select" id="select-type-lieu" required="">													  
+                      </select>
                   </div>
                 </div>
               </div>
@@ -160,12 +144,7 @@
                 <label class="slds-form-element__label" for="signalement-input-niveau">Niveau</label>
                 <div class="slds-form-element__control">
                   <div class="slds-select_container">
-                    <select class="slds-select" id="signalement-input-niveau">
-                      <option value="">Choisir un niveau</option>
-                      <option>Niveau 1</option>
-                      <option>Niveau 2</option>
-                      <option>Niveau 3</option>
-                    </select>
+				   <textarea id="niveau" class="slds-textarea"></textarea>
                   </div>
                 </div>
               </div>
@@ -191,13 +170,14 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-        </div>
-        <footer class="slds-modal__footer">
+          </div>           
+		  <footer class="slds-modal__footer">
+		   <button id="btnSignalementOk" class="slds-button slds-button_brand">Valider</button>
           <button id="btnSignalementCancel" class="slds-button slds-button_neutral">Annuler</button>
-          <button id="btnSignalementOk" class="slds-button slds-button_brand">Valider</button>
         </footer>
+        </div>
+        </div>
+       
       </div>
       </section>
       `;
@@ -211,15 +191,58 @@
         $('#signalement-modal').remove();
       });
       $('#btnSignalementOk').click(function(e) {
-        $('#signalement-modal').remove();
-        $('#missionContent').addClass('slds-hide');
-        $('#missionFooter').addClass('slds-hide');
-        $('#waiting4Mission').removeClass('slds-hide');
-        GGO.EventBus.dispatch(GGO.EVENTS.MISSIONCOMPLETED);
-        self.checkMission();
+		self.saveSignalement();
+		$('#signalement-modal').remove();
       });
     },
+	
+	
+	saveSignalement: function() {
+      let self = this;
+	  const mission = $('#mission_id_form');
+	  const id_mission = mission[0].innerHTML;
+      const type_signalement_id = $('#select-type-signalement').val();
+	  const type_lieu_id = $('#select-type-lieu').val();
+	  const categorie_id = $('#select-categorie').val();
+	  const categorie_2s_id = $('#select-categorie2s').val();
+	  const sous_categorie_id = $('#select-sous-categorie').val();
+	  const niveauVal = $('#niveau').val();
+	  const observationVal = $('#signalement-input-observation').val();
 
+	  let formSignalement = {
+		    mission_id : id_mission,
+		    type_signalement: type_signalement_id,
+            type_lieu: type_lieu_id,
+			categorie: categorie_id,
+			categorie_2s: categorie_2s_id,
+			sous_categorie: sous_categorie_id,
+			niveau: niveauVal,
+			observation: observationVal
+			
+          };
+		  console.log(formSignalement);
+      const saveSignalementUrl = `${this._options.baseRESTServicesURL}/signalement.php`;
+	  console.log(JSON.stringify(formSignalement));
+	  
+	  $.ajax({
+        type: 'POST',
+        url: saveSignalementUrl,
+		data: JSON.stringify(formSignalement),
+		contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function(response) {
+          console.log(`Response`, response);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`Request aborted`);
+          } else {
+            console.error(`Error request: ${textStatus}`, errorThrown);
+          }
+        }
+      });
+	  
+    },
 	
 	/**
      * Récupération de la liste type de signalements
@@ -243,6 +266,7 @@
         success: function(response) {
           console.log(`${typeSignalementUrl}`, response);
           self.handleTypeSignalementFetched(response);
+		  self.handleTypeLieuFetched(response);
         },
         error: function(jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
@@ -253,12 +277,9 @@
         }
       });
     },
-	/**
-     * Handle Type Signalement fetch response
-     * @param {Object} response Request response
-     */
+
     handleTypeSignalementFetched: function(response) {
-      console.log(`>> handlePatrouillesFetched`, response);
+      console.log(`>> handleTypeSignalementFetched`, response);
       const self = this;
       let selectCtnr = $('#select-type-signalement').empty();
       selectCtnr.append(
@@ -267,11 +288,161 @@
         ${response.type_signalement.map(p => `<option value="${p.id}" >${p.libelle}</option>`).join('')}
       `)
       );
+	   $("#select-type-signalement").change(function(){
+		self.handleClickChooseTypeSignalement();	
+	  });
+    },
+	handleTypeLieuFetched: function(response) {
+      console.log(`>> handleTypeLieuFetched`, response);
+      const self = this;
+      let selectCtnr = $('#select-type-lieu').empty();
+      selectCtnr.append(
+        $(`
+        <option value="">Sélectionner un type de lieu</option> 
+        ${response.type_lieu.map(p => `<option value="${p.id}" >${p.libelle}</option>`).join('')}
+      `)
+      );
+	   $("#select-type-lieu").change(function(){
+		self.handleClickChooseTypeLieu();	
+	  });
+    },
+	handleCategorieFetched: function(response) {
+      console.log(`>> handleCategorieFetched`, response);
+      const self = this;
+	  $('#parent_categorie').removeClass('slds-hide');
+      let selectCtnr = $('#select-categorie').empty();
+      selectCtnr.append(
+        $(`
+        <option value="">Sélectionner une catégorie</option> 
+        ${response.categorie.map(p => `<option value="${p.id}" >${p.libelle}</option>`).join('')}
+      `)
+      );
+	  $("#select-categorie").change(function(){
+		self.handleClickChooseCategorie();	
+	  });
+    },
+	handleSousCategorieFetched: function(response) {
+      console.log(`>> handleSousCategorieFetched`, response);
+      const self = this;
+      let selectCtnr2 = $('#select-sous-categorie').empty();
+      selectCtnr2.append(
+        $(`
+        <option value="">Sélectionner une sous-categorie</option> 
+        ${response.sous_categorie.map(p => `<option value="${p.id}" >${p.libelle}</option>`).join('')}
+      `)
+      );
+	  if (`${response.sous_categorie}`!=''){
+		  $('#parent_sous_categorie').removeClass('slds-hide');
+	  }
+    },
+	handleCategorie2sFetched: function(response) {
+	console.log(`>> handleCategorie2sFetched`, response);
+      const self = this;
+      let selectCtnr2 = $('#select-categorie2s').empty();
+      selectCtnr2.append(
+        $(`
+        <option value="">Sélectionner une catégorie secondaire</option> 
+        ${response.categorie_2s.map(p => `<option value="${p.id}" >${p.libelle}</option>`).join('')}
+      `)
+      );
+	  if (`${response.categorie_2s}`!=''){
+		  $('#parent_categorie2s').removeClass('slds-hide');
+	  }
+    },
+	
+	handleClickChooseCategorie: function() {
+      const selectCtnr = $('#select-categorie');
+      let catgorieId = selectCtnr.val();
+      if (catgorieId === '' || selectCtnr[0].selectedOptions.length === 0) {
+        return;
+      }
+      catgorieId = parseInt(catgorieId);
+      let selectedOption = $(selectCtnr[0].selectedOptions[0]);
+	  
+      this._selectedCategorie = {
+        id: catgorieId        
+      };
+	  console.log(this._selectedCategorie);
+	  this.fetchSousCategorie(this._selectedCategorie);
+    },
+	handleClickChooseTypeSignalement: function() {
+      const selectCtnr = $('#select-type-signalement');
+      let typeSignalementId = selectCtnr.val();
+      if (typeSignalementId === '' || selectCtnr[0].selectedOptions.length === 0) {
+        return;
+      }
+      typeSignalementId = parseInt(typeSignalementId);
+      let selectedOption = $(selectCtnr[0].selectedOptions[0]);
+	  
+      this._selectedTypeSignalement = {
+        id: typeSignalementId        
+      };
+	  console.log(this._selectedTypeSignalement);
+	  this.fetchCategorie(this._selectedTypeSignalement);
+    },
+	handleClickChooseTypeLieu: function() {
+      const selectCtnr = $('#select-type-lieu');
+      let typeLieuId = selectCtnr.val();
+      if (typeLieuId === '' || selectCtnr[0].selectedOptions.length === 0) {
+        return;
+      }
+      typeLieuId = parseInt(typeLieuId);
+      let selectedOption = $(selectCtnr[0].selectedOptions[0]);
+	  
+      this._selectedTypeLieu = {
+        id: typeLieuId        
+      };
+	  console.log(this._selectedTypeLieu);
+	  this.fetchNiveau(this._selectedTypeLieu);
+    },
+	
+	fetchCategorie: function(type_signalement) {
+      const self = this;
+      const categorieUrl = `${this._options.baseRESTServicesURL}/signalement.php?type_signalement=${type_signalement.id}&categorie=`;
+      $.ajax({
+        type: 'GET',
+        url: categorieUrl,
+        success: function(response) {
+          console.log(`${categorieUrl}: `, response);
+          self.handleCategorieFetched(response);
+		  self.handleCategorie2sFetched(response);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`[GET] ${categorieUrl} Request aborted`);
+          } else {
+            console.error(`[GET] ${categorieUrl} ERROR: ${textStatus}`, errorThrown);
+          }
+        }
+      });
+    },
+	fetchSousCategorie: function(categorie) {
+      const self = this;
+      const sousCategorieUrl = `${this._options.baseRESTServicesURL}/signalement.php?type_signalement=&categorie=${categorie.id}`;
+      $.ajax({
+        type: 'GET',
+        url: sousCategorieUrl,
+        success: function(response) {
+          console.log(`${sousCategorieUrl}: `, response);
+          self.handleSousCategorieFetched(response);;
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`[GET] ${sousCategorieUrl} Request aborted`);
+          } else {
+            console.error(`[GET] ${sousCategorieUrl} ERROR: ${textStatus}`, errorThrown);
+          }
+        }
+      });
+    },
+	fetchNiveau: function(type_lieu) {
+      const self = this;
+// if true -> input number
     },
 	
 	
 	
-    checkMission: function() {
+	checkMission: function() {
       let self = this;
       setTimeout(function() {
         self.fetchMission();
@@ -329,169 +500,7 @@
     },
     renderMissionViewMode: function() {
       GGO.EventBus.dispatch(GGO.EVENTS.SHOWMISSIONMLOCATION, this._currentMission);
-      let mission = this._currentMission.features[0];
-		
-					 
-										 
-									
-													   
-																																		   
-													  
-													   
-																			  
-					  
-					
-				  
-				
-													   
-																																		   
-																	 
-													  
-													   
-												
-					  
-					
-				  
-				
-			  
-									
-													   
-																																								   
-																   
-													  
-																											 
-					
-				  
-				
-			  
-									
-													   
-																																		   
-																		
-													  
-																							
-					
-				  
-				
-													   
-																																		   
-																				   
-													  
-																								
-					
-				  
-				
-			  
-									
-													   
-																																		   
-																			  
-													  
-																								 
-					
-				  
-				
-													   
-																																		   
-																				
-													  
-																								   
-					
-				  
-				
-			  
-									
-													   
-																																								   
-																 
-													  
-																									  
-					
-				  
-				
-			  
-									
-													   
-																																		   
-																		  
-													  
-													   
-																											 
-																				
-																											 
-						  
-																  
-						 
-					  
-					
-				  
-				
-													   
-																																		   
-																	  
-													  
-													   
-																											 
-																				
-																																							
-						  
-																 
-						 
-					  
-					
-				  
-				
-			  
-									
-													   
-																																								   
-																  
-													  
-													   
-																											 
-																			  
-																																					  
-						
-															   
-					   
-					
-					
-				  
-				
-			  
-									
-													   
-																																		   
-																				 
-													  
-													   
-											   
-															   
-															   
-															   
-					   
-					  
-					
-				  
-				
-													   
-																																		   
-																				   
-													  
-													   
-											   
-															
-															
-															
-					   
-					  
-					
-				  
-				
-			  
-			
-		
-		
+      let mission = this._currentMission.features[0];		
       let content = $(`<div class="slds-form" role="list"></div>`);
       content.append(
         $(`
@@ -648,6 +657,14 @@
               </div>
             </div>
           </div>
+        </div>
+		<div class="slds-form__row slds-hide"">
+            <div class="slds-form__item" role="listitem">
+              <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
+                <div class="slds-form-element__control">
+                  <div class="slds-form-element__static">
+                    <div id="mission_id_form" >${mission.properties.mission_id}</div>
+                  </div>
         </div>
       `)
       );
