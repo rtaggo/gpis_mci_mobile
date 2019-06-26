@@ -149,6 +149,8 @@
                 </div>
               </div>
             </div>
+		</div>
+		 <div class="slds-form__row ">
             <div class="slds-form__item" role="listitem">
               <div class="slds-form-element slds-form-element_stacked slds-is-editing">
                 <label class="slds-form-element__label" for="signalement-input-niveau">Image</label>
