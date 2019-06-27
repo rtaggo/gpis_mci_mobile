@@ -279,7 +279,8 @@
                 <label class="slds-form-element__label" for="signalement-input-niveau">Niveau</label>
                 <div class="slds-form-element__control">
                   <div class="slds-select_container">
-				   <textarea id="niveau" class="slds-textarea" disabled></textarea>
+				    <select class="slds-select" id="niveau" required="" disabled>													  
+                      </select>
                   </div>
                 </div>
               </div>
@@ -334,6 +335,7 @@
     },
 	saveSignalement: function() {
       let self = this;
+
 	  const mission = $('#mission_id_form');
 	  const id_mission = mission[0].innerHTML;
       const type_signalement_id = $('#select-type-signalement').val();
@@ -341,7 +343,7 @@
 	  const categorie_id = $('#select-categorie').val();
 	  const categorie_2s_id = $('#select-categorie2s').val();
 	  const sous_categorie_id = $('#select-sous-categorie').val();
-	  const niveauVal = $('#niveau').val();
+	  const niveauVal = $('#select-niveau').val();
 	  const observationVal = $('#signalement-input-observation').val();
 
 	  let formSignalement = {
@@ -595,6 +597,7 @@
       };
 	  if (niveauOK) {
 		 $('#parent_niveau').removeClass('slds-hide');
+		 
 		  let selectNiveau = $('#select-niveau').empty();
 		  var list_niveau = [];
 		  for (var i = -10; i <= 100; i += 1) {
