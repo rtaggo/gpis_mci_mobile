@@ -138,6 +138,29 @@ const _getSignalementPost= async (formSignalement) => {
   return signalementResponse;
 };
 
+const _getReaffectationSignalement= async (signalement_id, photo) => {
+  console.log(`[dev-rest] _getSignalement`);
+  let reaffectationUrl = `${require('../../config').get('BACKEND_URL')}/reaffectation.php?signalement_id=${signalement_id}&photo=${photo}`;
+  let reaffectationResponse = await doAsyncGET(reaffectationUrl);
+  return reaffectationResponse;
+};
+
+const _getReaffectationPost= async (formreaffectation) => {
+  console.log(`[dev-rest] _getReaffectationPost`);
+  let reaffectationUrlPost = `${require('../../config').get('BACKEND_URL')}/reaffectation.php`;
+  
+  let options = {
+    method: 'POST',
+    uri: reaffectationUrlPost,
+    body: formreaffectation.body,
+    json: true // Automatically stringifies the body to JSON
+  };
+  
+  let reaffectationResponse = await doAsyncPOST(options);
+  console.log('Resp: ' + reaffectationResponse);
+ 
+  return reaffectationResponse;
+};
 
 /* list to exports */
 module.exports = {
@@ -150,5 +173,7 @@ module.exports = {
   getMission: _getMission,
   getNeighborhood: _getNeighborhood,
   getSignalement: _getSignalement,
-  getSignalementPost: _getSignalementPost
+  getSignalementPost: _getSignalementPost,
+  getReaffectationSignalement: _getReaffectationSignalement,
+  getReaffectationPost: _getReaffectationPost
 };

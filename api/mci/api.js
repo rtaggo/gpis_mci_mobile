@@ -45,6 +45,19 @@ router.post('/signalement.php', (req, res, next) => {
   });
 });
 
+router.post('/reaffectation.php', (req, res, next) => {
+  console.log(`[POST] /reaffectation ${JSON.stringify(req.body)}`);
+  const mcimodule = getMCIModule();
+  mcimodule.getReaffectationPost(req).then(resp => {
+	  //console.log(resp)
+    if (resp.code !== 200) {
+      res.status(500).json(resp);
+    } else {
+      res.status(200).json(resp);
+    }
+  });
+});
+
 router.get('/patrouilles.php', (req, res, next) => {
   console.log(`[MCI API] /patrouilles.php`);
   const mcimodule = getMCIModule();
@@ -102,20 +115,30 @@ router.get('/mission_sous_secteur.php', (req, res, next) => {
 router.get('/voisinage.php', (req, res, next) => {
   console.log(`/[MCI_REST_API]/voisinage.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
-  mcimodule.getNeighborhood(req.query.patrouille, req.query.sssecteurs).then(missionResponse => {
+  mcimodule.getNeighborhood(req.query.patrouille, req.query.sssecteurs).then(voisinageResponse => {
     res.header('Content-Type', 'application/json');
-    res.json(missionResponse);
+    res.json(voisinageResponse);
   });
 });
 
 router.get('/signalement.php', (req, res, next) => {
   console.log(`/[MCI_REST_API]/signalement.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
-  mcimodule.getSignalement(req.query.type_signalement, req.query.categorie).then(missionResponse => {
+  mcimodule.getSignalement(req.query.type_signalement, req.query.categorie).then(signalementResponse => {
     res.header('Content-Type', 'application/json');
-    res.json(missionResponse);
+    res.json(signalementResponse);
   });
 });
+
+router.get('/reaffectation.php', (req, res, next) => {
+  console.log(`/[MCI_REST_API]/reaffectation.php ${JSON.stringify(req.query)}`);
+  const mcimodule = getMCIModule();
+  mcimodule.getReaffectationSignalement(req.query.signalement_id, req.query.photo).then(reaffectationResponse => {
+    res.header('Content-Type', 'application/json');
+    res.json(reaffectationResponse);
+  });
+});
+  
 /**
  * Errors on "/elephantbleu/*" routes.
  */

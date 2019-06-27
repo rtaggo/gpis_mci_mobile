@@ -49,6 +49,7 @@
           $('#udpate-mission-spinner').remove();
         }, 1000);
       });
+
       $('#btnMissionFin').click(function(e) {
         GGO.EventBus.dispatch(GGO.EVENTS.MISSIONCOMPLETED);
 
@@ -79,7 +80,7 @@
                 <label class="slds-form-element__label" for="signalement-input-type">Type de signalement</label>
                 <div class="slds-form-element__control" >
                   <div class="slds-select_container">
-                       <select class="slds-select" id="select-type-signalement" required="">													  
+				  <select class="slds-select" id="select-type-signalement" required="">													  
                       </select>
                   </div>
                 </div>
@@ -198,7 +199,140 @@
       });
     },
 	
-	
+	openReaffectationModal: function() {
+      let self = this;
+      let modal = `
+      <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-signalement-content" class="slds-modal slds-fade-in-open slds-modal_large">
+      <div class="slds-modal__container" style="margin: 0px; padding: 0px;">
+        <header class="slds-modal__header">
+          <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Signalement</h2>
+        </header>
+        <div class="slds-modal__content slds-p-around_medium" id="modal-signalement-content">
+        <div class="slds-form" role="list">
+          <div class="slds-form__row">
+            <div class="slds-form__item" role="listitem" >
+              <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                <label class="slds-form-element__label" for="signalement-input-type">Type de signalement</label>
+                <div class="slds-form-element__control" >
+                  <div class="slds-select_container">
+                     <select class="slds-select" id="type_signalement" required="" disabled>													  
+                      </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>          
+          <div id="parent_categorie" class="slds-form__row slds-hide">
+            <div class="slds-form__item" role="listitem">
+              <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                <label class="slds-form-element__label" for="signalement-input-categorie">Catégorie</label>
+                <div class="slds-form-element__control">
+                  <div class="slds-select_container">
+                    <select class="slds-select" id="categorie" required="" disabled>													  
+                     </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+			</div>
+		 <div id="parent_sous_categorie" class="slds-form__row slds-hide">
+            <div class="slds-form__item" role="listitem">
+              <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                <label class="slds-form-element__label" for="signalement-input-souscategorie">Sous-Catégorie</label>
+                <div class="slds-form-element__control">
+                <div class="slds-select_container">
+					<select class="slds-select" id="sous-categorie" required="" disabled>													  
+                     </select>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="parent_categorie2s" class="slds-form__row slds-hide">
+            <div class="slds-form__item" role="listitem">
+              <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                <label class="slds-form-element__label" for="signalement-input-categorie2nd">Catégorie 2nd</label>
+                <div class="slds-form-element__control">
+                  <div class="slds-select_container">
+						<select class="slds-select" id="categorie2s" required="" disabled>													  
+                     </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+		 </div>
+		 <div class="slds-form__row">
+            <div class="slds-form__item" role="listitem">
+              <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                <label class="slds-form-element__label" for="signalement-input-typelieu">Type de lieu</label>
+                <div class="slds-form-element__control">
+                  <div class="slds-select_container">
+                     <select class="slds-select" id="type-lieu" required="" disabled>													  
+                      </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="parent_niveau" class="slds-form__row slds-hide">
+            <div class="slds-form__item" role="listitem">
+              <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                <label class="slds-form-element__label" for="signalement-input-niveau">Niveau</label>
+                <div class="slds-form-element__control">
+                  <div class="slds-select_container">
+				   <textarea id="niveau" class="slds-textarea" disabled></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+		</div>
+		 <div class="slds-form__row ">
+            <div class="slds-form__item" role="listitem">
+              <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                <label class="slds-form-element__label" for="signalement-input-niveau">Image</label>
+                <div class="slds-form-element__control">
+                  <div class="snapshotdiv">
+                    <svg class="slds-icon slds-icon_large slds-icon-text-default slds-shrink-none" aria-hidden="true"><use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#photo"></use></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="slds-form__row">
+            <div class="slds-form__item" role="listitem">
+              <div class="slds-form-element slds-form-element_stacked slds-is-editing slds-form-element_1-col">
+                <label class="slds-form-element__label" for="signalement-input-observation">Observations / Caractéristique</label>
+                <div class="slds-form-element__control">
+                  <textarea id="observation" class="slds-textarea" disabled></textarea>
+                </div>
+              </div>
+            </div>
+          </div>           
+		  <footer class="slds-modal__footer">
+		   <button id="btnReaffecter" value="" class="slds-button slds-button_brand">Reaffecter</button>
+          <button id="btnReaffectationCancel" class="slds-button slds-button_neutral">Annuler</button>
+        </footer>
+        </div>
+        </div>
+       
+      </div>
+      </section>
+      `;
+
+      $('body').append(
+        $('<div id="reaffectation-signalement-modal" class="ggoslds"></div>')
+          .append($(modal))
+          .append($('<div class="slds-backdrop slds-backdrop_open"></div>'))
+      );
+      $('#btnReaffectationCancel').click(function(e) {
+        $('#reaffectation-signalement-modal').remove();
+      });
+      $('#btnReaffecter').click(function(e) {
+		self.validateReacffectation();
+		$('#reaffectation-signalement-modal').remove();
+      });
+    },
 	saveSignalement: function() {
       let self = this;
 	  const mission = $('#mission_id_form');
@@ -245,20 +379,85 @@
       });
 	  
     },
+	validateReacffectation: function() {
+      let self = this;
+	  let formReaffectation = {
+		    signalement_id : $('#btnReaffecter')[0].value
+          };
+		 
+      const reaffecctationUrl = `${this._options.baseRESTServicesURL}/reaffectation.php`;
+	  
+	  $.ajax({
+        type: 'POST',
+        url: reaffecctationUrl,
+		data: JSON.stringify(formReaffectation),
+		contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function(response) {
+          console.log(`Response`, response);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`Request aborted`);
+          } else {
+            console.error(`Error request: ${textStatus}`, errorThrown);
+          }
+        }
+      });
+	  
+    },
+	fetchFormSignalements: function(signalement_id) {
+      let self = this;
+      const reaffectationSignalementUrl = `${this._options.baseRESTServicesURL}/reaffectation.php?signalement_id=${signalement_id}&photo=`;
+      $.ajax({
+        type: 'GET',
+        url: reaffectationSignalementUrl,
+        success: function(response) {
+          console.log(`${reaffectationSignalementUrl}`, response);
+          self.handleFormSignalementFetched(response, signalement_id);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`${reaffectationSignalementUrl} Request aborted`);
+          } else {
+            console.error(`Error for ${reaffectationSignalementUrl} request: ${textStatus}`, errorThrown);
+          }
+        }
+      });
+    },
 	
-	/**
-     * Récupération de la liste type de signalements
-     * Ex.:
-     *  Méthode: GET
-     *  Request response:
-     *    {
-     *      "patrouille": [
-     *        {"name": "GOLF 03", "id": 3 },
-     *        {"name": "GOLF 11", "id": 11},
-     *        {"name": "GOLF 14", "id": 14 }
-     *      ]
-     *    }
-     */
+	handleFormSignalementFetched: function(response, signalement_id) {
+      console.log(`>> handleTypeSignalementFetched`, response);
+      const self = this;
+
+      let selectTypeSignalement = $('#type_signalement').empty();
+      selectTypeSignalement.append($(`<option value="">${response.signalement[0].type_signalement}</option>`));
+	  if (response.signalement[0].categorie) {
+		  $('#parent_categorie').removeClass('slds-hide')
+		  let selectCategorie = $('#categorie').empty();
+		  selectCategorie.append($(`<option value="">${response.signalement[0].categorie}</option>`));
+	  }
+	  let selectTypeLieu = $('#type-lieu').empty();
+      selectTypeLieu.append($(`<option value="">${response.signalement[0].type_lieu}</option>`));	  
+	  if (response.signalement[0].sous_categorie) {
+		  $('#parent_sous_categorie').removeClass('slds-hide');
+		  let selectSousCategorie = $('#sous-categorie').empty();
+		  selectSousCategorie.append($(`<option value="">${response.signalement[0].sous_categorie}</option>`));
+	  }	  
+	  if (response.signalement[0].categorie_2s) {
+		  $('#parent_categorie2s').removeClass('slds-hide');
+		  let selectCategorie2s = $('#categorie2s').empty();
+		  selectCategorie2s.append($(`<option value="">${response.signalement[0].categorie_2s}</option>`));
+	  }
+	  if (response.signalement[0].niveau) {
+		 $('#parent_niveau').removeClass('slds-hide');
+		 $('#niveau')[0].value = response.signalement[0].niveau; 
+	  }
+	  $('#observation')[0].value = response.signalement[0].observations; 
+	  $('#btnReaffecter')[0].value = signalement_id;
+	  
+	  
+    },
     fetchTypeSignalements: function() {
       let self = this;
       const typeSignalementUrl = `${this._options.baseRESTServicesURL}/signalement.php?type_signalement=&categorie=`;
@@ -500,10 +699,12 @@
         this.checkMission();
       }
     },
+
     renderMissionViewMode: function() {
       GGO.EventBus.dispatch(GGO.EVENTS.SHOWMISSIONMLOCATION, this._currentMission);
       let mission = this._currentMission.features[0];		
       let content = $(`<div class="slds-form" role="list"></div>`);
+	  let self = this;
       content.append(
         $(`
           <div class="slds-form__row">
@@ -707,18 +908,21 @@
       // signalements
       let signalementContent = '<div class="slds-form-element__static"><p>Aucun signalement</p></div>';
       if (typeof mission.properties.signalement !== 'undefined' && Array.isArray(mission.properties.signalement) && mission.properties.signalement.length > 0) {
+
         signalementContent = `
-        <div class="slds-form-element__static">
-          <ul class="slds-list_dotted">
+        <div class="slds-form-element__static" id="signalements">
+          <ul class="slds-list_dotted" id = "parent-list">
             ${mission.properties.signalement
               .map(s => {
-                return `<li>${moment(s.date).format('DD/MM/YYYY')} : ${s.libelle}</li>`;
+                return `<li id='signalement_list' value=${s.id}>${moment(s.date).format('DD/MM/YYYY')} : ${s.libelle}</li>`;
               })
               .join('')}
           </ul>
         </div>
         `;
+		
       }
+
       content.append(
         $(`
           <div class="slds-form__row">
@@ -733,6 +937,9 @@
           </div>
         `)
       );
+	  
+
+
 	if (mission.properties.renfort) {
         $('#mission-btn-list').addClass('slds-hide');
         $('#mission-renfort-info').removeClass('slds-hide');
@@ -740,17 +947,20 @@
         $('#mission-renfort-info').addClass('slds-hide');
         $('#mission-btn-list').removeClass('slds-hide');
       }							   
-													 
-															
-			  
-														 
-														
-	   
-
       $('#missionContent')
         .empty()
         .append(content);
-    }
+	if (typeof $('#signalement_list') !== 'undefined') {
+		var list_signalements = document.getElementById("signalements").getElementsByTagName("li");
+		for (var i = 0; i < list_signalements.length; i++) {
+			list_signalements[i].onclick = function(e) {
+					self.openReaffectationModal();
+					self.fetchFormSignalements($(this)[0].value);
+				};
+		}
+	}	
+   }
+
   };
   GGO.MissionManagerSingleton = (function() {
     let instance;
