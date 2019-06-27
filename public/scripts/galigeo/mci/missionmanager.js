@@ -139,14 +139,13 @@
               </div>
             </div>
           </div>
-          <div class="slds-form__row slds-hide">
+          <div id="parent_niveau" class="slds-form__row slds-hide">
             <div class="slds-form__item" role="listitem">
               <div class="slds-form-element slds-form-element_stacked slds-is-editing">
                 <label class="slds-form-element__label" for="signalement-input-niveau">Niveau</label>
-                <div class="slds-form-element__control">
-                  <div class="slds-select_container">
-				   <textarea id="niveau" class="slds-textarea"></textarea>
-                  </div>
+                <div class="slds-form-element__control" style="width:20%">
+				   <select class="slds-select" id="select-niveau" required="">													  
+                      </select>
                 </div>
               </div>
             </div>
@@ -154,7 +153,7 @@
 		 <div class="slds-form__row ">
             <div class="slds-form__item" role="listitem">
               <div class="slds-form-element slds-form-element_stacked slds-is-editing">
-                <label class="slds-form-element__label" for="signalement-input-niveau">Image</label>
+                <label class="slds-form-element__label">Image</label>
                 <div class="slds-form-element__control">
                   <div class="snapshotdiv">
                     <svg class="slds-icon slds-icon_large slds-icon-text-default slds-shrink-none" aria-hidden="true"><use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#photo"></use></svg>
@@ -500,11 +499,12 @@
       selectCtnr.append(
         $(`
         <option value="">Sélectionner un type de lieu</option> 
-        ${response.type_lieu.map(p => `<option value="${p.id}" >${p.libelle}</option>`).join('')}
+        ${response.type_lieu.map(p => `<option value="${p.id}" data-niveau="${p.niveau}" >${p.libelle}</option>`).join('')}
       `)
       );
 	   $("#select-type-lieu").change(function(){
-		self.handleClickChooseTypeLieu();	
+		const niveauOK = $(this).find(':selected').data('niveau');
+		self.handleClickChooseTypeLieu(niveauOK);	
 	  });
     },
 	handleCategorieFetched: function(response) {
@@ -581,7 +581,7 @@
 	  console.log(this._selectedTypeSignalement);
 	  this.fetchCategorie(this._selectedTypeSignalement);
     },
-	handleClickChooseTypeLieu: function() {
+	handleClickChooseTypeLieu: function(niveauOK) {
       const selectCtnr = $('#select-type-lieu');
       let typeLieuId = selectCtnr.val();
       if (typeLieuId === '' || selectCtnr[0].selectedOptions.length === 0) {
@@ -593,8 +593,20 @@
       this._selectedTypeLieu = {
         id: typeLieuId        
       };
-	  console.log(this._selectedTypeLieu);
-	  this.fetchNiveau(this._selectedTypeLieu);
+	  if (niveauOK) {
+		 $('#parent_niveau').removeClass('slds-hide');
+		  let selectNiveau = $('#select-niveau').empty();
+		  var list_niveau = [];
+		  for (var i = -10; i <= 100; i += 1) {
+			list_niveau.push(i);
+		  }
+		  selectNiveau.append(
+			 $(`
+        <option value=""> </option> 
+        ${list_niveau.map(p => `<option value="${p}" >${p}</option>`).join('')}
+      `)
+		  );
+	  }
     },
 	
 	fetchCategorie: function(type_signalement) {
@@ -636,11 +648,6 @@
         }
       });
     },
-	fetchNiveau: function(type_lieu) {
-      const self = this;
-// if true -> input number
-    },
-	
 	
 	
 	checkMission: function() {
