@@ -28,7 +28,7 @@
 		 imagery: L.tileLayer('//services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
           attribution: '',
           minZoom: 1,
-          maxZoom: 15
+          maxZoom: 19
         }),
         osm: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           maxZoom: 19,
