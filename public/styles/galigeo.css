@@ -75,6 +75,12 @@ body {
   top: 0px;
 }
 
+#basemap_popover {
+  position: absolute;
+  left: 45px;
+  top: 10px;
+}
+
 .legend-badge {
   width: 20px;
   height: 20px;
