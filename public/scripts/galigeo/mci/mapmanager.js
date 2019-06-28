@@ -83,7 +83,7 @@
         contextmenu: true,
         contextmenuWidth: 140,
         layers: [this._basemaps['streets']]
-      }).setView([0, 0], 2);
+      }).setView([48.853507, 2.348015], 12);
 
       /*  
       var baseMaps = {"<span>World Street Map</span>": self._basemaps.streets,"World Imagery": self._basemaps.satellite};
