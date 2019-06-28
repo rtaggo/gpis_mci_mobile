@@ -20,13 +20,15 @@
       $('#btnMissionEnRoute').click(function(e) {
         self._currentMission.statut = 'En direction';
         $('#mainContainer-card-body').prepend(
-          $(`<div id="udpate-mission-spinner" class="slds-spinner_container">
-        <div role="status" class="slds-spinner slds-spinner_medium">
-        <span class="slds-assistive-text">Loading</span>
-        <div class="slds-spinner__dot-a"></div>
-        <div class="slds-spinner__dot-b"></div>
-        </div>
-        </div>`)
+          $(`
+          <div id="udpate-mission-spinner" class="slds-spinner_container">
+            <div role="status" class="slds-spinner slds-spinner_medium">
+              <span class="slds-assistive-text">Loading</span>
+              <div class="slds-spinner__dot-a"></div>
+              <div class="slds-spinner__dot-b"></div>
+            </div>
+          </div>
+          `)
         );
         setTimeout(function(e) {
           self.renderMissionViewMode();
@@ -60,7 +62,7 @@
       });
       $('#btnMissionSignalement').click(function(e) {
         self.openSignalementModal();
-		self.fetchTypeSignalements();
+        self.fetchTypeSignalements();
       });
     },
     openSignalementModal: function() {
@@ -72,127 +74,125 @@
           <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Signalement</h2>
         </header>
         <div class="slds-modal__content slds-p-around_medium" id="modal-signalement-content">
-        <div class="slds-form" role="list">
-          <div class="slds-form__row">
-            <div class="slds-form__item" role="listitem">
-              <div class="slds-form-element slds-form-element_stacked slds-is-editing">
-                <label class="slds-form-element__label" for="signalement-input-type">Type de signalement</label>
-                <div class="slds-form-element__control">
-                  <div class="slds-select_container">
-                       <select class="slds-select" id="select-type-signalement" required="">
-																			  
-																		  
+          <div class="slds-form" role="list">
+            <div class="slds-form__row">
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                  <label class="slds-form-element__label" for="signalement-input-type">Type de signalement</label>
+                  <div class="slds-form-element__control">
+                    <div class="slds-select_container">
+                      <select class="slds-select" id="select-type-signalement" required="">
                       </select>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>          
-          <div class="slds-form__row slds-hide">
-            <div class="slds-form__item" role="listitem">
-              <div class="slds-form-element slds-form-element_stacked slds-is-editing">
-                <label class="slds-form-element__label" for="signalement-input-categorie">Catégorie</label>
-                <div class="slds-form-element__control">
-                  <div class="slds-select_container">
-                    <select class="slds-select" id="signalement-input-categorie">
-                      <option value="">Choisir une catégorie</option>
-                      <option>Catégorie 1</option>
-                      <option>Catégorie 2</option>
-                      <option>Catégorie 3</option>
-                    </select>
+            </div>          
+            <div class="slds-form__row slds-hide">
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                  <label class="slds-form-element__label" for="signalement-input-categorie">Catégorie</label>
+                  <div class="slds-form-element__control">
+                    <div class="slds-select_container">
+                      <select class="slds-select" id="signalement-input-categorie">
+                        <option value="">Choisir une catégorie</option>
+                        <option>Catégorie 1</option>
+                        <option>Catégorie 2</option>
+                        <option>Catégorie 3</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-			</div>
-		 <div class="slds-form__row slds-hide">
-            <div class="slds-form__item" role="listitem">
-              <div class="slds-form-element slds-form-element_stacked slds-is-editing">
-                <label class="slds-form-element__label" for="signalement-input-souscategorie">Sous-Catégorie</label>
-                <div class="slds-form-element__control">
-                <div class="slds-select_container">
-                  <select class="slds-select" id="signalement-input-souscategorie">
-                    <option value="">Choisir une sous-catégorie</option>
-                    <option>Sous-Catégorie 1</option>
-                    <option>Sous-Catégorie 2</option>
-                    <option>Sous-Catégorie 3</option>
-                  </select>
-                </div>
-                </div>
-              </div>
-            </div>
           </div>
           <div class="slds-form__row slds-hide">
-            <div class="slds-form__item" role="listitem">
-              <div class="slds-form-element slds-form-element_stacked slds-is-editing">
-                <label class="slds-form-element__label" for="signalement-input-categorie2nd">Catégorie 2nd</label>
-                <div class="slds-form-element__control">
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                  <label class="slds-form-element__label" for="signalement-input-souscategorie">Sous-Catégorie</label>
+                  <div class="slds-form-element__control">
                   <div class="slds-select_container">
-                    <select class="slds-select" id="signalement-input-categorie2nd">
-                      <option value="">Choisir une catégorie</option>
-                      <option>Catégorie 2nd 1</option>
-                      <option>Catégorie 2nd 2</option>
-                      <option>Catégorie 2nd 3</option>
+                    <select class="slds-select" id="signalement-input-souscategorie">
+                      <option value="">Choisir une sous-catégorie</option>
+                      <option>Sous-Catégorie 1</option>
+                      <option>Sous-Catégorie 2</option>
+                      <option>Sous-Catégorie 3</option>
                     </select>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div class="slds-form__item" role="listitem">
-              <div class="slds-form-element slds-form-element_stacked slds-is-editing">
-                <label class="slds-form-element__label" for="signalement-input-typelieu">Type de lieu</label>
-                <div class="slds-form-element__control">
-                  <div class="slds-select_container">
-                    <select class="slds-select" id="signalement-input-typelieu">
-                      <option value="">Choisir un type</option>
-                      <option>Type 1</option>
-                      <option>Type 2</option>
-                      <option>Type 3</option>
-                    </select>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="slds-form__row slds-hide">
-            <div class="slds-form__item" role="listitem">
-              <div class="slds-form-element slds-form-element_stacked slds-is-editing">
-                <label class="slds-form-element__label" for="signalement-input-niveau">Niveau</label>
-                <div class="slds-form-element__control">
-                  <div class="slds-select_container">
-                    <select class="slds-select" id="signalement-input-niveau">
-                      <option value="">Choisir un niveau</option>
-                      <option>Niveau 1</option>
-                      <option>Niveau 2</option>
-                      <option>Niveau 3</option>
-                    </select>
+            <div class="slds-form__row slds-hide">
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                  <label class="slds-form-element__label" for="signalement-input-categorie2nd">Catégorie 2nd</label>
+                  <div class="slds-form-element__control">
+                    <div class="slds-select_container">
+                      <select class="slds-select" id="signalement-input-categorie2nd">
+                        <option value="">Choisir une catégorie</option>
+                        <option>Catégorie 2nd 1</option>
+                        <option>Catégorie 2nd 2</option>
+                        <option>Catégorie 2nd 3</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                  <label class="slds-form-element__label" for="signalement-input-typelieu">Type de lieu</label>
+                  <div class="slds-form-element__control">
+                    <div class="slds-select_container">
+                      <select class="slds-select" id="signalement-input-typelieu">
+                        <option value="">Choisir un type</option>
+                        <option>Type 1</option>
+                        <option>Type 2</option>
+                        <option>Type 3</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="slds-form__item" role="listitem">
-              <div class="slds-form-element slds-form-element_stacked slds-is-editing">
-                <label class="slds-form-element__label" for="signalement-input-niveau">Image</label>
-                <div class="slds-form-element__control">
-                  <div class="snapshotdiv">
-                    <svg class="slds-icon slds-icon_large slds-icon-text-default slds-shrink-none" aria-hidden="true"><use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#photo"></use></svg>
+            <div class="slds-form__row slds-hide">
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                  <label class="slds-form-element__label" for="signalement-input-niveau">Niveau</label>
+                  <div class="slds-form-element__control">
+                    <div class="slds-select_container">
+                      <select class="slds-select" id="signalement-input-niveau">
+                        <option value="">Choisir un niveau</option>
+                        <option>Niveau 1</option>
+                        <option>Niveau 2</option>
+                        <option>Niveau 3</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                  <label class="slds-form-element__label" for="signalement-input-niveau">Image</label>
+                  <div class="slds-form-element__control">
+                    <div class="snapshotdiv">
+                      <svg class="slds-icon slds-icon_large slds-icon-text-default slds-shrink-none" aria-hidden="true"><use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#photo"></use></svg>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
           
-          <div class="slds-form__row">
-            <div class="slds-form__item" role="listitem">
-              <div class="slds-form-element slds-form-element_stacked slds-is-editing slds-form-element_1-col">
-                <label class="slds-form-element__label" for="signalement-input-observation">Observations / Caractéristique</label>
-                <div class="slds-form-element__control">
-                  <textarea id="signalement-input-observation" class="slds-textarea" placeholder="Renseigner Observations / Caractéristiques"></textarea>
+            <div class="slds-form__row">
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_stacked slds-is-editing slds-form-element_1-col">
+                  <label class="slds-form-element__label" for="signalement-input-observation">Observations / Caractéristique</label>
+                  <div class="slds-form-element__control">
+                    <textarea id="signalement-input-observation" class="slds-textarea" placeholder="Renseigner Observations / Caractéristiques"></textarea>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
         </div>
         <footer class="slds-modal__footer">
           <button id="btnSignalementCancel" class="slds-button slds-button_neutral">Annuler</button>
@@ -220,8 +220,7 @@
       });
     },
 
-	
-	/**
+    /**
      * Récupération de la liste type de signalements
      * Ex.:
      *  Méthode: GET
@@ -253,7 +252,7 @@
         }
       });
     },
-	/**
+    /**
      * Handle Type Signalement fetch response
      * @param {Object} response Request response
      */
@@ -268,9 +267,7 @@
       `)
       );
     },
-	
-	
-	
+
     checkMission: function() {
       let self = this;
       setTimeout(function() {
@@ -330,168 +327,7 @@
     renderMissionViewMode: function() {
       GGO.EventBus.dispatch(GGO.EVENTS.SHOWMISSIONMLOCATION, this._currentMission);
       let mission = this._currentMission.features[0];
-		
-					 
-										 
-									
-													   
-																																		   
-													  
-													   
-																			  
-					  
-					
-				  
-				
-													   
-																																		   
-																	 
-													  
-													   
-												
-					  
-					
-				  
-				
-			  
-									
-													   
-																																								   
-																   
-													  
-																											 
-					
-				  
-				
-			  
-									
-													   
-																																		   
-																		
-													  
-																							
-					
-				  
-				
-													   
-																																		   
-																				   
-													  
-																								
-					
-				  
-				
-			  
-									
-													   
-																																		   
-																			  
-													  
-																								 
-					
-				  
-				
-													   
-																																		   
-																				
-													  
-																								   
-					
-				  
-				
-			  
-									
-													   
-																																								   
-																 
-													  
-																									  
-					
-				  
-				
-			  
-									
-													   
-																																		   
-																		  
-													  
-													   
-																											 
-																				
-																											 
-						  
-																  
-						 
-					  
-					
-				  
-				
-													   
-																																		   
-																	  
-													  
-													   
-																											 
-																				
-																																							
-						  
-																 
-						 
-					  
-					
-				  
-				
-			  
-									
-													   
-																																								   
-																  
-													  
-													   
-																											 
-																			  
-																																					  
-						
-															   
-					   
-					
-					
-				  
-				
-			  
-									
-													   
-																																		   
-																				 
-													  
-													   
-											   
-															   
-															   
-															   
-					   
-					  
-					
-				  
-				
-													   
-																																		   
-																				   
-													  
-													   
-											   
-															
-															
-															
-					   
-					  
-					
-				  
-				
-			  
-			
-		
-		
+
       let content = $(`<div class="slds-form" role="list"></div>`);
       content.append(
         $(`
@@ -714,19 +550,13 @@
           </div>
         `)
       );
-	if (mission.properties.renfort) {
+      if (mission.properties.renfort) {
         $('#mission-btn-list').addClass('slds-hide');
         $('#mission-renfort-info').removeClass('slds-hide');
       } else {
         $('#mission-renfort-info').addClass('slds-hide');
         $('#mission-btn-list').removeClass('slds-hide');
-      }							   
-													 
-															
-			  
-														 
-														
-	   
+      }
 
       $('#missionContent')
         .empty()
