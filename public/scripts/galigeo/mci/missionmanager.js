@@ -310,6 +310,13 @@
                 <button id="btnReaffectationCancel" class="slds-button slds-button_neutral">Annuler</button>
               </footer>
             </div>
+            <div class="slds-spinner_container">
+              <div role="status" class="slds-spinner slds-spinner_x-small">
+                <span class="slds-assistive-text">Loading</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+              </div>
+            </div>
           </div>
           <!-- End Modal Content -->
         </div>
@@ -425,6 +432,7 @@
     handleFormSignalementFetched: function(response, signalement_id) {
       console.log(`>> handleTypeSignalementFetched`, response);
       const self = this;
+      //$('#modal-signalement-content .slds-spinner_container').empty();
 
       let selectTypeSignalement = $('#type_signalement').empty();
       selectTypeSignalement.append($(`<option value="">${response.signalement[0].type_signalement}</option>`));
@@ -945,6 +953,10 @@
       $('#missionContent')
         .empty()
         .append(content);
+      /*
+      TODO: refactor
+      $('#signalement_list li').click(function(e) { console.log($(this).val()); }) 
+      */
       if (typeof $('#signalement_list') !== 'undefined') {
         var list_signalements = document.getElementById('signalements').getElementsByTagName('li');
         for (var i = 0; i < list_signalements.length; i++) {

@@ -66,7 +66,7 @@
         contextmenu: true,
         contextmenuWidth: 140,
         layers: [streetsTL]
-      }).setView([0, 0], 2);
+      }).setView([48.853507, 2.348015], 12);
       this.fetchNeighborhood();
     },
     fetchNeighborhood: function() {
