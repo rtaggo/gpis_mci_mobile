@@ -35,6 +35,9 @@
       $('#legendIcon').click(function(e) {
         $('#legend_popover').toggleClass('slds-hide');
       });
+	  $('#basemapIcon').click(function(e) {
+        $('#basemap_popover').toggleClass('slds-hide');
+      });
       $('#swiper_handle').swipe({
         swipeStatus: function(event, phase, direction, distance, duration, fingers, fingerData, currentDirection) {
           if (phase !== 'cancel' && phase !== 'end') {

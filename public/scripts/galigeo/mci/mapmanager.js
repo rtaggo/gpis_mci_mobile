@@ -14,6 +14,27 @@
       fill: '#FF00FF',
       'fill-opacity': 0.5
     };
+	this._basemaps = {
+        streets: L.tileLayer('//server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+          attribution: '',
+          minZoom: 1,
+          maxZoom: 19
+        }),
+        grey: L.tileLayer('//services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+          attribution: '',
+          minZoom: 1,
+          maxZoom: 15
+        }),
+		 imagery: L.tileLayer('//services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+          attribution: '',
+          minZoom: 1,
+          maxZoom: 19
+        }),
+        osm: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        })
+    };
 
     this.init();
   };
@@ -49,25 +70,10 @@
     getMap: function() {
       return this._map;
     },
+
     setupMap: function() {
       var self = this;
 
-      self._basemaps = {
-        streets: L.tileLayer('//server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
-          attribution: '',
-          minZoom: 1,
-          maxZoom: 19
-        }),
-        grey: L.tileLayer('//services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
-          attribution: '',
-          minZoom: 1,
-          maxZoom: 15
-        }),
-        osm: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          maxZoom: 19,
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        })
-      };
       this._currentBasemap = 'streets';
       var mapDivId = this._options.mapDivId || 'map';
       this._map = L.map(mapDivId, {
@@ -76,8 +82,13 @@
         zoomControl: false,
         contextmenu: true,
         contextmenuWidth: 140,
-        layers: [self._basemaps['streets']]
+        layers: [this._basemaps['streets']]
       }).setView([0, 0], 2);
+	  	 
+	/*  var baseMaps = {"<span>World Street Map</span>": self._basemaps.streets,"World Imagery": self._basemaps.satellite};
+	   $('#basemapIcon').append(baseMaps);
+	  L.control.layers(baseMaps).addTo(this._map);  */
+	  
     },
     fetchPatrimoine_SousSecteurs: function() {
       var self = this;
@@ -107,6 +118,7 @@
           //this._patrimoineLayer.on('layeradd', this.onFeatureAddedToPatrimoineLayer.bind(this));
           this._patrimoineLayer.setGeoJSON(patrimoineGgeoJSON);
           this._buildLegend();
+		  this._buildBasemapList();
         }
 
         let sous_secteursGeoJSON = response['sous-secteur'];
@@ -119,6 +131,26 @@
         }
       } else {
       }
+    },
+	_buildBasemapList: function() {
+      let self = this;
+      let listContent = $(`
+        <div id = "radioButtonContainerId" >
+         <input type="radio" class="slds-badge legend-badge" name="basemap" value="streets" checked>World Street Map<br>
+         <input type="radio" class="slds-badge legend-badge" name="basemap" value="imagery">World Imagery<br>
+		</div>
+      `);
+      //
+	 listContent.find('input').click(function(e) {
+		self._map.removeLayer(self._basemaps['streets']); 
+		self._map.removeLayer(self._basemaps['imagery']);
+		self._map.addLayer(self._basemaps[$(this).val()]);
+	 });
+		
+
+      $('#dialog-body-basemap')
+        .empty()
+        .append(listContent);
     },
     _buildLegend: function() {
       const colorPalette = GGO.getDefaultColorPalette();
@@ -134,7 +166,7 @@
           <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[5]};" data-no="5"></div><div class="legend-label">5</div></div>
         </div>
       `);
-      //
+
       lgdContent.find('.slds-badge[data-no="0"]').click(function(e) {
         $(this)
           .parent()
