@@ -4,6 +4,8 @@
     this._options = options || {};
     //this._options.mciurl = '/services/rest/mci';
     this._options.baseRESTServicesURL = this._options.baseRESTServicesURL || '/services/rest/mci';
+    this._useBlob = false; // && window.URL;
+
     this._init();
   };
 
@@ -159,6 +161,7 @@
                       <div class="snapshotdiv">
                         <svg class="slds-icon slds-icon_large slds-icon-text-default slds-shrink-none" aria-hidden="true"><use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#photo"></use></svg>
                       </div>
+                      <input id="snapshot_input" type="file" accept="image/*" style="display:none;">
                     </div>
                   </div>
                 </div>
@@ -185,9 +188,39 @@
       </section>
       `;
 
+      let theModal = $(modal);
+      theModal.find('.snapshotdiv').click(function(e) {
+        $('#snapshot_input').trigger('click');
+      });
+
+      theModal.find('input[type="file"]').on('change', function(e) {
+        console.log('input file changed');
+        var files = this.files,
+          errors = '';
+
+        if (!files) {
+          errors += 'File upload not supported by your browser.';
+        }
+
+        if (files && files[0]) {
+          for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            if (/\.(png|jpeg|jpg|gif)$/i.test(file.name)) {
+              self.readImage(file);
+            } else {
+              errors += file.name + ' Unsupported Image extension\n';
+            }
+          }
+        }
+        // Handle errors
+        if (errors) {
+          alert(errors);
+        }
+      });
+
       $('body').append(
         $('<div id="signalement-modal" class="ggoslds"></div>')
-          .append($(modal))
+          .append(theModal)
           .append($('<div class="slds-backdrop slds-backdrop_open"></div>'))
       );
       $('#btnSignalementCancel').click(function(e) {
@@ -198,7 +231,29 @@
         $('#signalement-modal').remove();
       });
     },
+    readImage: function(file) {
+      let self = this;
+      let reader = new FileReader();
+      let elPreview = $('.snapshotdiv').empty();
+      reader.addEventListener('load', function() {
+        var image = new Image();
 
+        image.addEventListener('load', function() {
+          var imageInfo = file.name + ' ' + image.width + '×' + image.height + ' ' + file.type + ' ' + Math.round(file.size / 1024) + 'KB';
+          // Show image
+          elPreview.append(this);
+
+          if (self._useBlob) {
+            // Free some memory
+            window.URL.revokeObjectURL(image.src);
+          }
+        });
+        image.src = self._useBlob ? window.URL.createObjectURL(file) : reader.result;
+        self._snapshotBase64 = reader.result;
+      });
+
+      reader.readAsDataURL(file);
+    },
     openReaffectationModal: function() {
       let self = this;
       let modal = `
@@ -359,7 +414,7 @@
         sous_categorie: sous_categorie_id,
         niveau: niveauVal,
         observation: observationVal,
-        photo: ''
+        photo: this._snapshotBase64 || null
       };
       console.log(formSignalement);
       const saveSignalementUrl = `${this._options.baseRESTServicesURL}/signalement.php`;
