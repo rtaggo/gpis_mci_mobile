@@ -396,7 +396,7 @@
       let self = this;
 
       const mission = $('#mission_id_form');
-      const id_mission = mission[0].innerHTML;
+      const id_mission = self._currentMission.features[0].properties.mission_id; //mission[0].innerHTML;
       const type_signalement_id = $('#select-type-signalement').val();
       const type_lieu_id = $('#select-type-lieu').val();
       const categorie_id = $('#select-categorie').val();
@@ -428,6 +428,7 @@
         dataType: 'json',
         success: function(response) {
           console.log(`Response`, response);
+          self._snapshotBase64 = null;
         },
         error: function(jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
