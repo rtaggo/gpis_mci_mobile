@@ -292,7 +292,8 @@
                 <label class="slds-form-element__label" for="signalement-input-niveau">Image</label>
                 <div class="slds-form-element__control">
                   <div class="snapshotdiv">
-                    <svg class="slds-icon slds-icon_large slds-icon-text-default slds-shrink-none" aria-hidden="true"><use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#photo"></use></svg>
+                    <svg class="slds-icon slds-icon_large slds-icon-text-default slds-shrink-none" aria-hidden="true">
+					<use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#photo"></use></svg>
                   </div>
                 </div>
               </div>
@@ -354,7 +355,8 @@
 			categorie_2s: categorie_2s_id,
 			sous_categorie: sous_categorie_id,
 			niveau: niveauVal,
-			observation: observationVal
+			observation: observationVal,
+			photo: ''
 			
           };
 		  console.log(formSignalement);
