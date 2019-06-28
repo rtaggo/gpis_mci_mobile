@@ -14,26 +14,26 @@
       fill: '#FF00FF',
       'fill-opacity': 0.5
     };
-	this._basemaps = {
-        streets: L.tileLayer('//server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
-          attribution: '',
-          minZoom: 1,
-          maxZoom: 19
-        }),
-        grey: L.tileLayer('//services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
-          attribution: '',
-          minZoom: 1,
-          maxZoom: 15
-        }),
-		 imagery: L.tileLayer('//services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-          attribution: '',
-          minZoom: 1,
-          maxZoom: 19
-        }),
-        osm: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          maxZoom: 19,
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        })
+    this._basemaps = {
+      streets: L.tileLayer('//server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+        attribution: '',
+        minZoom: 1,
+        maxZoom: 19
+      }),
+      grey: L.tileLayer('//services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+        attribution: '',
+        minZoom: 1,
+        maxZoom: 15
+      }),
+      imagery: L.tileLayer('//services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: '',
+        minZoom: 1,
+        maxZoom: 19
+      }),
+      osm: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      })
     };
 
     this.init();
@@ -84,11 +84,12 @@
         contextmenuWidth: 140,
         layers: [this._basemaps['streets']]
       }).setView([0, 0], 2);
-	  	 
-	/*  var baseMaps = {"<span>World Street Map</span>": self._basemaps.streets,"World Imagery": self._basemaps.satellite};
-	   $('#basemapIcon').append(baseMaps);
-	  L.control.layers(baseMaps).addTo(this._map);  */
-	  
+
+      /*  
+      var baseMaps = {"<span>World Street Map</span>": self._basemaps.streets,"World Imagery": self._basemaps.satellite};
+      $('#basemapIcon').append(baseMaps);
+      L.control.layers(baseMaps).addTo(this._map);  
+      */
     },
     fetchPatrimoine_SousSecteurs: function() {
       var self = this;
@@ -118,7 +119,7 @@
           //this._patrimoineLayer.on('layeradd', this.onFeatureAddedToPatrimoineLayer.bind(this));
           this._patrimoineLayer.setGeoJSON(patrimoineGgeoJSON);
           this._buildLegend();
-		  this._buildBasemapList();
+          this._buildBasemapList();
         }
 
         let sous_secteursGeoJSON = response['sous-secteur'];
@@ -132,21 +133,40 @@
       } else {
       }
     },
-	_buildBasemapList: function() {
+    _buildBasemapList: function() {
       let self = this;
+      /*
       let listContent = $(`
         <div id = "radioButtonContainerId" >
-         <input type="radio" class="slds-badge legend-badge" name="basemap" value="streets" checked>World Street Map<br>
-         <input type="radio" class="slds-badge legend-badge" name="basemap" value="imagery">World Imagery<br>
-		</div>
+          <input type="radio" class="slds-badge legend-badge" name="basemap" value="streets" checked>World Street Map<br>
+          <input type="radio" class="slds-badge legend-badge" name="basemap" value="imagery">World Imagery<br>
+        </div>
+      `);
+      */
+      let listContent = $(`
+        <div class="slds-form-element__control" id="radioButtonContainerId" >
+          <span class="slds-radio">
+            <input type="radio" id="basempradio_streets" value="streets" name="basemap" checked="" />
+            <label class="slds-radio__label" for="basempradio_streets">
+              <span class="slds-radio_faux"></span>
+              <span class="slds-form-element__label">World Street Map</span>
+            </label>
+          </span>
+          <span class="slds-radio">
+            <input type="radio" id="basemapradion_imagery" value="imagery" name="basemap" />
+            <label class="slds-radio__label" for="basemapradion_imagery">
+              <span class="slds-radio_faux"></span>
+              <span class="slds-form-element__label">World Imagery</span>
+            </label>
+          </span>
+        </div>
       `);
       //
-	 listContent.find('input').click(function(e) {
-		self._map.removeLayer(self._basemaps['streets']); 
-		self._map.removeLayer(self._basemaps['imagery']);
-		self._map.addLayer(self._basemaps[$(this).val()]);
-	 });
-		
+      listContent.find('input').click(function(e) {
+        self._map.removeLayer(self._basemaps['streets']);
+        self._map.removeLayer(self._basemaps['imagery']);
+        self._map.addLayer(self._basemaps[$(this).val()]);
+      });
 
       $('#dialog-body-basemap')
         .empty()
@@ -156,8 +176,7 @@
       const colorPalette = GGO.getDefaultColorPalette();
       let self = this;
       let lgdContent = $(`
-        <div>
-		  <div class="legend-label"> Niveau Opérationnel (NO) </div></div>
+        <div class="legend-label"> Niveau Opérationnel (NO) </div></div>
           <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[0]};" data-no="0"></div><div class="legend-label">0</div></div>
           <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[1]};" data-no="1"></div><div class="legend-label">1</div></div>
           <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[2]};" data-no="2"></div><div class="legend-label">2</div></div>

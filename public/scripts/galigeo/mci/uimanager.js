@@ -33,15 +33,22 @@
         GGO.EventBus.dispatch(GGO.EVENTS.NEIGHBORHOOD);
       });
       $('#legendIcon').click(function(e) {
+        if ($('#legend_popover').hasClass('slds-hide')) {
+          $('#topleft_container .slds-popover').addClass('slds-hide');
+        }
         $('#legend_popover').toggleClass('slds-hide');
       });
-	  $('#basemapIcon').click(function(e) {
+      $('#basemapIcon').click(function(e) {
+        if ($('#basemap_popover').hasClass('slds-hide')) {
+          $('#topleft_container .slds-popover').addClass('slds-hide');
+        }
         $('#basemap_popover').toggleClass('slds-hide');
       });
       $('#swiper_handle').swipe({
         swipeStatus: function(event, phase, direction, distance, duration, fingers, fingerData, currentDirection) {
           if (phase !== 'cancel' && phase !== 'end') {
-            $('#legend_popover').addClass('slds-hide');
+            //$('#legend_popover').addClass('slds-hide');
+            $('#topleft_container .slds-popover').addClass('slds-hide');
 
             if (fingerData[0].end.y < self._viewSize.height - 20) {
               var tempCardHeight = self._viewSize.height - fingerData[0].end.y;
