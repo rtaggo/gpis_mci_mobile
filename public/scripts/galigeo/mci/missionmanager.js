@@ -85,71 +85,76 @@
               <div class="slds-form__row">
                 <div class="slds-form__item" role="listitem" >
                   <div class="slds-form-element slds-form-element_stacked slds-is-editing">
-                    <label class="slds-form-element__label" for="signalement-input-type">Type de signalement</label>
+                    <label class="slds-form-element__label" for="select-type-signalement"><abbr class="slds-required" title="required">* </abbr>Type de signalement</label>
                     <div class="slds-form-element__control" >
                       <div class="slds-select_container">
                         <select class="slds-select" id="select-type-signalement" required=""></select>
                       </div>
                     </div>
+                    <div class="slds-form-element__help" id="select-type-signalement_error">Champ obligatoire</div>
                   </div>
                 </div>
               </div>
               <div id="parent_categorie" class="slds-form__row slds-hide">
                 <div class="slds-form__item" role="listitem">
                   <div class="slds-form-element slds-form-element_stacked slds-is-editing">
-                    <label class="slds-form-element__label" for="signalement-input-categorie">Catégorie</label>
+                    <label class="slds-form-element__label" for="select-categorie"><abbr class="slds-required" title="required">* </abbr>Catégorie</label>
                     <div class="slds-form-element__control">
                       <div class="slds-select_container">
                         <select class="slds-select" id="select-categorie" required=""></select>
                       </div>
                     </div>
+                    <div class="slds-form-element__help" id="select-categorie_error">Champ obligatoire</div>
                   </div>
                 </div>
               </div>
               <div id="parent_sous_categorie" class="slds-form__row slds-hide">
                 <div class="slds-form__item" role="listitem">
                   <div class="slds-form-element slds-form-element_stacked slds-is-editing">
-                    <label class="slds-form-element__label" for="signalement-input-souscategorie">Sous-Catégorie</label>
+                    <label class="slds-form-element__label" for="select-sous-categorie">Sous-Catégorie</label>
                     <div class="slds-form-element__control">
                       <div class="slds-select_container">
                         <select class="slds-select" id="select-sous-categorie" required=""></select>
                       </div>
                     </div>
+                    <div class="slds-form-element__help" id="select-sous-categorie_error">Champ obligatoire</div>
                   </div>
                 </div>
               </div>
               <div id="parent_categorie2s" class="slds-form__row slds-hide">
                 <div class="slds-form__item" role="listitem">
                   <div class="slds-form-element slds-form-element_stacked slds-is-editing">
-                    <label class="slds-form-element__label" for="signalement-input-categorie2nd">Catégorie 2nd</label>
+                    <label class="slds-form-element__label" for="select-categorie2s">Catégorie 2nd</label>
                     <div class="slds-form-element__control">
                       <div class="slds-select_container">
                         <select class="slds-select" id="select-categorie2s" required=""></select>
                       </div>
                     </div>
+                    <div class="slds-form-element__help" id="select-categorie2s_error">Champ obligatoire</div>
                   </div>
                 </div>
               </div>
               <div class="slds-form__row">
                 <div class="slds-form__item" role="listitem">
                   <div class="slds-form-element slds-form-element_stacked slds-is-editing">
-                    <label class="slds-form-element__label" for="signalement-input-typelieu">Type de lieu</label>
+                    <label class="slds-form-element__label" for="select-type-lieu">Type de lieu</label>
                     <div class="slds-form-element__control">
                       <div class="slds-select_container">
-                        <select class="slds-select" id="select-type-lieu" required="">													  
-                          </select>
+                        <select class="slds-select" id="select-type-lieu" required=""></select>
                       </div>
                     </div>
+                    <div class="slds-form-element__help" id="select-type-lieu_error">Champ obligatoire</div>
                   </div>
                 </div>
               </div>
               <div id="parent_niveau" class="slds-form__row slds-hide">
                 <div class="slds-form__item" role="listitem">
                   <div class="slds-form-element slds-form-element_stacked slds-is-editing">
-                    <label class="slds-form-element__label" for="signalement-input-niveau">Niveau</label>
+                    <label class="slds-form-element__label" for="select-niveau">Niveau</label>
                     <div class="slds-form-element__control" style="width:20%">
                       <select class="slds-select" id="select-niveau" required=""></select>
                     </div>
+                    <div class="slds-form-element__help" id="select-niveau_error">Champ obligatoire</div>
                   </div>
                 </div>
               </div>
@@ -227,8 +232,9 @@
         $('#signalement-modal').remove();
       });
       $('#btnSignalementOk').click(function(e) {
-        self.saveSignalement();
-        $('#signalement-modal').remove();
+        //self.saveSignalement();
+        //$('#signalement-modal').remove();
+        self.checkBeforeSaveSignalement();
       });
     },
     readImage: function(file) {
@@ -269,12 +275,13 @@
               <div class="slds-form__row">
                 <div class="slds-form__item" role="listitem" >
                   <div class="slds-form-element slds-form-element_stacked slds-is-editing">
-                    <label class="slds-form-element__label" for="signalement-input-type">Type de signalement</label>
+                    <label class="slds-form-element__label" for="signalement-input-type"><abbr class="slds-required" title="required">* </abbr>Type de signalement</label>
                     <div class="slds-form-element__control" >
                       <div class="slds-select_container">
                         <select class="slds-select" id="type_signalement" required="" disabled></select>
                       </div>
                     </div>
+                    <div class="slds-form-element__help" id="signalement-input-type_error">Champ obligatoire</div>
                   </div>
                 </div>
               </div>          
@@ -392,10 +399,51 @@
         $('#reaffectation-signalement-modal').remove();
       });
     },
+    checkBeforeSaveSignalement: function() {
+      let self = this;
+      let allGood = false;
+
+      const type_signalement_id = $('#select-type-signalement').val();
+      const type_lieu_id = $('#select-type-lieu').val();
+      const categorie_id = $('#select-categorie').val();
+      const categorie_2s_id = $('#select-categorie2s').val();
+      const sous_categorie_id = $('#select-sous-categorie').val();
+      const niveauVal = $('#select-niveau').val();
+      const observationVal = $('#signalement-input-observation').val();
+
+      if (type_signalement_id === '') {
+        $('#select-type-signalement')
+          .parent()
+          .parent()
+          .parent()
+          .addClass('slds-has-error');
+        allGood = false;
+      }
+
+      if (type_lieu_id === '') {
+        $('#select-type-lieu')
+          .parent()
+          .parent()
+          .parent()
+          .addClass('slds-has-error');
+        allGood = false;
+      }
+      let formSignalement = {
+        mission_id: self._currentMission.features[0].properties.mission_id,
+        type_signalement: type_signalement_id,
+        type_lieu: type_lieu_id,
+        categorie: categorie_id,
+        categorie_2s: categorie_2s_id,
+        sous_categorie: sous_categorie_id,
+        niveau: niveauVal,
+        observation: observationVal,
+        photo: this._snapshotBase64 || null
+      };
+      this.saveSignalement();
+    },
     saveSignalement: function() {
       let self = this;
 
-      const mission = $('#mission_id_form');
       const id_mission = self._currentMission.features[0].properties.mission_id; //mission[0].innerHTML;
       const type_signalement_id = $('#select-type-signalement').val();
       const type_lieu_id = $('#select-type-lieu').val();
@@ -488,7 +536,6 @@
     handleFormSignalementFetched: function(response, signalement_id) {
       console.log(`>> handleTypeSignalementFetched`, response);
       const self = this;
-      //$('#modal-signalement-content .slds-spinner_container').empty();
 
       let selectTypeSignalement = $('#type_signalement').empty();
       selectTypeSignalement.append($(`<option value="">${response.signalement[0].type_signalement}</option>`));
@@ -515,6 +562,7 @@
       }
       $('#observation')[0].value = response.signalement[0].observations;
       $('#btnReaffecter')[0].value = signalement_id;
+      $('#modal-signalement-content .slds-spinner_container').remove();
     },
     fetchTypeSignalements: function() {
       let self = this;
@@ -547,6 +595,7 @@
       `)
       );
       $('#select-type-signalement').change(function() {
+        $('#modal-signalement-content .slds-has-error').removeClass('slds-has-error');
         self.handleClickChooseTypeSignalement();
       });
     },
@@ -561,6 +610,7 @@
       `)
       );
       $('#select-type-lieu').change(function() {
+        $('#modal-signalement-content .slds-has-error').removeClass('slds-has-error');
         const niveauOK = $(this)
           .find(':selected')
           .data('niveau');
@@ -579,6 +629,7 @@
       `)
       );
       $('#select-categorie').change(function() {
+        $('#modal-signalement-content .slds-has-error').removeClass('slds-has-error');
         self.handleClickChooseCategorie();
       });
     },
@@ -976,7 +1027,7 @@
           <ul class="slds-list_dotted" id = "parent-list">
             ${mission.properties.signalement
               .map(s => {
-                return `<li id='signalement_list' value=${s.id}>${moment(s.date).format('DD/MM/YYYY')} : ${s.libelle}</li>`;
+                return `<li id='signalement_list_${s.id}' value=${s.id}>${moment(s.date).format('DD/MM/YYYY')} : ${s.libelle}</li>`;
               })
               .join('')}
           </ul>
@@ -1013,6 +1064,14 @@
       TODO: refactor
       $('#signalement_list li').click(function(e) { console.log($(this).val()); }) 
       */
+      $('#signalements li')
+        .off()
+        .click(function(e) {
+          self.openReaffectationModal();
+          self.fetchFormSignalements($(this).val());
+        });
+
+      /*
       if (typeof $('#signalement_list') !== 'undefined') {
         var list_signalements = document.getElementById('signalements').getElementsByTagName('li');
         for (var i = 0; i < list_signalements.length; i++) {
@@ -1022,6 +1081,7 @@
           };
         }
       }
+      */
     }
   };
   GGO.MissionManagerSingleton = (function() {
