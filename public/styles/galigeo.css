@@ -100,13 +100,28 @@ body {
 }
 
 .snapshotdiv {
-  line-height: 80px;
+  line-height: 40px;
   border: 1px solid #73cfff;
   background-color: #EFEFEF;
+  /*
   width: 84px;
   height: 84px;
+  max-width: 84px;
+  max-height: 84px;
+  */
   text-align: center;
 }
+
+.snapshotImgDiv {
+  /*
+  width: 84px;
+  height: 84px;
+  max-width: 84px;
+  max-height: 84px;
+  */
+  text-align: center;
+}
+
 
 #mission-card-Container .slds-card__header {
   margin-bottom: 0px;

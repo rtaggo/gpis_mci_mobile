@@ -164,7 +164,7 @@
                     <label class="slds-form-element__label">Image</label>
                     <div class="slds-form-element__control">
                       <div class="snapshotdiv">
-                        <svg class="slds-icon slds-icon_large slds-icon-text-default slds-shrink-none" aria-hidden="true"><use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#photo"></use></svg>
+                        <svg class="slds-icon slds-icon_large slds-icon-text-default slds-shrink-none slds-m-around_small" aria-hidden="true"><use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#photo"></use></svg>
                       </div>
                       <input id="snapshot_input" type="file" accept="image/*" style="display:none;">
                     </div>
@@ -258,13 +258,23 @@
       let self = this;
       let reader = new FileReader();
       let elPreview = $('.snapshotdiv').empty();
+      let removeImgLink = $('<a href="">Supprimer</a>');
+      removeImgLink.click(function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        self._snapshotBase64 = null;
+        $('.snapshotdiv')
+          .empty()
+          .append(`<svg class="slds-icon slds-icon_large slds-icon-text-default slds-shrink-none slds-m-around_small" aria-hidden="true"><use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#photo"></use></svg>`);
+      });
+      elPreview.append(removeImgLink);
       reader.addEventListener('load', function() {
         var image = new Image();
 
         image.addEventListener('load', function() {
           var imageInfo = file.name + ' ' + image.width + '×' + image.height + ' ' + file.type + ' ' + Math.round(file.size / 1024) + 'KB';
           // Show image
-          elPreview.append(this);
+          elPreview.prepend($('<div class="snapshotImgDiv slds-p-around_small"></div>').append(this));
 
           if (self._useBlob) {
             // Free some memory
@@ -298,7 +308,6 @@
                         <select class="slds-select" id="type_signalement" required="" disabled></select>
                       </div>
                     </div>
-                    <div class="slds-form-element__help" id="signalement-input-type_error">Champ obligatoire</div>
                   </div>
                 </div>
               </div>          
@@ -364,19 +373,20 @@
               </div>
               <div class="slds-form__row ">
                 <div class="slds-form__item" role="listitem">
-                  <div class="slds-form-element slds-form-element_stacked slds-is-editing">
-                    <label class="slds-form-element__label" for="signalement-input-niveau">Image</label>
+                  <div class="slds-form-element slds-form-element_stacked">
+                    <label class="slds-form-element__label">Image</label>
                     <div class="slds-form-element__control">
                       <div class="snapshotdiv">
-                        <svg class="slds-icon slds-icon_large slds-icon-text-default slds-shrink-none" aria-hidden="true"><use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#photo"></use></svg>
+                        <svg class="slds-icon slds-icon_large slds-icon-text-default slds-shrink-none slds-m-around_small" aria-hidden="true"><use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#photo"></use></svg>
                       </div>
+                      <input id="snapshot_input" type="file" accept="image/*" style="display:none;">
                     </div>
                   </div>
                 </div>
               </div>
               <div class="slds-form__row">
                 <div class="slds-form__item" role="listitem">
-                  <div class="slds-form-element slds-form-element_stacked slds-is-editing slds-form-element_1-col">
+                  <div class="slds-form-element slds-form-element_stacked slds-form-element_readonly slds-form-element_1-col">
                     <label class="slds-form-element__label" for="signalement-input-observation">Observations / Caractéristique</label>
                     <div class="slds-form-element__control">
                       <textarea id="observation" class="slds-textarea" disabled></textarea>
@@ -403,9 +413,38 @@
       </section>
       `;
 
+      let theModal = $(modal);
+      theModal.find('.snapshotdiv').click(function(e) {
+        $('#snapshot_input').trigger('click');
+      });
+
+      theModal.find('input[type="file"]').on('change', function(e) {
+        console.log('input file changed');
+        var files = this.files,
+          errors = '';
+
+        if (!files) {
+          errors += 'File upload not supported by your browser.';
+        }
+
+        if (files && files[0]) {
+          for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            if (/\.(png|jpeg|jpg|gif)$/i.test(file.name)) {
+              self.readImage(file);
+            } else {
+              errors += file.name + ' Unsupported Image extension\n';
+            }
+          }
+        }
+        // Handle errors
+        if (errors) {
+          alert(errors);
+        }
+      });
       $('body').append(
         $('<div id="reaffectation-signalement-modal" class="ggoslds"></div>')
-          .append($(modal))
+          .append(theModal)
           .append($('<div class="slds-backdrop slds-backdrop_open"></div>'))
       );
       $('#btnReaffectationCancel').click(function(e) {
@@ -426,6 +465,13 @@
           .addClass('slds-has-error');
         $(`#${errorHelperId}`).removeClass('slds-hide');
         allGood = false;
+      } else {
+        $(`#${containerId}`)
+          .parent()
+          .parent()
+          .parent()
+          .removeClass('slds-has-error');
+        $(`#${errorHelperId}`).addClass('slds-hide');
       }
       return allGood;
     },
@@ -559,7 +605,8 @@
     validateReacffectation: function() {
       let self = this;
       let formReaffectation = {
-        signalement_id: $('#btnReaffecter')[0].value
+        signalement_id: $('#btnReaffecter').attr('data-signalementid'), // $('#btnReaffecter')[0].value,
+        photo: this._snapshotBase64 || null
       };
 
       const reaffecctationUrl = `${this._options.baseRESTServicesURL}/reaffectation.php`;
@@ -629,8 +676,12 @@
         $('#parent_niveau').removeClass('slds-hide');
         $('#niveau')[0].value = response.signalement[0].niveau;
       }
-      $('#observation')[0].value = response.signalement[0].observations;
-      $('#btnReaffecter')[0].value = signalement_id;
+      //$('#observation')[0].value = response.signalement[0].observations;
+      // $('#btnReaffecter')[0].value = signalement_id;
+
+      $('#observation').val(response.signalement[0].observations);
+      $('#btnReaffecter').attr('data-signalementid', signalement_id);
+
       $('#modal-signalement-content .slds-spinner_container').remove();
     },
     fetchTypeSignalements: function() {
@@ -966,7 +1017,7 @@
         <div class="slds-form__row">
           <div class="slds-form__item" role="listitem">
             <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
-              <span class="slds-form-element__label">Type de lieu secondaire/span>
+              <span class="slds-form-element__label">Type de lieu secondaire</span>
               <div class="slds-form-element__control">
                 <div class="slds-form-element__static">
                   ${mission.properties.type_lieu_sec || ''}
@@ -1048,7 +1099,7 @@
             </div>
           </div>
         </div>
-    		<div class="slds-form__row slds-hide"">
+       <div class="slds-form__row slds-hide"">
           <div class="slds-form__item" role="listitem">
             <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
               <div class="slds-form-element__control">
