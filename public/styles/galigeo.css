@@ -122,6 +122,9 @@ body {
   text-align: center;
 }
 
+.snapshotImgDiv img {
+  max-height: 200px;
+}
 
 #mission-card-Container .slds-card__header {
   margin-bottom: 0px;
