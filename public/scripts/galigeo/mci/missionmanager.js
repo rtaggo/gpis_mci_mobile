@@ -91,7 +91,7 @@
                         <select class="slds-select" id="select-type-signalement" required=""></select>
                       </div>
                     </div>
-                    <div class="slds-form-element__help" id="select-type-signalement_error">Champ obligatoire</div>
+                    <div class="slds-form-element__help slds-hide" id="select-type-signalement_error">Champ obligatoire</div>
                   </div>
                 </div>
               </div>
@@ -104,7 +104,7 @@
                         <select class="slds-select" id="select-categorie" required=""></select>
                       </div>
                     </div>
-                    <div class="slds-form-element__help" id="select-categorie_error">Champ obligatoire</div>
+                    <div class="slds-form-element__help slds-hide" id="select-categorie_error">Champ obligatoire</div>
                   </div>
                 </div>
               </div>
@@ -117,7 +117,7 @@
                         <select class="slds-select" id="select-sous-categorie" required=""></select>
                       </div>
                     </div>
-                    <div class="slds-form-element__help" id="select-sous-categorie_error">Champ obligatoire</div>
+                    <div class="slds-form-element__help slds-hide" id="select-sous-categorie_error">Champ obligatoire</div>
                   </div>
                 </div>
               </div>
@@ -130,7 +130,7 @@
                         <select class="slds-select" id="select-categorie2s" required=""></select>
                       </div>
                     </div>
-                    <div class="slds-form-element__help" id="select-categorie2s_error">Champ obligatoire</div>
+                    <div class="slds-form-element__help slds-hide" id="select-categorie2s_error">Champ obligatoire</div>
                   </div>
                 </div>
               </div>
@@ -143,7 +143,7 @@
                         <select class="slds-select" id="select-type-lieu" required=""></select>
                       </div>
                     </div>
-                    <div class="slds-form-element__help" id="select-type-lieu_error">Champ obligatoire</div>
+                    <div class="slds-form-element__help slds-hide" id="select-type-lieu_error">Champ obligatoire</div>
                   </div>
                 </div>
               </div>
@@ -154,7 +154,7 @@
                     <div class="slds-form-element__control" style="width:20%">
                       <select class="slds-select" id="select-niveau" required=""></select>
                     </div>
-                    <div class="slds-form-element__help" id="select-niveau_error">Champ obligatoire</div>
+                    <div class="slds-form-element__help slds-hide" id="select-niveau_error">Champ obligatoire</div>
                   </div>
                 </div>
               </div>
@@ -194,6 +194,23 @@
       `;
 
       let theModal = $(modal);
+
+      theModal.find('#select-type-signalement').change(function() {
+        $('#modal-signalement-content .slds-form-element__help').addClass('slds-hide');
+        $('#modal-signalement-content .slds-has-error').removeClass('slds-has-error');
+
+        self.handleClickChooseTypeSignalement();
+      });
+
+      theModal.find('#select-type-lieu').change(function() {
+        $('#modal-signalement-content .slds-form-element__help').addClass('slds-hide');
+        $('#modal-signalement-content .slds-has-error').removeClass('slds-has-error');
+        const niveauOK = $(this)
+          .find(':selected')
+          .data('niveau');
+        self.handleClickChooseTypeLieu(niveauOK);
+      });
+
       theModal.find('.snapshotdiv').click(function(e) {
         $('#snapshot_input').trigger('click');
       });
@@ -399,6 +416,19 @@
         $('#reaffectation-signalement-modal').remove();
       });
     },
+    validateSignalementInput: function(value2Check, containerId, errorHelperId) {
+      let allGood = true;
+      if (value2Check === '') {
+        $(`#${containerId}`)
+          .parent()
+          .parent()
+          .parent()
+          .addClass('slds-has-error');
+        $(`#${errorHelperId}`).removeClass('slds-hide');
+        allGood = false;
+      }
+      return allGood;
+    },
     checkBeforeSaveSignalement: function() {
       let self = this;
       let allGood = false;
@@ -411,6 +441,20 @@
       const niveauVal = $('#select-niveau').val();
       const observationVal = $('#signalement-input-observation').val();
 
+      allGood = this.validateSignalementInput(type_signalement_id, 'select-type-signalement', 'select-type-signalement_error') && allGood;
+      allGood = this.validateSignalementInput(categorie_id, 'select-categorie', 'select-categorie_error') && allGood;
+      if (!$('#parent_categorie2s').hasClass('slds-hide')) {
+        allGood = this.validateSignalementInput(categorie_2s_id, 'select-categorie2s', 'select-categorie2s_error') && allGood;
+      }
+      if (!$('#parent_sous_categorie').hasClass('slds-hide')) {
+        allGood = this.validateSignalementInput(sous_categorie_id, 'select-sous-categorie', 'select-sous-categorie_error') && allGood;
+      }
+      allGood = this.validateSignalementInput(type_lieu_id, 'select-type-lieu', 'select-type-lieu_error') && allGood;
+      if (!$('#parent_niveau').hasClass('slds-hide')) {
+        allGood = this.validateSignalementInput(niveauVal, 'select-niveau', 'select-niveau_error') && allGood;
+      }
+
+      /*
       if (type_signalement_id === '') {
         $('#select-type-signalement')
           .parent()
@@ -428,6 +472,7 @@
           .addClass('slds-has-error');
         allGood = false;
       }
+      */
       let formSignalement = {
         mission_id: self._currentMission.features[0].properties.mission_id,
         type_signalement: type_signalement_id,
@@ -439,9 +484,33 @@
         observation: observationVal,
         photo: this._snapshotBase64 || null
       };
-      this.saveSignalement();
+      if (allGood) {
+        this.saveSignalement(formSignalement);
+      }
     },
-    saveSignalement: function() {
+    saveSignalement: function(formSignalement) {
+      let self = this;
+      const saveSignalementUrl = `${this._options.baseRESTServicesURL}/signalement.php`;
+      $.ajax({
+        type: 'POST',
+        url: saveSignalementUrl,
+        data: JSON.stringify(formSignalement),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function(response) {
+          console.log(`Response`, response);
+          self._snapshotBase64 = null;
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`Request aborted`);
+          } else {
+            console.error(`Error request: ${textStatus}`, errorThrown);
+          }
+        }
+      });
+    },
+    saveSignalement_old: function() {
       let self = this;
 
       const id_mission = self._currentMission.features[0].properties.mission_id; //mission[0].innerHTML;
@@ -594,10 +663,12 @@
         ${response.type_signalement.map(p => `<option value="${p.id}" >${p.libelle}</option>`).join('')}
       `)
       );
+      /*
       $('#select-type-signalement').change(function() {
         $('#modal-signalement-content .slds-has-error').removeClass('slds-has-error');
         self.handleClickChooseTypeSignalement();
       });
+      */
     },
     handleTypeLieuFetched: function(response) {
       console.log(`>> handleTypeLieuFetched`, response);
@@ -609,6 +680,7 @@
         ${response.type_lieu.map(p => `<option value="${p.id}" data-niveau="${p.niveau}" >${p.libelle}</option>`).join('')}
       `)
       );
+      /*
       $('#select-type-lieu').change(function() {
         $('#modal-signalement-content .slds-has-error').removeClass('slds-has-error');
         const niveauOK = $(this)
@@ -616,6 +688,7 @@
           .data('niveau');
         self.handleClickChooseTypeLieu(niveauOK);
       });
+      */
     },
     handleCategorieFetched: function(response) {
       console.log(`>> handleCategorieFetched`, response);
@@ -667,11 +740,11 @@
       let catgorieId = selectCtnr.val();
       let selectedOption = $(selectCtnr[0].selectedOptions[0]);
 
-      this._selectedCategorie = {
+      let selectedCategorie = {
         id: catgorieId
       };
-      console.log(this._selectedCategorie);
-      this.fetchSousCategorie(this._selectedCategorie);
+      console.log(selectedCategorie);
+      this.fetchSousCategorie(selectedCategorie);
     },
     handleClickChooseTypeSignalement: function() {
       const selectCtnr = $('#select-type-signalement');
@@ -682,11 +755,11 @@
       typeSignalementId = parseInt(typeSignalementId);
       let selectedOption = $(selectCtnr[0].selectedOptions[0]);
 
-      this._selectedTypeSignalement = {
+      let selectedTypeSignalement = {
         id: typeSignalementId
       };
-      console.log(this._selectedTypeSignalement);
-      this.fetchCategorie(this._selectedTypeSignalement);
+      console.log(selectedTypeSignalement);
+      this.fetchCategorie(selectedTypeSignalement);
     },
     handleClickChooseTypeLieu: function(niveauOK) {
       const selectCtnr = $('#select-type-lieu');
@@ -697,7 +770,7 @@
       typeLieuId = parseInt(typeLieuId);
       let selectedOption = $(selectCtnr[0].selectedOptions[0]);
 
-      this._selectedTypeLieu = {
+      let selectedTypeLieu = {
         id: typeLieuId
       };
       if (niveauOK) {
