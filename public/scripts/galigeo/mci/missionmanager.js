@@ -752,10 +752,12 @@
         ${response.categorie.map(p => `<option value="${p.id}" >${p.libelle}</option>`).join('')}
       `)
       );
-      $('#select-categorie').change(function() {
-        $('#modal-signalement-content .slds-has-error').removeClass('slds-has-error');
-        self.handleClickChooseCategorie();
-      });
+      $('#select-categorie')
+        .off()
+        .change(function() {
+          $('#modal-signalement-content .slds-has-error').removeClass('slds-has-error');
+          self.handleClickChooseCategorie();
+        });
     },
     handleSousCategorieFetched: function(response) {
       console.log(`>> handleSousCategorieFetched`, response);
