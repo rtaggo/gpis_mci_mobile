@@ -31,12 +31,11 @@ router.post('/connexion.php', (req, res, next) => {
   });
 });
 
-
 router.post('/signalement.php', (req, res, next) => {
   console.log(`[POST] /signalement ${JSON.stringify(req.body)}`);
   const mcimodule = getMCIModule();
   mcimodule.getSignalementPost(req).then(resp => {
-	  //console.log(resp)
+    //console.log(resp)
     if (resp.code !== 200) {
       res.status(500).json(resp);
     } else {
@@ -49,7 +48,7 @@ router.post('/reaffectation.php', (req, res, next) => {
   console.log(`[POST] /reaffectation ${JSON.stringify(req.body)}`);
   const mcimodule = getMCIModule();
   mcimodule.getReaffectationPost(req).then(resp => {
-	  //console.log(resp)
+    //console.log(resp)
     if (resp.code !== 200) {
       res.status(500).json(resp);
     } else {
@@ -130,6 +129,28 @@ router.get('/signalement.php', (req, res, next) => {
   });
 });
 
+router.post('/maj_mission.php', (req, res, next) => {
+  console.log(`[POST] /maj_mission ${JSON.stringify(req.body)}`);
+  const mcimodule = getMCIModule();
+  mcimodule.postMaJMission(req).then(resp => {
+    //console.log(resp)
+    if (resp.code !== 200) {
+      res.status(500).json(resp);
+    } else {
+      res.status(200).json(resp);
+    }
+  });
+});
+
+router.get('/statut_mission.php', (req, res, next) => {
+  console.log(`/[MCI_REST_API]/statut_mission.php ${JSON.stringify(req.query)}`);
+  const mcimodule = getMCIModule();
+  mcimodule.getStatutMission(req.query.patrouille, req.query.mission).then(signalementResponse => {
+    res.header('Content-Type', 'application/json');
+    res.json(signalementResponse);
+  });
+});
+
 router.get('/reaffectation.php', (req, res, next) => {
   console.log(`/[MCI_REST_API]/reaffectation.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
@@ -138,7 +159,7 @@ router.get('/reaffectation.php', (req, res, next) => {
     res.json(reaffectationResponse);
   });
 });
-  
+
 /**
  * Errors on "/elephantbleu/*" routes.
  */

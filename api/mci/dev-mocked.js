@@ -135,7 +135,7 @@ const _getMission = async patrouilleId => {
   let mission = missions[idxMission];
   */
   //const mission_file = './data/mock/mission.json';
-  //idxMission = 1;
+  idxMission = 1;
   const mission_file = `./data/mock/${missionsFilesMocked[idxMission]}`;
   console.log(`Loading mocked mission file ${mission_file}`);
   idxMission = ++idxMission % missionsFilesMocked.length;

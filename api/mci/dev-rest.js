@@ -20,7 +20,7 @@ const doAsyncGET = async url => {
 const doAsyncPOST = async options => {
   try {
     let res = await rp(options);
-   // console.log(res);
+    console.log(res);
     var jsonRes = typeof res === 'string' ? JSON.parse(res) : res;
     jsonRes.code = 200;
     return jsonRes;
@@ -114,52 +114,77 @@ const _getNeighborhood = async (patrouilleId, sssecteurs) => {
   return neighborhoodResponse;
 };
 
-const _getSignalement= async (type_signalement, categorie) => {
+const _getSignalement = async (type_signalement, categorie) => {
   console.log(`[dev-rest] _getSignalement`);
   let signalementUrl = `${require('../../config').get('BACKEND_URL')}/signalement.php?type_signalement=${type_signalement}&categorie=${categorie}`;
   let signalementResponse = await doAsyncGET(signalementUrl);
   return signalementResponse;
 };
 
-const _getSignalementPost= async (formSignalement) => {
+const _getSignalementPost = async formSignalement => {
   console.log(`[dev-rest] _getSignalementPost`);
   let signalementUrlPost = `${require('../../config').get('BACKEND_URL')}/signalement.php`;
-  
+
   let options = {
     method: 'POST',
     uri: signalementUrlPost,
     body: formSignalement.body,
     json: true // Automatically stringifies the body to JSON
   };
-  
+
   let signalementResponse = await doAsyncPOST(options);
   console.log('Resp: ' + signalementResponse);
- 
+
   return signalementResponse;
 };
 
-const _getReaffectationSignalement= async (signalement_id, photo) => {
+const _getReaffectationSignalement = async (signalement_id, photo) => {
   console.log(`[dev-rest] _getSignalement`);
   let reaffectationUrl = `${require('../../config').get('BACKEND_URL')}/reaffectation.php?signalement_id=${signalement_id}&photo=${photo}`;
   let reaffectationResponse = await doAsyncGET(reaffectationUrl);
   return reaffectationResponse;
 };
 
-const _getReaffectationPost= async (formreaffectation) => {
+const _getReaffectationPost = async formreaffectation => {
   console.log(`[dev-rest] _getReaffectationPost`);
   let reaffectationUrlPost = `${require('../../config').get('BACKEND_URL')}/reaffectation.php`;
-  
+
   let options = {
     method: 'POST',
     uri: reaffectationUrlPost,
     body: formreaffectation.body,
     json: true // Automatically stringifies the body to JSON
   };
-  
+
   let reaffectationResponse = await doAsyncPOST(options);
   console.log('Resp: ' + reaffectationResponse);
- 
+
   return reaffectationResponse;
+};
+
+const _postMaJMission = async missionStatus => {
+  console.log(`[dev-rest] _postMaJMission`);
+  let majMissionUrlPost = `${require('../../config').get('BACKEND_URL')}/maj_mission.php`;
+
+  let options = {
+    method: 'POST',
+    uri: majMissionUrlPost,
+    body: missionStatus.body,
+    json: true // Automatically stringifies the body to JSON
+  };
+
+  let majMissionnResponse = await doAsyncPOST(options);
+  console.log('Resp: ' + majMissionnResponse);
+
+  return majMissionnResponse;
+};
+
+// getStatutMission
+const _getStatutMission = async (patrouilleId, missionId) => {
+  console.log(`[dev-rest] _getSignalement`);
+  let statutMissionUrl = `${require('../../config').get('BACKEND_URL')}/statut_mission.php?patrouille=${patrouilleId}&mission=${missionId}`;
+  let statutMissionResponse = await doAsyncGET(statutMissionUrl);
+  return statutMissionResponse;
 };
 
 /* list to exports */
@@ -175,5 +200,7 @@ module.exports = {
   getSignalement: _getSignalement,
   getSignalementPost: _getSignalementPost,
   getReaffectationSignalement: _getReaffectationSignalement,
-  getReaffectationPost: _getReaffectationPost
+  getReaffectationPost: _getReaffectationPost,
+  postMaJMission: _postMaJMission,
+  getStatutMission: _getStatutMission
 };
