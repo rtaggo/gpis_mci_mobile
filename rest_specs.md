@@ -160,6 +160,17 @@
 }
 ```
 
+## Statut Mission
+`GET <BASE_SERVER_URL>/statut_mission.php?mission=<id mission>&patrouille=<id patrouille>`
+
+**Request response**
+```json
+{
+  "code": "200 | 300 (200: ok, 300:ko)",
+  "statut": "<message>"
+}
+```
+
 ## signalement.php
 `GET <BASE_SERVER_URL>/signalement.php`
 
