@@ -108,7 +108,7 @@
           .featureLayer()
           .addTo(this._map)
           .setGeoJSON(response.sous_secteur);
-        this._map.fitBounds(this._secteurLayer.getBounds());
+        //this._map.fitBounds(this._secteurLayer.getBounds());
         zoomDone = true;
       }
       if (typeof response.mission_ronde !== 'undefined') {
@@ -122,7 +122,7 @@
           .on('layeradd', this.onMissionsAdded.bind(this))
           .setGeoJSON(response.mission_ronde);
         if (!zoomDone) {
-          this._map.fitBounds(this._lastMissionsLayer.getBounds());
+          //this._map.fitBounds(this._lastMissionsLayer.getBounds());
         }
       }
     },
