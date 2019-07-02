@@ -559,7 +559,7 @@
     },
     checkBeforeSaveSignalement: function() {
       let self = this;
-      let allGood = false;
+      let allGood = true;
 
       const type_signalement_id = $('#select-type-signalement').val();
       const type_lieu_id = $('#select-type-lieu').val();
@@ -610,7 +610,7 @@
         sous_categorie: sous_categorie_id,
         niveau: niveauVal,
         observation: observationVal,
-        photo: this._snapshotBase64 || null
+        photo: this._snapshotBase64 || ''
       };
       if (allGood) {
         this.saveSignalement(formSignalement);
@@ -628,6 +628,7 @@
         success: function(response) {
           console.log(`Response`, response);
           self._snapshotBase64 = null;
+          $('#signalement-modal').remove();
         },
         error: function(jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
@@ -635,6 +636,7 @@
           } else {
             console.error(`Error request: ${textStatus}`, errorThrown);
           }
+          $('#signalement-modal').remove();
         }
       });
     },
@@ -659,7 +661,7 @@
         sous_categorie: sous_categorie_id,
         niveau: niveauVal,
         observation: observationVal,
-        photo: this._snapshotBase64 || null
+        photo: this._snapshotBase64 || ''
       };
       console.log(formSignalement);
       const saveSignalementUrl = `${this._options.baseRESTServicesURL}/signalement.php`;
@@ -701,6 +703,7 @@
         dataType: 'json',
         success: function(response) {
           console.log(`Response`, response);
+          $('#reaffectation-signalement-modal').remove();
         },
         error: function(jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
@@ -708,6 +711,7 @@
           } else {
             console.error(`Error request: ${textStatus}`, errorThrown);
           }
+          $('#reaffectation-signalement-modal').remove();
         }
       });
     },
@@ -1039,15 +1043,20 @@
     },
     handleMissionResponseOK: function(response) {
       if (response.features.length > 0) {
-        this._currentMission = {
-          type: 'FeatureCollection',
-          features: response.features
-        };
-        this.renderMissionViewMode();
-        $('#waiting4Mission').addClass('slds-hide');
-        $('#missionContent').removeClass('slds-hide');
-        $('#missionFooter').removeClass('slds-hide');
-        this.checkMissionStatut();
+        let theMission = response.features[0];
+        if (theMission.properties.statut !== 'Fin') {
+          this._currentMission = {
+            type: 'FeatureCollection',
+            features: response.features
+          };
+          this.renderMissionViewMode();
+          $('#waiting4Mission').addClass('slds-hide');
+          $('#missionContent').removeClass('slds-hide');
+          $('#missionFooter').removeClass('slds-hide');
+          this.checkMissionStatut();
+        } else {
+          this.checkMission();
+        }
       } else {
         console.warn(`TODO: treat case of no mission`);
         $('#waiting4Mission h2').text(response.message);
