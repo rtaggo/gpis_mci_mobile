@@ -1,0 +1,5 @@
+{
+  "MCI_MODE"  : "dev-rest",
+  "BACKEND_URL" : "http://192.168.10.52:8081/MCI_mobile/fichierPHP",
+  "GEOSERVICE" : "openrouteservice"
+}

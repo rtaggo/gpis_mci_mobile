@@ -18,7 +18,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/connexion.php', (req, res, next) => {
-  console.log(`[POST] /login ${JSON.stringify(req.body)}`);
+  console.log(`[MCI_REST_API][POST] /login ${JSON.stringify(req.body)}`);
   const mcimodule = getMCIModule();
   mcimodule.login(req.body.login, req.body.password).then(loginResponse => {
     if (loginResponse.code !== 200) {
@@ -32,7 +32,7 @@ router.post('/connexion.php', (req, res, next) => {
 });
 
 router.post('/signalement.php', (req, res, next) => {
-  console.log(`[POST] /signalement ${JSON.stringify(req.body)}`);
+  console.log(`[MCI_REST_API][POST] /signalement`);
   const mcimodule = getMCIModule();
   mcimodule.getSignalementPost(req).then(resp => {
     //console.log(resp)
@@ -45,7 +45,7 @@ router.post('/signalement.php', (req, res, next) => {
 });
 
 router.post('/reaffectation.php', (req, res, next) => {
-  console.log(`[POST] /reaffectation ${JSON.stringify(req.body)}`);
+  console.log(`[MCI_REST_API][POST] /reaffectation ${JSON.stringify(req.body)}`);
   const mcimodule = getMCIModule();
   mcimodule.getReaffectationPost(req).then(resp => {
     //console.log(resp)
@@ -58,7 +58,7 @@ router.post('/reaffectation.php', (req, res, next) => {
 });
 
 router.get('/patrouilles.php', (req, res, next) => {
-  console.log(`[MCI API] /patrouilles.php`);
+  console.log(`[MCI_REST_API][GET] /patrouilles.php`);
   const mcimodule = getMCIModule();
   mcimodule.getPatrouilles().then(patrouilles => {
     res.header('Content-Type', 'application/json');
@@ -67,7 +67,7 @@ router.get('/patrouilles.php', (req, res, next) => {
 });
 
 router.get('/liberer_patrouille.php', (req, res, next) => {
-  console.log(`[MCI API] /liberer_patrouille.php`);
+  console.log(`[MCI_REST_API][GET] /liberer_patrouille.php`);
   const mcimodule = getMCIModule();
   mcimodule.libererPatrouille(req.query.patrouille).then(resp => {
     res.header('Content-Type', 'application/json');
@@ -76,7 +76,7 @@ router.get('/liberer_patrouille.php', (req, res, next) => {
 });
 
 router.get('/sous_secteurs.php', (req, res, next) => {
-  console.log(`[MCI API] /sous_secteurs.php`);
+  console.log(`[MCI API][GET] /sous_secteurs.php`);
   const mcimodule = getMCIModule();
   mcimodule.getSousSecteurs(req.query.patrouille).then(sssecteurs => {
     res.header('Content-Type', 'application/json');
@@ -85,7 +85,7 @@ router.get('/sous_secteurs.php', (req, res, next) => {
 });
 
 router.get('/secteurs.php', (req, res, next) => {
-  console.log(`/[MCI_REST_API]/secteurs`);
+  console.log(`[MCI_REST_API][GET] /secteurs`);
   const mcimodule = getMCIModule();
   mcimodule.getSecteurs().then(secteurs => {
     res.header('Content-Type', 'application/json');
@@ -94,7 +94,7 @@ router.get('/secteurs.php', (req, res, next) => {
 });
 
 router.get('/patrimoine_sous_secteur.php', (req, res, next) => {
-  console.log(`/[MCI_REST_API]/patrimoine_sous_secteur.php ${JSON.stringify(req.query)}`);
+  console.log(`[MCI_REST_API][GET] /patrimoine_sous_secteur.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
   mcimodule.getPatrimoineSousSecteur(req.query.patrouille, req.query.sssecteurs).then(patrimoineResponse => {
     res.header('Content-Type', 'application/json');
@@ -103,7 +103,7 @@ router.get('/patrimoine_sous_secteur.php', (req, res, next) => {
 });
 
 router.get('/mission_sous_secteur.php', (req, res, next) => {
-  console.log(`/[MCI_REST_API]/mission_sous_secteur.php ${JSON.stringify(req.query)}`);
+  console.log(`[MCI_REST_API][GET] /mission_sous_secteur.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
   mcimodule.getMission(req.query.patrouille).then(missionResponse => {
     res.header('Content-Type', 'application/json');
@@ -112,7 +112,7 @@ router.get('/mission_sous_secteur.php', (req, res, next) => {
 });
 
 router.get('/voisinage.php', (req, res, next) => {
-  console.log(`/[MCI_REST_API]/voisinage.php ${JSON.stringify(req.query)}`);
+  console.log(`[MCI_REST_API][GET] /voisinage.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
   mcimodule.getNeighborhood(req.query.patrouille, req.query.sssecteurs).then(voisinageResponse => {
     res.header('Content-Type', 'application/json');
@@ -121,7 +121,7 @@ router.get('/voisinage.php', (req, res, next) => {
 });
 
 router.get('/signalement.php', (req, res, next) => {
-  console.log(`/[MCI_REST_API]/signalement.php ${JSON.stringify(req.query)}`);
+  console.log(`[MCI_REST_API][GET] /signalement.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
   mcimodule.getSignalement(req.query.type_signalement, req.query.categorie).then(signalementResponse => {
     res.header('Content-Type', 'application/json');
@@ -130,7 +130,7 @@ router.get('/signalement.php', (req, res, next) => {
 });
 
 router.post('/maj_mission.php', (req, res, next) => {
-  console.log(`[POST] /maj_mission ${JSON.stringify(req.body)}`);
+  console.log(`[MCI_REST_API][POST] /maj_mission ${JSON.stringify(req.body)}`);
   const mcimodule = getMCIModule();
   mcimodule.postMaJMission(req).then(resp => {
     //console.log(resp)
@@ -143,7 +143,7 @@ router.post('/maj_mission.php', (req, res, next) => {
 });
 
 router.get('/statut_mission.php', (req, res, next) => {
-  console.log(`/[MCI_REST_API]/statut_mission.php ${JSON.stringify(req.query)}`);
+  console.log(`[MCI_REST_API][GET] /statut_mission.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
   mcimodule.getStatutMission(req.query.patrouille, req.query.mission).then(signalementResponse => {
     res.header('Content-Type', 'application/json');
@@ -152,7 +152,7 @@ router.get('/statut_mission.php', (req, res, next) => {
 });
 
 router.get('/reaffectation.php', (req, res, next) => {
-  console.log(`/[MCI_REST_API]/reaffectation.php ${JSON.stringify(req.query)}`);
+  console.log(`[MCI_REST_API][GET] /reaffectation.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
   mcimodule.getReaffectationSignalement(req.query.signalement_id, req.query.photo).then(reaffectationResponse => {
     res.header('Content-Type', 'application/json');

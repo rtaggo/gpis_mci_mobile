@@ -67,18 +67,21 @@ const _login = async (loginInput, passwordInput) => {
 };
 
 const _getPatrouilles = async () => {
+  console.log(`[dev-rest] _getPatrouilles`);
   let patrouilleUrl = `${require('../../config').get('BACKEND_URL')}/patrouilles.php`;
   let patrouilles = await doAsyncGET(patrouilleUrl);
   return patrouilles;
 };
 
 const _libererPatrouille = async patrouilleId => {
+  console.log(`[dev-rest] _libererPatrouille patrouilleId=${patrouilleId}`);
   let revokePatrouilleUrl = `${require('../../config').get('BACKEND_URL')}/liberer_patrouille.php?patrouille=${patrouilleId}`;
   let resp = await doAsyncGET(revokePatrouilleUrl);
   return resp;
 };
 
 const _getSousSecteurs = async patrouilleId => {
+  console.log(`[dev-rest] _getSousSecteurs patrouilleId=${patrouilleId}`);
   let sousSecteurseUrl = `${require('../../config').get('BACKEND_URL')}/sous_secteurs.php?patrouille=${patrouilleId}`;
   let sssecteurs = await doAsyncGET(sousSecteurseUrl);
   if (sssecteurs.code !== 200) {
@@ -90,18 +93,21 @@ const _getSousSecteurs = async patrouilleId => {
 };
 
 const _getSecteurs = async () => {
+  console.log(`[dev-rest] _getSecteurs`);
   let secteurseUrl = `${require('../../config').get('BACKEND_URL')}/secteurs.php`;
   let secteurs = await doAsyncGET(secteurseUrl);
   return secteurs;
 };
 
 const _getPatrimoineSousSecteur = async (patrouilleId, soussecteurs) => {
+  console.log(`[dev-rest] _getPatrimoineSousSecteur patrouilleId=${patrouilleId} sous-secteurs=${soussecteurs}`);
   let patrimoineUrl = `${require('../../config').get('BACKEND_URL')}/patrimoine_sous_secteur.php?patrouille=${patrouilleId}&sssecteurs=${soussecteurs}`;
   let patrimoineResponse = await doAsyncGET(patrimoineUrl);
   return patrimoineResponse;
 };
 
 const _getMission = async patrouilleId => {
+  console.log(`[dev-rest] _getNeighborhood patrouilleId=${patrouilleId}`);
   let patrimoineUrl = `${require('../../config').get('BACKEND_URL')}/mission_sous_secteur.php?patrouille=${patrouilleId}`;
   let patrimoineResponse = await doAsyncGET(patrimoineUrl);
   return patrimoineResponse;
@@ -134,12 +140,11 @@ const _getSignalementPost = async formSignalement => {
 
   let signalementResponse = await doAsyncPOST(options);
   console.log('Resp: ' + signalementResponse);
-
   return signalementResponse;
 };
 
 const _getReaffectationSignalement = async (signalement_id, photo) => {
-  console.log(`[dev-rest] _getSignalement`);
+  console.log(`[dev-rest] _getReaffectationSignalement`);
   let reaffectationUrl = `${require('../../config').get('BACKEND_URL')}/reaffectation.php?signalement_id=${signalement_id}&photo=${photo}`;
   let reaffectationResponse = await doAsyncGET(reaffectationUrl);
   return reaffectationResponse;
@@ -179,9 +184,8 @@ const _postMaJMission = async missionStatus => {
   return majMissionnResponse;
 };
 
-// getStatutMission
 const _getStatutMission = async (patrouilleId, missionId) => {
-  console.log(`[dev-rest] _getSignalement`);
+  console.log(`[dev-rest] _getStatutMission missionid=${missionId}, patrouilleId=${patrouilleId}`);
   let statutMissionUrl = `${require('../../config').get('BACKEND_URL')}/statut_mission.php?patrouille=${patrouilleId}&mission=${missionId}`;
   let statutMissionResponse = await doAsyncGET(statutMissionUrl);
   return statutMissionResponse;
