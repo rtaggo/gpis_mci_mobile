@@ -34,7 +34,7 @@
       let panelContent = $(`
       <div id="neighborhoodMapPanel" class="slds-panel slds-panel_docked slds-panel_docked-left slds-is-open" aria-hidden="false" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0;z-index:10000; overflow: hidden;">
         <div class="slds-panel__header">
-          <h2 class="slds-panel__header-title slds-text-heading_small slds-truncate">Où sont mes amis?</h2>
+          <h2 class="slds-panel__header-title slds-text-heading_small slds-truncate">Où sont mes amis ?</h2>
           <button class="slds-button slds-button_icon slds-button_icon-small slds-panel__close" title="Collapse Panel Header">
             <svg class="slds-button__icon" aria-hidden="true">
               <use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
@@ -114,7 +114,7 @@
       if (typeof response.mission_ronde !== 'undefined') {
         response.mission_ronde.features.forEach(f => {
           f.properties['marker-size'] = 'small';
-          //f.properties['description'] = `Patrouille ${f.properties.patrouille_id}`;
+          //f.properties['description'] = `${f.properties.patrouille_id}`;
         });
         this._lastMissionsLayer = L.mapbox
           .featureLayer()
