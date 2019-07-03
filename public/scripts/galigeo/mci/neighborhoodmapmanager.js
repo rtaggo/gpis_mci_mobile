@@ -129,7 +129,7 @@
     onMissionsAdded: function(e) {
       let marker = e.layer;
       marker
-        .bindTooltip(`Patrouille ${marker.feature.properties['name_patrouille']}`, {
+        .bindTooltip(`${marker.feature.properties['name_patrouille']}`, {
           offset: L.point(0, -22),
           direction: 'top',
           noHide: true,
