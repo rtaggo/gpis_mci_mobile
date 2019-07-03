@@ -689,6 +689,7 @@
     validateReacffectation: function() {
       let self = this;
       let formReaffectation = {
+        mission_id: self._currentMission.features[0].properties.mission_id,
         signalement_id: $('#btnReaffecter').attr('data-signalementid'), // $('#btnReaffecter')[0].value,
         photo: this._snapshotBase64 || null
       };

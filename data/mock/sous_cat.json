@@ -1,0 +1,18 @@
+{
+	"code" : 200,
+	"what" : "sous_categorie",
+	"sous_categorie" : [{
+			"libelle" : "Non fournis",
+			"id" : "23"
+		}, {
+			"libelle" : "Non fonctionnels",
+			"id" : "24"
+		}, {
+			"libelle" : "Perdus",
+			"id" : "25"
+		}, {
+			"libelle" : "Réservés",
+			"id" : "26"
+		}
+	]
+}
