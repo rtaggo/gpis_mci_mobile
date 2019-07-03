@@ -154,7 +154,7 @@ router.get('/statut_mission.php', (req, res, next) => {
 router.get('/reaffectation.php', (req, res, next) => {
   console.log(`[MCI_REST_API][GET] /reaffectation.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
-  mcimodule.getReaffectationSignalement(req.query.mission_id, req.query.signalement_id, req.query.photo).then(reaffectationResponse => {
+  mcimodule.getReaffectationSignalement(req.query.signalement_id).then(reaffectationResponse => {
     res.header('Content-Type', 'application/json');
     res.json(reaffectationResponse);
   });
