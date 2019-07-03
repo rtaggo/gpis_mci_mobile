@@ -143,9 +143,9 @@ const _getSignalementPost = async formSignalement => {
   return signalementResponse;
 };
 
-const _getReaffectationSignalement = async (signalement_id, photo) => {
+const _getReaffectationSignalement = async (mission_id, signalement_id, photo) => {
   console.log(`[dev-rest] _getReaffectationSignalement`);
-  let reaffectationUrl = `${require('../../config').get('BACKEND_URL')}/reaffectation.php?signalement_id=${signalement_id}&photo=${photo}`;
+  let reaffectationUrl = `${require('../../config').get('BACKEND_URL')}/reaffectation.php?mission_id=${mission_id}&signalement_id=${signalement_id}&photo=${photo}`;
   let reaffectationResponse = await doAsyncGET(reaffectationUrl);
   return reaffectationResponse;
 };
