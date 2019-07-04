@@ -114,6 +114,9 @@
           this._patrimoineLayer.setGeoJSON(patrimoineGgeoJSON);
           this._buildLegend();
           this._buildBasemapList();
+          this._patrimoineLayer.setFilter(function(f) {
+            if (f.properties.niveau_operationnel != 0) return f;
+          });
         }
 
         let sous_secteursGeoJSON = response['sous-secteur'];
@@ -171,7 +174,7 @@
       let self = this;
       let lgdContent = $(`
         <div class="legend-label"> Niveau Opérationnel (NO) </div></div>
-          <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[0]};" data-no="0"></div><div class="legend-label">0</div></div>
+          <div class="slds-p-around_xx-small disabled-legend-item"><div class="slds-badge legend-badge filtered_no" style="background-color: ${colorPalette[0]};" data-no="0"></div><div class="legend-label">0</div></div>
           <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[1]};" data-no="1"></div><div class="legend-label">1</div></div>
           <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[2]};" data-no="2"></div><div class="legend-label">2</div></div>
           <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[3]};" data-no="3"></div><div class="legend-label">3</div></div>
