@@ -146,3 +146,9 @@ body {
   line-height: 32px;
   font-size: 24px;
 }
+
+.class-tooltip{
+  font-size: 9px;
+  padding: 2px ;
+  line-height: 100%;
+}

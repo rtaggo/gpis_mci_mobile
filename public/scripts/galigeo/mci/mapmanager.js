@@ -84,12 +84,6 @@
         contextmenuWidth: 140,
         layers: [this._basemaps['streets']]
       }).setView([48.853507, 2.348015], 12);
-
-      /*  
-      var baseMaps = {"<span>World Street Map</span>": self._basemaps.streets,"World Imagery": self._basemaps.satellite};
-      $('#basemapIcon').append(baseMaps);
-      L.control.layers(baseMaps).addTo(this._map);  
-      */
     },
     fetchPatrimoine_SousSecteurs: function() {
       var self = this;
@@ -237,8 +231,8 @@
       }
       let mission = missionGeoJSON.features[0];
       let markerProperties = {
-        'marker-color': mission.statut === 'En attente' ? '#FF0000' : mission.statut === 'En direction' ? '#00FF00' : '#0000FF',
-        'marker-size': 'small'
+        'marker-color': mission.statut === 'En attente' ? '#FF0000' : mission.statut === 'En direction' ? '#00FF00' : '#0000FF' //,
+        //'marker-size': 'small'
       };
       /*
       let missionGeoJSON = turf.point(mission.coordinates);
