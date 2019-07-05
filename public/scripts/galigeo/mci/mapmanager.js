@@ -12,7 +12,7 @@
       'stroke-width': 1,
       'stroke-opacity': 1,
       fill: '#FF00FF',
-      'fill-opacity': 0.5
+      'fill-opacity': 0.2
     };
     this._basemaps = {
       streets: L.tileLayer('//server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
