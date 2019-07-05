@@ -718,7 +718,7 @@
     },
     fetchFormSignalements: function(signalement_id) {
       let self = this;
-      const reaffectationSignalementUrl = `${this._options.baseRESTServicesURL}/reaffectation.php?signalement_id=${signalement_id}&photo=`;
+      const reaffectationSignalementUrl = `${this._options.baseRESTServicesURL}/reaffectation.php?signalement_id=${signalement_id}`;
       $.ajax({
         type: 'GET',
         url: reaffectationSignalementUrl,
@@ -1315,13 +1315,14 @@
       TODO: refactor
       $('#signalement_list li').click(function(e) { console.log($(this).val()); }) 
       */
-      $('#signalements li')
-        .off()
-        .click(function(e) {
-          self.openReaffectationModal();
-          self.fetchFormSignalements($(this).val());
-        });
-
+      if (!mission.properties.renfort) {
+        $('#signalements li')
+          .off()
+          .click(function(e) {
+            self.openReaffectationModal();
+            self.fetchFormSignalements($(this).val());
+          });
+      }
       /*
       if (typeof $('#signalement_list') !== 'undefined') {
         var list_signalements = document.getElementById('signalements').getElementsByTagName('li');
