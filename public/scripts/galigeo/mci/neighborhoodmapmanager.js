@@ -133,7 +133,8 @@
           offset: L.point(0, -22),
           direction: 'top',
           noHide: true,
-          permanent: true
+          permanent: true,
+          className: 'class-tooltip'
         })
         .openTooltip();
     }

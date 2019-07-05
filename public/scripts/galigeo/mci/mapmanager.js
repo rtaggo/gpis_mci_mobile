@@ -84,12 +84,6 @@
         contextmenuWidth: 140,
         layers: [this._basemaps['streets']]
       }).setView([48.853507, 2.348015], 12);
-
-      /*  
-      var baseMaps = {"<span>World Street Map</span>": self._basemaps.streets,"World Imagery": self._basemaps.satellite};
-      $('#basemapIcon').append(baseMaps);
-      L.control.layers(baseMaps).addTo(this._map);  
-      */
     },
     fetchPatrimoine_SousSecteurs: function() {
       var self = this;
@@ -120,6 +114,9 @@
           this._patrimoineLayer.setGeoJSON(patrimoineGgeoJSON);
           this._buildLegend();
           this._buildBasemapList();
+          this._patrimoineLayer.setFilter(function(f) {
+            if (f.properties.niveau_operationnel != 0) return f;
+          });
         }
 
         let sous_secteursGeoJSON = response['sous-secteur'];
@@ -177,7 +174,7 @@
       let self = this;
       let lgdContent = $(`
         <div class="legend-label"> Niveau Opérationnel (NO) </div></div>
-          <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[0]};" data-no="0"></div><div class="legend-label">0</div></div>
+          <div class="slds-p-around_xx-small disabled-legend-item"><div class="slds-badge legend-badge filtered_no" style="background-color: ${colorPalette[0]};" data-no="0"></div><div class="legend-label">0</div></div>
           <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[1]};" data-no="1"></div><div class="legend-label">1</div></div>
           <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[2]};" data-no="2"></div><div class="legend-label">2</div></div>
           <div class="slds-p-around_xx-small"><div class="slds-badge legend-badge" style="background-color: ${colorPalette[3]};" data-no="3"></div><div class="legend-label">3</div></div>
@@ -237,8 +234,8 @@
       }
       let mission = missionGeoJSON.features[0];
       let markerProperties = {
-        'marker-color': mission.statut === 'En attente' ? '#FF0000' : mission.statut === 'En direction' ? '#00FF00' : '#0000FF',
-        'marker-size': 'small'
+        'marker-color': mission.statut === 'En attente' ? '#FF0000' : mission.statut === 'En direction' ? '#00FF00' : '#0000FF' //,
+        //'marker-size': 'small'
       };
       /*
       let missionGeoJSON = turf.point(mission.coordinates);
