@@ -123,7 +123,7 @@ router.get('/voisinage.php', (req, res, next) => {
 router.get('/signalement.php', (req, res, next) => {
   console.log(`[MCI_REST_API][GET] /signalement.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
-  mcimodule.getSignalement(req.query.type_signalement, req.query.categorie).then(signalementResponse => {
+  mcimodule.getSignalement(req.query.mission_id, req.query.type_signalement, req.query.categorie).then(signalementResponse => {
     res.header('Content-Type', 'application/json');
     res.json(signalementResponse);
   });
