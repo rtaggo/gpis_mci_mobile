@@ -146,14 +146,14 @@
             <input type="radio" id="basempradio_streets" value="streets" name="basemap" checked="" />
             <label class="slds-radio__label" for="basempradio_streets">
               <span class="slds-radio_faux"></span>
-              <span class="slds-form-element__label">World Street Map</span>
+              <span class="slds-form-element__label">Rues et avenues</span>
             </label>
           </span>
           <span class="slds-radio">
             <input type="radio" id="basemapradion_imagery" value="imagery" name="basemap" />
             <label class="slds-radio__label" for="basemapradion_imagery">
               <span class="slds-radio_faux"></span>
-              <span class="slds-form-element__label">World Imagery</span>
+              <span class="slds-form-element__label">Satellite</span>
             </label>
           </span>
         </div>
