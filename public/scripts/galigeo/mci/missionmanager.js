@@ -402,6 +402,18 @@
               <div class="slds-form__row">
                 <div class="slds-form__item" role="listitem" >
                   <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                    <label class="slds-form-element__label" for="signalement-input-adresse"><abbr class="slds-required" title="required">* </abbr>Adresse</label>
+                    <div class="slds-form-element__control" >
+                      <div class="slds-select_container">
+                        <select class="slds-select" id="adresse" required="" disabled></select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form__row">
+                <div class="slds-form__item" role="listitem" >
+                  <div class="slds-form-element slds-form-element_stacked slds-is-editing">
                     <label class="slds-form-element__label" for="signalement-input-type"><abbr class="slds-required" title="required">* </abbr>Type de signalement</label>
                     <div class="slds-form-element__control" >
                       <div class="slds-select_container">
