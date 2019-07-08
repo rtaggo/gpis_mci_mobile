@@ -107,12 +107,64 @@
           break;
         case 'charly':
         case 'alpha':
-          GGO.SessionIssuePrompt('Rôle utilisateur non disponible', `Le rôle '<b>${authResponse.role}</b>' n\'est pas disponible pour le moment.<br /> Veuillez vous reconnecter.`, $('#appContainer').empty());
+          //GGO.SessionIssuePrompt('Rôle utilisateur non disponible', `Le rôle '<b>${authResponse.role}</b>' n\'est pas disponible pour le moment.<br /> Veuillez vous reconnecter.`, $('#appContainer').empty());
+          this.fetchSecteursChefGroup();
           break;
         default:
           $('#error-message > .slds-form-element__help').text(`Le rôle ${authResponse.role} n'est pas un rôle valide.`);
           $('#error-message').removeClass('slds-hide');
       }
+    },
+    fetchSecteursChefGroup: function() {
+      let self = this;
+      const secteursUrl = `${this._options.baseRESTServicesURL}/secteurs.php`;
+      $.ajax({
+        type: 'GET',
+        url: secteursUrl,
+        success: function(response) {
+          console.log(`${secteursUrl}`, response);
+          self.handleSecteursFetched(response);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`${secteursUrl} Request aborted`);
+          } else {
+            console.error(`Error for ${secteursUrl} request: ${textStatus}`, errorThrown);
+          }
+        }
+      });
+    },
+    handleSecteursFetched: function(response) {
+      console.log(`>> handleSecteursFetched`, response);
+      if (response.code !== 200) {
+        $('#error-message > .slds-form-element__help').text(`${response.message}`);
+        $('#error-message').removeClass('slds-hide');
+
+        /*
+        $('#sous-secteurs-cancel-btn')
+          .off()
+          .click(function(e) {
+            self.handleClickCancelSubSectors();
+          })
+          .removeClass('slds-hide');
+        */
+        return;
+      }
+      switch (this._currentRole) {
+        case 'charly':
+          break;
+        case 'alpha':
+          this.validateChefGroupLoginSteps(response.secteurs);
+          break;
+        default:
+          GGO.SessionIssuePrompt('Rôle utilisateur non disponible', `Le rôle '<b>${this._currentRole}</b>' n\'est pas disponible pour le moment.<br /> Veuillez vous reconnecter.`, $('#appContainer').empty());
+      }
+    },
+    validateChefGroupLoginSteps: function(selectedSecteurs) {
+      let mapUrl = `/chefgroup.html`;
+      sessionStorage.secteurs = JSON.stringify(selectedSecteurs);
+      sessionStorage.role = this._currentRole;
+      location.href = mapUrl;
     },
     /**
      * Récupération de la liste des patrouilles

@@ -99,6 +99,13 @@ const _getSecteurs = async () => {
   return secteurs;
 };
 
+const _getPatrimoineSecteur = async secteurs => {
+  console.log(`[dev-rest] _getPatrimoineSecteur secteurs=${secteurs}`);
+  let patrimoineUrl = `${require('../../config').get('BACKEND_URL')}/patrimoine_secteur.php?secteurs=${secteurs}`;
+  let patrimoineResponse = await doAsyncGET(patrimoineUrl);
+  return patrimoineResponse;
+};
+
 const _getPatrimoineSousSecteur = async (patrouilleId, soussecteurs) => {
   console.log(`[dev-rest] _getPatrimoineSousSecteur patrouilleId=${patrouilleId} sous-secteurs=${soussecteurs}`);
   let patrimoineUrl = `${require('../../config').get('BACKEND_URL')}/patrimoine_sous_secteur.php?patrouille=${patrouilleId}&sssecteurs=${soussecteurs}`;
@@ -107,8 +114,16 @@ const _getPatrimoineSousSecteur = async (patrouilleId, soussecteurs) => {
 };
 
 const _getMission = async patrouilleId => {
-  console.log(`[dev-rest] _getNeighborhood patrouilleId=${patrouilleId}`);
+  console.log(`[dev-rest] _getMission patrouilleId=${patrouilleId}`);
   let patrimoineUrl = `${require('../../config').get('BACKEND_URL')}/mission_sous_secteur.php?patrouille=${patrouilleId}`;
+  let patrimoineResponse = await doAsyncGET(patrimoineUrl);
+  return patrimoineResponse;
+};
+
+// getMissionSecteurs
+const _getMissionSecteurs = async secteurIds => {
+  console.log(`[dev-rest] _getMissionSecteurs secteurIds=${secteurIds}`);
+  let patrimoineUrl = `${require('../../config').get('BACKEND_URL')}/mission_secteur.php?secteurs=${secteurIds}`;
   let patrimoineResponse = await doAsyncGET(patrimoineUrl);
   return patrimoineResponse;
 };
@@ -206,5 +221,7 @@ module.exports = {
   getReaffectationSignalement: _getReaffectationSignalement,
   getReaffectationPost: _getReaffectationPost,
   postMaJMission: _postMaJMission,
-  getStatutMission: _getStatutMission
+  getStatutMission: _getStatutMission,
+  getPatrimoineSecteur: _getPatrimoineSecteur,
+  getMissionSecteurs: _getMissionSecteurs
 };

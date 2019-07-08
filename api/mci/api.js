@@ -93,6 +93,24 @@ router.get('/secteurs.php', (req, res, next) => {
   });
 });
 
+router.get('/patrimoine_secteur.php', (req, res, next) => {
+  console.log(`[MCI_REST_API][GET] /patrimoine_secteur.php ${JSON.stringify(req.query)}`);
+  const mcimodule = getMCIModule();
+  mcimodule.getPatrimoineSecteur(req.query.secteurs).then(patrimoineResponse => {
+    res.header('Content-Type', 'application/json');
+    res.json(patrimoineResponse);
+  });
+});
+
+router.get('/mission_secteur.php', (req, res, next) => {
+  console.log(`[MCI_REST_API][GET] /mission_sous_secteur.php ${JSON.stringify(req.query)}`);
+  const mcimodule = getMCIModule();
+  mcimodule.getMissionSecteurs(req.query.secteurs).then(missionResponse => {
+    res.header('Content-Type', 'application/json');
+    res.json(missionResponse);
+  });
+});
+
 router.get('/patrimoine_sous_secteur.php', (req, res, next) => {
   console.log(`[MCI_REST_API][GET] /patrimoine_sous_secteur.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
