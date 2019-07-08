@@ -114,6 +114,7 @@
           this._classifyPatrimoine(patrimoineGgeoJSON);
           this._patrimoineLayer = L.mapbox
             .featureLayer(null, {
+              /* dot rendering - uncommnet for later
               pointToLayer: function(feature, latlng) {
                 let geojsonMarkerOptions = {
                   radius: 6,
@@ -126,6 +127,7 @@
                 let lyr = L.circleMarker(latlng, geojsonMarkerOptions);
                 return lyr;
               }
+                */
             })
             .addTo(this._map);
           //this._patrimoineLayer.on('layeradd', this.onFeatureAddedToPatrimoineLayer.bind(this));
