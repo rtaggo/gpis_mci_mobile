@@ -994,9 +994,9 @@
           },
           error: function(jqXHR, textStatus, errorThrown) {
             if (textStatus === 'abort') {
-              console.warn(`[GET] ${missionUrl} Request aborted`);
+              console.warn(`[GET] ${statutMissionUrl} Request aborted`);
             } else {
-              console.error(`${missionUrl} request error : ${textStatus}`, errorThrown);
+              console.error(`${statutMissionUrl} request error : ${textStatus}`, errorThrown);
             }
           }
         });

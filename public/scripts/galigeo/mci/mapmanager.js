@@ -84,6 +84,9 @@
         contextmenuWidth: 140,
         layers: [this._basemaps['streets']]
       }).setView([48.853507, 2.348015], 12);
+      new L.control.zoom({
+        position: 'bottomright'
+      }).addTo(this._map);
     },
     fetchPatrimoine_SousSecteurs: function() {
       var self = this;
@@ -109,7 +112,22 @@
         let patrimoineGgeoJSON = response['patrimoine'];
         if (typeof patrimoineGgeoJSON !== 'undefined') {
           this._classifyPatrimoine(patrimoineGgeoJSON);
-          this._patrimoineLayer = L.mapbox.featureLayer().addTo(this._map);
+          this._patrimoineLayer = L.mapbox
+            .featureLayer(null, {
+              pointToLayer: function(feature, latlng) {
+                let geojsonMarkerOptions = {
+                  radius: 6,
+                  fillColor: feature.properties['marker-color'],
+                  color: '#808080',
+                  weight: 1,
+                  opacity: 1,
+                  fillOpacity: 0.9
+                };
+                let lyr = L.circleMarker(latlng, geojsonMarkerOptions);
+                return lyr;
+              }
+            })
+            .addTo(this._map);
           //this._patrimoineLayer.on('layeradd', this.onFeatureAddedToPatrimoineLayer.bind(this));
           this._patrimoineLayer.setGeoJSON(patrimoineGgeoJSON);
           this._buildLegend();
@@ -219,7 +237,7 @@
     _classifyPatrimoine: function(geojson) {
       geojson.features.forEach(f => {
         f.properties['marker-size'] = 'small';
-        f.properties['marker-symbol'] = f.properties['niveau_operationnel'];
+        //f.properties['marker-symbol'] = f.properties['niveau_operationnel'];
         f.properties['marker-color'] = this._getColorForNiveauOpe(f.properties['niveau_operationnel']);
       });
     },
