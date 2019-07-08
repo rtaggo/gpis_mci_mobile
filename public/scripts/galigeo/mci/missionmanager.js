@@ -167,6 +167,19 @@
               <div class="slds-form__row">
                 <div class="slds-form__item" role="listitem" >
                   <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                    <label class="slds-form-element__label" for="select-adresse"><abbr class="slds-required" title="required">* </abbr>Adresse</label>
+                    <div class="slds-form-element__control" >
+                      <div class="slds-select_container">
+                        <select class="slds-select" id="select-adresse" required=""></select>
+                      </div>
+                    </div>
+                    <div class="slds-form-element__help slds-hide" id="select-adresse_error">Champ obligatoire</div>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form__row">
+                <div class="slds-form__item" role="listitem" >
+                  <div class="slds-form-element slds-form-element_stacked slds-is-editing">
                     <label class="slds-form-element__label" for="select-type-signalement"><abbr class="slds-required" title="required">* </abbr>Type de signalement</label>
                     <div class="slds-form-element__control" >
                       <div class="slds-select_container">
@@ -277,6 +290,11 @@
 
       let theModal = $(modal);
 
+      theModal.find('#select-adresse').change(function() {
+        $('#modal-signalement-content .slds-form-element__help').addClass('slds-hide');
+        $('#modal-signalement-content .slds-has-error').removeClass('slds-has-error');
+      });
+
       theModal.find('#select-type-signalement').change(function() {
         $('#modal-signalement-content .slds-form-element__help').addClass('slds-hide');
         $('#modal-signalement-content .slds-has-error').removeClass('slds-has-error');
@@ -381,6 +399,18 @@
           <!-- Start Modal Content -->
           <div class="slds-modal__content slds-p-around_medium" id="modal-signalement-content">
             <div class="slds-form" role="list">
+              <div class="slds-form__row">
+                <div class="slds-form__item" role="listitem" >
+                  <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                    <label class="slds-form-element__label" for="signalement-input-adresse"><abbr class="slds-required" title="required">* </abbr>Adresse</label>
+                    <div class="slds-form-element__control" >
+                      <div class="slds-select_container">
+                        <select class="slds-select" id="adresse" required="" disabled></select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div class="slds-form__row">
                 <div class="slds-form__item" role="listitem" >
                   <div class="slds-form-element slds-form-element_stacked slds-is-editing">
@@ -561,6 +591,7 @@
       let self = this;
       let allGood = true;
 
+      const adresse = $('#select-adresse').val();
       const type_signalement_id = $('#select-type-signalement').val();
       const type_lieu_id = $('#select-type-lieu').val();
       const categorie_id = $('#select-categorie').val();
@@ -569,6 +600,7 @@
       const niveauVal = $('#select-niveau').val();
       const observationVal = $('#signalement-input-observation').val();
 
+      allGood = this.validateSignalementInput(adresse, 'select-adresse', 'select-adresse_error') && allGood;
       allGood = this.validateSignalementInput(type_signalement_id, 'select-type-signalement', 'select-type-signalement_error') && allGood;
       allGood = this.validateSignalementInput(categorie_id, 'select-categorie', 'select-categorie_error') && allGood;
       if (!$('#parent_categorie2s').hasClass('slds-hide')) {
@@ -603,6 +635,7 @@
       */
       let formSignalement = {
         mission_id: self._currentMission.features[0].properties.mission_id,
+        adresse: adresse,
         type_signalement: type_signalement_id,
         type_lieu: type_lieu_id,
         categorie: categorie_id,
@@ -618,6 +651,8 @@
     },
     saveSignalement: function(formSignalement) {
       let self = this;
+
+      console.log(formSignalement);
       const saveSignalementUrl = `${this._options.baseRESTServicesURL}/signalement.php`;
       $.ajax({
         type: 'POST',
@@ -644,6 +679,7 @@
       let self = this;
 
       const id_mission = self._currentMission.features[0].properties.mission_id; //mission[0].innerHTML;
+      const adresse = $('#select-adresse').val();
       const type_signalement_id = $('#select-type-signalement').val();
       const type_lieu_id = $('#select-type-lieu').val();
       const categorie_id = $('#select-categorie').val();
@@ -654,6 +690,7 @@
 
       let formSignalement = {
         mission_id: id_mission,
+        adresse: adresse,
         type_signalement: type_signalement_id,
         type_lieu: type_lieu_id,
         categorie: categorie_id,
@@ -740,6 +777,9 @@
       console.log(`>> handleTypeSignalementFetched`, response);
       const self = this;
 
+      let selectAdresse = $('#adresse').empty();
+      selectAdresse.append($(`<option value="">${response.signalement[0].adresse}</option>`));
+
       let selectTypeSignalement = $('#type_signalement').empty();
       selectTypeSignalement.append($(`<option value="">${response.signalement[0].type_signalement}</option>`));
       if (response.signalement[0].categorie) {
@@ -773,13 +813,15 @@
     },
     fetchTypeSignalements: function() {
       let self = this;
-      const typeSignalementUrl = `${this._options.baseRESTServicesURL}/signalement.php?type_signalement=&categorie=`;
+      const typeSignalementUrl = `${this._options.baseRESTServicesURL}/signalement.php?mission_id=${self._currentMission.features[0].properties.mission_id}&type_signalement=&categorie=`;
+      console.log(typeSignalementUrl);
       $.ajax({
         type: 'GET',
         url: typeSignalementUrl,
         success: function(response) {
           console.log(`${typeSignalementUrl}`, response);
           self.handleTypeSignalementFetched(response);
+          self.handleAdresseFetched(response);
           self.handleTypeLieuFetched(response);
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -807,6 +849,17 @@
         self.handleClickChooseTypeSignalement();
       });
       */
+    },
+    handleAdresseFetched: function(response) {
+      console.log(`>> handleAdresseFetched`, response);
+      const self = this;
+      let selectCtnr = $('#select-adresse').empty();
+      selectCtnr.append(
+        $(`
+        <option value="">Sélectionner une adresse</option> 
+        ${response.adresses.map(p => `<option value="${p.id}" >${p.adresse}</option>`).join('')}
+      `)
+      );
     },
     handleTypeLieuFetched: function(response) {
       console.log(`>> handleTypeLieuFetched`, response);
@@ -885,6 +938,7 @@
       console.log(selectedCategorie);
       this.fetchSousCategorie(selectedCategorie);
     },
+
     handleClickChooseTypeSignalement: function() {
       const selectCtnr = $('#select-type-signalement');
       let typeSignalementId = selectCtnr.val();
@@ -931,7 +985,7 @@
 
     fetchCategorie: function(type_signalement) {
       const self = this;
-      const categorieUrl = `${this._options.baseRESTServicesURL}/signalement.php?type_signalement=${type_signalement.id}&categorie=`;
+      const categorieUrl = `${this._options.baseRESTServicesURL}/signalement.php?mission_id=${self._currentMission.features[0].properties.mission_id}&type_signalement=${type_signalement.id}&categorie=`;
       $.ajax({
         type: 'GET',
         url: categorieUrl,
@@ -951,7 +1005,7 @@
     },
     fetchSousCategorie: function(categorie) {
       const self = this;
-      const sousCategorieUrl = `${this._options.baseRESTServicesURL}/signalement.php?type_signalement=&categorie=${categorie.id}`;
+      const sousCategorieUrl = `${this._options.baseRESTServicesURL}/signalement.php?mission_id=${self._currentMission.features[0].properties.mission_id}&type_signalement=&categorie=${categorie.id}`;
       $.ajax({
         type: 'GET',
         url: sousCategorieUrl,

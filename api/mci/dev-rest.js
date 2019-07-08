@@ -120,9 +120,9 @@ const _getNeighborhood = async (patrouilleId, sssecteurs) => {
   return neighborhoodResponse;
 };
 
-const _getSignalement = async (type_signalement, categorie) => {
+const _getSignalement = async (mission_id, type_signalement, categorie) => {
   console.log(`[dev-rest] _getSignalement`);
-  let signalementUrl = `${require('../../config').get('BACKEND_URL')}/signalement.php?type_signalement=${type_signalement}&categorie=${categorie}`;
+  let signalementUrl = `${require('../../config').get('BACKEND_URL')}/signalement.php?mission_id=${mission_id}&type_signalement=${type_signalement}&categorie=${categorie}`;
   let signalementResponse = await doAsyncGET(signalementUrl);
   return signalementResponse;
 };
