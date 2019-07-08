@@ -238,6 +238,28 @@
 }
 ```
 
+## Patrimoine Secteur
+`GET <BASE_SERVER_URL>/patrimoine_secteur.php?secteurs=<Liste des secteurs>`
+
+**Example**
+
+`GET <BASE_SERVER_URL>/patrimoine_secteur.php?secteurs='EST'`
+
+**Request response**
+```json
+{
+	"code"  : 200,
+	"patrimoine"  : {
+		"type": "FeatureCollection",
+		"features": [..]
+	},
+	"secteur" : {
+		"type": "FeatureCollection",
+		"features": [..]
+	}
+}
+```
+
 ## Missions Secteurs
 `GET /missions_secteurs.php?secteurs=<Liste des secteurs>`
 
@@ -249,9 +271,7 @@
 ```json
 {
   "code": 200,
-  "secteur" : "<geojson du ou des secteurs>",
-  "patrimoine" : "<geojson du patrimoine>",
-  "mission_ronde": "<geojons de toutes les missions en cours sur le ou les secteurs>"
+  "missions": "<geojons de toutes les missions en cours sur le ou les secteurs>"
 }
 ```
 
@@ -275,7 +295,7 @@
 
 **Example**
 
-`GET <BASE_SERVER_URL>/rejoindre.php?mission=2190025&chef_groupe=CHARLY01
+`GET <BASE_SERVER_URL>/rejoindre.php?mission=2190025&chef_groupe='charly01'
 
 
 **Request response**
@@ -284,3 +304,5 @@
   "code": 200,
 }
 ```
+
+
