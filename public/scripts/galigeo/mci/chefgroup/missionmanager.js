@@ -1105,7 +1105,7 @@
         $('#waiting4Mission').remove();
         let ctnr = $('#missionListContent').empty();
         let dataTbl = $(`
-          <table class="slds-table slds-table_bordered">
+          <table class="slds-table slds-table_bordered slds-table_fixed-layout">
             <thead>
             <tr class="slds-line-height_reset" style="vertical-align: top;">
               <th class="slds-cell-wrap" scope="col" style="text-align: center;">
@@ -1490,6 +1490,16 @@
     joinMission: function(mission) {
       console.warn(`TODO: join mission `, mission);
       let self = this;
+      // do Ajax call
+      this.joinMissionCallback({}, mission);
+    },
+    joinMissionCallback: function(response, mission) {
+      $(`#missionListContent tr`)
+        .removeClass('slds-is-selected')
+        .attr('aria-selected', false);
+      $(`#missionListContent tr[data-missionid="${mission.properties.mission_id}"`)
+        .addClass('slds-is-selected')
+        .attr('aria-selected', true);
     }
   };
   GGO.MissionManagerSingleton = (function() {

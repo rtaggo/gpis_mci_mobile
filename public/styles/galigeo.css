@@ -157,3 +157,16 @@ body {
 .mission_list_info {
   white-space: pre-line;
 }
+
+#missionListContent tr.slds-is-selected > td {
+  border-top: 2px solid #76c6ee;
+  border-bottom: 2px solid #76c6ee;
+}
+
+#missionListContent tr.slds-is-selected > td:first-child {
+  border-left: 2px solid #76c6ee;
+}
+
+#missionListContent tr.slds-is-selected > td:last-child {
+  border-right: 2px solid #76c6ee;
+}

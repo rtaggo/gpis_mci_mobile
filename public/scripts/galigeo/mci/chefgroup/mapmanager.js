@@ -271,7 +271,7 @@
         type: 'FeatureCollection',
         features: [mission]
       };
-      $.extend(mission.properties, markerProperties);
+      //$.extend(mission.properties, markerProperties);
       this._missionLayer.setGeoJSON(missionGeoJSON);
       this._map.fitBounds(this._missionLayer.getBounds(), { maxZoom: 14 });
     },
