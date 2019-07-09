@@ -85,7 +85,7 @@
 
   GGO.CHECK_MISSION_INTERVALLE = 4000;
   GGO.COLORPALETTES = {
-    rdYlBu: ['#d73027', '#fc8d59', '#fee090', '#e0f3f8', '#91bfdb', '#4575b4'],
+    rdYlBu: ['#4874bf', '#228714', '#edeb2a', '#f99e38', '#ff0000', '#000000'],
     secteurs: ['#8dd3c7', '#ffffb3', '#bebada', '#fb8072', '#80b1d3', '#fdb462', '#b3de69', '#fccde5', '#d9d9d9'],
     secteurs_voisinages: ['#d9d9d9', '#fccde5', '#b3de69', '#fdb462', '#80b1d3', '#fb8072', '#bebada', '#ffffb3', '#8dd3c7']
   };
