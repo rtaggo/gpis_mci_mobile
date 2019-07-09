@@ -261,7 +261,7 @@
       }
       let mission = missionGeoJSON.features[0];
       let markerProperties = {
-        'marker-color': mission.properties.statut === 'En attente' ? '#FF0000' : mission.properties.statut === 'En direction' ? '#00FF00' : '#0000FF',
+        'marker-color': mission.properties.statut === 'En attente' ? '#0000FF' : mission.properties.statut === 'En direction' ? '#FFC100' : '#0000FF',
         'marker-symbol': mission.properties['niveau_operationnel'] || ''
         //'marker-size': 'small'
       };
