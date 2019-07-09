@@ -128,6 +128,14 @@ const _getMissionSecteurs = async secteurIds => {
   return patrimoineResponse;
 };
 
+// getMissionDetails
+const _getMissionDetails = async missionId => {
+  console.log(`[dev-rest] _getMissionDetails secteurIds=${missionId}`);
+  let patrimoineUrl = `${require('../../config').get('BACKEND_URL')}/selection_mission.php?mission=${missionId}`;
+  let patrimoineResponse = await doAsyncGET(patrimoineUrl);
+  return patrimoineResponse;
+};
+
 /*
 const _getNeighborhood = async (patrouilleId, sssecteurs) => {
   console.log(`[dev-rest] _getNeighborhood`);
@@ -236,5 +244,6 @@ module.exports = {
   postMaJMission: _postMaJMission,
   getStatutMission: _getStatutMission,
   getPatrimoineSecteur: _getPatrimoineSecteur,
-  getMissionSecteurs: _getMissionSecteurs
+  getMissionSecteurs: _getMissionSecteurs,
+  getMissionDetails: _getMissionDetails
 };

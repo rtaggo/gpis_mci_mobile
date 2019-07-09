@@ -1101,8 +1101,10 @@
       }
     },
     handleMissionResponseOK: function(response) {
+      let self = this;
       if (response.missions && Array.isArray(response.missions) && response.missions.length > 0) {
-        let ctnr = $('#mainContainer-card-body').empty();
+        $('#waiting4Mission').remove();
+        let ctnr = $('#missionListContent').empty();
         let dataTbl = $(`
           <table class="slds-table slds-table_bordered">
             <thead>
@@ -1153,8 +1155,12 @@
         tblBody.find('tr').click(function(e) {
           const mission_id = $(this).attr('data-missionid');
           console.log(`Click on row for mission id=${mission_id}`);
+          self.getMissionDetails(mission_id);
         });
-        ctnr.append(dataTbl.append(tblBody)).addClass('slds-scrollable_x');
+        ctnr
+          .append(dataTbl.append(tblBody))
+          .addClass('slds-scrollable')
+          .removeClass('slds-hide');
         /*
         let theMission = response.features[0];
         if (theMission.properties.statut !== 'Fin') {
@@ -1177,10 +1183,34 @@
         this.checkMission();
       }
     },
-
-    renderMissionViewMode: function() {
-      GGO.EventBus.dispatch(GGO.EVENTS.SHOWMISSIONMLOCATION, this._currentMission);
-      let mission = this._currentMission.features[0];
+    getMissionDetails: function(missionId) {
+      let self = this;
+      let missionUrl = `${this._options.baseRESTServicesURL}/selection_mission.php?mission=${missionId}`;
+      $.ajax({
+        type: 'GET',
+        url: missionUrl,
+        success: function(response) {
+          console.log(`${missionUrl}: `, response);
+          self.handleMissionDetailsFetched(response);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`[GET] ${missionUrl} Request aborted`);
+          } else {
+            console.error(`${missionUrl} request error : ${textStatus}`, errorThrown);
+          }
+        }
+      });
+    },
+    handleMissionDetailsFetched: function(response) {
+      console.log(`[ChefGroup] >> handleMissionDetailsFetched`, response);
+      if (response.code === 200 && response.features.length > 0) {
+        this._currentDetailsMission = response.features[0];
+        this.renderMissionViewMode(this._currentDetailsMission);
+      }
+    },
+    renderMissionViewMode: function(mission) {
+      GGO.EventBus.dispatch(GGO.EVENTS.SHOWMISSIONMLOCATION, mission);
       let content = $(`<div class="slds-form" role="list"></div>`);
       let self = this;
       content.append(
@@ -1414,39 +1444,57 @@
         `)
       );
 
-      if (mission.properties.renfort) {
-        $('#mission-btn-list').addClass('slds-hide');
-        $('#mission-renfort-info').removeClass('slds-hide');
-      } else {
-        $('#mission-renfort-info').addClass('slds-hide');
-        $('#mission-btn-list').removeClass('slds-hide');
-      }
+      $('#missionListContent').addClass('slds-hide');
+      $('#missionContent').removeClass('slds-hide');
+      $('#missionFooter').removeClass('slds-hide');
+
+      let closeBtn = $(`
+        <button class="slds-button slds-button_icon slds-button_icon-small slds-panel__close" style="position: absolute;right: 0;top: 0px;">
+          <svg class="slds-button__icon" aria-hidden="true">
+            <use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+          </svg>
+          <span class="slds-assistive-text">Collapse Panel Header</span>
+        </button>
+      `).click(function(e) {
+        GGO.EventBus.dispatch(GGO.EVENTS.CLEARMISSIONMLOCATION);
+        $('#missionContent')
+          .empty()
+          .addClass('slds-hide');
+        $('#missionFooter').addClass('slds-hide');
+        $('#missionListContent').removeClass('slds-hide');
+      });
+
       $('#missionContent')
         .empty()
-        .append(content);
-      /*
-      TODO: refactor
-      $('#signalement_list li').click(function(e) { console.log($(this).val()); }) 
-      */
-      if (!mission.properties.renfort) {
-        $('#signalements li')
-          .off()
-          .click(function(e) {
-            self.openReaffectationModal();
-            self.fetchFormSignalements($(this).val());
-          });
-      }
-      /*
-      if (typeof $('#signalement_list') !== 'undefined') {
-        var list_signalements = document.getElementById('signalements').getElementsByTagName('li');
-        for (var i = 0; i < list_signalements.length; i++) {
-          list_signalements[i].onclick = function(e) {
-            self.openReaffectationModal();
-            self.fetchFormSignalements($(this)[0].value);
-          };
-        }
-      }
-      */
+        .append(content)
+        .append(closeBtn);
+
+      $('#btnMissionRejoindre')
+        .off()
+        .click(
+          function(e) {
+            self.joinMission(this);
+          }.bind(mission)
+        );
+      $('#btnMissionClose')
+        .off()
+        .click(
+          function(e) {
+            GGO.EventBus.dispatch(GGO.EVENTS.CLEARMISSIONMLOCATION);
+            $('#missionContent')
+              .empty()
+              .addClass('slds-hide');
+            $('#missionFooter').addClass('slds-hide');
+            $('#missionListContent').removeClass('slds-hide');
+            $('#missionListContent tr')
+              .removeClass('slds-is-selected')
+              .attr('aria-selected', false);
+          }.bind(mission)
+        );
+    },
+    joinMission: function(mission) {
+      console.warn(`TODO: join mission `, mission);
+      let self = this;
     }
   };
   GGO.MissionManagerSingleton = (function() {

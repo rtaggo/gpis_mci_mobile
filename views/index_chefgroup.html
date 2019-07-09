@@ -108,23 +108,17 @@
 						<h2>Chargement des missions du (des) secteur(s) ... </h2>					
 					</div>
 					<div id="missionContent" class="slds-scrollable_y slds-hide" style="position: absolute; top: 15px; left: 18px; right: 13px; bottom: 60px;">
-
+					</div>
+					<div id="missionListContent" class="slds-scrollable_y slds-hide" style="position:relative; height:100%; width:100%;">
 					</div>
 				</div>
 				<footer id="missionFooter" class="slds-card__footer slds-hide" style="position: absolute; bottom: 0px; left: 0px; right: 0px; padding: 0.5rem 0.5rem;">
-						<div id="mission-renfort-info" class="mission-renfort">En renfort</div>
 					<ul id="mission-btn-list" class="slds-button-group-row">
 						<li class="slds-button-group-item">
-							<button id="btnMissionEnRoute" class="slds-button slds-button_brand" style="padding-left: 8px; padding-right: 8px; background-color: #FFC100; border-color: #FFC100;">En direction</button>
+							<button id="btnMissionRejoindre" class="slds-button slds-button_brand" style="padding-left: 8px; padding-right: 8px; background-color: #FFC100; border-color: #FFC100;">Rejoindre</button>
 						</li>
 						<li class="slds-button-group-item">
-							<button id="btnMissionDebut" class="slds-button slds-button_brand" style="padding-left: 6px; padding-right: 6px">Début</button>
-						</li>
-						<li class="slds-button-group-item">
-							<button id="btnMissionFin" class="slds-button slds-button_success">Fin</button>
-						</li>
-						<li class="slds-button-group-item">
-							<button id="btnMissionSignalement" class="slds-button slds-button_destructive">Signalement</button>
+							<button id="btnMissionClose" class="slds-button slds-button_brand" style="padding-left: 6px; padding-right: 6px">Fermer</button>
 						</li>
 					</ul>
 				</footer>
@@ -137,8 +131,10 @@
 			console.log(' >> document is ready');
 			$('#logoutBtn').click(function(e){
 				GGO.disconnect(
-					self.galigeo.getPatrouille().id, 
+					undefined,
 					{
+						userName: self.galigeo.getUserLogin(),
+						userRole: self.galigeo.getUserRole(),
 						'baseRESTServicesURL': '/services/rest/mci'
 					}
 				);

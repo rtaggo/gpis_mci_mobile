@@ -143,6 +143,9 @@
           GGO.postLogoutForm();
         }
       });
+    } else if (typeof options.userRole !== 'undefined' && (options.userRole === 'charly' || options.userRole === 'alpha')) {
+      console.warn(`Might be usefull to disconnect the user ${options.userName} with role ${options.role} from the system`);
+      GGO.postLogoutForm();
     } else {
       GGO.postLogoutForm();
     }
@@ -161,7 +164,8 @@
     SHOWMISSIONMLOCATION: 'showmissionlocation',
     MISSIONCOMPLETED: 'missioncompleted',
     INVALIDATEMAPSIZE: 'invalidemapsize',
-    NEIGHBORHOOD: 'neighborhood'
+    NEIGHBORHOOD: 'neighborhood',
+    CLEARMISSIONMLOCATION: 'clearmissionlocation'
   };
 })();
 /* end GGO: put code below in galigeo.js */

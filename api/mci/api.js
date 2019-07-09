@@ -111,6 +111,16 @@ router.get('/mission_secteur.php', (req, res, next) => {
   });
 });
 
+// selection_mission.php
+router.get('/selection_mission.php', (req, res, next) => {
+  console.log(`[MCI_REST_API][GET] /selection_mission.php ${JSON.stringify(req.query)}`);
+  const mcimodule = getMCIModule();
+  mcimodule.getMissionDetails(req.query.mission).then(missionResponse => {
+    res.header('Content-Type', 'application/json');
+    res.json(missionResponse);
+  });
+});
+
 router.get('/patrimoine_sous_secteur.php', (req, res, next) => {
   console.log(`[MCI_REST_API][GET] /patrimoine_sous_secteur.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();

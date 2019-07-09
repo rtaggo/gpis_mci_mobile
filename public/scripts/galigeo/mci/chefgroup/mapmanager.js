@@ -55,11 +55,17 @@
         let mission = e.target;
         self.displayMission(mission);
       });
+      GGO.EventBus.addEventListener(GGO.EVENTS.CLEARMISSIONMLOCATION, function(e) {
+        console.log('Received GGO.EVENTS.CLEARMISSIONMLOCATION');
+        self.clearMission();
+      });
       // MISSIONCOMPLETED
+      /*
       GGO.EventBus.addEventListener(GGO.EVENTS.MISSIONCOMPLETED, function(e) {
         console.log('Received GGO.EVENTS.MISSIONCOMPLETED');
         self.clearMission();
       });
+      */
 
       // INVALIDATEMAPSIZE
       GGO.EventBus.addEventListener(GGO.EVENTS.INVALIDATEMAPSIZE, function(e) {
@@ -111,6 +117,19 @@
     },
     handleSectorFetched: function(response) {
       if (response.code === 200) {
+        let secteursGeoJSON = response['secteur'];
+        if (typeof secteursGeoJSON !== 'undefined') {
+          this._secteurLayer = L.mapbox.featureLayer().addTo(this._map);
+          this._classifySecteurs(secteursGeoJSON);
+          //$.extend(sous_secteurs.features[0].properties, this._secteurDrawingProperties);
+          this._secteurLayer.setGeoJSON(secteursGeoJSON);
+          try {
+            this._map.fitBounds(this._secteurLayer.getBounds());
+          } catch (error) {
+            console.error('Failed to fit the map with the _secteurLayer bounds');
+          }
+        }
+
         let patrimoineGgeoJSON = response['patrimoine'];
         if (typeof patrimoineGgeoJSON !== 'undefined') {
           this._classifyPatrimoine(patrimoineGgeoJSON);
@@ -135,18 +154,8 @@
           this._buildLegend();
           this._buildBasemapList();
           this._patrimoineLayer.setFilter(function(f) {
-            //if (f.properties.niveau_operationnel != 0) return f;
             return parseInt(f.properties.niveau_operationnel) !== 0;
           });
-        }
-
-        let secteursGeoJSON = response['secteur'];
-        if (typeof secteursGeoJSON !== 'undefined') {
-          this._secteurLayer = L.mapbox.featureLayer().addTo(this._map);
-          this._classifySecteurs(secteursGeoJSON);
-          //$.extend(sous_secteurs.features[0].properties, this._secteurDrawingProperties);
-          this._secteurLayer.setGeoJSON(secteursGeoJSON);
-          this._map.fitBounds(this._secteurLayer.getBounds());
         }
       } else {
       }
@@ -249,11 +258,10 @@
       let feature = marker.feature;
       let props = feature.properties;
     },
-    displayMission: function(missionGeoJSON) {
+    displayMission: function(mission) {
       if (typeof this._missionLayer === 'undefined' || this._missionLayer === null) {
         this._missionLayer = L.mapbox.featureLayer().addTo(this._options.app._mapManager._map);
       }
-      let mission = missionGeoJSON.features[0];
       let markerProperties = {
         'marker-color': mission.statut === 'En attente' ? '#FF0000' : mission.statut === 'En direction' ? '#00FF00' : '#0000FF' //,
         //'marker-size': 'small'
@@ -264,6 +272,10 @@
       this._missionLayer.setGeoJSON(missionGeoJSON);
       this._map.fitBounds(this._missionLayer.getBounds(), { maxZoom: 14 });
       */
+      let missionGeoJSON = {
+        type: 'FeatureCollection',
+        features: [mission]
+      };
       $.extend(mission.properties, markerProperties);
       this._missionLayer.setGeoJSON(missionGeoJSON);
       this._map.fitBounds(this._missionLayer.getBounds(), { maxZoom: 14 });
@@ -272,7 +284,6 @@
       if (typeof this._missionLayer !== 'undefined' && this._missionLayer !== null) {
         this._missionLayer.clearLayers();
       }
-
       if (typeof this._secteurLayer !== 'undefined' && this._secteurLayer !== null) {
         this._map.fitBounds(this._secteurLayer.getBounds());
       }

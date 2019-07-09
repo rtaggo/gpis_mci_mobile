@@ -24,6 +24,12 @@
     },
     getPatrouille: function() {
       return this._options.patrouille;
+    },
+    getUserLogin: function() {
+      return this._options.userName;
+    },
+    getUserRole: function() {
+      return this._options.userRole;
     }
   };
 })();

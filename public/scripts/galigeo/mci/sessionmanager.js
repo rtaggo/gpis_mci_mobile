@@ -141,14 +141,12 @@
         $('#error-message > .slds-form-element__help').text(`${response.message}`);
         $('#error-message').removeClass('slds-hide');
 
-        /*
         $('#sous-secteurs-cancel-btn')
           .off()
           .click(function(e) {
-            self.handleClickCancelSubSectors();
+            self.handleClickCancelSectors();
           })
           .removeClass('slds-hide');
-        */
         return;
       }
       switch (this._currentRole) {
@@ -162,6 +160,13 @@
         default:
           GGO.SessionIssuePrompt('Rôle utilisateur non disponible', `Le rôle '<b>${this._currentRole}</b>' n\'est pas disponible pour le moment.<br /> Veuillez vous reconnecter.`, $('#appContainer').empty());
       }
+    },
+    handleClickCancelSectors: function() {
+      GGO.disconnect(undefined, {
+        userName: this._currentUserName,
+        userRole: this._currentRole,
+        baseRESTServicesURL: '/services/rest/mci'
+      });
     },
     handleSecteursFetchedCharly: function(response) {
       let self = this;
@@ -229,7 +234,7 @@
       $('#sous-secteurs-cancel-btn')
         .off()
         .click(function(e) {
-          self.handleClickCancelSubSectors();
+          self.handleClickCancelSectors();
         })
         .removeClass('slds-hide');
     },

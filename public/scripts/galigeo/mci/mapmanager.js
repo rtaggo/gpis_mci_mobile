@@ -239,7 +239,7 @@
     _classifyPatrimoine: function(geojson) {
       geojson.features.forEach(f => {
         f.properties['marker-size'] = 'small';
-        //f.properties['marker-symbol'] = f.properties['niveau_operationnel'];
+        f.properties['marker-symbol'] = f.properties['niveau_operationnel'];
         f.properties['marker-color'] = this._getColorForNiveauOpe(f.properties['niveau_operationnel']);
       });
     },
