@@ -134,9 +134,11 @@
           this._patrimoineLayer.setGeoJSON(patrimoineGgeoJSON);
           this._buildLegend();
           this._buildBasemapList();
-          this._patrimoineLayer.setFilter(function(f) {
-            if (parseInt(f.properties.niveau_operationnel) !== 0) return f;
-          });
+          this._patrimoineLayer
+            .setFilter(function(f) {
+              if (parseInt(f.properties.niveau_operationnel) !== 0) return f;
+            })
+            .bringToBack();
         }
 
         let sous_secteursGeoJSON = response['sous-secteur'];
@@ -217,9 +219,11 @@
     _filterPatrimoineLayer: function() {
       let filteredNO = $('#dialog-body-legend .filtered_no');
       const filteredNOValues = new Set(filteredNO.toArray().map(b => $(b).attr('data-no')));
-      this._patrimoineLayer.setFilter(function(f) {
-        return !filteredNOValues.has(f.properties.niveau_operationnel);
-      });
+      this._patrimoineLayer
+        .setFilter(function(f) {
+          return !filteredNOValues.has(f.properties.niveau_operationnel);
+        })
+        .bringToBack();
     },
     _getColorForNiveauOpe: function(no) {
       const rdYlBu = ['#d73027', '#fc8d59', '#fee090', '#e0f3f8', '#91bfdb', '#4575b4'];
@@ -250,11 +254,15 @@
     },
     displayMission: function(missionGeoJSON) {
       if (typeof this._missionLayer === 'undefined' || this._missionLayer === null) {
-        this._missionLayer = L.mapbox.featureLayer().addTo(this._options.app._mapManager._map);
+        this._missionLayer = L.mapbox
+          .featureLayer()
+          .addTo(this._options.app._mapManager._map)
+          .bringToFront();
       }
       let mission = missionGeoJSON.features[0];
       let markerProperties = {
-        'marker-color': mission.statut === 'En attente' ? '#FF0000' : mission.statut === 'En direction' ? '#00FF00' : '#0000FF' //,
+        'marker-color': mission.properties.statut === 'En attente' ? '#FF0000' : mission.properties.statut === 'En direction' ? '#00FF00' : '#0000FF',
+        'marker-symbol': mission.properties['niveau_operationnel'] || ''
         //'marker-size': 'small'
       };
       /*
