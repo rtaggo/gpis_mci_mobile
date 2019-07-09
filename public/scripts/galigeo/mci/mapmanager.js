@@ -135,7 +135,7 @@
           this._buildLegend();
           this._buildBasemapList();
           this._patrimoineLayer.setFilter(function(f) {
-            if (f.properties.niveau_operationnel != 0) return f;
+            if (parseInt(f.properties.niveau_operationnel) !== 0) return f;
           });
         }
 
@@ -239,7 +239,7 @@
     _classifyPatrimoine: function(geojson) {
       geojson.features.forEach(f => {
         f.properties['marker-size'] = 'small';
-        //f.properties['marker-symbol'] = f.properties['niveau_operationnel'];
+        f.properties['marker-symbol'] = f.properties['niveau_operationnel'];
         f.properties['marker-color'] = this._getColorForNiveauOpe(f.properties['niveau_operationnel']);
       });
     },
