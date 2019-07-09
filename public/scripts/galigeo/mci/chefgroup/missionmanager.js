@@ -1064,8 +1064,10 @@
     },
     fetchMission: function() {
       let self = this;
-      let uniqueSecteurNames = Array.from(new Set(this._options.secteurs.map(s => `'${s.name}'`)));
-      uniqueSecteurNames = [`'EST'`];
+      //let uniqueSecteurNames = Array.from(new Set(this._options.secteurs.map(s => `'${s.name}'`)));
+      //uniqueSecteurNames = [`'EST'`];
+      let uniqueSecteurNames = this._options.secteurs.join(',');
+      uniqueSecteurNames = `'EST'`;
       let missionUrl = `${this._options.baseRESTServicesURL}/mission_secteur.php?secteurs=${uniqueSecteurNames}`;
       $.ajax({
         type: 'GET',
@@ -1102,23 +1104,23 @@
       if (response.missions && Array.isArray(response.missions) && response.missions.length > 0) {
         let ctnr = $('#mainContainer-card-body').empty();
         let dataTbl = $(`
-          <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+          <table class="slds-table slds-table_bordered">
             <thead>
             <tr class="slds-line-height_reset">
-              <th class="" scope="col">
-                <div class="slds-truncate" title="Opportunity Name">Identifiant Patrouille</div>
+              <th class="slds-cell-wrap" scope="col" style="text-align: center;">
+                <div class="" title="Identifiant Patrouille">Identifiant Patrouille</div>
               </th>
-              <th class="" scope="col">
-                <div class="slds-truncate" title="Account Name">Identifiant Site</div>
+              <th class="slds-cell-wrap" scope="col" style="text-align: center;">
+                <div class="" title="Identifiant site">Identifiant Site</div>
               </th>
-              <th class="" scope="col">
-                <div class="slds-truncate" title="Close Date">Type Mission</div>
+              <th class="slds-cell-wrap" scope="col" style="text-align: center;">
+                <div class="" title="Type Mission">Type Mission</div>
               </th>
-              <th class="" scope="col">
-                <div class="slds-truncate" title="Stage">Nom du Site</div>
+              <th class="slds-cell-wrap" scope="col" style="text-align: center;">
+                <div class="" title="Nom du site">Nom du site</div>
               </th>
-              <th class="" scope="col">
-                <div class="slds-truncate" title="Confidence">Bailleur</div>
+              <th class="slds-cell-wrap" scope="col" style="text-align: center;">
+                <div class="" title="Bailleur">Bailleur</div>
               </th>
             </tr>
           </thead>
@@ -1128,27 +1130,27 @@
           tblBody.append(
             $(`
             <tr class="slds-hint-parent">
-              <th data-label="Opportunity Name" scope="row">
-                <div class="slds-truncate" title="Cloudhub">${m.patrouille_id}
+              <th data-label="Identifiant Patrouille" scope="row">
+                <div class="slds-truncate">${m.patrouille_id}
                 </div>
               </th>
-              <td data-label="Account Name">
-                <div class="slds-truncate" title="Cloudhub">${m.codesite}</div>
+              <td data-label="Identifiant Site">
+                <div class="">${m.codesite}</div>
               </td>
-              <td data-label="Close Date">
-                <div class="slds-truncate" title="4/14/2015">${m.type_mission}</div>
+              <td data-label="Type Mission">
+                <div class="">${m.type_mission}</div>
               </td>
-              <td data-label="Prospecting">
-                <div class="slds-truncate" title="Prospecting">${m.nom_site}</div>
+              <td data-label="Nom du site">
+                <div class="" >${m.nom_site}</div>
               </td>
-              <td data-label="Confidence">
-                <div class="slds-truncate" title="20%">...</div>
+              <td data-label="Bailleur">
+                <div class="">...</div>
               </td>
             </tr>
           `)
           );
         });
-        ctnr.append(dataTbl.append(tblBody));
+        ctnr.append(dataTbl.append(tblBody)).addClass('slds-scrollable_x');
         /*
         let theMission = response.features[0];
         if (theMission.properties.statut !== 'Fin') {

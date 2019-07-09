@@ -27,7 +27,12 @@
 		<link rel="stylesheet" type="text/css" href="/styles/galigeo.css" />	
 
 		<script type="module" src="./scripts/galigeo/mci/mci_chefgroup.js"></script>
+		<style>
+			html, body {
+				overflow: hidden;
+			}
 
+		</style>
 	</head>
 	<body>
 		<div id="map"></div>
@@ -93,7 +98,7 @@
 						</div>
 					</header>
 				</div>
-				<div id="mainContainer-card-body" class="slds-card__body slds-card__body_inner" style="max-height: calc(100%);">
+				<div id="mainContainer-card-body" class="slds-card__body slds-card__body_inner" style="max-height: calc(100%); padding:0px;">
 					<div id="waiting4Mission" class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_info" role="alert">
 						<div role="status" class="slds-spinner slds-spinner_x-small slds-spinner_inline" style=" top: 8px; left: -10px; ">
 							<span class="slds-assistive-text">Loading</span>
