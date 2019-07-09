@@ -85,7 +85,7 @@
 
   GGO.CHECK_MISSION_INTERVALLE = 4000;
   GGO.COLORPALETTES = {
-    rdYlBu: ['#d73027', '#fc8d59', '#fee090', '#e0f3f8', '#91bfdb', '#4575b4'],
+    rdYlBu: ['#4874bf', '#228714', '#edeb2a', '#f99e38', '#ff0000', '#000000'],
     secteurs: ['#8dd3c7', '#ffffb3', '#bebada', '#fb8072', '#80b1d3', '#fdb462', '#b3de69', '#fccde5', '#d9d9d9'],
     secteurs_voisinages: ['#d9d9d9', '#fccde5', '#b3de69', '#fdb462', '#80b1d3', '#fb8072', '#bebada', '#ffffb3', '#8dd3c7']
   };
@@ -96,6 +96,21 @@
 
   GGO.getColorPalette = function(paletteName) {
     return GGO.COLORPALETTES[paletteName] || GGO.getDefaultColorPalette();
+  };
+
+  GGO.shadeHexColor = function(color, percent) {
+    /* 
+      Percent: 
+        > 0 => lighter
+        < 0 => darker
+    */
+    var f = parseInt(color.slice(1), 16),
+      t = percent < 0 ? 0 : 255,
+      p = percent < 0 ? percent * -1 : percent,
+      R = f >> 16,
+      G = (f >> 8) & 0x00ff,
+      B = f & 0x0000ff;
+    return '#' + (0x1000000 + (Math.round((t - R) * p) + R) * 0x10000 + (Math.round((t - G) * p) + G) * 0x100 + (Math.round((t - B) * p) + B)).toString(16).slice(1);
   };
 
   GGO.revokePatrouille = function(patrouilleId, options) {
