@@ -112,41 +112,24 @@
         let patrimoineGgeoJSON = response['patrimoine'];
         if (typeof patrimoineGgeoJSON !== 'undefined') {
           this._classifyPatrimoine(patrimoineGgeoJSON);
-          this._patrimoineLayer = L.mapbox
-            .featureLayer(null, {
-              /* dot rendering - uncommnet for later
-              pointToLayer: function(feature, latlng) {
-                let geojsonMarkerOptions = {
-                  radius: 6,
-                  fillColor: feature.properties['marker-color'],
-                  color: '#808080',
-                  weight: 1,
-                  opacity: 1,
-                  fillOpacity: 0.9
-                };
-                let lyr = L.circleMarker(latlng, geojsonMarkerOptions);
-                return lyr;
-              }
-                */
-            })
-            .addTo(this._map);
+          this._patrimoineLayer = L.mapbox.featureLayer(patrimoineGgeoJSON).addTo(this._map);
           //this._patrimoineLayer.on('layeradd', this.onFeatureAddedToPatrimoineLayer.bind(this));
-          this._patrimoineLayer.setGeoJSON(patrimoineGgeoJSON);
+
+          //this._patrimoineLayer.setGeoJSON(patrimoineGgeoJSON);
           this._buildLegend();
           this._buildBasemapList();
-          this._patrimoineLayer
-            .setFilter(function(f) {
-              if (parseInt(f.properties.niveau_operationnel) !== 0) return f;
-            })
-            .bringToBack();
+          this._patrimoineLayer.setFilter(function(f) {
+            //if (parseInt(f.properties.niveau_operationnel) !== 0) return f;
+            return parseInt(f.properties.niveau_operationnel) !== 0;
+          });
         }
 
         let sous_secteursGeoJSON = response['sous-secteur'];
         if (typeof sous_secteursGeoJSON !== 'undefined') {
-          this._secteurLayer = L.mapbox.featureLayer().addTo(this._map);
           this._classifySecteurs(sous_secteursGeoJSON);
+          this._secteurLayer = L.mapbox.featureLayer(sous_secteursGeoJSON).addTo(this._map);
           //$.extend(sous_secteurs.features[0].properties, this._secteurDrawingProperties);
-          this._secteurLayer.setGeoJSON(sous_secteursGeoJSON);
+          //this._secteurLayer.setGeoJSON(sous_secteursGeoJSON);
           this._map.fitBounds(this._secteurLayer.getBounds());
         }
       } else {
@@ -219,11 +202,11 @@
     _filterPatrimoineLayer: function() {
       let filteredNO = $('#dialog-body-legend .filtered_no');
       const filteredNOValues = new Set(filteredNO.toArray().map(b => $(b).attr('data-no')));
-      this._patrimoineLayer
-        .setFilter(function(f) {
+      if (typeof this._patrimoineLayer !== 'undefined') {
+        this._patrimoineLayer.setFilter(function(f) {
           return !filteredNOValues.has(f.properties.niveau_operationnel);
-        })
-        .bringToBack();
+        });
+      }
     },
     _getColorForNiveauOpe: function(no) {
       const rdYlBu = ['#d73027', '#fc8d59', '#fee090', '#e0f3f8', '#91bfdb', '#4575b4'];
@@ -256,15 +239,19 @@
       if (typeof this._missionLayer === 'undefined' || this._missionLayer === null) {
         this._missionLayer = L.mapbox
           .featureLayer()
-          .addTo(this._options.app._mapManager._map)
-          .bringToFront();
+          .addTo(this._map)
+          .on('layeradd', function(l) {
+            console.log('Layer added to mission layer', l);
+            l.layer.options.zIndexOffset = 1000;
+          });
       }
       let mission = missionGeoJSON.features[0];
       let markerProperties = {
-        'marker-color': mission.properties.statut === 'En attente' ? '#0000FF' : mission.properties.statut === 'En direction' ? '#FFC100' : '#0000FF',
-        'marker-symbol': mission.properties['niveau_operationnel'] || ''
-        //'marker-size': 'small'
+        'marker-color': GGO.shadeHexColor(this._getColorForNiveauOpe(mission.properties['niveau_operationnel']), -0.1),
+        'marker-symbol': mission.properties['niveau_operationnel'] || '',
+        'marker-size': 'large'
       };
+
       /*
       let missionGeoJSON = turf.point(mission.coordinates);
       $.extend(missionGeoJSON.properties, markerProperties);
