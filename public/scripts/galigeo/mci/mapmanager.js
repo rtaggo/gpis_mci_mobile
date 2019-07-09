@@ -247,7 +247,7 @@
       }
       let mission = missionGeoJSON.features[0];
       let markerProperties = {
-        'marker-color': GGO.shadeHexColor(this._getColorForNiveauOpe(mission.properties['niveau_operationnel']), -0.1),
+        'marker-color': GGO.shadeHexColor(this._getColorForNiveauOpe(mission.properties['niveau_operationnel']), -0.15),
         'marker-symbol': mission.properties['niveau_operationnel'] || '',
         'marker-size': 'large'
       };

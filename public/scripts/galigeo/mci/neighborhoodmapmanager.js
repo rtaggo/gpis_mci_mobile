@@ -114,6 +114,8 @@
       if (typeof response.mission_ronde !== 'undefined') {
         response.mission_ronde.features.forEach(f => {
           f.properties['marker-size'] = 'small';
+          f.properties['marker-color'] = this._getColorForStatutMission(f.properties.statut_mission);
+          console.log(f.properties.statut_mission);
           //f.properties['description'] = `${f.properties.patrouille_id}`;
         });
         this._lastMissionsLayer = L.mapbox
@@ -126,6 +128,16 @@
         }
       }
     },
+    _getColorForStatutMission: function(statut) {
+      if (statut == 1) {
+        return '#FFC100';
+      } else if (statut == 2) {
+        return '#0070d2';
+      } else if (statut == 5) {
+        return '#4bca81';
+      }
+    },
+
     onMissionsAdded: function(e) {
       let marker = e.layer;
       marker
