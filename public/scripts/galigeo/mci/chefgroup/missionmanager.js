@@ -1129,7 +1129,7 @@
         response.missions.forEach(m => {
           tblBody.append(
             $(`
-            <tr class="slds-hint-parent">
+            <tr class="slds-hint-parent" data-missionid="${m.mission_id}">
               <th data-label="Identifiant Patrouille" scope="row">
                 <div class="slds-truncate">${m.patrouille_id}
                 </div>
@@ -1144,11 +1144,15 @@
                 <div class="" >${m.nom_site}</div>
               </td>
               <td data-label="Bailleur">
-                <div class="">...</div>
+                <div class="">${m.bailleur}<div>
               </td>
             </tr>
           `)
           );
+        });
+        tblBody.find('tr').click(function(e) {
+          const mission_id = $(this).attr('data-missionid');
+          console.log(`Click on row for mission id=${mission_id}`);
         });
         ctnr.append(dataTbl.append(tblBody)).addClass('slds-scrollable_x');
         /*

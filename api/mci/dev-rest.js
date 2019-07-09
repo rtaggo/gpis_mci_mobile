@@ -128,9 +128,22 @@ const _getMissionSecteurs = async secteurIds => {
   return patrimoineResponse;
 };
 
+/*
 const _getNeighborhood = async (patrouilleId, sssecteurs) => {
   console.log(`[dev-rest] _getNeighborhood`);
   let neighborhoodUrl = `${require('../../config').get('BACKEND_URL')}/voisinage.php?patrouille=${patrouilleId}&sssecteurs=${sssecteurs}`;
+  let neighborhoodResponse = await doAsyncGET(neighborhoodUrl);
+  return neighborhoodResponse;
+};
+*/
+const _getNeighborhood = async reqQuery => {
+  console.log(`[dev-rest] _getNeighborhood`);
+  //let neighborhoodUrl = `${require('../../config').get('BACKEND_URL')}/voisinage.php?patrouille=${patrouilleId}&sssecteurs=${sssecteurs}`;
+  const requestParams = Object.keys(reqQuery)
+    .map(k => `${k}=${reqQuery[k]}`)
+    .join('&');
+  console.log(`Request parameters: ${requestParams}`);
+  let neighborhoodUrl = `${require('../../config').get('BACKEND_URL')}/voisinage.php?${requestParams}`;
   let neighborhoodResponse = await doAsyncGET(neighborhoodUrl);
   return neighborhoodResponse;
 };

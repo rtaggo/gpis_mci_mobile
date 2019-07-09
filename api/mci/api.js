@@ -132,7 +132,13 @@ router.get('/mission_sous_secteur.php', (req, res, next) => {
 router.get('/voisinage.php', (req, res, next) => {
   console.log(`[MCI_REST_API][GET] /voisinage.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
+  /*
   mcimodule.getNeighborhood(req.query.patrouille, req.query.sssecteurs).then(voisinageResponse => {
+    res.header('Content-Type', 'application/json');
+    res.json(voisinageResponse);
+  });
+  */
+  mcimodule.getNeighborhood(req.query).then(voisinageResponse => {
     res.header('Content-Type', 'application/json');
     res.json(voisinageResponse);
   });

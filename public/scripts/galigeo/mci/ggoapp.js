@@ -12,7 +12,9 @@
       var modulesOptions = {
         app: this,
         patrouille: this._options.patrouille,
-        secteurs: this._options.secteurs
+        secteurs: this._options.secteurs,
+        userName: this._options.userName,
+        userRole: this._options.userRole
       };
       GGO.UIManagerSingleton.getInstance({});
       this._mapManager = new GGO.MapManagerSingleton.getInstance(modulesOptions);

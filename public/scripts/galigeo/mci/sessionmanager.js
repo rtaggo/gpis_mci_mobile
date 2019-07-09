@@ -71,7 +71,7 @@
         dataType: 'json',
         success: function(response) {
           console.log(`Response`, response);
-          self.handleUserAuthentication(response);
+          self.handleUserAuthentication(response, loginRequest.login);
         },
         error: function(jqXHR, textStatus, errorThrown) {
           const errResponse = jqXHR.responseJSON;
@@ -81,7 +81,7 @@
         }
       });
     },
-    handleUserAuthentication: function(authResponse) {
+    handleUserAuthentication: function(authResponse, username) {
       $('#error-message').addClass('slds-hide');
       if (!authResponse.authentification) {
         let errMsg = authResponse.message || 'Une erreur est survenue, veuillez contacter votre administrateur';
@@ -108,6 +108,7 @@
         case 'charly':
         case 'alpha':
           //GGO.SessionIssuePrompt('Rôle utilisateur non disponible', `Le rôle '<b>${authResponse.role}</b>' n\'est pas disponible pour le moment.<br /> Veuillez vous reconnecter.`, $('#appContainer').empty());
+          this._currentUserName = username;
           this.fetchSecteursChefGroup();
           break;
         default:
@@ -234,7 +235,6 @@
     },
     handleClickValidateSectors: function() {
       console.warn('TODO: click validate selected sectors');
-      /*
       const selectedSecteurs = $('#listbox-soussecteurs div.slds-listbox__option.slds-is-selected').toArray();
       if (selectedSecteurs.length === 0 || selectedSecteurs.length > 3) {
         $('#sous-secteurs-form-element div.slds-combobox').addClass('slds-has-error');
@@ -246,21 +246,15 @@
       $('#sous-secteurs-form-element div.slds-combobox').removeClass('slds-has-error');
       const secteurs = selectedSecteurs.map(s => {
         let secteurId = $(s).attr('data-secteurid');
-        let secteurName = $(s).attr('data-secteurname');
-        console.log(`Secteur ${secteurName} (${secteurId})`);
-        return { id: secteurId, name: secteurName };
+        return secteurId;
       });
-      let mapUrl = `/map.html`;
-      sessionStorage.soussecteurs = JSON.stringify(secteurs);
-      sessionStorage.role = this._currentRole;
-      sessionStorage.patrouille = JSON.stringify(this._selectedPatrouille);
-      location.href = mapUrl;
-      */
+      this.validateChefGroupLoginSteps(secteurs);
     },
     validateChefGroupLoginSteps: function(selectedSecteurs) {
       let mapUrl = `/chefgroup.html`;
       sessionStorage.secteurs = JSON.stringify(selectedSecteurs);
       sessionStorage.role = this._currentRole;
+      sessionStorage.username = this._currentUserName;
       location.href = mapUrl;
     },
     /**

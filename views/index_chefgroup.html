@@ -150,31 +150,38 @@
 				'max-height':  windowH+'px',
 			});
 			let userRole = sessionStorage.getItem('role');
+			let userName = sessionStorage.getItem('username');
 
+			if (!userName) {
+				GGO.SessionIssuePrompt('Utilisateur indéfini', 'Votre nom  d\'utilisateur n\'est pas défini. Veuillez vous reconnecter.', $('#appContainer').empty());
+				return;
+			}
 			if (!userRole) {
 				GGO.SessionIssuePrompt('Rôle utilisateur indéfini', 'Votre rôle utilisateur n\'est pas défini. Veuillez vous reconnecter.', $('#appContainer').empty());
 				return;
 			}
-			let patrouille = sessionStorage.getItem('patrouille');
-			if ((userRole==='india') && !patrouille) {
-				GGO.SessionIssuePrompt('Patrouille non définie', 'Aucun patrouille n\'est pas défini. Veuillez vous reconnecter.', $('#appContainer').empty());
+			if (userRole==='india') {
+				GGO.SessionIssuePrompt('Rôle India non autorisé', 'Le rôle India n\'est pas autorisé à suivre ce parcours utilisateur. Veuillez vous reconnecter.', $('#appContainer').empty());
+				return;
 			}
 			
 			let secteurs = null;
 			switch(userRole) {
-				case 'india' : 
-					secteurs = sessionStorage.getItem('soussecteurs');
-					break;
 				case 'charly' : case 'alpha': 
 					secteurs = sessionStorage.getItem('secteurs');
 					break;
-				default:
-				
+				default:				
+			}
+
+			if (!secteurs || (secteurs === null)) {
+				GGO.SessionIssuePrompt('Aucun secteur sélectionné', 'Aucun secteur n\'été sélectionné. Veuillez vous reconnecter.', $('#appContainer').empty());
+				return;
 			}
 
 			self.galigeo = new GGO.GGOApp ({
 				windowHeight: windowH,
-				patrouille: JSON.parse(patrouille),
+				userName:  userName,
+				userRole: userRole,
 				secteurs: JSON.parse(secteurs)
 			});
 			$('.ui-loader').remove();
