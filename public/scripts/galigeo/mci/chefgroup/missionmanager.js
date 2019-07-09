@@ -1067,7 +1067,6 @@
       //let uniqueSecteurNames = Array.from(new Set(this._options.secteurs.map(s => `'${s.name}'`)));
       //uniqueSecteurNames = [`'EST'`];
       let uniqueSecteurNames = this._options.secteurs.join(',');
-      uniqueSecteurNames = `'EST'`;
       let missionUrl = `${this._options.baseRESTServicesURL}/mission_secteur.php?secteurs=${uniqueSecteurNames}`;
       $.ajax({
         type: 'GET',
@@ -1108,7 +1107,7 @@
         let dataTbl = $(`
           <table class="slds-table slds-table_bordered">
             <thead>
-            <tr class="slds-line-height_reset">
+            <tr class="slds-line-height_reset" style="vertical-align: top;">
               <th class="slds-cell-wrap" scope="col" style="text-align: center;">
                 <div class="" title="Identifiant Patrouille">Identifiant Patrouille</div>
               </th>
@@ -1131,22 +1130,21 @@
         response.missions.forEach(m => {
           tblBody.append(
             $(`
-            <tr class="slds-hint-parent" data-missionid="${m.mission_id}">
-              <th data-label="Identifiant Patrouille" scope="row">
-                <div class="slds-truncate">${m.patrouille_id}
-                </div>
-              </th>
+            <tr class="slds-hint-parent" data-missionid="${m.mission_id}" style="vertical-align:top;">
+              <td data-label="Identifiant Patrouille" scope="row">
+                <div class="slds-truncate">${m.patrouille_id}</div>
+              </td>
               <td data-label="Identifiant Site">
-                <div class="">${m.codesite}</div>
+                <div class="mission_list_info">${m.codesite}</div>
               </td>
               <td data-label="Type Mission">
-                <div class="">${m.type_mission}</div>
+                <div class="mission_list_info">${m.type_mission}</div>
               </td>
               <td data-label="Nom du site">
-                <div class="" >${m.nom_site}</div>
+                <div class="mission_list_info">${m.nom_site}</div>
               </td>
               <td data-label="Bailleur">
-                <div class="">${m.bailleur}<div>
+                <div class="mission_list_info">${m.bailleur}</div>
               </td>
             </tr>
           `)
@@ -1157,10 +1155,7 @@
           console.log(`Click on row for mission id=${mission_id}`);
           self.getMissionDetails(mission_id);
         });
-        ctnr
-          .append(dataTbl.append(tblBody))
-          .addClass('slds-scrollable')
-          .removeClass('slds-hide');
+        ctnr.append(dataTbl.append(tblBody)).removeClass('slds-hide');
         /*
         let theMission = response.features[0];
         if (theMission.properties.statut !== 'Fin') {

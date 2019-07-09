@@ -33,6 +33,11 @@
       osm: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }),
+      black: L.tileLayer('//services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+        attribution: '© Galigeo | ESRI',
+        minZoom: 1,
+        maxZoom: 15
       })
     };
 
@@ -96,9 +101,8 @@
 
     fetchPatrimoine_Secteur: function() {
       var self = this;
-      let uniqueSecteurNames = Array.from(new Set(this._options.secteurs.map(s => `'${s.name}'`)));
-      uniqueSecteurNames = [`'EST'`];
-      var restURL = `${this._options.baseRESTServicesURL}/patrimoine_secteur.php?secteurs=${uniqueSecteurNames.join(',')}`;
+      let uniqueSecteurNames = this._options.secteurs.join(',');
+      var restURL = `${this._options.baseRESTServicesURL}/patrimoine_secteur.php?secteurs=${uniqueSecteurNames}`;
       $.ajax({
         type: 'GET',
         url: restURL,
@@ -119,10 +123,9 @@
       if (response.code === 200) {
         let secteursGeoJSON = response['secteur'];
         if (typeof secteursGeoJSON !== 'undefined') {
-          this._secteurLayer = L.mapbox.featureLayer().addTo(this._map);
           this._classifySecteurs(secteursGeoJSON);
-          //$.extend(sous_secteurs.features[0].properties, this._secteurDrawingProperties);
-          this._secteurLayer.setGeoJSON(secteursGeoJSON);
+          this._secteurLayer = L.mapbox.featureLayer(secteursGeoJSON).addTo(this._map);
+          //this._secteurLayer.setGeoJSON(secteursGeoJSON);
           try {
             this._map.fitBounds(this._secteurLayer.getBounds());
           } catch (error) {
@@ -134,7 +137,7 @@
         if (typeof patrimoineGgeoJSON !== 'undefined') {
           this._classifyPatrimoine(patrimoineGgeoJSON);
           this._patrimoineLayer = L.mapbox
-            .featureLayer(null, {
+            .featureLayer(patrimoineGgeoJSON, {
               pointToLayer: function(feature, latlng) {
                 let geojsonMarkerOptions = {
                   radius: 6,
@@ -150,7 +153,7 @@
             })
             .addTo(this._map);
           //this._patrimoineLayer.on('layeradd', this.onFeatureAddedToPatrimoineLayer.bind(this));
-          this._patrimoineLayer.setGeoJSON(patrimoineGgeoJSON);
+          //this._patrimoineLayer.setGeoJSON(patrimoineGgeoJSON);
           this._buildLegend();
           this._buildBasemapList();
           this._patrimoineLayer.setFilter(function(f) {
@@ -162,14 +165,6 @@
     },
     _buildBasemapList: function() {
       let self = this;
-      /*
-      let listContent = $(`
-        <div id = "radioButtonContainerId" >
-          <input type="radio" class="slds-badge legend-badge" name="basemap" value="streets" checked>World Street Map<br>
-          <input type="radio" class="slds-badge legend-badge" name="basemap" value="imagery">World Imagery<br>
-        </div>
-      `);
-      */
       let listContent = $(`
         <div class="slds-form-element__control" id="radioButtonContainerId" >
           <span class="slds-radio">

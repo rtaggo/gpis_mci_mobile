@@ -152,3 +152,8 @@ body {
   padding: 2px ;
   line-height: 100%;
 }
+
+/* Chef de groupe */
+.mission_list_info {
+  white-space: pre-line;
+}
