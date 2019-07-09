@@ -247,10 +247,11 @@
       }
       let mission = missionGeoJSON.features[0];
       let markerProperties = {
-        'marker-color': mission.properties.statut === 'En attente' ? '#0000FF' : mission.properties.statut === 'En direction' ? '#FFC100' : '#0000FF',
-        'marker-symbol': mission.properties['niveau_operationnel'] || ''
-        //'marker-size': 'small'
+        'marker-color': GGO.shadeHexColor(this._getColorForNiveauOpe(mission.properties['niveau_operationnel']), -0.1),
+        'marker-symbol': mission.properties['niveau_operationnel'] || '',
+        'marker-size': 'large'
       };
+
       /*
       let missionGeoJSON = turf.point(mission.coordinates);
       $.extend(missionGeoJSON.properties, markerProperties);
