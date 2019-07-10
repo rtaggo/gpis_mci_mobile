@@ -258,9 +258,10 @@
         this._missionLayer = L.mapbox.featureLayer().addTo(this._options.app._mapManager._map);
       }
       let markerProperties = {
-        'marker-color': mission.statut === 'En attente' ? '#FF0000' : mission.statut === 'En direction' ? '#00FF00' : '#0000FF' //,
+        'marker-color': mission.properties.statut === 'Début' ? '#00FF00' : '#0000FF' //,
         //'marker-size': 'small'
       };
+      $.extend(mission.properties, markerProperties);
       /*
       let missionGeoJSON = turf.point(mission.coordinates);
       $.extend(missionGeoJSON.properties, markerProperties);

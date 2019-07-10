@@ -6,13 +6,15 @@ const rp = require('request-promise');
 const bodyParser = require('body-parser');
 
 const doAsyncGET = async url => {
+  let res = null;
   try {
-    let res = await rp(url);
+    res = await rp(url);
     //console.log(res);
     let jsonRes = typeof res === 'string' ? JSON.parse(res) : res;
     return jsonRes;
   } catch (err) {
     console.log('Error: ', err);
+    console.log(' resquest response: ', res);
     return { code: 500 };
   }
 };
@@ -123,17 +125,25 @@ const _getMission = async patrouilleId => {
 // getMissionSecteurs
 const _getMissionSecteurs = async secteurIds => {
   console.log(`[dev-rest] _getMissionSecteurs secteurIds=${secteurIds}`);
-  let patrimoineUrl = `${require('../../config').get('BACKEND_URL')}/mission_secteur.php?secteurs=${secteurIds}`;
-  let patrimoineResponse = await doAsyncGET(patrimoineUrl);
-  return patrimoineResponse;
+  let missionSecteursUrl = `${require('../../config').get('BACKEND_URL')}/mission_secteur.php?secteurs=${secteurIds}`;
+  let missionSecteursResponse = await doAsyncGET(missionSecteursUrl);
+  return missionSecteursResponse;
 };
 
 // getMissionDetails
 const _getMissionDetails = async missionId => {
-  console.log(`[dev-rest] _getMissionDetails secteurIds=${missionId}`);
-  let patrimoineUrl = `${require('../../config').get('BACKEND_URL')}/selection_mission.php?mission=${missionId}`;
-  let patrimoineResponse = await doAsyncGET(patrimoineUrl);
-  return patrimoineResponse;
+  console.log(`[dev-rest] _getMissionDetails missionId=${missionId}`);
+  let missionDetailsUrl = `${require('../../config').get('BACKEND_URL')}/selection_mission.php?mission=${missionId}`;
+  let missionDetailsResponse = await doAsyncGET(missionDetailsUrl);
+  return missionDetailsResponse;
+};
+
+// joinMission
+const _joinMission = async reqQuery => {
+  console.log(`[dev-rest] _joinMission request query=${JSON.stringify(reqQuery)}`);
+  let joinMissionUrl = `${require('../../config').get('BACKEND_URL')}/rejoindre.php?mission=${reqQuery.mission}&chef_groupe=${reqQuery.chef_groupe}`;
+  let joinMissionResponse = await doAsyncGET(joinMissionUrl);
+  return joinMissionResponse;
 };
 
 /*
@@ -245,5 +255,6 @@ module.exports = {
   getStatutMission: _getStatutMission,
   getPatrimoineSecteur: _getPatrimoineSecteur,
   getMissionSecteurs: _getMissionSecteurs,
-  getMissionDetails: _getMissionDetails
+  getMissionDetails: _getMissionDetails,
+  joinMission: _joinMission
 };

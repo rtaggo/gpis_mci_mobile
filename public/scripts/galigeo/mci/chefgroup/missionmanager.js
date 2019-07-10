@@ -1109,10 +1109,10 @@
             <thead>
             <tr class="slds-line-height_reset" style="vertical-align: top;">
               <th class="slds-cell-wrap" scope="col" style="text-align: center;">
-                <div class="" title="Identifiant Patrouille">Identifiant Patrouille</div>
+                <div class="" title="Identifiant Patrouille">Patrouille(s)</div>
               </th>
               <th class="slds-cell-wrap" scope="col" style="text-align: center;">
-                <div class="" title="Identifiant site">Identifiant Site</div>
+                <div class="" title="Identifiant site">Site</div>
               </th>
               <th class="slds-cell-wrap" scope="col" style="text-align: center;">
                 <div class="" title="Type Mission">Type Mission</div>
@@ -1371,6 +1371,9 @@
                 <div class="slds-form-element__static">
                   <div id="mission_id_form" >${mission.properties.mission_id}</div>
                 </div>
+              </div>
+            </div>
+          </div>
         </div>
       `)
       );
@@ -1464,13 +1467,18 @@
         .append(content)
         .append(closeBtn);
 
-      $('#btnMissionRejoindre')
-        .off()
-        .click(
-          function(e) {
-            self.joinMission(this);
-          }.bind(mission)
-        );
+      if (typeof this._currentJoinedMission !== 'undefined' && mission.properties.mission_id === this._currentJoinedMission.properties.mission_id) {
+        $('#btnMissionRejoindre').attr('disabled', true);
+      } else {
+        $('#btnMissionRejoindre')
+          .attr('disabled', false)
+          .off()
+          .click(
+            function(e) {
+              self.joinMission(this);
+            }.bind(mission)
+          );
+      }
       $('#btnMissionClose')
         .off()
         .click(
@@ -1491,15 +1499,40 @@
       console.warn(`TODO: join mission `, mission);
       let self = this;
       // do Ajax call
-      this.joinMissionCallback({}, mission);
+      debugger;
+      let joinMissionUrl = `${this._options.baseRESTServicesURL}/rejoindre.php?mission=${mission.properties.mission_id}&chef_groupe=${this._options.userName}`;
+      $.ajax({
+        type: 'GET',
+        url: joinMissionUrl,
+        success: function(response) {
+          console.log(`${joinMissionUrl}: `, response);
+          //self.handleMissionDetailsFetched(response);
+          self.joinMissionCallback(response, mission);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`[GET] ${joinMissionUrl} Request aborted`);
+          } else {
+            console.error(`${joinMissionUrl} request error : ${textStatus}`, errorThrown);
+          }
+        }
+      });
+      //this.joinMissionCallback({}, mission);
     },
     joinMissionCallback: function(response, mission) {
-      $(`#missionListContent tr`)
-        .removeClass('slds-is-selected')
-        .attr('aria-selected', false);
-      $(`#missionListContent tr[data-missionid="${mission.properties.mission_id}"`)
-        .addClass('slds-is-selected')
-        .attr('aria-selected', true);
+      if (response.code === 200) {
+        this._currentJoinedMission = mission;
+        $('#btnMissionRejoindre').attr('disabled', true);
+
+        $(`#missionListContent tr`)
+          .removeClass('slds-is-selected')
+          .attr('aria-selected', false);
+        $(`#missionListContent tr[data-missionid="${mission.properties.mission_id}"`)
+          .addClass('slds-is-selected')
+          .attr('aria-selected', true);
+      } else {
+        console.warn(`Display error message`, response);
+      }
     }
   };
   GGO.MissionManagerSingleton = (function() {
