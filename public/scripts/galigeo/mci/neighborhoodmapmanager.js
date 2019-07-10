@@ -114,7 +114,7 @@
       if (typeof response.mission_ronde !== 'undefined') {
         response.mission_ronde.features.forEach(f => {
           f.properties['marker-size'] = 'small';
-          f.properties['marker-color'] = this._getColorForStatutMission(f.properties.statut_mission);
+          f.properties['marker-color'] = GGO.getColorForStatutMission(parseInt(f.properties.statut_mission));
           console.log(f.properties.statut_mission);
           //f.properties['description'] = `${f.properties.patrouille_id}`;
         });
@@ -128,6 +128,7 @@
         }
       }
     },
+    /* J'ai déplacé la méthode dans galigeo.js ==> GGO.getColorForStatutMission
     _getColorForStatutMission: function(statut) {
       if (statut == 1) {
         return '#FFC100';
@@ -137,7 +138,7 @@
         return '#4bca81';
       }
     },
-
+    */
     onMissionsAdded: function(e) {
       let marker = e.layer;
       marker
