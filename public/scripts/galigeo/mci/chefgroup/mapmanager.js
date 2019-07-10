@@ -258,7 +258,7 @@
         this._missionLayer = L.mapbox.featureLayer().addTo(this._options.app._mapManager._map);
       }
       let markerProperties = {
-        'marker-color': mission.properties.statut === 'Début' ? '#00FF00' : '#0000FF' //,
+        'marker-color': GGO.getColorForStatutMissionLabel(mission.properties.statut)
         //'marker-size': 'small'
       };
       $.extend(mission.properties, markerProperties);

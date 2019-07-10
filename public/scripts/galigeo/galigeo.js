@@ -98,6 +98,26 @@
     return GGO.COLORPALETTES[paletteName] || GGO.getDefaultColorPalette();
   };
 
+  GGO.getColorForStatutMission = function(statut) {
+    if (statut === 1) {
+      return '#FFC100';
+    } else if (statut === 2) {
+      return '#0070d2';
+    } else if (statut === 5) {
+      return '#4bca81';
+    }
+  };
+
+  GGO.getColorForStatutMissionLabel = function(statut) {
+    if (statut === 'En direction') {
+      return '#FFC100';
+    } else if (statut === 'Début') {
+      return '#0070d2';
+    } else if (statut === 'Fin') {
+      return '#4bca81';
+    }
+  };
+
   GGO.shadeHexColor = function(color, percent) {
     /* 
       Percent: 
