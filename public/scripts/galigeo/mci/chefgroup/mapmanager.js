@@ -237,6 +237,7 @@
     _classifySecteurs: function(geojson) {
       let colors = GGO.getColorPalette('secteurs');
       geojson.features.forEach((f, i) => {
+        f.properties['description'] = `Secteur ${f.properties.name_secteur}`;
         let col = colors[i];
         $.extend(f.properties, this._secteurDrawingProperties, { fill: col, stroke: col });
       });
