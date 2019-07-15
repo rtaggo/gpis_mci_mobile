@@ -865,7 +865,7 @@
       //let uniqueSecteurNames = Array.from(new Set(this._options.secteurs.map(s => `'${s.name}'`)));
       //uniqueSecteurNames = [`'EST'`];
       let uniqueSecteurNames = this._options.secteurs.join(',');
-      let missionUrl = `${this._options.baseRESTServicesURL}/mission_secteur.php?secteurs=${uniqueSecteurNames}`;
+      let missionUrl = `${this._options.baseRESTServicesURL}/mission_secteur.php?secteurs=${uniqueSecteurNames}&id_chef_groupe=${this._options.userName}`;
       $.ajax({
         type: 'GET',
         url: missionUrl,
