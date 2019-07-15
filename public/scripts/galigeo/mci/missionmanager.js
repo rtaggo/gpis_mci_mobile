@@ -588,6 +588,7 @@
       return allGood;
     },
     checkBeforeSaveSignalement: function() {
+      $('#btnSignalementOk').attr('disabled', true);
       let self = this;
       let allGood = true;
 
@@ -647,6 +648,8 @@
       };
       if (allGood) {
         this.saveSignalement(formSignalement);
+      } else {
+        $('#btnSignalementOk').attr('disabled', false);
       }
     },
     saveSignalement: function(formSignalement) {
@@ -724,6 +727,7 @@
       });
     },
     validateReacffectation: function() {
+      $('#btnReaffecter').attr('disabled', true);
       let self = this;
       let formReaffectation = {
         mission_id: self._currentMission.features[0].properties.mission_id,
