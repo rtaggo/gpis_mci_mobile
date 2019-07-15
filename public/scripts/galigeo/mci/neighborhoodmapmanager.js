@@ -69,10 +69,19 @@
       }).setView([48.853507, 2.348015], 12);
       this.fetchNeighborhood();
     },
+    _getNeighborhoodURL: function() {
+      if (this._options.userRole === 'india') {
+        /*console.log(`Build neighborhood url for patrouille  ${JSON.stringify(this._options.patrouille)} with sectors ${JSON.stringify(this._options.secteurs)}`);*/
+        return `${this._options.baseRESTServicesURL}/voisinage.php?patrouille=${this._options.patrouille.id}&sssecteurs=${this._options.secteurs.map(s => s.id).join(',')}`;
+      } else {
+        /* case of charly or alpha */
+        return `${this._options.baseRESTServicesURL}/voisinage.php?id_chef_groupe=${this._options.userName}&secteurs=${this._options.secteurs.join(',')}`;
+      }
+    },
     fetchNeighborhood: function() {
-      console.warn(`TODO: fetch neighborhood for patrouille  ${JSON.stringify(this._options.patrouille)} with sectors ${JSON.stringify(this._options.secteurs)}`);
       let self = this;
-      var restURL = `${this._options.baseRESTServicesURL}/voisinage.php?patrouille=${this._options.patrouille.id}&sssecteurs=${this._options.secteurs.map(s => s.id).join(',')}`;
+      //var restURL = `${this._options.baseRESTServicesURL}/voisinage.php?patrouille=${this._options.patrouille.id}&sssecteurs=${this._options.secteurs.map(s => s.id).join(',')}`;
+      let restURL = this._getNeighborhoodURL();
       $.ajax({
         type: 'GET',
         url: restURL,

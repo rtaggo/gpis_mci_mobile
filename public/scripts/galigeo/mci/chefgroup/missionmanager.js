@@ -1468,9 +1468,12 @@
         .append(closeBtn);
 
       if (typeof this._currentJoinedMission !== 'undefined' && mission.properties.mission_id === this._currentJoinedMission.properties.mission_id) {
-        $('#btnMissionRejoindre').attr('disabled', true);
+        $('#btnMissionRejoindre')
+          .attr('disabled', true)
+          .addClass('slds-hide');
       } else {
         $('#btnMissionRejoindre')
+          .removeClass('slds-hide')
           .attr('disabled', false)
           .off()
           .click(
@@ -1489,9 +1492,11 @@
               .addClass('slds-hide');
             $('#missionFooter').addClass('slds-hide');
             $('#missionListContent').removeClass('slds-hide');
+            /*
             $('#missionListContent tr')
               .removeClass('slds-is-selected')
               .attr('aria-selected', false);
+            */
           }.bind(mission)
         );
     },
@@ -1522,7 +1527,9 @@
     joinMissionCallback: function(response, mission) {
       if (response.code === 200) {
         this._currentJoinedMission = mission;
-        $('#btnMissionRejoindre').attr('disabled', true);
+        $('#btnMissionRejoindre')
+          .attr('disabled', true)
+          .addClass('slds-hide');
 
         $(`#missionListContent tr`)
           .removeClass('slds-is-selected')
