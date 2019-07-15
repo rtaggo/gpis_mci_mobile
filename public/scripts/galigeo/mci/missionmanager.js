@@ -1296,7 +1296,6 @@
       );
 
       // incidentes
-      debugger;
       let incidContent = '<div class="slds-form-element__static"><p>Aucune incidente</p></div>';
       if (typeof mission.properties.incidente !== 'undefined' && Array.isArray(mission.properties.incidente) && mission.properties.incidente.length > 0) {
         incidContent = `
