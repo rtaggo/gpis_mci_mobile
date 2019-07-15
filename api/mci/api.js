@@ -105,7 +105,7 @@ router.get('/patrimoine_secteur.php', (req, res, next) => {
 router.get('/mission_secteur.php', (req, res, next) => {
   console.log(`[MCI_REST_API][GET] /mission_secteur.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
-  mcimodule.getMissionSecteurs(req.query.secteurs).then(missionResponse => {
+  mcimodule.getMissionSecteurs(req.query.secteurs, req.query.id_chef_groupe).then(missionResponse => {
     res.header('Content-Type', 'application/json');
     res.json(missionResponse);
   });
