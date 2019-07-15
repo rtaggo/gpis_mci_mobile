@@ -1280,7 +1280,7 @@
             </div>
           </div>
         </div>
-       <div class="slds-form__row slds-hide"">
+        <div class="slds-form__row slds-hide"">
           <div class="slds-form__item" role="listitem">
             <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
               <div class="slds-form-element__control">

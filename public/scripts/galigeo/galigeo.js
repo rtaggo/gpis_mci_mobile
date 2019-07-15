@@ -83,7 +83,7 @@
     }
   };
 
-  GGO.CHECK_MISSION_INTERVALLE = 4000;
+  GGO.CHECK_MISSION_INTERVALLE = 10000;
   GGO.COLORPALETTES = {
     rdYlBu: ['#4874bf', '#228714', '#edeb2a', '#f99e38', '#ff0000', '#000000'],
     secteurs: ['#8dd3c7', '#ffffb3', '#bebada', '#fb8072', '#80b1d3', '#fdb462', '#b3de69', '#fccde5', '#d9d9d9'],
