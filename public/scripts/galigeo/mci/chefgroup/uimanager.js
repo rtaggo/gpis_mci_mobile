@@ -35,6 +35,10 @@
     },
     _setupListeners: function() {
       let self = this;
+      window.addEventListener('orientationchange', function(e) {
+        console.log('the orientation of the device is now ' + screen.orientation.angle, e);
+        self._handleOrientationChanged(screen.orientation.angle === 0 ? 'portrait' : 'landscape');
+      });
       $('#neighborhoodIcon').click(function(e) {
         GGO.EventBus.dispatch(GGO.EVENTS.NEIGHBORHOOD);
       });
@@ -76,6 +80,34 @@
         //Default is 75px, set to 0 for demo so any distance triggers swipe
         threshold: 0
       });
+    },
+    _handleOrientationChanged: function(orientation) {
+      console.log('_handleOrientationChanged');
+      this.updateUISizes();
+    },
+    updateUISizes: function() {
+      let wHeight = screen.availHeight;
+      let wHalfHeight = wHeight / 2;
+
+      $('body').css({
+        height: wHeight + 'px',
+        'max-height': wHeight + 'px'
+      });
+
+      $('#mission-card-Container').css({
+        height: wHalfHeight + 'px',
+        'max-height': wHalfHeight + 'px'
+      });
+      //wHalfHeight -= 20;
+      $('#mission-card-Container .slds-card__body').css({
+        height: wHalfHeight + 'px',
+        'max-height': wHalfHeight + 'px'
+      });
+
+      $('#map').css({
+        height: wHalfHeight + 'px'
+      });
+      GGO.EventBus.dispatch(GGO.EVENTS.INVALIDATEMAPSIZE);
     },
     _handleSwipeUpDownEnd: function(direction, data) {
       var self = this;

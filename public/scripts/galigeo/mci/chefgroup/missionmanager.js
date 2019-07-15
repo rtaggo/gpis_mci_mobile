@@ -857,6 +857,7 @@
       setTimeout(function() {
         if (self._periodicCheckMission) {
           self.fetchMission();
+          self._periodicCheckMission = false;
         }
       }, GGO.CHECK_MISSION_INTERVALLE);
     },
@@ -931,7 +932,7 @@
             $(`
             <tr class="slds-hint-parent" data-missionid="${m.mission_id}" style="vertical-align:top;">
               <td data-label="Identifiant Patrouille" scope="row">
-                <div class="slds-truncate">${m.patrouille_id}</div>
+                <div class="slds-truncate" style="white-space: pre-line;">${m.patrouille_id.split(',').join(', ')}</div>
               </td>
               <td data-label="Identifiant Site">
                 <div class="mission_list_info">${m.codesite}</div>
@@ -1295,7 +1296,6 @@
       console.warn(`TODO: join mission `, mission);
       let self = this;
       // do Ajax call
-      debugger;
       let joinMissionUrl = `${this._options.baseRESTServicesURL}/rejoindre.php?mission=${mission.properties.mission_id}&chef_groupe=${this._options.userName}`;
       $.ajax({
         type: 'GET',
