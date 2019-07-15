@@ -259,7 +259,8 @@
         this._missionLayer = L.mapbox.featureLayer().addTo(this._options.app._mapManager._map);
       }
       let markerProperties = {
-        'marker-color': GGO.getColorForStatutMissionLabel(mission.properties.statut)
+        'marker-color': GGO.shadeHexColor(this._getColorForNiveauOpe(mission.properties['niveau_operationnel']), -0.15),
+        'marker-symbol': mission.properties['niveau_operationnel'] || ''
         //'marker-size': 'small'
       };
       $.extend(mission.properties, markerProperties);
