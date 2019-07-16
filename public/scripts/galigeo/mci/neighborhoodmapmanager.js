@@ -70,6 +70,7 @@
       this.fetchNeighborhood();
     },
     _getNeighborhoodURL: function() {
+      console.log(this._options);
       if (this._options.userRole === 'india') {
         /*console.log(`Build neighborhood url for patrouille  ${JSON.stringify(this._options.patrouille)} with sectors ${JSON.stringify(this._options.secteurs)}`);*/
         return `${this._options.baseRESTServicesURL}/voisinage.php?patrouille=${this._options.patrouille.id}&sssecteurs=${this._options.secteurs.map(s => s.id).join(',')}`;
@@ -160,6 +161,9 @@
       if (typeof response.mission_ronde !== 'undefined') {
         response.mission_ronde.features.forEach(f => {
           f.properties['marker-size'] = 'small';
+          if (parseInt(f.properties.type_mission_id) == 6) {
+            f.properties['marker-symbol'] = 'triangle';
+          }
           f.properties['marker-color'] = GGO.getColorForStatutMission(parseInt(f.properties.statut_mission));
           f.properties['description'] = f.properties.codesite;
           console.log(f.properties.statut_mission);
