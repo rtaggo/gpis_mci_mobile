@@ -124,6 +124,7 @@
         response.mission_ronde.features.forEach(f => {
           f.properties['marker-size'] = 'small';
           f.properties['marker-color'] = GGO.getColorForStatutMission(parseInt(f.properties.statut_mission));
+          f.properties['description'] = f.properties.codesite;
           //console.log(f.properties.statut_mission);
           //f.properties['description'] = `${f.properties.patrouille_id}`;
         });
