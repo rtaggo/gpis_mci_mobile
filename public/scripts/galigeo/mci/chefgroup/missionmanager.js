@@ -1225,7 +1225,7 @@
         </div>
         `;
       }
-
+      
       content.append(
         $(`
           <div class="slds-form__row">
@@ -1242,7 +1242,9 @@
       );
 
       $('#missionListContent').addClass('slds-hide');
-      $('#missionContent').removeClass('slds-hide');
+      $('#missionContent')
+        .removeClass('slds-hide')
+        .scrollTop();
       $('#missionFooter').removeClass('slds-hide');
 
       let closeBtn = $(`
