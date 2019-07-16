@@ -1186,7 +1186,7 @@
             ${mission.properties.incidente
               .map(s => {
                 return `
-                <li>${moment(s.date).format('DD/MM/YYYY')} : ${s.libelle}
+                <li>${moment(s.date).format('DD/MM/YYYY HH:mm')} : ${s.libelle}
                   <span class="incidente-observation">${s.observations}</span>
                 </li>`;
               })
@@ -1218,7 +1218,7 @@
           <ul class="slds-list_dotted" id = "parent-list">
             ${mission.properties.signalement
               .map(s => {
-                return `<li id='signalement_list_${s.id}' value=${s.id}>${moment(s.date).format('DD/MM/YYYY')} : ${s.libelle}</li>`;
+                return `<li id='signalement_list_${s.id}' value=${s.id}>${moment(s.date).format('DD/MM/YYYY HH:mm')} : ${s.libelle}</li>`;
               })
               .join('')}
           </ul>
