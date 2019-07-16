@@ -1225,7 +1225,7 @@
         </div>
         `;
       }
-      
+
       content.append(
         $(`
           <div class="slds-form__row">
@@ -1248,7 +1248,7 @@
       $('#missionFooter').removeClass('slds-hide');
 
       let closeBtn = $(`
-        <button class="slds-button slds-button_icon slds-button_icon-small slds-panel__close" style="position: absolute;right: 0;top: 0px;">
+        <button class="slds-button slds-button_icon slds-button_icon-small slds-panel__close slds-hide" style="position: absolute;right: 0;top: 0px;">
           <svg class="slds-button__icon" aria-hidden="true">
             <use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
           </svg>
