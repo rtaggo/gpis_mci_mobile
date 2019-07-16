@@ -120,6 +120,43 @@
         //this._map.fitBounds(this._secteurLayer.getBounds());
         zoomDone = true;
       }
+      if (typeof response.secteur !== 'undefined') {
+        response.secteur.features.forEach((f, i) => {
+          f.properties['description'] = `Secteur ${f.properties.name_sous_secteur}`;
+          let col = colors[i];
+          $.extend(f.properties, this._secteurDrawingProperties, { fill: col, stroke: col });
+        });
+        this._secteurLayer = L.mapbox
+          .featureLayer()
+          .addTo(this._map)
+          .setGeoJSON(response.secteur);
+        //this._map.fitBounds(this._secteurLayer.getBounds());
+        zoomDone = true;
+      }
+      if (typeof response.chef_groupe !== 'undefined') {
+        // response.chef_groupe.features.forEach((f, i) => {
+        //   f.properties['marker-size'] = 'small';
+        // });
+        this._secteurLayer = L.mapbox
+          .featureLayer(response.chef_groupe, {
+            pointToLayer: function(feature, latlng) {
+              let geojsonMarkerOptions = {
+                radius: 6,
+                fillColor: feature.properties['marker-color'],
+                color: '#808080',
+                weight: 1,
+                opacity: 0,
+                fillOpacity: 0
+              };
+              let lyr = L.circleMarker(latlng, geojsonMarkerOptions);
+              return lyr;
+            }
+          })
+          .addTo(this._map)
+          .on('layeradd', this.onChefGroupeAdded.bind(this))
+          .setGeoJSON(response.chef_groupe);
+        zoomDone = true;
+      }
       if (typeof response.mission_ronde !== 'undefined') {
         response.mission_ronde.features.forEach(f => {
           f.properties['marker-size'] = 'small';
@@ -154,6 +191,18 @@
       marker
         .bindTooltip(`${marker.feature.properties['name_patrouille']}`, {
           offset: L.point(0, -22),
+          direction: 'top',
+          noHide: true,
+          permanent: true,
+          className: 'class-tooltip'
+        })
+        .openTooltip();
+    },
+    onChefGroupeAdded: function(e) {
+      let marker = e.layer;
+      marker
+        .bindTooltip(`${marker.feature.properties['id_chef_groupe']}`, {
+          offset: L.point(0, 0),
           direction: 'top',
           noHide: true,
           permanent: true,
