@@ -858,7 +858,9 @@
       setTimeout(function() {
         if (self._periodicCheckMission) {
           self.fetchMission();
+          /*
           self._periodicCheckMission = false;
+          */
         }
       }, GGO.CHECK_MISSION_INTERVALLE);
     },
