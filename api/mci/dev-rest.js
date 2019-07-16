@@ -123,9 +123,21 @@ const _getMission = async patrouilleId => {
 };
 
 // getMissionSecteurs
+/*
 const _getMissionSecteurs = async (secteurIds, chefGroupeId) => {
   console.log(`[dev-rest] _getMissionSecteurs secteurIds=${secteurIds}`);
   let missionSecteursUrl = `${require('../../config').get('BACKEND_URL')}/mission_secteur.php?secteurs=${secteurIds}&id_chef_groupe=${chefGroupeId}`;
+  let missionSecteursResponse = await doAsyncGET(missionSecteursUrl);
+  return missionSecteursResponse;
+};
+*/
+const _getMissionSecteurs = async reqQuery => {
+  console.log(`[dev-rest] _getMissionSecteurs`);
+  const requestParams = Object.keys(reqQuery)
+    .map(k => `${k}=${reqQuery[k]}`)
+    .join('&');
+  console.log(`Request parameters: ${requestParams}`);
+  let missionSecteursUrl = `${require('../../config').get('BACKEND_URL')}/mission_secteur.php?${requestParams}`;
   let missionSecteursResponse = await doAsyncGET(missionSecteursUrl);
   return missionSecteursResponse;
 };

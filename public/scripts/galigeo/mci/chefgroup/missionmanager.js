@@ -15,7 +15,8 @@
       let self = this;
       GGO.EventBus.addEventListener(GGO.EVENTS.APPISREADY, function(e) {
         console.log('Received GGO.EVENTS.APPISREADY');
-        self.checkMission();
+        //self.checkMission();
+        self.fetchMission();
       });
     },
     openSignalementModal: function() {
@@ -901,6 +902,9 @@
     },
     handleMissionResponseOK: function(response) {
       let self = this;
+      if (typeof response.mission_en_cours !== 'undefined') {
+        this._currentJoinedMissionId = response.mission_en_cours;
+      }
       if (response.missions && Array.isArray(response.missions) && response.missions.length > 0) {
         $('#waiting4Mission').remove();
         let ctnr = $('#missionListContent').empty();
@@ -955,9 +959,9 @@
           console.log(`Click on row for mission id=${mission_id}`);
           self.getMissionDetails(mission_id);
         });
-        if (typeof this._currentJoinedMission !== 'undefined') {
+        if (typeof this._currentJoinedMissionId !== 'undefined') {
           tblBody
-            .find(`tr[data-missionid="${this._currentJoinedMission.properties.mission_id}"]`)
+            .find(`tr[data-missionid="${this._currentJoinedMissionId}"]`)
             .addClass('slds-is-selected')
             .attr('aria-selected', true);
         }
@@ -1253,6 +1257,7 @@
           .addClass('slds-hide');
         $('#missionFooter').addClass('slds-hide');
         $('#missionListContent').removeClass('slds-hide');
+        delete self._currentDetailsMission;
         self._periodicCheckMission = true;
         self.checkMission();
       });
@@ -1262,7 +1267,7 @@
         .append(content)
         .append(closeBtn);
 
-      if (typeof this._currentJoinedMission !== 'undefined' && mission.properties.mission_id === this._currentJoinedMission.properties.mission_id) {
+      if (typeof this._currentJoinedMissionId !== 'undefined' && mission.properties.mission_id === this._currentJoinedMissionId) {
         $('#btnMissionRejoindre')
           .attr('disabled', true)
           .addClass('slds-hide');
@@ -1287,6 +1292,7 @@
               .addClass('slds-hide');
             $('#missionFooter').addClass('slds-hide');
             $('#missionListContent').removeClass('slds-hide');
+            delete self._currentDetailsMission;
             self._periodicCheckMission = true;
             self.checkMission();
           }.bind(mission)
@@ -1315,7 +1321,7 @@
     },
     joinMissionCallback: function(response, mission) {
       if (response.code === 200) {
-        this._currentJoinedMission = mission;
+        this._currentJoinedMissionId = mission.properties.mission_id;
         $('#btnMissionRejoindre')
           .attr('disabled', true)
           .addClass('slds-hide');
