@@ -6,13 +6,15 @@ const rp = require('request-promise');
 const bodyParser = require('body-parser');
 
 const doAsyncGET = async url => {
+  let res = null;
   try {
-    let res = await rp(url);
+    res = await rp(url);
     //console.log(res);
     let jsonRes = typeof res === 'string' ? JSON.parse(res) : res;
     return jsonRes;
   } catch (err) {
     console.log('Error: ', err);
+    console.log(' resquest response: ', res);
     return { code: 500 };
   }
 };
@@ -99,6 +101,13 @@ const _getSecteurs = async () => {
   return secteurs;
 };
 
+const _getPatrimoineSecteur = async secteurs => {
+  console.log(`[dev-rest] _getPatrimoineSecteur secteurs=${secteurs}`);
+  let patrimoineUrl = `${require('../../config').get('BACKEND_URL')}/patrimoine_secteur.php?secteurs=${secteurs}`;
+  let patrimoineResponse = await doAsyncGET(patrimoineUrl);
+  return patrimoineResponse;
+};
+
 const _getPatrimoineSousSecteur = async (patrouilleId, soussecteurs) => {
   console.log(`[dev-rest] _getPatrimoineSousSecteur patrouilleId=${patrouilleId} sous-secteurs=${soussecteurs}`);
   let patrimoineUrl = `${require('../../config').get('BACKEND_URL')}/patrimoine_sous_secteur.php?patrouille=${patrouilleId}&sssecteurs=${soussecteurs}`;
@@ -107,15 +116,64 @@ const _getPatrimoineSousSecteur = async (patrouilleId, soussecteurs) => {
 };
 
 const _getMission = async patrouilleId => {
-  console.log(`[dev-rest] _getNeighborhood patrouilleId=${patrouilleId}`);
+  console.log(`[dev-rest] _getMission patrouilleId=${patrouilleId}`);
   let patrimoineUrl = `${require('../../config').get('BACKEND_URL')}/mission_sous_secteur.php?patrouille=${patrouilleId}`;
   let patrimoineResponse = await doAsyncGET(patrimoineUrl);
   return patrimoineResponse;
 };
 
+// getMissionSecteurs
+/*
+const _getMissionSecteurs = async (secteurIds, chefGroupeId) => {
+  console.log(`[dev-rest] _getMissionSecteurs secteurIds=${secteurIds}`);
+  let missionSecteursUrl = `${require('../../config').get('BACKEND_URL')}/mission_secteur.php?secteurs=${secteurIds}&id_chef_groupe=${chefGroupeId}`;
+  let missionSecteursResponse = await doAsyncGET(missionSecteursUrl);
+  return missionSecteursResponse;
+};
+*/
+const _getMissionSecteurs = async reqQuery => {
+  console.log(`[dev-rest] _getMissionSecteurs`);
+  const requestParams = Object.keys(reqQuery)
+    .map(k => `${k}=${reqQuery[k]}`)
+    .join('&');
+  console.log(`Request parameters: ${requestParams}`);
+  let missionSecteursUrl = `${require('../../config').get('BACKEND_URL')}/mission_secteur.php?${requestParams}`;
+  let missionSecteursResponse = await doAsyncGET(missionSecteursUrl);
+  return missionSecteursResponse;
+};
+
+// getMissionDetails
+const _getMissionDetails = async missionId => {
+  console.log(`[dev-rest] _getMissionDetails missionId=${missionId}`);
+  let missionDetailsUrl = `${require('../../config').get('BACKEND_URL')}/selection_mission.php?mission=${missionId}`;
+  let missionDetailsResponse = await doAsyncGET(missionDetailsUrl);
+  return missionDetailsResponse;
+};
+
+// joinMission
+const _joinMission = async reqQuery => {
+  console.log(`[dev-rest] _joinMission request query=${JSON.stringify(reqQuery)}`);
+  let joinMissionUrl = `${require('../../config').get('BACKEND_URL')}/rejoindre.php?mission=${reqQuery.mission}&chef_groupe=${reqQuery.chef_groupe}`;
+  let joinMissionResponse = await doAsyncGET(joinMissionUrl);
+  return joinMissionResponse;
+};
+
+/*
 const _getNeighborhood = async (patrouilleId, sssecteurs) => {
   console.log(`[dev-rest] _getNeighborhood`);
   let neighborhoodUrl = `${require('../../config').get('BACKEND_URL')}/voisinage.php?patrouille=${patrouilleId}&sssecteurs=${sssecteurs}`;
+  let neighborhoodResponse = await doAsyncGET(neighborhoodUrl);
+  return neighborhoodResponse;
+};
+*/
+const _getNeighborhood = async reqQuery => {
+  console.log(`[dev-rest] _getNeighborhood`);
+  //let neighborhoodUrl = `${require('../../config').get('BACKEND_URL')}/voisinage.php?patrouille=${patrouilleId}&sssecteurs=${sssecteurs}`;
+  const requestParams = Object.keys(reqQuery)
+    .map(k => `${k}=${reqQuery[k]}`)
+    .join('&');
+  console.log(`Request parameters: ${requestParams}`);
+  let neighborhoodUrl = `${require('../../config').get('BACKEND_URL')}/voisinage.php?${requestParams}`;
   let neighborhoodResponse = await doAsyncGET(neighborhoodUrl);
   return neighborhoodResponse;
 };
@@ -206,5 +264,9 @@ module.exports = {
   getReaffectationSignalement: _getReaffectationSignalement,
   getReaffectationPost: _getReaffectationPost,
   postMaJMission: _postMaJMission,
-  getStatutMission: _getStatutMission
+  getStatutMission: _getStatutMission,
+  getPatrimoineSecteur: _getPatrimoineSecteur,
+  getMissionSecteurs: _getMissionSecteurs,
+  getMissionDetails: _getMissionDetails,
+  joinMission: _joinMission
 };

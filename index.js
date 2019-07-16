@@ -46,6 +46,10 @@ app.get('/map.html', (req, res) => {
   res.sendFile(path.join(__dirname, '/views/index.html'));
 });
 
+app.get('/chefgroup.html', (req, res) => {
+  res.sendFile(path.join(__dirname, '/views/index_chefgroup.html'));
+});
+
 /*
 app.post('/login', (req, res, next) => {
   console.log(`/login ${JSON.stringify(req.body)}`);

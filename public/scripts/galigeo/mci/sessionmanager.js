@@ -71,7 +71,7 @@
         dataType: 'json',
         success: function(response) {
           console.log(`Response`, response);
-          self.handleUserAuthentication(response);
+          self.handleUserAuthentication(response, loginRequest.login);
         },
         error: function(jqXHR, textStatus, errorThrown) {
           const errResponse = jqXHR.responseJSON;
@@ -81,7 +81,7 @@
         }
       });
     },
-    handleUserAuthentication: function(authResponse) {
+    handleUserAuthentication: function(authResponse, username) {
       $('#error-message').addClass('slds-hide');
       if (!authResponse.authentification) {
         let errMsg = authResponse.message || 'Une erreur est survenue, veuillez contacter votre administrateur';
@@ -107,12 +107,160 @@
           break;
         case 'charly':
         case 'alpha':
-          GGO.SessionIssuePrompt('Rôle utilisateur non disponible', `Le rôle '<b>${authResponse.role}</b>' n\'est pas disponible pour le moment.<br /> Veuillez vous reconnecter.`, $('#appContainer').empty());
+          //GGO.SessionIssuePrompt('Rôle utilisateur non disponible', `Le rôle '<b>${authResponse.role}</b>' n\'est pas disponible pour le moment.<br /> Veuillez vous reconnecter.`, $('#appContainer').empty());
+          this._currentUserName = username;
+          this.fetchSecteursChefGroup();
           break;
         default:
           $('#error-message > .slds-form-element__help').text(`Le rôle ${authResponse.role} n'est pas un rôle valide.`);
           $('#error-message').removeClass('slds-hide');
       }
+    },
+    fetchSecteursChefGroup: function() {
+      let self = this;
+      const secteursUrl = `${this._options.baseRESTServicesURL}/secteurs.php`;
+      $.ajax({
+        type: 'GET',
+        url: secteursUrl,
+        success: function(response) {
+          console.log(`${secteursUrl}`, response);
+          self.handleSecteursFetched(response);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`${secteursUrl} Request aborted`);
+          } else {
+            console.error(`Error for ${secteursUrl} request: ${textStatus}`, errorThrown);
+          }
+        }
+      });
+    },
+    handleSecteursFetched: function(response) {
+      console.log(`>> handleSecteursFetched`, response);
+      if (response.code !== 200) {
+        $('#error-message > .slds-form-element__help').text(`${response.message}`);
+        $('#error-message').removeClass('slds-hide');
+
+        $('#sous-secteurs-cancel-btn')
+          .off()
+          .click(function(e) {
+            self.handleClickCancelSectors();
+          })
+          .removeClass('slds-hide');
+        return;
+      }
+      switch (this._currentRole) {
+        case 'charly':
+          this.handleSecteursFetchedCharly(response);
+          break;
+        case 'alpha':
+          let uniqueSecteursValues = Array.from(new Set(response.secteurs.map(s => s.name)));
+          this.validateChefGroupLoginSteps(uniqueSecteursValues);
+          break;
+        default:
+          GGO.SessionIssuePrompt('Rôle utilisateur non disponible', `Le rôle '<b>${this._currentRole}</b>' n\'est pas disponible pour le moment.<br /> Veuillez vous reconnecter.`, $('#appContainer').empty());
+      }
+    },
+    handleClickCancelSectors: function() {
+      GGO.disconnect(undefined, {
+        userName: this._currentUserName,
+        userRole: this._currentRole,
+        baseRESTServicesURL: '/services/rest/mci'
+      });
+    },
+    handleSecteursFetchedCharly: function(response) {
+      let self = this;
+      $('#combobox-soussecteurs').attr('placeholder', 'Choisir 1 à 3 secteurs');
+      let ssUL = $('<ul class="slds-listbox slds-listbox_vertical" role="presentation"></ul>');
+      let uniqueSecteursValues = Array.from(new Set(response.secteurs.map(s => s.name)));
+      ssUL.append(
+        $(`
+          ${uniqueSecteursValues
+            .map(
+              ss => `
+            <li role="presentation" class="slds-listbox__item">
+              <div id="listbox-option-unique-id-${ss}" class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small slds-media_center" role="option" data-secteurid="${ss}" data-secteurname="${ss}">
+                <span class="slds-media__figure">
+                  <svg class="slds-icon slds-icon_x-small slds-listbox__icon-selected" aria-hidden="true">
+                    <use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#check"></use>
+                  </svg>
+                </span>
+                <span class="slds-media__body">
+                  <span class="slds-truncate" title="${ss}"> ${ss}</span>
+                </span>
+              </div>
+            </li>
+          `
+            )
+            .join('')}
+        `)
+      );
+      ssUL.find('.slds-listbox__option').click(function(e) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        $('#sous-secteurs-form-element div.slds-combobox').removeClass('slds-has-error');
+        $('#error-message').addClass('slds-hide');
+
+        $(this).toggleClass('slds-is-selected');
+        self.updateSelectedSecteursInput();
+      });
+      $('#listbox-soussecteurs')
+        .empty()
+        .append(ssUL);
+      $('#combobox-soussecteurs')
+        .off()
+        .focusin(function(e) {
+          e.preventDefault();
+          $('#sous-secteurs-form-element div.slds-combobox')
+            //.removeClass('slds-combobox-picklist')
+            .addClass('slds-is-open')
+            .attr('aria-expanded', true);
+          $('#listbox-soussecteurs').mouseleave(function(e) {
+            $('#sous-secteurs-form-element div.slds-combobox')
+              .removeClass('slds-is-open')
+              //.addClass('slds-combobox-picklist')
+              .attr('aria-expanded', false);
+            $('#listbox-soussecteurs').off();
+            self.updateSelectedSecteurs();
+          });
+        });
+      $('#sous-secteurs-form-element').removeClass('slds-hide');
+      $('#sous-secteurs-validate-btn')
+        .off()
+        .click(function(e) {
+          self.handleClickValidateSectors();
+        })
+        .removeClass('slds-hide');
+      $('#sous-secteurs-cancel-btn')
+        .off()
+        .click(function(e) {
+          self.handleClickCancelSectors();
+        })
+        .removeClass('slds-hide');
+    },
+    handleClickValidateSectors: function() {
+      console.warn('TODO: click validate selected sectors');
+      const selectedSecteurs = $('#listbox-soussecteurs div.slds-listbox__option.slds-is-selected').toArray();
+      if (selectedSecteurs.length === 0 || selectedSecteurs.length > 3) {
+        $('#sous-secteurs-form-element div.slds-combobox').addClass('slds-has-error');
+        $('#error-message > .slds-form-element__help').text(`Sélection d'un à trois sous-secteurs obligatoire.`);
+        $('#error-message').removeClass('slds-hide');
+        return;
+      }
+      $('#error-message').addClass('slds-hide');
+      $('#sous-secteurs-form-element div.slds-combobox').removeClass('slds-has-error');
+      const secteurs = selectedSecteurs.map(s => {
+        let secteurId = $(s).attr('data-secteurid');
+        return secteurId;
+      });
+      this.validateChefGroupLoginSteps(secteurs);
+    },
+    validateChefGroupLoginSteps: function(selectedSecteurs) {
+      let mapUrl = `/chefgroup.html`;
+      sessionStorage.secteurs = JSON.stringify(selectedSecteurs);
+      sessionStorage.role = this._currentRole;
+      sessionStorage.username = this._currentUserName;
+      location.href = mapUrl;
     },
     /**
      * Récupération de la liste des patrouilles

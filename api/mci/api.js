@@ -93,6 +93,50 @@ router.get('/secteurs.php', (req, res, next) => {
   });
 });
 
+router.get('/patrimoine_secteur.php', (req, res, next) => {
+  console.log(`[MCI_REST_API][GET] /patrimoine_secteur.php ${JSON.stringify(req.query)}`);
+  const mcimodule = getMCIModule();
+  mcimodule.getPatrimoineSecteur(req.query.secteurs).then(patrimoineResponse => {
+    res.header('Content-Type', 'application/json');
+    res.json(patrimoineResponse);
+  });
+});
+
+router.get('/mission_secteur.php', (req, res, next) => {
+  console.log(`[MCI_REST_API][GET] /mission_secteur.php ${JSON.stringify(req.query)}`);
+  const mcimodule = getMCIModule();
+  /*
+  mcimodule.getMissionSecteurs(req.query.secteurs, req.query.id_chef_groupe).then(missionResponse => {
+    res.header('Content-Type', 'application/json');
+    res.json(missionResponse);
+  });
+  */
+  mcimodule.getMissionSecteurs(req.query).then(missionResponse => {
+    res.header('Content-Type', 'application/json');
+    res.json(missionResponse);
+  });
+});
+
+// selection_mission.php
+router.get('/selection_mission.php', (req, res, next) => {
+  console.log(`[MCI_REST_API][GET] /selection_mission.php ${JSON.stringify(req.query)}`);
+  const mcimodule = getMCIModule();
+  mcimodule.getMissionDetails(req.query.mission).then(missionResponse => {
+    res.header('Content-Type', 'application/json');
+    res.json(missionResponse);
+  });
+});
+
+// rejoindre.php
+router.get('/rejoindre.php', (req, res, next) => {
+  console.log(`[MCI_REST_API][GET] /rejoindre.php ${JSON.stringify(req.query)}`);
+  const mcimodule = getMCIModule();
+  mcimodule.joinMission(req.query).then(response => {
+    res.header('Content-Type', 'application/json');
+    res.json(response);
+  });
+});
+
 router.get('/patrimoine_sous_secteur.php', (req, res, next) => {
   console.log(`[MCI_REST_API][GET] /patrimoine_sous_secteur.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
@@ -114,7 +158,13 @@ router.get('/mission_sous_secteur.php', (req, res, next) => {
 router.get('/voisinage.php', (req, res, next) => {
   console.log(`[MCI_REST_API][GET] /voisinage.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
+  /*
   mcimodule.getNeighborhood(req.query.patrouille, req.query.sssecteurs).then(voisinageResponse => {
+    res.header('Content-Type', 'application/json');
+    res.json(voisinageResponse);
+  });
+  */
+  mcimodule.getNeighborhood(req.query).then(voisinageResponse => {
     res.header('Content-Type', 'application/json');
     res.json(voisinageResponse);
   });

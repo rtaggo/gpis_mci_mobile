@@ -69,19 +69,9 @@
       }).setView([48.853507, 2.348015], 12);
       this.fetchNeighborhood();
     },
-    _getNeighborhoodURL: function() {
-      if (this._options.userRole === 'india') {
-        /*console.log(`Build neighborhood url for patrouille  ${JSON.stringify(this._options.patrouille)} with sectors ${JSON.stringify(this._options.secteurs)}`);*/
-        return `${this._options.baseRESTServicesURL}/voisinage.php?patrouille=${this._options.patrouille.id}&sssecteurs=${this._options.secteurs.map(s => s.id).join(',')}`;
-      } else {
-        /* case of charly or alpha */
-        return `${this._options.baseRESTServicesURL}/voisinage.php?id_chef_groupe=${this._options.userName}&secteurs=${this._options.secteurs.join(',')}`;
-      }
-    },
     fetchNeighborhood: function() {
       let self = this;
-      //var restURL = `${this._options.baseRESTServicesURL}/voisinage.php?patrouille=${this._options.patrouille.id}&sssecteurs=${this._options.secteurs.map(s => s.id).join(',')}`;
-      let restURL = this._getNeighborhoodURL();
+      var restURL = `${this._options.baseRESTServicesURL}/voisinage.php?id_chef_groupe=${this._options.userName}&secteurs=${this._options.secteurs.join(',')}`;
       $.ajax({
         type: 'GET',
         url: restURL,
@@ -120,49 +110,10 @@
         //this._map.fitBounds(this._secteurLayer.getBounds());
         zoomDone = true;
       }
-      if (typeof response.secteur !== 'undefined') {
-        response.secteur.features.forEach((f, i) => {
-          f.properties['description'] = `Secteur ${f.properties.name_sous_secteur}`;
-          let col = colors[i];
-          $.extend(f.properties, this._secteurDrawingProperties, { fill: col, stroke: col });
-        });
-        this._secteurLayer = L.mapbox
-          .featureLayer()
-          .addTo(this._map)
-          .setGeoJSON(response.secteur);
-        //this._map.fitBounds(this._secteurLayer.getBounds());
-        zoomDone = true;
-      }
-      if (typeof response.chef_groupe !== 'undefined') {
-        // response.chef_groupe.features.forEach((f, i) => {
-        //   f.properties['marker-size'] = 'small';
-        // });
-        this._secteurLayer = L.mapbox
-          .featureLayer(response.chef_groupe, {
-            pointToLayer: function(feature, latlng) {
-              let geojsonMarkerOptions = {
-                radius: 6,
-                fillColor: feature.properties['marker-color'],
-                color: '#808080',
-                weight: 1,
-                opacity: 0,
-                fillOpacity: 0
-              };
-              let lyr = L.circleMarker(latlng, geojsonMarkerOptions);
-              return lyr;
-            }
-          })
-          .addTo(this._map)
-          .on('layeradd', this.onChefGroupeAdded.bind(this))
-          .setGeoJSON(response.chef_groupe);
-        zoomDone = true;
-      }
       if (typeof response.mission_ronde !== 'undefined') {
         response.mission_ronde.features.forEach(f => {
           f.properties['marker-size'] = 'small';
           f.properties['marker-color'] = GGO.getColorForStatutMission(parseInt(f.properties.statut_mission));
-          f.properties['description'] = f.properties.codesite;
-          console.log(f.properties.statut_mission);
           //f.properties['description'] = `${f.properties.patrouille_id}`;
         });
         this._lastMissionsLayer = L.mapbox
@@ -175,34 +126,11 @@
         }
       }
     },
-    /* J'ai déplacé la méthode dans galigeo.js ==> GGO.getColorForStatutMission
-    _getColorForStatutMission: function(statut) {
-      if (statut == 1) {
-        return '#FFC100';
-      } else if (statut == 2) {
-        return '#0070d2';
-      } else if (statut == 5) {
-        return '#4bca81';
-      }
-    },
-    */
     onMissionsAdded: function(e) {
       let marker = e.layer;
       marker
         .bindTooltip(`${marker.feature.properties['name_patrouille']}`, {
           offset: L.point(0, -22),
-          direction: 'top',
-          noHide: true,
-          permanent: true,
-          className: 'class-tooltip'
-        })
-        .openTooltip();
-    },
-    onChefGroupeAdded: function(e) {
-      let marker = e.layer;
-      marker
-        .bindTooltip(`${marker.feature.properties['id_chef_groupe']}`, {
-          offset: L.point(0, 0),
           direction: 'top',
           noHide: true,
           permanent: true,

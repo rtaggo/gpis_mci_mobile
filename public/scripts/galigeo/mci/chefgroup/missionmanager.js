@@ -2,10 +2,8 @@
   'use strict';
   GGO.MissionManager = function(options) {
     this._options = options || {};
-    //this._options.mciurl = '/services/rest/mci';
+    this._periodicCheckMission = true;
     this._options.baseRESTServicesURL = this._options.baseRESTServicesURL || '/services/rest/mci';
-    this._useBlob = false; // && window.URL;
-
     this._init();
   };
 
@@ -17,139 +15,8 @@
       let self = this;
       GGO.EventBus.addEventListener(GGO.EVENTS.APPISREADY, function(e) {
         console.log('Received GGO.EVENTS.APPISREADY');
-        self.checkMission();
-      });
-      $('#btnMissionEnRoute').click(function(e) {
-        let theMission = self._currentMission.features[0];
-        self._currentMission.statut = 'En direction';
-        $('#mainContainer-card-body').prepend(
-          $(`
-          <div id="udpate-mission-spinner" class="slds-spinner_container">
-            <div role="status" class="slds-spinner slds-spinner_medium">
-              <span class="slds-assistive-text">Loading</span>
-              <div class="slds-spinner__dot-a"></div>
-              <div class="slds-spinner__dot-b"></div>
-            </div>
-          </div>
-          `)
-        );
-        self.updateMissionStatus(
-          self._currentMission.features[0].properties.mission_id,
-          1,
-          function(response) {
-            console.log('>> En route callback', response, self);
-            if (response.code === 200) {
-              $('#udpate-mission-spinner').remove();
-              let theMission = self._currentMission.features[0];
-              theMission.properties.statut = 'En direction';
-              this.renderMissionViewMode();
-            }
-          }.bind(self)
-        );
-        /*
-        setTimeout(function(e) {
-          self.renderMissionViewMode();
-          $('#udpate-mission-spinner').remove();
-        }, 1000);
-        */
-      });
-      $('#btnMissionDebut').click(function(e) {
-        self._currentMission.statut = 'Début';
-        $('#mainContainer-card-body').prepend(
-          $(`
-          <div id="udpate-mission-spinner" class="slds-spinner_container">
-            <div role="status" class="slds-spinner slds-spinner_medium">
-              <span class="slds-assistive-text">Loading</span>
-              <div class="slds-spinner__dot-a"></div>
-              <div class="slds-spinner__dot-b"></div>
-            </div>
-          </div>
-        `)
-        );
-        self.updateMissionStatus(
-          self._currentMission.features[0].properties.mission_id,
-          2,
-          function(response) {
-            console.log('>> En route callback', response, self);
-            if (response.code === 200) {
-              $('#udpate-mission-spinner').remove();
-              let theMission = self._currentMission.features[0];
-              theMission.properties.statut = 'Début';
-              this.renderMissionViewMode();
-            }
-          }.bind(self)
-        );
-        /*
-        setTimeout(function(e) {
-          self.renderMissionViewMode();
-          $('#udpate-mission-spinner').remove();
-        }, 1000);
-        */
-      });
-
-      $('#btnMissionFin').click(function(e) {
-        self.updateMissionStatus(
-          self._currentMission.features[0].properties.mission_id,
-          5,
-          function(response) {
-            console.log('>> En route callback', response, self);
-            if (response.code === 200) {
-              $('#udpate-mission-spinner').remove();
-              this.finishCurrentMission();
-            }
-          }.bind(self)
-        );
-        /*
-        GGO.EventBus.dispatch(GGO.EVENTS.MISSIONCOMPLETED);
-
-        $('#missionContent').addClass('slds-hide');
-        $('#missionFooter').addClass('slds-hide');
-        $('#waiting4Mission').removeClass('slds-hide');
-        //self.fakeTimeOutbeforeFetchingMission();
-        self.checkMission();
-        */
-      });
-      $('#btnMissionSignalement').click(function(e) {
-        self.openSignalementModal();
-        self.fetchTypeSignalements();
-      });
-    },
-    finishCurrentMission: function() {
-      this._currentMission = null;
-      GGO.EventBus.dispatch(GGO.EVENTS.MISSIONCOMPLETED);
-
-      $('#missionContent').addClass('slds-hide');
-      $('#missionFooter').addClass('slds-hide');
-      $('#waiting4Mission').removeClass('slds-hide');
-      //self.fakeTimeOutbeforeFetchingMission();
-      this.checkMission();
-    },
-    updateMissionStatus: function(missionId, statusCode, callback) {
-      let self = this;
-      let updateStatusUrl = `${this._options.baseRESTServicesURL}/maj_mission.php`;
-      let reqBody = {
-        mission_id: missionId,
-        code: statusCode
-      };
-      $.ajax({
-        type: 'POST',
-        url: updateStatusUrl,
-        data: JSON.stringify(reqBody),
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
-        success: function(response) {
-          console.log(`Response`, response);
-          if (typeof callback === 'function') {
-            callback(response);
-          }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-          if (textStatus === 'abort') {
-            console.warn(`Request aborted`);
-          } else {
-            console.error(`Error request: ${textStatus}`, errorThrown);
-          }
-        }
+        //self.checkMission();
+        self.fetchMission();
       });
     },
     openSignalementModal: function() {
@@ -588,7 +455,6 @@
       return allGood;
     },
     checkBeforeSaveSignalement: function() {
-      $('#btnSignalementOk').attr('disabled', true);
       let self = this;
       let allGood = true;
 
@@ -615,25 +481,6 @@
         allGood = this.validateSignalementInput(niveauVal, 'select-niveau', 'select-niveau_error') && allGood;
       }
 
-      /*
-      if (type_signalement_id === '') {
-        $('#select-type-signalement')
-          .parent()
-          .parent()
-          .parent()
-          .addClass('slds-has-error');
-        allGood = false;
-      }
-
-      if (type_lieu_id === '') {
-        $('#select-type-lieu')
-          .parent()
-          .parent()
-          .parent()
-          .addClass('slds-has-error');
-        allGood = false;
-      }
-      */
       let formSignalement = {
         mission_id: self._currentMission.features[0].properties.mission_id,
         adresse: adresse,
@@ -648,8 +495,6 @@
       };
       if (allGood) {
         this.saveSignalement(formSignalement);
-      } else {
-        $('#btnSignalementOk').attr('disabled', false);
       }
     },
     saveSignalement: function(formSignalement) {
@@ -727,7 +572,6 @@
       });
     },
     validateReacffectation: function() {
-      $('#btnReaffecter').attr('disabled', true);
       let self = this;
       let formReaffectation = {
         mission_id: self._currentMission.features[0].properties.mission_id,
@@ -807,8 +651,6 @@
         $('#parent_niveau').removeClass('slds-hide');
         $('#niveau')[0].value = response.signalement[0].niveau;
       }
-      //$('#observation')[0].value = response.signalement[0].observations;
-      // $('#btnReaffecter')[0].value = signalement_id;
 
       $('#observation').val(response.signalement[0].observations);
       $('#btnReaffecter').attr('data-signalementid', signalement_id);
@@ -847,12 +689,6 @@
         ${response.type_signalement.map(p => `<option value="${p.id}" >${p.libelle}</option>`).join('')}
       `)
       );
-      /*
-      $('#select-type-signalement').change(function() {
-        $('#modal-signalement-content .slds-has-error').removeClass('slds-has-error');
-        self.handleClickChooseTypeSignalement();
-      });
-      */
     },
     handleAdresseFetched: function(response) {
       console.log(`>> handleAdresseFetched`, response);
@@ -875,15 +711,6 @@
         ${response.type_lieu.map(p => `<option value="${p.id}" data-niveau="${p.niveau}" >${p.libelle}</option>`).join('')}
       `)
       );
-      /*
-      $('#select-type-lieu').change(function() {
-        $('#modal-signalement-content .slds-has-error').removeClass('slds-has-error');
-        const niveauOK = $(this)
-          .find(':selected')
-          .data('niveau');
-        self.handleClickChooseTypeLieu(niveauOK);
-      });
-      */
     },
     handleCategorieFetched: function(response) {
       console.log(`>> handleCategorieFetched`, response);
@@ -1026,49 +853,23 @@
         }
       });
     },
-    checkMissionStatut: function() {
-      let self = this;
-      if (this._currentMission !== null) {
-        let self = this;
-        let statutMissionUrl = `${this._options.baseRESTServicesURL}/statut_mission.php?patrouille=${this._options.patrouille.id}&mission=${self._currentMission.features[0].properties.mission_id}`;
-        $.ajax({
-          type: 'GET',
-          url: statutMissionUrl,
-          success: function(response) {
-            console.log(`${statutMissionUrl}: `, response);
-            if (response.code === 200) {
-              if (response.statut === 'Fin' || response.statut === 'Nouvelle mission') {
-                self.finishCurrentMission();
-              } else {
-                setTimeout(function() {
-                  self.checkMissionStatut();
-                }, GGO.CHECK_MISSION_INTERVALLE);
-              }
-            } else {
-              setTimeout(function() {
-                self.checkMissionStatut();
-              }, GGO.CHECK_MISSION_INTERVALLE);
-            }
-          },
-          error: function(jqXHR, textStatus, errorThrown) {
-            if (textStatus === 'abort') {
-              console.warn(`[GET] ${statutMissionUrl} Request aborted`);
-            } else {
-              console.error(`${statutMissionUrl} request error : ${textStatus}`, errorThrown);
-            }
-          }
-        });
-      }
-    },
     checkMission: function() {
       let self = this;
       setTimeout(function() {
-        self.fetchMission();
+        if (self._periodicCheckMission) {
+          self.fetchMission();
+          /*
+          self._periodicCheckMission = false;
+          */
+        }
       }, GGO.CHECK_MISSION_INTERVALLE);
     },
     fetchMission: function() {
       let self = this;
-      let missionUrl = `${this._options.baseRESTServicesURL}/mission_sous_secteur.php?patrouille=${this._options.patrouille.id}`;
+      //let uniqueSecteurNames = Array.from(new Set(this._options.secteurs.map(s => `'${s.name}'`)));
+      //uniqueSecteurNames = [`'EST'`];
+      let uniqueSecteurNames = this._options.secteurs.join(',');
+      let missionUrl = `${this._options.baseRESTServicesURL}/mission_secteur.php?secteurs=${uniqueSecteurNames}&id_chef_groupe=${this._options.userName}`;
       $.ajax({
         type: 'GET',
         url: missionUrl,
@@ -1082,6 +883,7 @@
           } else {
             console.error(`${missionUrl} request error : ${textStatus}`, errorThrown);
           }
+          self.checkMission();
         }
       });
     },
@@ -1092,40 +894,117 @@
           break;
         case 300:
           $('#waiting4Mission h2').text(response.message);
-          this.checkMission();
           break;
         default:
           console.error(`Unhandled code error ${response.code}: ${JSON.stringify(response)}`);
           const errMsg = response.message || 'Erreur non reconnue';
           $('#waiting4Mission h2').text(response.message);
       }
+      this.checkMission();
     },
     handleMissionResponseOK: function(response) {
-      if (response.features.length > 0) {
-        let theMission = response.features[0];
-        if (theMission.properties.statut !== 'Fin') {
-          this._currentMission = {
-            type: 'FeatureCollection',
-            features: response.features
-          };
-          this.renderMissionViewMode();
-          $('#waiting4Mission').addClass('slds-hide');
-          $('#missionContent').removeClass('slds-hide');
-          $('#missionFooter').removeClass('slds-hide');
-          this.checkMissionStatut();
-        } else {
-          this.checkMission();
+      let self = this;
+      if (typeof response.mission_en_cours !== 'undefined') {
+        this._currentJoinedMissionId = response.mission_en_cours;
+      }
+      if (response.missions && Array.isArray(response.missions) && response.missions.length > 0) {
+        $('#waiting4Mission').remove();
+        let ctnr = $('#missionListContent').empty();
+        let dataTbl = $(`
+          <table class="slds-table slds-table_bordered slds-table_fixed-layout">
+            <thead>
+            <tr class="slds-line-height_reset" style="vertical-align: top;">
+              <th class="slds-cell-wrap" scope="col" style="text-align: center;">
+                <div class="" title="Identifiant Patrouille">Patrouille(s)</div>
+              </th>
+              <th class="slds-cell-wrap" scope="col" style="text-align: center;">
+                <div class="" title="Identifiant site">Site</div>
+              </th>
+              <th class="slds-cell-wrap" scope="col" style="text-align: center;">
+                <div class="" title="Type Mission">Type Mission</div>
+              </th>
+              <th class="slds-cell-wrap" scope="col" style="text-align: center;">
+                <div class="" title="Nom du site">Nom du site</div>
+              </th>
+              <th class="slds-cell-wrap" scope="col" style="text-align: center;">
+                <div class="" title="Bailleur">Bailleur</div>
+              </th>
+            </tr>
+          </thead>
+        </table>`);
+        let tblBody = $('<tbody></tbody>');
+        response.missions.forEach(m => {
+          tblBody.append(
+            $(`
+            <tr class="slds-hint-parent" data-missionid="${m.mission_id}" style="vertical-align:top;">
+              <td data-label="Identifiant Patrouille" scope="row">
+                <div class="slds-truncate" style="white-space: pre-line;">${m.patrouille_id.split(',').join(', ')}</div>
+              </td>
+              <td data-label="Identifiant Site">
+                <div class="mission_list_info">${m.codesite}</div>
+              </td>
+              <td data-label="Type Mission">
+                <div class="mission_list_info">${m.type_mission}</div>
+              </td>
+              <td data-label="Nom du site">
+                <div class="mission_list_info">${m.nom_site}</div>
+              </td>
+              <td data-label="Bailleur">
+                <div class="mission_list_info">${m.bailleur}</div>
+              </td>
+            </tr>
+          `)
+          );
+        });
+        tblBody.find('tr').click(function(e) {
+          const mission_id = $(this).attr('data-missionid');
+          console.log(`Click on row for mission id=${mission_id}`);
+          self.getMissionDetails(mission_id);
+        });
+        if (typeof this._currentJoinedMissionId !== 'undefined') {
+          tblBody
+            .find(`tr[data-missionid="${this._currentJoinedMissionId}"]`)
+            .addClass('slds-is-selected')
+            .attr('aria-selected', true);
         }
+        ctnr.append(dataTbl.append(tblBody)).removeClass('slds-hide');
       } else {
         console.warn(`TODO: treat case of no mission`);
         $('#waiting4Mission h2').text(response.message);
         this.checkMission();
       }
     },
-
-    renderMissionViewMode: function() {
-      GGO.EventBus.dispatch(GGO.EVENTS.SHOWMISSIONMLOCATION, this._currentMission);
-      let mission = this._currentMission.features[0];
+    getMissionDetails: function(missionId) {
+      let self = this;
+      self._periodicCheckMission = false;
+      let missionUrl = `${this._options.baseRESTServicesURL}/selection_mission.php?mission=${missionId}`;
+      $.ajax({
+        type: 'GET',
+        url: missionUrl,
+        success: function(response) {
+          console.log(`${missionUrl}: `, response);
+          self.handleMissionDetailsFetched(response);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`[GET] ${missionUrl} Request aborted`);
+          } else {
+            console.error(`${missionUrl} request error : ${textStatus}`, errorThrown);
+          }
+          self._periodicCheckMission = true;
+          self.checkMission();
+        }
+      });
+    },
+    handleMissionDetailsFetched: function(response) {
+      console.log(`[ChefGroup] >> handleMissionDetailsFetched`, response);
+      if (response.code === 200 && response.features.length > 0) {
+        this._currentDetailsMission = response.features[0];
+        this.renderMissionViewMode(this._currentDetailsMission);
+      }
+    },
+    renderMissionViewMode: function(mission) {
+      GGO.EventBus.dispatch(GGO.EVENTS.SHOWMISSIONMLOCATION, mission);
       let content = $(`<div class="slds-form" role="list"></div>`);
       let self = this;
       content.append(
@@ -1291,6 +1170,9 @@
                 <div class="slds-form-element__static">
                   <div id="mission_id_form" >${mission.properties.mission_id}</div>
                 </div>
+              </div>
+            </div>
+          </div>
         </div>
       `)
       );
@@ -1304,7 +1186,7 @@
             ${mission.properties.incidente
               .map(s => {
                 return `
-                <li>${moment(s.date).format('DD/MM/YYYY  HH:mm')} : ${s.libelle}
+                <li>${moment(s.date).format('DD/MM/YYYY HH:mm')} : ${s.libelle}
                   <span class="incidente-observation">${s.observations}</span>
                 </li>`;
               })
@@ -1336,7 +1218,7 @@
           <ul class="slds-list_dotted" id = "parent-list">
             ${mission.properties.signalement
               .map(s => {
-                return `<li id='signalement_list_${s.id}' value=${s.id}>${moment(s.date).format('DD/MM/YYYY  HH:mm')} : ${s.libelle}</li>`;
+                return `<li id='signalement_list_${s.id}' value=${s.id}>${moment(s.date).format('DD/MM/YYYY HH:mm')} : ${s.libelle}</li>`;
               })
               .join('')}
           </ul>
@@ -1359,39 +1241,104 @@
         `)
       );
 
-      if (mission.properties.renfort) {
-        $('#mission-btn-list').addClass('slds-hide');
-        $('#mission-renfort-info').removeClass('slds-hide');
-      } else {
-        $('#mission-renfort-info').addClass('slds-hide');
-        $('#mission-btn-list').removeClass('slds-hide');
-      }
+      $('#missionListContent').addClass('slds-hide');
+      $('#missionContent')
+        .removeClass('slds-hide')
+        .scrollTop();
+      $('#missionFooter').removeClass('slds-hide');
+
+      let closeBtn = $(`
+        <button class="slds-button slds-button_icon slds-button_icon-small slds-panel__close slds-hide" style="position: absolute;right: 0;top: 0px;">
+          <svg class="slds-button__icon" aria-hidden="true">
+            <use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+          </svg>
+          <span class="slds-assistive-text">Collapse Panel Header</span>
+        </button>
+      `).click(function(e) {
+        GGO.EventBus.dispatch(GGO.EVENTS.CLEARMISSIONMLOCATION);
+        $('#missionContent')
+          .empty()
+          .addClass('slds-hide');
+        $('#missionFooter').addClass('slds-hide');
+        $('#missionListContent').removeClass('slds-hide');
+        delete self._currentDetailsMission;
+        self._periodicCheckMission = true;
+        self.checkMission();
+      });
+
       $('#missionContent')
         .empty()
-        .append(content);
-      /*
-      TODO: refactor
-      $('#signalement_list li').click(function(e) { console.log($(this).val()); }) 
-      */
-      if (!mission.properties.renfort) {
-        $('#signalements li')
+        .append(content)
+        .append(closeBtn);
+
+      if (typeof this._currentJoinedMissionId !== 'undefined' && mission.properties.mission_id === this._currentJoinedMissionId) {
+        $('#btnMissionRejoindre')
+          .attr('disabled', true)
+          .addClass('slds-hide');
+      } else {
+        $('#btnMissionRejoindre')
+          .removeClass('slds-hide')
+          .attr('disabled', false)
           .off()
-          .click(function(e) {
-            self.openReaffectationModal();
-            self.fetchFormSignalements($(this).val());
-          });
+          .click(
+            function(e) {
+              self.joinMission(this);
+            }.bind(mission)
+          );
       }
-      /*
-      if (typeof $('#signalement_list') !== 'undefined') {
-        var list_signalements = document.getElementById('signalements').getElementsByTagName('li');
-        for (var i = 0; i < list_signalements.length; i++) {
-          list_signalements[i].onclick = function(e) {
-            self.openReaffectationModal();
-            self.fetchFormSignalements($(this)[0].value);
-          };
+      $('#btnMissionClose')
+        .off()
+        .click(
+          function(e) {
+            GGO.EventBus.dispatch(GGO.EVENTS.CLEARMISSIONMLOCATION);
+            $('#missionContent')
+              .empty()
+              .addClass('slds-hide');
+            $('#missionFooter').addClass('slds-hide');
+            $('#missionListContent').removeClass('slds-hide');
+            delete self._currentDetailsMission;
+            self._periodicCheckMission = true;
+            self.checkMission();
+          }.bind(mission)
+        );
+    },
+    joinMission: function(mission) {
+      console.warn(`TODO: join mission `, mission);
+      let self = this;
+      // do Ajax call
+      let joinMissionUrl = `${this._options.baseRESTServicesURL}/rejoindre.php?mission=${mission.properties.mission_id}&chef_groupe=${this._options.userName}`;
+      $.ajax({
+        type: 'GET',
+        url: joinMissionUrl,
+        success: function(response) {
+          console.log(`${joinMissionUrl}: `, response);
+          self.joinMissionCallback(response, mission);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`[GET] ${joinMissionUrl} Request aborted`);
+          } else {
+            console.error(`${joinMissionUrl} request error : ${textStatus}`, errorThrown);
+          }
         }
+      });
+    },
+    joinMissionCallback: function(response, mission) {
+      if (response.code === 200) {
+        this._currentJoinedMissionId = mission.properties.mission_id;
+        $('#btnMissionRejoindre')
+          .attr('disabled', true)
+          .addClass('slds-hide');
+
+        $(`#missionListContent tr`)
+          .removeClass('slds-is-selected')
+          .attr('aria-selected', false);
+        $(`#missionListContent tr[data-missionid="${mission.properties.mission_id}"]`)
+          .addClass('slds-is-selected')
+          .attr('aria-selected', true);
+      } else {
+        console.warn(`Display error message`, response);
       }
-      */
     }
   };
   GGO.MissionManagerSingleton = (function() {
