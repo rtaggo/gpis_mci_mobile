@@ -125,7 +125,7 @@
           f.properties['marker-size'] = 'small';
           f.properties['marker-color'] = GGO.getColorForStatutMission(parseInt(f.properties.statut_mission));
           f.properties['description'] = f.properties.codesite;
-          //console.log(f.properties.statut_mission);
+          console.log(f.properties.statut_mission);
           //f.properties['description'] = `${f.properties.patrouille_id}`;
         });
         this._lastMissionsLayer = L.mapbox
