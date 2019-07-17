@@ -947,10 +947,10 @@
                 <div class="mission_list_info">${m.type_mission}</div>
               </td>
               <td data-label="Nom du site">
-                <div class="mission_list_info">${m.nom_site}</div>
+                <div class="mission_list_info" style="font-size: 10px;">${m.nom_site}</div>
               </td>
               <td data-label="Bailleur">
-                <div class="mission_list_info">${m.bailleur}</div>
+                <div class="mission_list_info" style="font-size: 10px;">${m.bailleur}</div>
               </td>
             </tr>
           `)
