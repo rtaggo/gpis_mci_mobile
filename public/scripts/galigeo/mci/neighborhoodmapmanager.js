@@ -210,7 +210,7 @@
           direction: 'top',
           noHide: true,
           permanent: true,
-          className: 'class-tooltip'
+          className: 'class-tooltip-ChefGroupe'
         })
         .openTooltip();
     }

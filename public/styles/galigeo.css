@@ -152,6 +152,14 @@ body {
   padding: 2px ;
   line-height: 100%;
 }
+.class-tooltip-ChefGroupe{
+  font-size: 9px;
+  padding: 2px ;
+  line-height: 100%;
+  color: white;
+  font-weight: bold;
+  background-color: rgb(219, 110, 110);
+}
 
 /* Chef de groupe */
 .mission_list_info {
