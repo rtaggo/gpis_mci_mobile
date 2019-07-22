@@ -90,6 +90,20 @@
     secteurs_voisinages: ['#d9d9d9', '#fccde5', '#b3de69', '#fdb462', '#80b1d3', '#fb8072', '#bebada', '#ffffb3', '#8dd3c7']
   };
 
+  GGO.notifyNewMissionSound = function() {
+    try {
+      var music = new Audio('/sounds/new_mission.mp3');
+      var p = music.play();
+      p.then(event => {
+        console.log(event);
+      }).catch(err => {
+        console.log(err.message);
+      });
+    } catch (error) {
+      console.error(`Error while playing sound`, error);
+    }
+  };
+
   GGO.getDefaultColorPalette = function() {
     return GGO.COLORPALETTES['rdYlBu'];
   };
