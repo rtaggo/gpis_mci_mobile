@@ -1089,6 +1089,7 @@
       switch (response.code) {
         case 200:
           this.handleMissionResponseOK(response);
+          GGO.notifyNewMissionSound();
           break;
         case 300:
           $('#waiting4Mission h2').text(response.message);
