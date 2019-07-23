@@ -1168,6 +1168,18 @@
             </div>
           </div>
           <div class="slds-form__row">
+          <div class="slds-form__item" role="listitem">
+            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent"  >
+              <span class="slds-form-element__label" id="renfort_label">Renfort</span> 
+              <div class="slds-form-element__control">
+                <div class="slds-form-element__static">
+                  ${mission.properties.renforts_patrouille.replace('{', '').replace('}', '')}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <div class="slds-form__row">
             <div class="slds-form__item" role="listitem">
               <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
                 <span class="slds-form-element__label">Adresse</span>
@@ -1381,6 +1393,8 @@
             self.openReaffectationModal();
             self.fetchFormSignalements($(this).val());
           });
+      } else {
+        $('#renfort_label')[0].innerHTML = 'Patrouille leader';
       }
       /*
       if (typeof $('#signalement_list') !== 'undefined') {

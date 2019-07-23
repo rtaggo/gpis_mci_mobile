@@ -109,14 +109,21 @@
         case 'alpha':
           //GGO.SessionIssuePrompt('Rôle utilisateur non disponible', `Le rôle '<b>${authResponse.role}</b>' n\'est pas disponible pour le moment.<br /> Veuillez vous reconnecter.`, $('#appContainer').empty());
           this._currentUserName = username;
-          this.fetchSecteursChefGroup();
+          this.fetchChefsGroup(this._currentUserName);
           break;
         default:
           $('#error-message > .slds-form-element__help').text(`Le rôle ${authResponse.role} n'est pas un rôle valide.`);
           $('#error-message').removeClass('slds-hide');
       }
+      $('#patrouille_name')
+        .text(username.toUpperCase())
+        .removeClass('slds-hide');
     },
     fetchSecteursChefGroup: function() {
+      $('#chefs_groupe-validate-btn').addClass('slds-hide');
+      $('#chefs_groupe-cancel-btn').addClass('slds-hide');
+      $('#combobox-chefs-groupe').attr('disabled', true);
+      $('.slds-icon_container.slds-pill__remove').addClass('slds-hide');
       let self = this;
       const secteursUrl = `${this._options.baseRESTServicesURL}/secteurs.php`;
       $.ajax({
@@ -134,6 +141,108 @@
           }
         }
       });
+    },
+    fetchChefsGroup: function(chefGroupeConnected) {
+      let self = this;
+      const chefsGroupeUrl = `${this._options.baseRESTServicesURL}/chefs_groupe.php?chef_connected=${chefGroupeConnected}`;
+      $.ajax({
+        type: 'GET',
+        url: chefsGroupeUrl,
+        success: function(response) {
+          console.log(`${chefsGroupeUrl}`, response);
+          self.handleChefsGroupeFetched(response);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`${chefsGroupeUrl} Request aborted`);
+          } else {
+            console.error(`Error for ${chefsGroupeUrl} request: ${textStatus}`, errorThrown);
+          }
+        }
+      });
+    },
+    handleChefsGroupeFetched: function(response) {
+      console.log(`>> handleChefsGroupeFetched`, response);
+      if (response.code !== 200) {
+        $('#error-message > .slds-form-element__help').text(`${response.message}`);
+        $('#error-message').removeClass('slds-hide');
+
+        $('#chefs_groupe-cancel-btn')
+          .off()
+          .click(function(e) {
+            self.handleClickCancelSectors();
+          })
+          .removeClass('slds-hide');
+        return;
+      }
+      let self = this;
+      $('#combobox-chefs-groupe').attr('placeholder', 'Choisir les chefs de groupe');
+      let ssUL = $('<ul class="slds-listbox slds-listbox_vertical" role="presentation"></ul>');
+      let uniqueChefsGroupeValues = Array.from(new Set(response.chefs_groupe.map(s => s.name)));
+      ssUL.append(
+        $(`
+            ${uniqueChefsGroupeValues
+              .map(
+                ss => `
+              <li role="presentation" class="slds-listbox__item">
+                <div id="listbox-option-unique-id-${ss}" class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small slds-media_center" role="option" data-chefgroupeid="${ss}" data-chefsgroupename="${ss}">
+                  <span class="slds-media__figure">
+                    <svg class="slds-icon slds-icon_x-small slds-listbox__icon-selected" aria-hidden="true">
+                      <use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#check"></use>
+                    </svg>
+                  </span>
+                  <span class="slds-media__body">
+                    <span class="slds-truncate" title="${ss}"> ${ss}</span>
+                  </span>
+                </div>
+              </li>
+            `
+              )
+              .join('')}
+          `)
+      );
+      ssUL.find('.slds-listbox__option').click(function(e) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        $('#chefs-groupe-form-element div.slds-combobox').removeClass('slds-has-error');
+        $('#error-message').addClass('slds-hide');
+
+        $(this).toggleClass('slds-is-selected');
+        self.updateSelectedChefsGroupeInput();
+      });
+      $('#listbox-chefs-groupe')
+        .empty()
+        .append(ssUL);
+      $('#combobox-chefs-groupe')
+        .off()
+        .focusin(function(e) {
+          e.preventDefault();
+          $('#chefs-groupe-form-element div.slds-combobox')
+            //.removeClass('slds-combobox-picklist')
+            .addClass('slds-is-open')
+            .attr('aria-expanded', true);
+          $('#listbox-chefs-groupe').mouseleave(function(e) {
+            $('#chefs-groupe-form-element div.slds-combobox')
+              .removeClass('slds-is-open')
+              //.addClass('slds-combobox-picklist')
+              .attr('aria-expanded', false);
+            $('#listbox-chefs-groupe').off();
+            self.updateSelectedChefsGroupe();
+          });
+        });
+      $('#chefs-groupe-form-element').removeClass('slds-hide');
+      $('#chefs_groupe-validate-btn')
+        .off()
+        .click(function(e) {
+          self.handleClickValidateChefsGroupe();
+        })
+        .removeClass('slds-hide');
+      $('#chefs_groupe-cancel-btn')
+        .off()
+        .click(function(e) {
+          self.handleClickCancelSectors();
+        })
+        .removeClass('slds-hide');
     },
     handleSecteursFetched: function(response) {
       console.log(`>> handleSecteursFetched`, response);
@@ -171,6 +280,7 @@
     handleSecteursFetchedCharly: function(response) {
       let self = this;
       $('#combobox-soussecteurs').attr('placeholder', 'Choisir 1 à 3 secteurs');
+      $('#sous-secteurs-form-element')[0].firstElementChild.innerHTML = '<abbr class="slds-required" title="required">* </abbr>Secteurs';
       let ssUL = $('<ul class="slds-listbox slds-listbox_vertical" role="presentation"></ul>');
       let uniqueSecteursValues = Array.from(new Set(response.secteurs.map(s => s.name)));
       ssUL.append(
@@ -254,6 +364,25 @@
         return secteurId;
       });
       this.validateChefGroupLoginSteps(secteurs);
+    },
+    handleClickValidateChefsGroupe: function() {
+      console.warn('TODO: click validate selected sectors');
+      const selectedChefsGroupe = $('#listbox-chefs-groupe div.slds-listbox__option.slds-is-selected').toArray();
+      if (selectedChefsGroupe.length === 0 || selectedChefsGroupe.length > 3) {
+        $('#chefs-groupe-form-element div.slds-combobox').addClass('slds-has-error');
+        $('#error-message > .slds-form-element__help').text(`Sélection d'un à trois chefs de groupe obligatoire.`);
+        $('#error-message').removeClass('slds-hide');
+        return;
+      }
+      $('#error-message').addClass('slds-hide');
+      $('#chefs-groupe-form-element div.slds-combobox').removeClass('slds-has-error');
+      const chefsGroupe = selectedChefsGroupe.map(s => {
+        let chefsGroupeId = $(s).attr('data-chefgroupeid');
+        return chefsGroupeId;
+      });
+
+      sessionStorage.chefsGroupe = chefsGroupe;
+      this.fetchSecteursChefGroup();
     },
     validateChefGroupLoginSteps: function(selectedSecteurs) {
       let mapUrl = `/chefgroup.html`;
@@ -467,6 +596,58 @@
         $('#combobox-soussecteurs').val($(selectedSecteurs[0]).attr('data-secteurname'));
       } else {
         $('#combobox-soussecteurs').val(`${selectedSecteurs.length} secteurs sélectionnés`);
+      }
+    },
+    updateSelectedChefsGroupeInput: function() {
+      const selectedSecteurs = $('#listbox-chefs-groupe div.slds-listbox__option.slds-is-selected');
+      if (selectedSecteurs.length === 0) {
+        $('#combobox-chefs-groupe').val('');
+      } else if (selectedSecteurs.length === 1) {
+        $('#combobox-chefs-groupe').val($(selectedSecteurs[0]).attr('data-Chefsgroupename'));
+      } else {
+        $('#combobox-chefs-groupe').val(`${selectedSecteurs.length} chefs de groupe sélectionnés`);
+      }
+    },
+    updateSelectedChefsGroupe: function() {
+      const self = this;
+      let listSelects = $('#listbox-selections-chefs-groupe').empty();
+      const selectedChefsGroupe = $('#listbox-chefs-groupe div.slds-listbox__option.slds-is-selected');
+      const nbSelected = selectedChefsGroupe.length;
+      if (nbSelected > 1) {
+        let ssUL = $('<ul class="slds-listbox slds-listbox_horizontal slds-p-top_xxx-small" role="group" aria-label="Selected Options:"></ul>').append(
+          $(`
+            ${selectedChefsGroupe
+              .toArray()
+              .map(s => {
+                const ChefGroupeName = $(s).attr('data-Chefsgroupename');
+                const ChefGroupeId = $(s).attr('data-chefgroupeid');
+                return `
+                  <li role="presentation" class="slds-listbox__item">
+                    <span class="slds-pill" role="option" aria-selected="true">
+                      <span class="slds-pill__label" title="${ChefGroupeName}" data-chefgroupeid="${ChefGroupeId}" data-chefgroupename="${ChefGroupeName}">${ChefGroupeName}</span>
+                      <span class="slds-icon_container slds-pill__remove" title="Retirer">
+                        <svg class="slds-icon slds-icon_x-small slds-icon-text-default" aria-hidden="true">
+                          <use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                        </svg>
+                        <span class="slds-assistive-text">Press delete or backspace to remove</span>
+                      </span>
+                    </span>
+                  </li>`;
+              })
+              .join('')}
+          `)
+        );
+        ssUL.find('.slds-pill__remove').click(function(e) {
+          const siblingSpan = $(this).siblings();
+          const ChefGroupeId = siblingSpan.attr('data-chefgroupeid');
+          $(`#listbox-chefs-groupe div.slds-listbox__option.slds-is-selected[data-chefgroupeid="${ChefGroupeId}"]`).removeClass('slds-is-selected');
+          self.updateSelectedChefsGroupeInput();
+          self.updateSelectedChefsGroupe();
+        });
+        listSelects.append(ssUL);
+        listSelects.removeClass('slds-hide');
+      } else {
+        listSelects.addClass('slds-hide');
       }
     },
     updateSelectedSecteurs: function() {

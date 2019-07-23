@@ -14,7 +14,8 @@
         patrouille: this._options.patrouille,
         secteurs: this._options.secteurs,
         userName: this._options.userName,
-        userRole: this._options.userRole
+        userRole: this._options.userRole,
+        chefsGroupe: this._options.chefsGroupe
       };
       GGO.UIManagerSingleton.getInstance({});
       this._mapManager = new GGO.MapManagerSingleton.getInstance(modulesOptions);

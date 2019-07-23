@@ -57,6 +57,31 @@
                     </div>
                   </div>
                 </div>
+                <div id="chefs-groupe-form-element" class="slds-form-element slds-form-element_stacked slds-hide">
+                  <label class="slds-form-element__label" for="combobox-chefs-groupe">
+                    <abbr class="slds-required" title="required">* </abbr>Chefs de groupe
+                  </label>
+                  <div class="slds-form-element__control">
+                    <div class="slds-combobox_container slds-size_small">
+                      <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                        <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                          <input type="text" class="slds-input slds-combobox__input" id="combobox-chefs-groupe" aria-controls="listbox-unique-id" autoComplete="off" role="textbox" placeholder="" readonly="" />
+                          <span class="slds-icon_container slds-icon-utility-down slds-input__icon slds-input__icon_right">
+                            <svg class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default" aria-hidden="true">
+                              <use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#down"></use>
+                            </svg>
+                            <span class="slds-assistive-text">Description of icon when needed</span>
+                          </span>
+                        </div>
+                        <div id="listbox-chefs-groupe" role="listbox" class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid">
+
+                        </div>
+                      </div>
+                    </div>
+                    <div id="listbox-selections-chefs-groupe" role="listbox" aria-orientation="horizontal" class="slds-hide">
+                    </div>  
+                  </div>
+                </div>
                 <div id="sous-secteurs-form-element" class="slds-form-element slds-form-element_stacked slds-hide">
                   <label class="slds-form-element__label" for="combobox-soussecteurs">
                     <abbr class="slds-required" title="required">* </abbr>Sous-secteurs
@@ -91,6 +116,8 @@
               <button id="login-btn" class="slds-button slds-button_neutral">Connexion</button>
               <button id="patrouille-validate-btn" class="slds-button slds-button_neutral slds-hide">Valider</button>
 
+              <button id="chefs_groupe-validate-btn" class="slds-button slds-button_neutral slds-hide">Valider</button>
+              <button id="chefs_groupe-cancel-btn" class="slds-button slds-button_neutral slds-hide">Annuler</button>
               <button id="sous-secteurs-validate-btn" class="slds-button slds-button_neutral slds-hide">Valider</button>
               <button id="sous-secteurs-cancel-btn" class="slds-button slds-button_neutral slds-hide">Annuler</button>
 

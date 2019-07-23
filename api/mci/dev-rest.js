@@ -101,6 +101,13 @@ const _getSecteurs = async () => {
   return secteurs;
 };
 
+const _getChefsGroupe = async chefGroupeConnected => {
+  console.log(`[dev-rest] _getChefsGroupe`);
+  let chefsGroupeUrl = `${require('../../config').get('BACKEND_URL')}/chefs_groupe.php?chef_connected=${chefGroupeConnected}`;
+  let chefsGroupe = await doAsyncGET(chefsGroupeUrl);
+  return chefsGroupe;
+};
+
 const _getPatrimoineSecteur = async secteurs => {
   console.log(`[dev-rest] _getPatrimoineSecteur secteurs=${secteurs}`);
   let patrimoineUrl = `${require('../../config').get('BACKEND_URL')}/patrimoine_secteur.php?secteurs=${secteurs}`;
@@ -153,7 +160,7 @@ const _getMissionDetails = async missionId => {
 // joinMission
 const _joinMission = async reqQuery => {
   console.log(`[dev-rest] _joinMission request query=${JSON.stringify(reqQuery)}`);
-  let joinMissionUrl = `${require('../../config').get('BACKEND_URL')}/rejoindre.php?mission=${reqQuery.mission}&chef_groupe=${reqQuery.chef_groupe}`;
+  let joinMissionUrl = `${require('../../config').get('BACKEND_URL')}/rejoindre.php?mission=${reqQuery.mission}&chef_groupe=${reqQuery.chef_groupe}&chefs_groupe=${reqQuery.chefs_groupe}`;
   let joinMissionResponse = await doAsyncGET(joinMissionUrl);
   return joinMissionResponse;
 };
@@ -256,6 +263,7 @@ module.exports = {
   libererPatrouille: _libererPatrouille,
   getSousSecteurs: _getSousSecteurs,
   getSecteurs: _getSecteurs,
+  getChefsGroupe: _getChefsGroupe,
   getPatrimoineSousSecteur: _getPatrimoineSousSecteur,
   getMission: _getMission,
   getNeighborhood: _getNeighborhood,

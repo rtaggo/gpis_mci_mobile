@@ -147,7 +147,7 @@
 			});
 			let userRole = sessionStorage.getItem('role');
 			let userName = sessionStorage.getItem('username');
-
+			let chefsGroupe = sessionStorage.getItem('chefsGroupe');
 			if (!userName) {
 				GGO.SessionIssuePrompt('Utilisateur indéfini', 'Votre nom  d\'utilisateur n\'est pas défini. Veuillez vous reconnecter.', $('#appContainer').empty());
 				return;
@@ -178,6 +178,7 @@
 				windowHeight: windowH,
 				userName:  userName,
 				userRole: userRole,
+				chefsGroupe: chefsGroupe,
 				secteurs: JSON.parse(secteurs)
 			});
 			$('.ui-loader').remove();

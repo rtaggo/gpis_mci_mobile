@@ -76,7 +76,7 @@
         return `${this._options.baseRESTServicesURL}/voisinage.php?patrouille=${this._options.patrouille.id}&sssecteurs=${this._options.secteurs.map(s => s.id).join(',')}`;
       } else {
         /* case of charly or alpha */
-        return `${this._options.baseRESTServicesURL}/voisinage.php?id_chef_groupe=${this._options.userName}&secteurs=${this._options.secteurs.join(',')}`;
+        return `${this._options.baseRESTServicesURL}/voisinage.php?chefs_groupe=${this._options.chefsGroupe}&secteurs=${this._options.secteurs.join(',')}`;
       }
     },
     fetchNeighborhood: function() {
@@ -205,7 +205,7 @@
     onChefGroupeAdded: function(e) {
       let marker = e.layer;
       marker
-        .bindTooltip(`${marker.feature.properties['id_chef_groupe']}`, {
+        .bindTooltip(`${marker.feature.properties['libelle']}`, {
           offset: L.point(0, 0),
           direction: 'top',
           noHide: true,

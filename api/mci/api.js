@@ -93,6 +93,15 @@ router.get('/secteurs.php', (req, res, next) => {
   });
 });
 
+router.get('/chefs_groupe.php', (req, res, next) => {
+  console.log(`[MCI_REST_API][GET] /chefs_groupe ${JSON.stringify(req.query)}`);
+  const mcimodule = getMCIModule();
+  mcimodule.getChefsGroupe(req.query.chef_connected).then(chefs_groupe => {
+    res.header('Content-Type', 'application/json');
+    res.json(chefs_groupe);
+  });
+});
+
 router.get('/patrimoine_secteur.php', (req, res, next) => {
   console.log(`[MCI_REST_API][GET] /patrimoine_secteur.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();

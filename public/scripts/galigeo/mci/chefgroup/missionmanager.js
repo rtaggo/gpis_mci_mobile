@@ -869,7 +869,8 @@
       //let uniqueSecteurNames = Array.from(new Set(this._options.secteurs.map(s => `'${s.name}'`)));
       //uniqueSecteurNames = [`'EST'`];
       let uniqueSecteurNames = this._options.secteurs.join(',');
-      let missionUrl = `${this._options.baseRESTServicesURL}/mission_secteur.php?secteurs=${uniqueSecteurNames}&id_chef_groupe=${this._options.userName}`;
+      let missionUrl = `${this._options.baseRESTServicesURL}/mission_secteur.php?secteurs=${uniqueSecteurNames}&chefs_groupe=${this._options.chefsGroupe}&chef_groupe=${this._options.userName}`;
+
       $.ajax({
         type: 'GET',
         url: missionUrl,
@@ -1306,7 +1307,7 @@
       console.warn(`TODO: join mission `, mission);
       let self = this;
       // do Ajax call
-      let joinMissionUrl = `${this._options.baseRESTServicesURL}/rejoindre.php?mission=${mission.properties.mission_id}&chef_groupe=${this._options.userName}`;
+      let joinMissionUrl = `${this._options.baseRESTServicesURL}/rejoindre.php?mission=${mission.properties.mission_id}&chef_groupe=${this._options.userName}&chefs_groupe=${this._options.chefsGroupe}`;
       $.ajax({
         type: 'GET',
         url: joinMissionUrl,
