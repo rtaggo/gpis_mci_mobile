@@ -1129,6 +1129,11 @@
       let mission = this._currentMission.features[0];
       let content = $(`<div class="slds-form" role="list"></div>`);
       let self = this;
+      let renfort = '';
+      if (mission.properties.renforts_patrouille !== null) {
+        renfort = mission.properties.renforts_patrouille.replace('{', '').replace('}', '');
+      }
+
       content.append(
         $(`
           <div class="slds-form__row">
@@ -1173,7 +1178,7 @@
               <span class="slds-form-element__label" id="renfort_label">Renfort</span> 
               <div class="slds-form-element__control">
                 <div class="slds-form-element__static">
-                  ${mission.properties.renforts_patrouille.replace('{', '').replace('}', '')}
+                  ${renfort}
                 </div>
               </div>
             </div>
