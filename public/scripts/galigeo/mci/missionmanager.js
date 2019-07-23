@@ -776,7 +776,159 @@
         }
       });
     },
+    fetchFormIncidentes: function(incidente_id) {
+      let self = this;
+      const incidenteUrl = `${this._options.baseRESTServicesURL}/incidente.php?incidente_id=${incidente_id}`;
+      $.ajax({
+        type: 'GET',
+        url: incidenteUrl,
+        success: function(response) {
+          console.log(`${incidenteUrl}`, response);
+          self.handleFormIncidenteFetched(response, incidente_id);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`${incidenteUrl} Request aborted`);
+          } else {
+            console.error(`Error for ${incidenteUrl} request: ${textStatus}`, errorThrown);
+          }
+        }
+      });
+    },
+    openIncidenteModal: function() {
+      let self = this;
+      let modal = `
+      <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-incidente-content" class="slds-modal slds-fade-in-open slds-modal_large">
+        <!-- Start Modal Container -->
+        <div class="slds-modal__container" style="margin: 0px; padding: 0px;">
+          <header class="slds-modal__header">
+            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Incidente</h2>
+          </header>
+          <!-- Start Modal Content -->
+          <div class="slds-modal__content slds-p-around_medium" id="modal-incidente-content">
+            <div class="slds-form" role="list">
+              <div class="slds-form__row">
+                <div class="slds-form__item" role="listitem" >
+                  <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                    <label class="slds-form-element__label" for="incidente-input-adresse"><abbr class="slds-required" title="required"> </abbr>Adresse</label>
+                    <div class="slds-form-element__control" >
+                      <div class="slds-select_container">
+                        <select class="slds-select" id="adresse" required="" disabled></select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form__row">
+                <div class="slds-form__item" role="listitem" >
+                  <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                    <label class="slds-form-element__label" for="signalement-input-type"><abbr class="slds-required" title="required"> </abbr>Type d'incidente</label>
+                    <div class="slds-form-element__control" >
+                      <div class="slds-select_container">
+                        <select class="slds-select" id="type_incidente" required="" disabled></select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>          
+              <div id="parent_categorie" class="slds-form__row slds-hide">
+                <div class="slds-form__item" role="listitem">
+                  <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                    <label class="slds-form-element__label" for="signalement-input-categorie">Catégorie</label>
+                    <div class="slds-form-element__control">
+                      <div class="slds-select_container">
+                        <select class="slds-select" id="categorie" required="" disabled></select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="parent_sous_categorie" class="slds-form__row slds-hide">
+                <div class="slds-form__item" role="listitem">
+                  <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                    <label class="slds-form-element__label" for="signalement-input-souscategorie">Sous-Catégorie</label>
+                    <div class="slds-form-element__control">
+                      <div class="slds-select_container">
+                        <select class="slds-select" id="sous-categorie" required="" disabled></select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="parent_categorie2s" class="slds-form__row slds-hide">
+                <div class="slds-form__item" role="listitem">
+                  <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                    <label class="slds-form-element__label" for="signalement-input-categorie2nd">Catégorie 2nd</label>
+                    <div class="slds-form-element__control">
+                      <div class="slds-select_container">
+                        <select class="slds-select" id="categorie2s" required="" disabled></select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form__row">
+                <div class="slds-form__item" role="listitem">
+                  <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                    <label class="slds-form-element__label" for="signalement-input-typelieu">Type de lieu</label>
+                    <div class="slds-form-element__control">
+                      <div class="slds-select_container">
+                        <select class="slds-select" id="type-lieu" required="" disabled></select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form__row">
+                <div class="slds-form__item" role="listitem">
+                  <div class="slds-form-element slds-form-element_stacked slds-form-element_readonly slds-form-element_1-col">
+                    <label class="slds-form-element__label" for="signalement-input-observation">Observations / Caractéristique</label>
+                    <div class="slds-form-element__control">
+                      <textarea id="observation" class="slds-textarea" disabled></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>    
+              <div id="parent_nbre_personne" class="slds-form__row slds-hide">
+                <div class="slds-form__item" role="listitem">
+                  <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                    <label class="slds-form-element__label" for="signalement-input-typelieu">Nombre de personnes</label>
+                    <div class="slds-form-element__control">
+                      <div class="slds-select_container">
+                        <select class="slds-select" id="nbre-personne" required="" disabled></select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>       
+              <footer class="slds-modal__footer">
+                <button id="btnIncidenteCancel" class="slds-button slds-button_neutral">Fermer</button>
+              </footer>
+            </div>
+            <div class="slds-spinner_container">
+              <div role="status" class="slds-spinner slds-spinner_x-small">
+                <span class="slds-assistive-text">Loading</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+              </div>
+            </div>
+          </div>
+          <!-- End Modal Content -->
+        </div>
+        <!-- End Modal Containter -->
+      </section>
+      `;
 
+      let theModal = $(modal);
+      $('body').append(
+        $('<div id="incidente-modal" class="ggoslds"></div>')
+          .append(theModal)
+          .append($('<div class="slds-backdrop slds-backdrop_open"></div>'))
+      );
+      $('#btnIncidenteCancel').click(function(e) {
+        $('#incidente-modal').remove();
+      });
+    },
     handleFormSignalementFetched: function(response, signalement_id) {
       console.log(`>> handleTypeSignalementFetched`, response);
       const self = this;
@@ -807,13 +959,47 @@
         $('#parent_niveau').removeClass('slds-hide');
         $('#niveau')[0].value = response.signalement[0].niveau;
       }
-      //$('#observation')[0].value = response.signalement[0].observations;
-      // $('#btnReaffecter')[0].value = signalement_id;
 
       $('#observation').val(response.signalement[0].observations);
       $('#btnReaffecter').attr('data-signalementid', signalement_id);
 
       $('#modal-signalement-content .slds-spinner_container').remove();
+    },
+    handleFormIncidenteFetched: function(response, incidente_id) {
+      console.log(`>> handleFormIncidenteFetched`, response);
+      const self = this;
+
+      let selectAdresse = $('#adresse').empty();
+      selectAdresse.append($(`<option value="">${response.incidente[0].adresse}</option>`));
+
+      let selectTypeIncidente = $('#type_incidente').empty();
+      selectTypeIncidente.append($(`<option value="">${response.incidente[0].type_incidente}</option>`));
+      if (response.incidente[0].type_categorie) {
+        $('#parent_categorie').removeClass('slds-hide');
+        let selectCategorie = $('#categorie').empty();
+        selectCategorie.append($(`<option value="">${response.incidente[0].type_categorie}</option>`));
+      }
+      let selectTypeLieu = $('#type-lieu').empty();
+      selectTypeLieu.append($(`<option value="">${response.incidente[0].type_lieu}</option>`));
+      if (response.incidente[0].type_souscategorie) {
+        $('#parent_sous_categorie').removeClass('slds-hide');
+        let selectSousCategorie = $('#sous-categorie').empty();
+        selectSousCategorie.append($(`<option value="">${response.incidente[0].type_souscategorie}</option>`));
+      }
+      if (response.incidente[0].type_categorie_2s) {
+        $('#parent_categorie2s').removeClass('slds-hide');
+        let selectCategorie2s = $('#categorie2s').empty();
+        selectCategorie2s.append($(`<option value="">${response.incidente[0].type_categorie_2s}</option>`));
+      }
+
+      if (response.incidente[0].nbre_personne) {
+        $('#parent_nbre_personne').removeClass('slds-hide');
+        let selectNombrePersonne = $('#nbre-personne').empty();
+        selectNombrePersonne.append($(`<option value="">${response.incidente[0].nbre_personne}</option>`));
+      }
+
+      $('#observation').val(response.incidente[0].observations);
+      $('#modal-incidente-content .slds-spinner_container').remove();
     },
     fetchTypeSignalements: function() {
       let self = this;
@@ -1317,12 +1503,12 @@
       let incidContent = '<div class="slds-form-element__static"><p>Aucune incidente</p></div>';
       if (typeof mission.properties.incidente !== 'undefined' && Array.isArray(mission.properties.incidente) && mission.properties.incidente.length > 0) {
         incidContent = `
-        <div class="slds-form-element__static">
+        <div class="slds-form-element__static"  id="incidentes">
           <ul class="slds-list_dotted">
             ${mission.properties.incidente
               .map(s => {
                 return `
-                <li>${moment(s.date).format('DD/MM/YYYY  HH:mm')} : ${s.libelle}
+                <li id='incidente_list_${s.incidente_id}' value=${s.incidente_id}>${moment(s.date).format('DD/MM/YYYY  HH:mm')} : ${s.libelle}
                   <span class="incidente-observation">${s.observations}</span>
                 </li>`;
               })
@@ -1398,9 +1584,23 @@
             self.openReaffectationModal();
             self.fetchFormSignalements($(this).val());
           });
+        $('#incidentes li')
+          .off()
+          .click(function(e) {
+            console.log($(this));
+            self.openIncidenteModal();
+            self.fetchFormIncidentes($(this).val());
+          });
       } else {
         $('#renfort_label')[0].innerHTML = 'Patrouille leader';
       }
+      $('#incidentes li')
+      .off()
+      .click(function(e) {
+        console.log($(this));
+        self.openIncidenteModal();
+        self.fetchFormIncidentes($(this).val());
+      });
       /*
       if (typeof $('#signalement_list') !== 'undefined') {
         var list_signalements = document.getElementById('signalements').getElementsByTagName('li');
