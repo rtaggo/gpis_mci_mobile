@@ -215,6 +215,13 @@ const _getReaffectationSignalement = async signalement_id => {
   return reaffectationResponse;
 };
 
+const _getIncidente = async incidente_id => {
+  console.log(`[dev-rest] _getIncidente`);
+  let incidenteUrl = `${require('../../config').get('BACKEND_URL')}/incidente.php?incidente_id=${incidente_id}`;
+  let incidenteResponse = await doAsyncGET(incidenteUrl);
+  return incidenteResponse;
+};
+
 const _getReaffectationPost = async formreaffectation => {
   console.log(`[dev-rest] _getReaffectationPost`);
   let reaffectationUrlPost = `${require('../../config').get('BACKEND_URL')}/reaffectation.php`;
@@ -270,6 +277,7 @@ module.exports = {
   getSignalement: _getSignalement,
   getSignalementPost: _getSignalementPost,
   getReaffectationSignalement: _getReaffectationSignalement,
+  getIncidente: _getIncidente,
   getReaffectationPost: _getReaffectationPost,
   postMaJMission: _postMaJMission,
   getStatutMission: _getStatutMission,

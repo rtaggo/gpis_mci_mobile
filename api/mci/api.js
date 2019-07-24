@@ -219,6 +219,15 @@ router.get('/reaffectation.php', (req, res, next) => {
   });
 });
 
+router.get('/incidente.php', (req, res, next) => {
+  console.log(`[MCI_REST_API][GET] /incidente.php ${JSON.stringify(req.query)}`);
+  const mcimodule = getMCIModule();
+  mcimodule.getIncidente(req.query.incidente_id).then(incidenteResponse => {
+    res.header('Content-Type', 'application/json');
+    res.json(incidenteResponse);
+  });
+});
+
 /**
  * Errors on "/elephantbleu/*" routes.
  */
