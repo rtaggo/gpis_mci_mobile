@@ -68,11 +68,20 @@
 						</div>
 					</section>
 				</div>
-				<div id="logoutBtn">
-					<div class="slds-icon_container" style="position: absolute; right: 2px; top: 4px;">
-						<svg class="slds-icon slds-icon_x-small slds-icon-text-default" style="fill: red;">
+				<div class="slds-button-group" role="group"  style="position: absolute; right: 2px; top: 4px;">
+					<div class="slds-dropdown-trigger">
+				<button class="slds-button slds-button--icon-border-filled">
+						<svg aria-hidden="true" class="slds-button__icon" style="fill: red;">
 							<use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#logout"></use>
 						</svg>
+						</button>
+
+					<div class="slds-dropdown slds-dropdown--right slds-text-heading--label slds-dropdown--menu">
+						<ul class="slds-dropdown__list" role="menu">
+						<li class="slds-dropdown__item"><a id="logoutBtn1" class="slds-truncate" role="menuitem"  style="font-size: 10px;">Se déconnecter</a></li>
+						<li class="slds-dropdown__item"><a id="logoutBtn2" class="slds-truncate" role="menuitem" style="font-size: 10px;">Fin de vacation</a></li>
+						</ul>
+					</div>
 					</div>
 				</div>
 			</div>
@@ -128,11 +137,21 @@
 		var self = this;		
 		$(document).ready(function(e){
 			console.log(' >> document is ready');
-			$('#logoutBtn').click(function(e){
+			$('#logoutBtn1').click(function(e){
 				GGO.disconnect(
 					self.galigeo.getPatrouille().id, 
 					{
-						'baseRESTServicesURL': '/services/rest/mci'
+						'baseRESTServicesURL': '/services/rest/mci',
+						'fonction': 'deconnexion'
+					}
+				);
+			});
+			$('#logoutBtn2').click(function(e){
+				GGO.disconnect(
+					self.galigeo.getPatrouille().id, 
+					{
+						'baseRESTServicesURL': '/services/rest/mci',
+						'fonction': 'fin'
 					}
 				);
 			});

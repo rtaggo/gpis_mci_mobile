@@ -82,6 +82,13 @@ const _libererPatrouille = async patrouilleId => {
   return resp;
 };
 
+const _finVacation = async patrouilleId => {
+  console.log(`[dev-rest] _finVacation patrouilleId=${patrouilleId}`);
+  let finVacationUrl = `${require('../../config').get('BACKEND_URL')}/fin_vacation.php?patrouille=${patrouilleId}`;
+  let resp = await doAsyncGET(finVacationUrl);
+  return resp;
+};
+
 const _getSousSecteurs = async patrouilleId => {
   console.log(`[dev-rest] _getSousSecteurs patrouilleId=${patrouilleId}`);
   let sousSecteurseUrl = `${require('../../config').get('BACKEND_URL')}/sous_secteurs.php?patrouille=${patrouilleId}`;
@@ -268,6 +275,7 @@ module.exports = {
   login: _login,
   getPatrouilles: _getPatrouilles,
   libererPatrouille: _libererPatrouille,
+  finVacation: _finVacation,
   getSousSecteurs: _getSousSecteurs,
   getSecteurs: _getSecteurs,
   getChefsGroupe: _getChefsGroupe,
