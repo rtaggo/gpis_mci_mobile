@@ -75,6 +75,15 @@ router.get('/liberer_patrouille.php', (req, res, next) => {
   });
 });
 
+router.get('/fin_vacation.php', (req, res, next) => {
+  console.log(`[MCI_REST_API][GET] /fin_vacation.php`);
+  const mcimodule = getMCIModule();
+  mcimodule.finVacation(req.query.patrouille).then(resp => {
+    res.header('Content-Type', 'application/json');
+    res.json(resp);
+  });
+});
+
 router.get('/sous_secteurs.php', (req, res, next) => {
   console.log(`[MCI API][GET] /sous_secteurs.php`);
   const mcimodule = getMCIModule();

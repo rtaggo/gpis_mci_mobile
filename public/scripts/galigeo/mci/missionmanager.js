@@ -22,6 +22,10 @@
       $('#btnMissionEnRoute').click(function(e) {
         let theMission = self._currentMission.features[0];
         self._currentMission.statut = 'En direction';
+        $('#btnMissionEnRoute').attr('disabled', true);
+        $('#btnMissionDebut').attr('disabled', false);
+        $('#btnMissionFin').attr('disabled', true);
+        $('#btnMissionSignalement').attr('disabled', true);
         $('#mainContainer-card-body').prepend(
           $(`
           <div id="udpate-mission-spinner" class="slds-spinner_container">
@@ -46,15 +50,13 @@
             }
           }.bind(self)
         );
-        /*
-        setTimeout(function(e) {
-          self.renderMissionViewMode();
-          $('#udpate-mission-spinner').remove();
-        }, 1000);
-        */
       });
       $('#btnMissionDebut').click(function(e) {
         self._currentMission.statut = 'Début';
+        $('#btnMissionEnRoute').attr('disabled', true);
+        $('#btnMissionDebut').attr('disabled', true);
+        $('#btnMissionFin').attr('disabled', false);
+        $('#btnMissionSignalement').attr('disabled', false);
         $('#mainContainer-card-body').prepend(
           $(`
           <div id="udpate-mission-spinner" class="slds-spinner_container">
@@ -1252,6 +1254,25 @@
         self.fetchMission();
       }, GGO.CHECK_MISSION_INTERVALLE);
     },
+    updateButtons: function() {
+      let self = this;
+      if (self._currentMission.features[0].properties.statut == 'En direction') {
+        $('#btnMissionEnRoute').attr('disabled', true);
+        $('#btnMissionDebut').attr('disabled', false);
+        $('#btnMissionFin').attr('disabled', true);
+        $('#btnMissionSignalement').attr('disabled', true);
+      } else if (self._currentMission.features[0].properties.statut == 'Début') {
+        $('#btnMissionEnRoute').attr('disabled', true);
+        $('#btnMissionDebut').attr('disabled', true);
+        $('#btnMissionFin').attr('disabled', false);
+        $('#btnMissionSignalement').attr('disabled', false);
+      } else if (self._currentMission.features[0].properties.statut == 'Mission créée') {
+        $('#btnMissionEnRoute').attr('disabled', false);
+        $('#btnMissionDebut').attr('disabled', true);
+        $('#btnMissionSignalement').attr('disabled', true);
+        $('#btnMissionFin').attr('disabled', true);
+      }
+    },
     fetchMission: function() {
       let self = this;
       let missionUrl = `${this._options.baseRESTServicesURL}/mission_sous_secteur.php?patrouille=${this._options.patrouille.id}`;
@@ -1300,6 +1321,7 @@
           $('#missionContent').removeClass('slds-hide');
           $('#missionFooter').removeClass('slds-hide');
           this.checkMissionStatut();
+          this.updateButtons();
         } else {
           this.checkMission();
         }
@@ -1595,12 +1617,12 @@
         $('#renfort_label')[0].innerHTML = 'Patrouille leader';
       }
       $('#incidentes li')
-      .off()
-      .click(function(e) {
-        console.log($(this));
-        self.openIncidenteModal();
-        self.fetchFormIncidentes($(this).val());
-      });
+        .off()
+        .click(function(e) {
+          console.log($(this));
+          self.openIncidenteModal();
+          self.fetchFormIncidentes($(this).val());
+        });
       /*
       if (typeof $('#signalement_list') !== 'undefined') {
         var list_signalements = document.getElementById('signalements').getElementsByTagName('li');

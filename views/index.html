@@ -68,11 +68,20 @@
 						</div>
 					</section>
 				</div>
-				<div id="logoutBtn">
-					<div class="slds-icon_container" style="position: absolute; right: 2px; top: 4px;">
-						<svg class="slds-icon slds-icon_x-small slds-icon-text-default" style="fill: red;">
+				<div class="slds-button-group" role="group"  style="position: absolute; right: 2px; top: 4px;">
+					<div class="slds-dropdown-trigger">
+				<button class="slds-button slds-button--icon-border-filled">
+						<svg aria-hidden="true" class="slds-button__icon" style="fill: red;">
 							<use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#logout"></use>
 						</svg>
+						</button>
+
+					<div class="slds-dropdown slds-dropdown--right slds-text-heading--label slds-dropdown--menu">
+						<ul class="slds-dropdown__list" role="menu">
+						<li class="slds-dropdown__item"><a id="logoutBtn1" class="slds-truncate" role="menuitem"  style="font-size: 10px;">Se déconnecter</a></li>
+						<li class="slds-dropdown__item"><a id="logoutBtn2" class="slds-truncate" role="menuitem" style="font-size: 10px;">Fin de vacation</a></li>
+						</ul>
+					</div>
 					</div>
 				</div>
 			</div>
@@ -111,10 +120,10 @@
 							<button id="btnMissionEnRoute" class="slds-button slds-button_brand" style="padding-left: 8px; padding-right: 8px; background-color: #FFC100; border-color: #FFC100;">En direction</button>
 						</li>
 						<li class="slds-button-group-item">
-							<button id="btnMissionDebut" class="slds-button slds-button_brand" style="padding-left: 6px; padding-right: 6px">Début</button>
+							<button id="btnMissionDebut" class="slds-button slds-button_brand" style="padding-left: 6px; padding-right: 6px; background-color: #0070d2; border-color: #0070d2;">Début</button>
 						</li>
 						<li class="slds-button-group-item">
-							<button id="btnMissionFin" class="slds-button slds-button_success">Fin</button>
+							<button id="btnMissionFin" class="slds-button slds-button_success" style="background-color: #4bca81; border-color: #4bca81;">Fin</button>
 						</li>
 						<li class="slds-button-group-item">
 							<button id="btnMissionSignalement" class="slds-button slds-button_destructive">Signalement</button>
@@ -128,11 +137,21 @@
 		var self = this;		
 		$(document).ready(function(e){
 			console.log(' >> document is ready');
-			$('#logoutBtn').click(function(e){
+			$('#logoutBtn1').click(function(e){
 				GGO.disconnect(
 					self.galigeo.getPatrouille().id, 
 					{
-						'baseRESTServicesURL': '/services/rest/mci'
+						'baseRESTServicesURL': '/services/rest/mci',
+						'fonction': 'deconnexion'
+					}
+				);
+			});
+			$('#logoutBtn2').click(function(e){
+				GGO.disconnect(
+					self.galigeo.getPatrouille().id, 
+					{
+						'baseRESTServicesURL': '/services/rest/mci',
+						'fonction': 'fin'
 					}
 				);
 			});

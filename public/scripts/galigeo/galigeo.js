@@ -175,23 +175,43 @@
   GGO.disconnect = function(patrouilleId, options) {
     sessionStorage.clear();
     if (typeof patrouilleId !== 'undefined') {
-      const patrouillesUrl = `${options.baseRESTServicesURL}/liberer_patrouille.php?patrouille=${patrouilleId}`;
-      $.ajax({
-        type: 'GET',
-        url: patrouillesUrl,
-        success: function(response) {
-          console.log(`Revoke Patrouille response: `, response);
-          GGO.postLogoutForm();
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-          if (textStatus === 'abort') {
-            console.warn(`${patrouillesUrl} Request aborted`);
-          } else {
-            console.error(`Error for ${patrouillesUrl} request: ${textStatus}`, errorThrown);
+      if (options.fonction == 'deconnexion') {
+        const patrouillesUrl = `${options.baseRESTServicesURL}/liberer_patrouille.php?patrouille=${patrouilleId}`;
+        $.ajax({
+          type: 'GET',
+          url: patrouillesUrl,
+          success: function(response) {
+            console.log(`Revoke Patrouille response: `, response);
+            GGO.postLogoutForm();
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            if (textStatus === 'abort') {
+              console.warn(`${patrouillesUrl} Request aborted`);
+            } else {
+              console.error(`Error for ${patrouillesUrl} request: ${textStatus}`, errorThrown);
+            }
+            GGO.postLogoutForm();
           }
-          GGO.postLogoutForm();
-        }
-      });
+        });
+      } else if (options.fonction == 'fin') {
+        const patrouillesUrl = `${options.baseRESTServicesURL}/fin_vacation.php?patrouille=${patrouilleId}`;
+        $.ajax({
+          type: 'GET',
+          url: patrouillesUrl,
+          success: function(response) {
+            console.log(`Revoke Patrouille response: `, response);
+            GGO.postLogoutForm();
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            if (textStatus === 'abort') {
+              console.warn(`${patrouillesUrl} Request aborted`);
+            } else {
+              console.error(`Error for ${patrouillesUrl} request: ${textStatus}`, errorThrown);
+            }
+            GGO.postLogoutForm();
+          }
+        });
+      }
     } else if (typeof options.userRole !== 'undefined' && (options.userRole === 'charly' || options.userRole === 'alpha')) {
       console.warn(`Might be usefull to disconnect the user ${options.userName} with role ${options.role} from the system`);
       GGO.postLogoutForm();
