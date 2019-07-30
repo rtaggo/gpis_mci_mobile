@@ -1379,6 +1379,7 @@
           }
         }
       });
+      $('#btnMissionPosition').attr('disabled', true);
     }
   };
   GGO.MissionManagerSingleton = (function() {
