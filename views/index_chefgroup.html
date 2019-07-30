@@ -140,8 +140,10 @@
 			console.log(' >> document is ready');
 			$('#logoutBtn1').click(function(e){
 				GGO.disconnect(
-					self.galigeo.getPatrouille().id, 
+					undefined, 
 					{
+						userName: self.galigeo.getUserLogin(),
+						userRole: self.galigeo.getUserRole(),
 						'baseRESTServicesURL': '/services/rest/mci',
 						'fonction': 'deconnexion'
 					}
@@ -149,8 +151,10 @@
 			});
 			$('#logoutBtn2').click(function(e){
 				GGO.disconnect(
-					self.galigeo.getPatrouille().id, 
+					undefined, 
 					{
+						userName: self.galigeo.getUserLogin(),
+						userRole: self.galigeo.getUserRole(),
 						'baseRESTServicesURL': '/services/rest/mci',
 						'fonction': 'fin'
 					}
