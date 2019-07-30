@@ -172,6 +172,13 @@ const _joinMission = async reqQuery => {
   return joinMissionResponse;
 };
 
+// positionMission
+const _positionMission = async reqQuery => {
+  console.log(`[dev-rest] _positionMission request query=${JSON.stringify(reqQuery)}`);
+  let positionMissionUrl = `${require('../../config').get('BACKEND_URL')}/position.php?mission=${reqQuery.mission}&chef_groupe=${reqQuery.chef_groupe}&chefs_groupe=${reqQuery.chefs_groupe}`;
+  let positionMissionResponse = await doAsyncGET(positionMissionUrl);
+  return positionMissionResponse;
+};
 /*
 const _getNeighborhood = async (patrouilleId, sssecteurs) => {
   console.log(`[dev-rest] _getNeighborhood`);
@@ -292,5 +299,6 @@ module.exports = {
   getPatrimoineSecteur: _getPatrimoineSecteur,
   getMissionSecteurs: _getMissionSecteurs,
   getMissionDetails: _getMissionDetails,
-  joinMission: _joinMission
+  joinMission: _joinMission,
+  positionMission: _positionMission
 };
