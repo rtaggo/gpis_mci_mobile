@@ -1273,6 +1273,15 @@
         .append(closeBtn);
 
       if (typeof this._currentJoinedMissionId !== 'undefined' && mission.properties.mission_id === this._currentJoinedMissionId) {
+        $('#btnMissionPosition')
+          .attr('disabled', false)
+          .removeClass('slds-hide')
+          .off()
+          .click(
+            function(e) {
+              self.positionMission(this);
+            }.bind(mission)
+          );
         $('#btnMissionRejoindre')
           .attr('disabled', true)
           .addClass('slds-hide');
@@ -1286,6 +1295,9 @@
               self.joinMission(this);
             }.bind(mission)
           );
+        $('#btnMissionPosition')
+          .attr('disabled', true)
+          .addClass('slds-hide');
       }
       $('#btnMissionClose')
         .off()
@@ -1330,7 +1342,14 @@
         $('#btnMissionRejoindre')
           .attr('disabled', true)
           .addClass('slds-hide');
-
+        $('#btnMissionPosition')
+          .attr('disabled', false)
+          .removeClass('slds-hide')
+          .click(
+            function(e) {
+              self.positionMission(this);
+            }.bind(mission)
+          );
         $(`#missionListContent tr`)
           .removeClass('slds-is-selected')
           .attr('aria-selected', false);
@@ -1340,6 +1359,26 @@
       } else {
         console.warn(`Display error message`, response);
       }
+    },
+    positionMission: function(mission) {
+      console.warn(`TODO: position mission `, mission);
+      let self = this;
+      // do Ajax call
+      let positionMissionUrl = `${this._options.baseRESTServicesURL}/position.php?mission=${mission.properties.mission_id}&chef_groupe=${this._options.userName}&chefs_groupe=${this._options.chefsGroupe}`;
+      $.ajax({
+        type: 'GET',
+        url: positionMissionUrl,
+        success: function(response) {
+          console.log(`${positionMissionUrl}: `, response);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`[GET] ${positionMissionUrl} Request aborted`);
+          } else {
+            console.error(`${positionMissionUrl} request error : ${textStatus}`, errorThrown);
+          }
+        }
+      });
     }
   };
   GGO.MissionManagerSingleton = (function() {

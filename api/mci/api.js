@@ -155,6 +155,16 @@ router.get('/rejoindre.php', (req, res, next) => {
   });
 });
 
+// position.php
+router.get('/position.php', (req, res, next) => {
+  console.log(`[MCI_REST_API][GET] /position.php ${JSON.stringify(req.query)}`);
+  const mcimodule = getMCIModule();
+  mcimodule.positionMission(req.query).then(response => {
+    res.header('Content-Type', 'application/json');
+    res.json(response);
+  });
+});
+
 router.get('/patrimoine_sous_secteur.php', (req, res, next) => {
   console.log(`[MCI_REST_API][GET] /patrimoine_sous_secteur.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
