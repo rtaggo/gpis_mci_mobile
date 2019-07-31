@@ -1283,7 +1283,6 @@
               self.positionMission(this);
             }.bind(mission)
           );
-        console.log(this._position);
         if (this._position) {
           $('#btnMissionPosition')
             .attr('disabled', true)
