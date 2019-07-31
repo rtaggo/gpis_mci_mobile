@@ -907,6 +907,7 @@
       let self = this;
       if (typeof response.mission_en_cours !== 'undefined') {
         this._currentJoinedMissionId = response.mission_en_cours;
+        this._position = response.position;
       }
       if (response.missions && Array.isArray(response.missions) && response.missions.length > 0) {
         $('#waiting4Mission').remove();
@@ -1282,6 +1283,12 @@
               self.positionMission(this);
             }.bind(mission)
           );
+        console.log(this._position);
+        if (this._position) {
+          $('#btnMissionPosition')
+            .attr('disabled', true)
+            .attr('style', ' background-color: #bab7af; border-color: #bab7af;');
+        }
         $('#btnMissionRejoindre')
           .attr('disabled', true)
           .addClass('slds-hide');
@@ -1345,6 +1352,7 @@
         $('#btnMissionPosition')
           .attr('disabled', false)
           .removeClass('slds-hide')
+          .attr('style', ' background-color: #0070d2; border-color: #0070d2;')
           .click(
             function(e) {
               self.positionMission(this);
@@ -1379,7 +1387,9 @@
           }
         }
       });
-      $('#btnMissionPosition').attr('disabled', true);
+      $('#btnMissionPosition')
+        .attr('disabled', true)
+        .attr('style', ' background-color: #bab7af; border-color: #bab7af;');
     }
   };
   GGO.MissionManagerSingleton = (function() {
