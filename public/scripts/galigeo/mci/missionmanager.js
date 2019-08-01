@@ -25,7 +25,7 @@
         $('#btnMissionEnRoute').attr('disabled', true);
         $('#btnMissionDebut').attr('disabled', false);
         $('#btnMissionFin').attr('disabled', true);
-        $('#btnMissionSignalement').attr('disabled', true);
+        // $('#btnMissionSignalement').attr('disabled', true);
         $('#mainContainer-card-body').prepend(
           $(`
           <div id="udpate-mission-spinner" class="slds-spinner_container">
@@ -56,7 +56,7 @@
         $('#btnMissionEnRoute').attr('disabled', true);
         $('#btnMissionDebut').attr('disabled', true);
         $('#btnMissionFin').attr('disabled', false);
-        $('#btnMissionSignalement').attr('disabled', false);
+        // $('#btnMissionSignalement').attr('disabled', false);
         $('#mainContainer-card-body').prepend(
           $(`
           <div id="udpate-mission-spinner" class="slds-spinner_container">
@@ -1260,16 +1260,16 @@
         $('#btnMissionEnRoute').attr('disabled', true);
         $('#btnMissionDebut').attr('disabled', false);
         $('#btnMissionFin').attr('disabled', true);
-        $('#btnMissionSignalement').attr('disabled', true);
+        //$('#btnMissionSignalement').attr('disabled', true);
       } else if (self._currentMission.features[0].properties.statut == 'Début') {
         $('#btnMissionEnRoute').attr('disabled', true);
         $('#btnMissionDebut').attr('disabled', true);
         $('#btnMissionFin').attr('disabled', false);
-        $('#btnMissionSignalement').attr('disabled', false);
+        // $('#btnMissionSignalement').attr('disabled', false);
       } else if (self._currentMission.features[0].properties.statut == 'Mission créée') {
         $('#btnMissionEnRoute').attr('disabled', false);
         $('#btnMissionDebut').attr('disabled', true);
-        $('#btnMissionSignalement').attr('disabled', true);
+        // $('#btnMissionSignalement').attr('disabled', true);
         $('#btnMissionFin').attr('disabled', true);
       }
     },
