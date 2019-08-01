@@ -1283,11 +1283,6 @@
               self.positionMission(this);
             }.bind(mission)
           );
-        if (this._position) {
-          $('#btnMissionPosition')
-            .attr('disabled', true)
-            .attr('style', ' background-color: #bab7af; border-color: #bab7af;');
-        }
         $('#btnMissionRejoindre')
           .attr('disabled', true)
           .addClass('slds-hide');
@@ -1344,6 +1339,7 @@
     },
     joinMissionCallback: function(response, mission) {
       if (response.code === 200) {
+        let self = this;
         this._currentJoinedMissionId = mission.properties.mission_id;
         $('#btnMissionRejoindre')
           .attr('disabled', true)
@@ -1371,7 +1367,7 @@
       console.warn(`TODO: position mission `, mission);
       let self = this;
       // do Ajax call
-      let positionMissionUrl = `${this._options.baseRESTServicesURL}/position.php?mission=${mission.properties.mission_id}&chef_groupe=${this._options.userName}&chefs_groupe=${this._options.chefsGroupe}`;
+      let positionMissionUrl = `${this._options.baseRESTServicesURL}/position.php?mission=${this._currentJoinedMissionId}&chef_groupe=${this._options.userName}&chefs_groupe=${this._options.chefsGroupe}`;
       $.ajax({
         type: 'GET',
         url: positionMissionUrl,
