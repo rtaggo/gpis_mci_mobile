@@ -229,6 +229,15 @@ router.get('/statut_mission.php', (req, res, next) => {
   });
 });
 
+router.get('/renforts.php', (req, res, next) => {
+  console.log(`[MCI_REST_API][GET] /renforts.php ${JSON.stringify(req.query)}`);
+  const mcimodule = getMCIModule();
+  mcimodule.getRenfortsMission(req.query.patrouille, req.query.mission).then(renfortsResponse => {
+    res.header('Content-Type', 'application/json');
+    res.json(renfortsResponse);
+  });
+});
+
 router.get('/reaffectation.php', (req, res, next) => {
   console.log(`[MCI_REST_API][GET] /reaffectation.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
