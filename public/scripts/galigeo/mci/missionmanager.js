@@ -25,7 +25,7 @@
         $('#btnMissionEnRoute').attr('disabled', true);
         $('#btnMissionDebut').attr('disabled', false);
         $('#btnMissionFin').attr('disabled', true);
-        $('#btnMissionSignalement').attr('disabled', true);
+        // $('#btnMissionSignalement').attr('disabled', true);
         $('#mainContainer-card-body').prepend(
           $(`
           <div id="udpate-mission-spinner" class="slds-spinner_container">
@@ -56,7 +56,7 @@
         $('#btnMissionEnRoute').attr('disabled', true);
         $('#btnMissionDebut').attr('disabled', true);
         $('#btnMissionFin').attr('disabled', false);
-        $('#btnMissionSignalement').attr('disabled', false);
+        // $('#btnMissionSignalement').attr('disabled', false);
         $('#mainContainer-card-body').prepend(
           $(`
           <div id="udpate-mission-spinner" class="slds-spinner_container">
@@ -211,7 +211,7 @@
                     <label class="slds-form-element__label" for="select-sous-categorie">Sous-Catégorie</label>
                     <div class="slds-form-element__control">
                       <div class="slds-select_container">
-                        <select class="slds-select" id="select-sous-categorie" required=""></select>
+                        <select multiple size="2" class="slds-select" id="select-sous-categorie" required=""></select>
                       </div>
                     </div>
                     <div class="slds-form-element__help slds-hide" id="select-sous-categorie_error">Champ obligatoire</div>
@@ -224,7 +224,7 @@
                     <label class="slds-form-element__label" for="select-categorie2s">Catégorie 2nd</label>
                     <div class="slds-form-element__control">
                       <div class="slds-select_container">
-                        <select class="slds-select" id="select-categorie2s" required=""></select>
+                        <select multiple size="2" class="slds-select" id="select-categorie2s" required=""></select>
                       </div>
                     </div>
                     <div class="slds-form-element__help slds-hide" id="select-categorie2s_error">Champ obligatoire</div>
@@ -289,7 +289,20 @@
         <!-- End Modal Container -->
       </section>
       `;
+      window.onmousedown = function(e) {
+        var el = e.target;
+        if (el.tagName.toLowerCase() == 'option' && el.parentNode.hasAttribute('multiple')) {
+          e.preventDefault();
 
+          // toggle selection
+          if (el.hasAttribute('selected')) el.removeAttribute('selected');
+          else el.setAttribute('selected', '');
+
+          // hack to correct buggy behavior
+          var select = el.parentNode.cloneNode(true);
+          el.parentNode.parentNode.replaceChild(select, el.parentNode);
+        }
+      };
       let theModal = $(modal);
 
       theModal.find('#select-adresse').change(function() {
@@ -1260,16 +1273,16 @@
         $('#btnMissionEnRoute').attr('disabled', true);
         $('#btnMissionDebut').attr('disabled', false);
         $('#btnMissionFin').attr('disabled', true);
-        $('#btnMissionSignalement').attr('disabled', true);
+        //$('#btnMissionSignalement').attr('disabled', true);
       } else if (self._currentMission.features[0].properties.statut == 'Début') {
         $('#btnMissionEnRoute').attr('disabled', true);
         $('#btnMissionDebut').attr('disabled', true);
         $('#btnMissionFin').attr('disabled', false);
-        $('#btnMissionSignalement').attr('disabled', false);
+        // $('#btnMissionSignalement').attr('disabled', false);
       } else if (self._currentMission.features[0].properties.statut == 'Mission créée') {
         $('#btnMissionEnRoute').attr('disabled', false);
         $('#btnMissionDebut').attr('disabled', true);
-        $('#btnMissionSignalement').attr('disabled', true);
+        // $('#btnMissionSignalement').attr('disabled', true);
         $('#btnMissionFin').attr('disabled', true);
       }
     },
