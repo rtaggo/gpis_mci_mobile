@@ -224,7 +224,7 @@
                     <label class="slds-form-element__label" for="select-categorie2s">Catégorie 2nd</label>
                     <div class="slds-form-element__control">
                       <div class="slds-select_container">
-                        <select class="slds-select" id="select-categorie2s" required=""></select>
+                        <select multiple size="2" class="slds-select" id="select-categorie2s" required=""></select>
                       </div>
                     </div>
                     <div class="slds-form-element__help slds-hide" id="select-categorie2s_error">Champ obligatoire</div>
@@ -289,7 +289,20 @@
         <!-- End Modal Container -->
       </section>
       `;
+      window.onmousedown = function(e) {
+        var el = e.target;
+        if (el.tagName.toLowerCase() == 'option' && el.parentNode.hasAttribute('multiple')) {
+          e.preventDefault();
 
+          // toggle selection
+          if (el.hasAttribute('selected')) el.removeAttribute('selected');
+          else el.setAttribute('selected', '');
+
+          // hack to correct buggy behavior
+          var select = el.parentNode.cloneNode(true);
+          el.parentNode.parentNode.replaceChild(select, el.parentNode);
+        }
+      };
       let theModal = $(modal);
 
       theModal.find('#select-adresse').change(function() {
@@ -1111,8 +1124,7 @@
       let selectCtnr2 = $('#select-categorie2s').empty();
       selectCtnr2.append(
         $(`
-        <option value="">Sélectionner une catégorie secondaire</option> 
-        ${response.categorie_2s.map(p => `<option value="${p.id}" >${p.libelle}</option>`).join('')}
+          ${response.categorie_2s.map(p => `<option value="${p.id}" >${p.libelle}</option>`).join('')}
       `)
       );
       if (`${response.categorie_2s}` != '') {
