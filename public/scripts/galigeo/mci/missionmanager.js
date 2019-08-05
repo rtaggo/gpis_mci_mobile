@@ -211,7 +211,7 @@
                     <label class="slds-form-element__label" for="select-sous-categorie">Sous-Catégorie</label>
                     <div class="slds-form-element__control">
                       <div class="slds-select_container">
-                        <select multiple size="2" class="slds-select" id="select-sous-categorie" required=""></select>
+                        <select class="slds-select" id="select-sous-categorie" required=""></select>
                       </div>
                     </div>
                     <div class="slds-form-element__help slds-hide" id="select-sous-categorie_error">Champ obligatoire</div>
@@ -1124,8 +1124,7 @@
       let selectCtnr2 = $('#select-categorie2s').empty();
       selectCtnr2.append(
         $(`
-        <option value="">Sélectionner une catégorie secondaire</option> 
-        ${response.categorie_2s.map(p => `<option value="${p.id}" >${p.libelle}</option>`).join('')}
+          ${response.categorie_2s.map(p => `<option value="${p.id}" >${p.libelle}</option>`).join('')}
       `)
       );
       if (`${response.categorie_2s}` != '') {
