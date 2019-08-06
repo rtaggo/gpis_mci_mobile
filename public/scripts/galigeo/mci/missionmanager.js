@@ -81,12 +81,9 @@
             }
           }.bind(self)
         );
-        /*
         setTimeout(function(e) {
-          self.renderMissionViewMode();
-          $('#udpate-mission-spinner').remove();
-        }, 1000);
-        */
+          GGO.notifyNewMissionSound(2);
+        }, GGO.CHECK_PAUSE_INTERVALLE);
       });
 
       $('#btnMissionFin').click(function(e) {
@@ -1260,6 +1257,17 @@
         });
       }
     },
+    checkPause: function(type_mission, statut) {
+      let self = this;
+      console.log('la');
+      if ((type_mission === 'Pause') & (statut == 'Debut')) {
+      } else {
+        setTimeout(function() {
+          console.log('ok');
+          self.checkPause(type_mission, statut);
+        }, GGO.CHECK_PAUSE_INTERVALLE);
+      }
+    },
     checkMissionRenfort: function() {
       let self = this;
       if (this._currentMission !== null) {
@@ -1341,7 +1349,7 @@
       switch (response.code) {
         case 200:
           this.handleMissionResponseOK(response);
-          GGO.notifyNewMissionSound();
+          GGO.notifyNewMissionSound(1);
           break;
         case 300:
           $('#waiting4Mission h2').text(response.message);
