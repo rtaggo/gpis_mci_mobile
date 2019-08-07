@@ -68,6 +68,23 @@ const _login = async (loginInput, passwordInput) => {
   return loginResponse;
 };
 
+const _newPassword = async (loginInput, passwordInput) => {
+  let newPasswordUrl = `${require('../../config').get('BACKEND_URL')}/save_password.php`;
+
+  let options = {
+    method: 'POST',
+    uri: newPasswordUrl,
+    body: {
+      login: loginInput,
+      password: passwordInput
+    },
+    json: true // Automatically stringifies the body to JSON
+  };
+  let newPasswordResponse = await doAsyncPOST(options);
+  console.log('Resp: ' + newPasswordResponse);
+  return newPasswordResponse;
+};
+
 const _getPatrouilles = async () => {
   console.log(`[dev-rest] _getPatrouilles`);
   let patrouilleUrl = `${require('../../config').get('BACKEND_URL')}/patrouilles.php`;
@@ -310,6 +327,7 @@ const _getRenfortsMission = async (patrouilleId, missionId) => {
 /* list to exports */
 module.exports = {
   login: _login,
+  newPassword: _newPassword,
   getPatrouilles: _getPatrouilles,
   libererPatrouille: _libererPatrouille,
   finVacation: _finVacation,

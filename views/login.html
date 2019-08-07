@@ -46,6 +46,12 @@
                     <input type="password" id="user-password-input" placeholder="Password" class="slds-input">
                   </div>
                 </div>
+                <div id="new-password-form-element" class="slds-form-element slds-form-element_stacked slds-hide">
+                  <abbr class="slds-required" title="required">* </abbr><label class="slds-form-element__label" for="user-newpassword-input">Nouveau mot de passe</label>
+                  <div class="slds-form-element__control">
+                    <input type="text" id="user-newpassword-input" placeholder="Password" class="slds-input">
+                  </div>
+                </div>
                 <div id="patrouille-form-element" class="slds-form-element slds-form-element_stacked slds-hide">
                   <label class="slds-form-element__label" for="select-patrouille">
                     <abbr class="slds-required" title="required">* </abbr>Patrouille
@@ -114,6 +120,7 @@
             </div>
             <footer class="slds-card__footer">
               <button id="login-btn" class="slds-button slds-button_neutral">Connexion</button>
+              <button id="login-btn-new" class="slds-button slds-button_neutral slds-hide">Confirmation</button>
               <button id="patrouille-validate-btn" class="slds-button slds-button_neutral slds-hide">Valider</button>
 
               <button id="chefs_groupe-validate-btn" class="slds-button slds-button_neutral slds-hide">Valider</button>

@@ -31,6 +31,20 @@ router.post('/connexion.php', (req, res, next) => {
   });
 });
 
+router.post('/save_password.php', (req, res, next) => {
+  console.log(`[MCI_REST_API][POST] /newPassword ${JSON.stringify(req.body)}`);
+  const mcimodule = getMCIModule();
+  mcimodule.newPassword(req.body.login, req.body.password).then(newPasswordResponse => {
+    if (newPasswordResponse.code !== 200) {
+      res.status(500).json(newPasswordResponse);
+    } else {
+      req.session.loggedin = true;
+      req.session.username = req.body.username;
+      res.status(200).json(newPasswordResponse);
+    }
+  });
+});
+
 router.post('/signalement.php', (req, res, next) => {
   console.log(`[MCI_REST_API][POST] /signalement`);
   const mcimodule = getMCIModule();

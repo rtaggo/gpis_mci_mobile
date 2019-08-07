@@ -48,6 +48,29 @@
           $('#error-message').removeClass('slds-hide');
         }
       });
+      $('#login-btn-new').click(function(e) {
+        let loginVal = $('#user-login-input').val();
+        let pwdVal = $('#user-newpassword-input').val();
+        let allFilled = true;
+        if (pwdVal.trim() === '') {
+          allFilled = false;
+          $('#user-password-input')
+            .parent()
+            .parent()
+            .addClass('slds-has-error');
+        }
+        if (allFilled) {
+          $('#error-message').addClass('slds-hide');
+          let loginRequest = {
+            login: loginVal,
+            password: pwdVal
+          };
+          self.newPassword(loginRequest);
+        } else {
+          $('#error-message > .slds-form-element__help').text('Login et mot de passe doivent être renseignés.');
+          $('#error-message').removeClass('slds-hide');
+        }
+      });
     },
     /**
      * Authentification de l'utilisateur
@@ -83,8 +106,13 @@
     },
     handleUserAuthentication: function(authResponse, username) {
       $('#error-message').addClass('slds-hide');
-      if (!authResponse.authentification) {
+      if (!authResponse.authentification & authResponse.structure) {
         let errMsg = authResponse.message || 'Une erreur est survenue, veuillez contacter votre administrateur';
+        $('#error-message > .slds-form-element__help').text(errMsg);
+        $('#error-message').removeClass('slds-hide');
+        return;
+      } else if (!authResponse.authentification & !authResponse.structure) {
+        let errMsg = authResponse.message || 'Une erreur est survenue, le mot de passe doit avoir 8 caractères comprenant majuscules, minuscules, chiffres et caractères spéciaux.';
         $('#error-message > .slds-form-element__help').text(errMsg);
         $('#error-message').removeClass('slds-hide');
         return;
@@ -100,24 +128,51 @@
         .parent()
         .removeClass('slds-has-error');
       $('#login-btn').addClass('slds-hide');
+      $('#login-btn-new').addClass('slds-hide');
       this._currentRole = authResponse.role;
-      switch (authResponse.role) {
-        case 'india':
-          this.fetchPatrouilles();
-          break;
-        case 'charly':
-        case 'alpha':
-          //GGO.SessionIssuePrompt('Rôle utilisateur non disponible', `Le rôle '<b>${authResponse.role}</b>' n\'est pas disponible pour le moment.<br /> Veuillez vous reconnecter.`, $('#appContainer').empty());
-          this._currentUserName = username;
-          this.fetchChefsGroup(this._currentUserName);
-          break;
-        default:
-          $('#error-message > .slds-form-element__help').text(`Le rôle ${authResponse.role} n'est pas un rôle valide.`);
-          $('#error-message').removeClass('slds-hide');
+      if (authResponse.first_connexion) {
+        $('#new-password-form-element').removeClass('slds-hide');
+        $('#login-btn').addClass('slds-hide');
+        $('#login-btn-new').removeClass('slds-hide');
+      } else {
+        switch (authResponse.role) {
+          case 'india':
+            this.fetchPatrouilles();
+            break;
+          case 'charly':
+          case 'alpha':
+            //GGO.SessionIssuePrompt('Rôle utilisateur non disponible', `Le rôle '<b>${authResponse.role}</b>' n\'est pas disponible pour le moment.<br /> Veuillez vous reconnecter.`, $('#appContainer').empty());
+            this._currentUserName = username;
+            this.fetchChefsGroup(this._currentUserName);
+            break;
+          default:
+            $('#error-message > .slds-form-element__help').text(`Le rôle ${authResponse.role} n'est pas un rôle valide.`);
+            $('#error-message').removeClass('slds-hide');
+        }
       }
       $('#patrouille_name')
         .text(username.toUpperCase())
         .removeClass('slds-hide');
+    },
+    newPassword: function(newLoginRequest) {
+      let self = this;
+      $.ajax({
+        type: 'POST',
+        url: `${this._options.baseRESTServicesURL}/save_password.php`,
+        data: JSON.stringify(newLoginRequest),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function(response) {
+          console.log(`Response`, response);
+          self.handleUserAuthentication(response, newLoginRequest.login);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          const errResponse = jqXHR.responseJSON;
+          let errMsg = errResponse.message || 'Une erreur est survenue, veuillez contacter votre administrateur';
+          $('#error-message > .slds-form-element__help').text(errMsg);
+          $('#error-message').removeClass('slds-hide');
+        }
+      });
     },
     fetchSecteursChefGroup: function() {
       $('#chefs_groupe-validate-btn').addClass('slds-hide');
@@ -407,6 +462,7 @@
     fetchPatrouilles: function() {
       let self = this;
       $('#patrouille-form-element').removeClass('slds-hide');
+      $('#new-password-form-element').addClass('slds-hide');
       const patrouillesUrl = `${this._options.baseRESTServicesURL}/patrouilles.php`;
       $.ajax({
         type: 'GET',
