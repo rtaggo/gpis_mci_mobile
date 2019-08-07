@@ -48,7 +48,7 @@ router.post('/pause.php', (req, res, next) => {
   console.log(`[MCI_REST_API][POST] /pause`);
   const mcimodule = getMCIModule();
   mcimodule.getPausePost(req).then(resp => {
-    //console.log(resp)
+    //console.log(resp);
     if (resp.code !== 200) {
       res.status(500).json(resp);
     } else {

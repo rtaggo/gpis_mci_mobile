@@ -81,9 +81,9 @@
             }
           }.bind(self)
         );
-        setTimeout(function(e) {
-          GGO.notifyNewMissionSound(2);
-        }, GGO.CHECK_PAUSE_INTERVALLE);
+        if (self._currentMission.features[0].properties.type_mission === 'Pause') {
+          self.debutPause(self._options.patrouille.id);
+        }
       });
 
       $('#btnMissionFin').click(function(e) {
@@ -141,6 +141,31 @@
           if (typeof callback === 'function') {
             callback(response);
           }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`Request aborted`);
+          } else {
+            console.error(`Error request: ${textStatus}`, errorThrown);
+          }
+        }
+      });
+    },
+    debutPause: function(patrouilleId) {
+      let self = this;
+      let debutPauseUrl = `${this._options.baseRESTServicesURL}/pause.php`;
+      let reqBody = {
+        id_patrouille: patrouilleId
+      };
+      console.log(JSON.stringify(reqBody));
+      $.ajax({
+        type: 'POST',
+        url: debutPauseUrl,
+        data: JSON.stringify(reqBody),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function(response) {
+          console.log(`Response`, response);
         },
         error: function(jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
@@ -1257,15 +1282,43 @@
         });
       }
     },
-    checkPause: function(type_mission, statut) {
+    checkPauseTime: function() {
       let self = this;
-      console.log('la');
-      if ((type_mission === 'Pause') & (statut == 'Debut')) {
-      } else {
-        setTimeout(function() {
-          console.log('ok');
-          self.checkPause(type_mission, statut);
-        }, GGO.CHECK_PAUSE_INTERVALLE);
+      if (this._currentMission !== null) {
+        if (self._currentMission.features[0].properties.type_mission === 'Pause') {
+          let self = this;
+          let pauseUrl = `${this._options.baseRESTServicesURL}/pause.php?id_patrouille=${this._options.patrouille.id}`;
+          $.ajax({
+            type: 'GET',
+            url: pauseUrl,
+            success: function(response) {
+              console.log(`${pauseUrl}: `, response);
+              if (response.code === 200) {
+                if (response.fin_pause & (self._currentMission.features[0].properties.statut === 'Début')) {
+                  GGO.notifyNewMissionSound(2);
+                  setTimeout(function() {
+                    self.checkPauseTime();
+                  }, GGO.CHECK_PAUSE_INTERVALLE);
+                } else {
+                  setTimeout(function() {
+                    self.checkPauseTime();
+                  }, GGO.CHECK_MISSION_INTERVALLE);
+                }
+              } else {
+                setTimeout(function() {
+                  self.checkPauseTime();
+                }, GGO.CHECK_MISSION_INTERVALLE);
+              }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+              if (textStatus === 'abort') {
+                console.warn(`[GET] ${pauseUrl} Request aborted`);
+              } else {
+                console.error(`${statutMissionUrl} request error : ${textStatus}`, errorThrown);
+              }
+            }
+          });
+        }
       }
     },
     checkMissionRenfort: function() {
@@ -1301,6 +1354,7 @@
         });
       }
     },
+
     checkMission: function() {
       let self = this;
       setTimeout(function() {
@@ -1375,6 +1429,7 @@
           $('#missionFooter').removeClass('slds-hide');
           this.checkMissionStatut();
           this.checkMissionRenfort();
+          this.checkPauseTime();
           this.updateButtons();
         } else {
           this.checkMission();
