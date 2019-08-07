@@ -1296,9 +1296,6 @@
               if (response.code === 200) {
                 if (response.fin_pause & (self._currentMission.features[0].properties.statut === 'Début')) {
                   GGO.notifyNewMissionSound(2);
-                  setTimeout(function() {
-                    self.checkPauseTime();
-                  }, GGO.CHECK_PAUSE_INTERVALLE);
                 } else {
                   setTimeout(function() {
                     self.checkPauseTime();
