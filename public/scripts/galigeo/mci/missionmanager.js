@@ -81,12 +81,9 @@
             }
           }.bind(self)
         );
-        /*
         setTimeout(function(e) {
-          self.renderMissionViewMode();
-          $('#udpate-mission-spinner').remove();
-        }, 1000);
-        */
+          GGO.notifyNewMissionSound(2);
+        }, GGO.CHECK_PAUSE_INTERVALLE);
       });
 
       $('#btnMissionFin').click(function(e) {
@@ -1260,6 +1257,50 @@
         });
       }
     },
+    checkPause: function(type_mission, statut) {
+      let self = this;
+      console.log('la');
+      if ((type_mission === 'Pause') & (statut == 'Debut')) {
+      } else {
+        setTimeout(function() {
+          console.log('ok');
+          self.checkPause(type_mission, statut);
+        }, GGO.CHECK_PAUSE_INTERVALLE);
+      }
+    },
+    checkMissionRenfort: function() {
+      let self = this;
+      if (this._currentMission !== null) {
+        let self = this;
+        let renfortMissionUrl = `${this._options.baseRESTServicesURL}/renforts.php?patrouille=${this._options.patrouille.id}&mission=${self._currentMission.features[0].properties.mission_id}`;
+        $.ajax({
+          type: 'GET',
+          url: renfortMissionUrl,
+          success: function(response) {
+            console.log(`${renfortMissionUrl}: `, response);
+            if (response.code === 200) {
+              if (response.renfort !== null) {
+                $('#list_renfort').text(response.renfort.replace('{', '').replace('}', ''));
+                setTimeout(function() {
+                  self.checkMissionRenfort();
+                }, GGO.CHECK_MISSION_INTERVALLE);
+              }
+            } else {
+              setTimeout(function() {
+                self.checkMissionRenfort();
+              }, GGO.CHECK_MISSION_INTERVALLE);
+            }
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            if (textStatus === 'abort') {
+              console.warn(`[GET] ${statutMissionUrl} Request aborted`);
+            } else {
+              console.error(`${statutMissionUrl} request error : ${textStatus}`, errorThrown);
+            }
+          }
+        });
+      }
+    },
     checkMission: function() {
       let self = this;
       setTimeout(function() {
@@ -1308,7 +1349,7 @@
       switch (response.code) {
         case 200:
           this.handleMissionResponseOK(response);
-          GGO.notifyNewMissionSound();
+          GGO.notifyNewMissionSound(1);
           break;
         case 300:
           $('#waiting4Mission h2').text(response.message);
@@ -1333,6 +1374,7 @@
           $('#missionContent').removeClass('slds-hide');
           $('#missionFooter').removeClass('slds-hide');
           this.checkMissionStatut();
+          this.checkMissionRenfort();
           this.updateButtons();
         } else {
           this.checkMission();
@@ -1353,7 +1395,6 @@
       if (mission.properties.renforts_patrouille !== null) {
         renfort = mission.properties.renforts_patrouille.replace('{', '').replace('}', '');
       }
-
       content.append(
         $(`
           <div class="slds-form__row">
@@ -1397,7 +1438,7 @@
             <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent"  >
               <span class="slds-form-element__label" id="renfort_label">Renfort</span> 
               <div class="slds-form-element__control">
-                <div class="slds-form-element__static">
+                <div class="slds-form-element__static" id="list_renfort">
                   ${renfort}
                 </div>
               </div>

@@ -84,15 +84,21 @@
   };
 
   GGO.CHECK_MISSION_INTERVALLE = 10000;
+  GGO.CHECK_PAUSE_INTERVALLE = 10000 * 6 * 30;
   GGO.COLORPALETTES = {
     rdYlBu: ['#4874bf', '#228714', '#edeb2a', '#f99e38', '#ff0000', '#000000'],
     secteurs: ['#8dd3c7', '#ffffb3', '#bebada', '#fb8072', '#80b1d3', '#fdb462', '#b3de69', '#fccde5', '#d9d9d9'],
     secteurs_voisinages: ['#d9d9d9', '#fccde5', '#b3de69', '#fdb462', '#80b1d3', '#fb8072', '#bebada', '#ffffb3', '#8dd3c7']
   };
 
-  GGO.notifyNewMissionSound = function() {
+  GGO.notifyNewMissionSound = function(code) {
+    if (code === 1) {
+      var name_music = '/sounds/new_mission.mp3'; // new mission
+    } else if (code === 2) {
+      var name_music = '/sounds/kaxon_velo.mp3'; // fin de pause
+    }
     try {
-      var music = new Audio('/sounds/new_mission.mp3');
+      var music = new Audio(name_music);
       var p = music.play();
       p.then(event => {
         console.log(event);
