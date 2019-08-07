@@ -206,6 +206,13 @@ const _getSignalement = async (mission_id, type_signalement, categorie) => {
   return signalementResponse;
 };
 
+const _getPause = async id_patrouille => {
+  console.log(`[dev-rest] _getPause`);
+  let pauseUrl = `${require('../../config').get('BACKEND_URL')}/pause.php?id_patrouille=${id_patrouille}`;
+  let pauseResponse = await doAsyncGET(pauseUrl);
+  return pauseResponse;
+};
+
 const _getSignalementPost = async formSignalement => {
   console.log(`[dev-rest] _getSignalementPost`);
   let signalementUrlPost = `${require('../../config').get('BACKEND_URL')}/signalement.php`;
@@ -220,6 +227,22 @@ const _getSignalementPost = async formSignalement => {
   let signalementResponse = await doAsyncPOST(options);
   console.log('Resp: ' + signalementResponse);
   return signalementResponse;
+};
+
+const _getPausePost = async formPause => {
+  console.log(`[dev-rest] _getPausePost`);
+  let pauseUrlPost = `${require('../../config').get('BACKEND_URL')}/pause.php`;
+
+  let options = {
+    method: 'POST',
+    uri: pauseUrlPost,
+    body: formPause.body,
+    json: true // Automatically stringifies the body to JSON
+  };
+
+  let pauseResponse = await doAsyncPOST(options);
+  console.log('Resp: ' + pauseResponse);
+  return pauseResponse;
 };
 
 const _getReaffectationSignalement = async signalement_id => {
@@ -297,7 +320,9 @@ module.exports = {
   getMission: _getMission,
   getNeighborhood: _getNeighborhood,
   getSignalement: _getSignalement,
+  getPause: _getPause,
   getSignalementPost: _getSignalementPost,
+  getPausePost: _getPausePost,
   getReaffectationSignalement: _getReaffectationSignalement,
   getIncidente: _getIncidente,
   getReaffectationPost: _getReaffectationPost,
