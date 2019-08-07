@@ -44,6 +44,19 @@ router.post('/signalement.php', (req, res, next) => {
   });
 });
 
+router.post('/pause.php', (req, res, next) => {
+  console.log(`[MCI_REST_API][POST] /pause`);
+  const mcimodule = getMCIModule();
+  mcimodule.getPausePost(req).then(resp => {
+    //console.log(resp)
+    if (resp.code !== 200) {
+      res.status(500).json(resp);
+    } else {
+      res.status(200).json(resp);
+    }
+  });
+});
+
 router.post('/reaffectation.php', (req, res, next) => {
   console.log(`[MCI_REST_API][POST] /reaffectation ${JSON.stringify(req.body)}`);
   const mcimodule = getMCIModule();
@@ -204,6 +217,15 @@ router.get('/signalement.php', (req, res, next) => {
   mcimodule.getSignalement(req.query.mission_id, req.query.type_signalement, req.query.categorie).then(signalementResponse => {
     res.header('Content-Type', 'application/json');
     res.json(signalementResponse);
+  });
+});
+
+router.get('/pause.php', (req, res, next) => {
+  console.log(`[MCI_REST_API][GET] /pause.php ${JSON.stringify(req.query)}`);
+  const mcimodule = getMCIModule();
+  mcimodule.getPause(req.query.id_patrouille).then(pauseResponse => {
+    res.header('Content-Type', 'application/json');
+    res.json(pauseResponse);
   });
 });
 
