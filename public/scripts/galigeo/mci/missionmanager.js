@@ -1343,15 +1343,41 @@
           },
           error: function(jqXHR, textStatus, errorThrown) {
             if (textStatus === 'abort') {
-              console.warn(`[GET] ${statutMissionUrl} Request aborted`);
+              console.warn(`[GET] ${renfortMissionUrl} Request aborted`);
             } else {
-              console.error(`${statutMissionUrl} request error : ${textStatus}`, errorThrown);
+              console.error(`${renfortMissionUrl} request error : ${textStatus}`, errorThrown);
             }
           }
         });
       }
     },
-
+    checkMissionSousSecteur: function() {
+      if (this._currentMission !== null) {
+        let self = this;
+        let verificationMissionUrl = `${this._options.baseRESTServicesURL}/verification_sous_secteurs.php?mission=${this._currentMission.features[0].properties.mission_id}&sssecteurs=${this._options.secteurs.map(s => s.id).join(',')}`;
+        $.ajax({
+          type: 'GET',
+          url: verificationMissionUrl,
+          success: function(response) {
+            console.log(`${verificationMissionUrl}: `, response);
+            if (response.code === 200) {
+              if (!response.verification_sous_secteur | ((self._currentMission.features[0].properties.type_mission !== 'Ronde') & (self._currentMission.features[0].properties.type_mission !== 'Ronde renforcée') & (self._currentMission.features[0].properties.type_mission !== 'Ronde générale') & (self._currentMission.features[0].properties.type_mission !== 'Ronde ciblée'))) {
+                $('#btnMissionFin').addClass('slds-hide');
+              } else {
+                $('#btnMissionFin').removeClass('slds-hide');
+              }
+            }
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            if (textStatus === 'abort') {
+              console.warn(`[GET] ${verificationMissionUrl} Request aborted`);
+            } else {
+              console.error(`${verificationMissionUrl} request error : ${textStatus}`, errorThrown);
+            }
+          }
+        });
+      }
+    },
     checkMission: function() {
       let self = this;
       setTimeout(function() {
@@ -1375,6 +1401,12 @@
         $('#btnMissionDebut').attr('disabled', true);
         // $('#btnMissionSignalement').attr('disabled', true);
         $('#btnMissionFin').attr('disabled', true);
+      }
+
+      if ((self._currentMission.features[0].properties.type_mission !== 'Ronde') & (self._currentMission.features[0].properties.type_mission !== 'Ronde renforcée') & (self._currentMission.features[0].properties.type_mission !== 'Ronde générale') & (self._currentMission.features[0].properties.type_mission !== 'Ronde ciblée')) {
+        $('#btnMissionDebut').addClass('slds-hide');
+      } else {
+        $('#btnMissionDebut').removeClass('slds-hide');
       }
     },
     fetchMission: function() {
@@ -1428,6 +1460,7 @@
           this.checkMissionRenfort();
           this.checkPauseTime();
           this.updateButtons();
+          this.checkMissionSousSecteur();
         } else {
           this.checkMission();
         }
