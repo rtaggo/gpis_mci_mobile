@@ -98,19 +98,14 @@
             }
           }.bind(self)
         );
-        /*
-        GGO.EventBus.dispatch(GGO.EVENTS.MISSIONCOMPLETED);
-
-        $('#missionContent').addClass('slds-hide');
-        $('#missionFooter').addClass('slds-hide');
-        $('#waiting4Mission').removeClass('slds-hide');
-        //self.fakeTimeOutbeforeFetchingMission();
-        self.checkMission();
-        */
       });
       $('#btnMissionSignalement').click(function(e) {
         self.openSignalementModal();
         self.fetchTypeSignalements();
+      });
+      $('#btnMissionAdresse').click(function(e) {
+        self.openAdressesModal();
+        self.fetchAdresses();
       });
     },
     finishCurrentMission: function() {
@@ -389,6 +384,55 @@
         //self.saveSignalement();
         //$('#signalement-modal').remove();
         self.checkBeforeSaveSignalement();
+      });
+    },
+    openAdressesModal: function() {
+      let self = this;
+      let modal = `
+      <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-signalement-content" class="slds-modal slds-fade-in-open slds-modal_large">
+        <!-- Start Modal Container -->
+        <div class="slds-modal__container" style="margin: 0px; padding: 0px;">
+          <header class="slds-modal__header">
+            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Adresses</h2>
+          </header>
+          <!-- Start Modal Content -->
+          <div class="slds-modal__content slds-p-around_medium" id="modal-signalement-content">
+            <div class="slds-form" role="list">
+              <div class="slds-form__row">
+                <div class="slds-form__item" role="listitem" >
+                  <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                    <div class="slds-form-element__control" >
+                      <div class="slds-select_container">
+                        <select class="slds-select" id="select-adresse-modal" required=""></select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>          
+            </div>           
+            <footer class="slds-modal__footer">
+              <button id="btnSignalementCancel" class="slds-button slds-button_neutral">Fermer</button>
+            </footer>
+          </div>
+          <!-- End Modal Content -->
+        </div>
+        <!-- End Modal Container -->
+      </section>
+      `;
+      let theModal = $(modal);
+
+      theModal.find('#select-adresse').change(function() {
+        $('#modal-signalement-content .slds-form-element__help').addClass('slds-hide');
+        $('#modal-signalement-content .slds-has-error').removeClass('slds-has-error');
+      });
+
+      $('body').append(
+        $('<div id="signalement-modal" class="ggoslds"></div>')
+          .append(theModal)
+          .append($('<div class="slds-backdrop slds-backdrop_open"></div>'))
+      );
+      $('#btnSignalementCancel').click(function(e) {
+        $('#signalement-modal').remove();
       });
     },
     readImage: function(file) {
@@ -1060,6 +1104,26 @@
         }
       });
     },
+    fetchAdresses: function() {
+      let self = this;
+      const typeSignalementUrl = `${this._options.baseRESTServicesURL}/signalement.php?mission_id=${self._currentMission.features[0].properties.mission_id}&type_signalement=&categorie=`;
+      console.log(typeSignalementUrl);
+      $.ajax({
+        type: 'GET',
+        url: typeSignalementUrl,
+        success: function(response) {
+          console.log(`${typeSignalementUrl}`, response);
+          self.handleModalAdresseFetched(response);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`${typeSignalementUrl} Request aborted`);
+          } else {
+            console.error(`Error for ${typeSignalementUrl} request: ${textStatus}`, errorThrown);
+          }
+        }
+      });
+    },
     handleTypeSignalementFetched: function(response) {
       console.log(`>> handleTypeSignalementFetched`, response);
       const self = this;
@@ -1076,6 +1140,17 @@
         self.handleClickChooseTypeSignalement();
       });
       */
+    },
+    handleModalAdresseFetched: function(response) {
+      console.log(`>> handleModalAdresseFetched`, response);
+      const self = this;
+      let selectCtnr = $('#select-adresse-modal').empty();
+      selectCtnr.append(
+        $(`
+        <option value="">Liste d'adresses du site</option> 
+        ${response.adresses.map(p => `<option value="${p.id}" >${p.adresse}</option>`).join('')}
+      `)
+      );
     },
     handleAdresseFetched: function(response) {
       console.log(`>> handleAdresseFetched`, response);
@@ -1354,17 +1429,45 @@
     checkMissionSousSecteur: function() {
       if (this._currentMission !== null) {
         let self = this;
-        let verificationMissionUrl = `${this._options.baseRESTServicesURL}/verification_sous_secteurs.php?mission=${this._currentMission.features[0].properties.mission_id}&sssecteurs=${this._options.secteurs.map(s => s.id).join(',')}`;
+        let verificationMissionUrl = `${this._options.baseRESTServicesURL}/verification.php?mission=${this._currentMission.features[0].properties.mission_id}&sssecteurs=${this._options.secteurs.map(s => s.id).join(',')}`;
         $.ajax({
           type: 'GET',
           url: verificationMissionUrl,
           success: function(response) {
             console.log(`${verificationMissionUrl}: `, response);
             if (response.code === 200) {
-              if (!response.verification_sous_secteur | ((self._currentMission.features[0].properties.type_mission !== 'Ronde') & (self._currentMission.features[0].properties.type_mission !== 'Ronde renforcée') & (self._currentMission.features[0].properties.type_mission !== 'Ronde générale') & (self._currentMission.features[0].properties.type_mission !== 'Ronde ciblée'))) {
+              if (!response.verification_sous_secteur & !response.verification_type_missions) {
+                // mission pas sur le secteur et pas une mission ronde/ Pause -> seulement boutons En direction & Adresse
                 $('#btnMissionFin').addClass('slds-hide');
-              } else {
+                $('#btnMissionDebut').addClass('slds-hide');
+                $('#btnMissionSignalement').addClass('slds-hide');
+                $('#btnMissionAdresse').removeClass('slds-hide');
+              } else if (!response.verification_sous_secteur & response.verification_type_missions) {
+                // mission pas sur le secteur mais c'est une mission ronde/ Pause -> seulement boutons En direction, Debut & Adresse
+                $('#btnMissionFin').addClass('slds-hide');
+                $('#btnMissionDebut').removeClass('slds-hide');
+                $('#btnMissionSignalement').addClass('slds-hide');
+                $('#btnMissionAdresse').removeClass('slds-hide');
+              } else if (response.verification_sous_secteur & !response.verification_type_missions) {
+                // mission  sur le secteur mais ce n'est pas une mission ronde/ Pause -> seulement boutons En direction & Adresse
+                $('#btnMissionFin').addClass('slds-hide');
+                $('#btnMissionDebut').addClass('slds-hide');
+                $('#btnMissionSignalement').addClass('slds-hide');
+                $('#btnMissionAdresse').removeClass('slds-hide');
+              } else if (response.verification_sous_secteur & response.verification_type_missions) {
+                // mission  sur le secteur et c'est une mission ronde/ Pause ->  boutons En direction, Début, Fin & Signalement
                 $('#btnMissionFin').removeClass('slds-hide');
+                $('#btnMissionDebut').removeClass('slds-hide');
+                $('#btnMissionSignalement').removeClass('slds-hide');
+                $('#btnMissionAdresse').addClass('slds-hide');
+              }
+
+              if (self._currentMission.features[0].properties.type_mission == 'Pause') {
+                // cas particulier de la Pause
+                $('#btnMissionFin').removeClass('slds-hide');
+                $('#btnMissionDebut').removeClass('slds-hide');
+                $('#btnMissionSignalement').removeClass('slds-hide');
+                $('#btnMissionAdresse').addClass('slds-hide');
               }
             }
           },
@@ -1390,23 +1493,14 @@
         $('#btnMissionEnRoute').attr('disabled', true);
         $('#btnMissionDebut').attr('disabled', false);
         $('#btnMissionFin').attr('disabled', true);
-        //$('#btnMissionSignalement').attr('disabled', true);
       } else if (self._currentMission.features[0].properties.statut == 'Début') {
         $('#btnMissionEnRoute').attr('disabled', true);
         $('#btnMissionDebut').attr('disabled', true);
         $('#btnMissionFin').attr('disabled', false);
-        // $('#btnMissionSignalement').attr('disabled', false);
       } else if (self._currentMission.features[0].properties.statut == 'Mission créée') {
         $('#btnMissionEnRoute').attr('disabled', false);
         $('#btnMissionDebut').attr('disabled', true);
-        // $('#btnMissionSignalement').attr('disabled', true);
         $('#btnMissionFin').attr('disabled', true);
-      }
-
-      if ((self._currentMission.features[0].properties.type_mission !== 'Ronde') & (self._currentMission.features[0].properties.type_mission !== 'Ronde renforcée') & (self._currentMission.features[0].properties.type_mission !== 'Ronde générale') & (self._currentMission.features[0].properties.type_mission !== 'Ronde ciblée')) {
-        $('#btnMissionDebut').addClass('slds-hide');
-      } else {
-        $('#btnMissionDebut').removeClass('slds-hide');
       }
     },
     fetchMission: function() {

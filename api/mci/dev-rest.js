@@ -129,9 +129,9 @@ const _getPatrimoineSousSecteur = async (patrouilleId, soussecteurs) => {
   return patrimoineResponse;
 };
 
-const _getVerificationSousSecteur = async (missionId, soussecteurs) => {
-  console.log(`[dev-rest] _getVerificationSousSecteur missionId=${missionId} sous-secteurs=${soussecteurs}`);
-  let verificationUrl = `${require('../../config').get('BACKEND_URL')}/verification_sous_secteurs.php?mission=${missionId}&sssecteurs=${soussecteurs}`;
+const _getVerification = async (missionId, soussecteurs) => {
+  console.log(`[dev-rest] _getVerification missionId=${missionId} sous-secteurs=${soussecteurs}`);
+  let verificationUrl = `${require('../../config').get('BACKEND_URL')}/verification.php?mission=${missionId}&sssecteurs=${soussecteurs}`;
   let verificationResponse = await doAsyncGET(verificationUrl);
   return verificationResponse;
 };
@@ -325,7 +325,7 @@ module.exports = {
   getChefsGroupe: _getChefsGroupe,
   getPatrimoineSousSecteur: _getPatrimoineSousSecteur,
   getMission: _getMission,
-  getVerificationSousSecteur: _getVerificationSousSecteur,
+  getVerification: _getVerification,
   getNeighborhood: _getNeighborhood,
   getSignalement: _getSignalement,
   getPause: _getPause,

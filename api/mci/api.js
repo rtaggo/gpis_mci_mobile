@@ -196,10 +196,10 @@ router.get('/mission_sous_secteur.php', (req, res, next) => {
   });
 });
 
-router.get('/verification_sous_secteurs.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][GET] /verification_sous_secteurs.php ${JSON.stringify(req.query)}`);
+router.get('/verification.php', (req, res, next) => {
+  console.log(`[MCI_REST_API][GET] /verification.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
-  mcimodule.getVerificationSousSecteur(req.query.mission, req.query.sssecteurs).then(verificationResponse => {
+  mcimodule.getVerification(req.query.mission, req.query.sssecteurs).then(verificationResponse => {
     res.header('Content-Type', 'application/json');
     res.json(verificationResponse);
   });
