@@ -210,6 +210,15 @@ router.get('/mission_sous_secteur.php', (req, res, next) => {
   });
 });
 
+router.get('/verification.php', (req, res, next) => {
+  console.log(`[MCI_REST_API][GET] /verification.php ${JSON.stringify(req.query)}`);
+  const mcimodule = getMCIModule();
+  mcimodule.getVerification(req.query.mission, req.query.sssecteurs).then(verificationResponse => {
+    res.header('Content-Type', 'application/json');
+    res.json(verificationResponse);
+  });
+});
+
 router.get('/voisinage.php', (req, res, next) => {
   console.log(`[MCI_REST_API][GET] /voisinage.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
@@ -271,6 +280,15 @@ router.get('/renforts.php', (req, res, next) => {
   mcimodule.getRenfortsMission(req.query.patrouille, req.query.mission).then(renfortsResponse => {
     res.header('Content-Type', 'application/json');
     res.json(renfortsResponse);
+  });
+});
+
+router.get('/mission_en_cours.php', (req, res, next) => {
+  console.log(`[MCI_REST_API][GET] /mission_en_cours.php ${JSON.stringify(req.query)}`);
+  const mcimodule = getMCIModule();
+  mcimodule.getStatutMissionEnCours(req.query.mission).then(statutMissionEnCoursResponse => {
+    res.header('Content-Type', 'application/json');
+    res.json(statutMissionEnCoursResponse);
   });
 });
 

@@ -146,6 +146,13 @@ const _getPatrimoineSousSecteur = async (patrouilleId, soussecteurs) => {
   return patrimoineResponse;
 };
 
+const _getVerification = async (missionId, soussecteurs) => {
+  console.log(`[dev-rest] _getVerification missionId=${missionId} sous-secteurs=${soussecteurs}`);
+  let verificationUrl = `${require('../../config').get('BACKEND_URL')}/verification.php?mission=${missionId}&sssecteurs=${soussecteurs}`;
+  let verificationResponse = await doAsyncGET(verificationUrl);
+  return verificationResponse;
+};
+
 const _getMission = async patrouilleId => {
   console.log(`[dev-rest] _getMission patrouilleId=${patrouilleId}`);
   let patrimoineUrl = `${require('../../config').get('BACKEND_URL')}/mission_sous_secteur.php?patrouille=${patrouilleId}`;
@@ -324,6 +331,13 @@ const _getRenfortsMission = async (patrouilleId, missionId) => {
   return renfortsMissionResponse;
 };
 
+const _getStatutMissionEnCours = async missionId => {
+  console.log(`[dev-rest] _getStatutMissionEnCours missionid=${missionId}`);
+  let statutMissionEnCoursUrl = `${require('../../config').get('BACKEND_URL')}/mission_en_cours.php?mission=${missionId}`;
+  let statutMissionEnCoursResponse = await doAsyncGET(statutMissionEnCoursUrl);
+  return statutMissionEnCoursResponse;
+};
+
 /* list to exports */
 module.exports = {
   login: _login,
@@ -336,6 +350,7 @@ module.exports = {
   getChefsGroupe: _getChefsGroupe,
   getPatrimoineSousSecteur: _getPatrimoineSousSecteur,
   getMission: _getMission,
+  getVerification: _getVerification,
   getNeighborhood: _getNeighborhood,
   getSignalement: _getSignalement,
   getPause: _getPause,
@@ -347,6 +362,7 @@ module.exports = {
   postMaJMission: _postMaJMission,
   getStatutMission: _getStatutMission,
   getRenfortsMission: _getRenfortsMission,
+  getStatutMissionEnCours: _getStatutMissionEnCours,
   getPatrimoineSecteur: _getPatrimoineSecteur,
   getMissionSecteurs: _getMissionSecteurs,
   getMissionDetails: _getMissionDetails,
