@@ -314,6 +314,13 @@ const _getRenfortsMission = async (patrouilleId, missionId) => {
   return renfortsMissionResponse;
 };
 
+const _getStatutMissionEnCours = async missionId => {
+  console.log(`[dev-rest] _getStatutMissionEnCours missionid=${missionId}`);
+  let statutMissionEnCoursUrl = `${require('../../config').get('BACKEND_URL')}/mission_en_cours.php?mission=${missionId}`;
+  let statutMissionEnCoursResponse = await doAsyncGET(statutMissionEnCoursUrl);
+  return statutMissionEnCoursResponse;
+};
+
 /* list to exports */
 module.exports = {
   login: _login,
@@ -337,6 +344,7 @@ module.exports = {
   postMaJMission: _postMaJMission,
   getStatutMission: _getStatutMission,
   getRenfortsMission: _getRenfortsMission,
+  getStatutMissionEnCours: _getStatutMissionEnCours,
   getPatrimoineSecteur: _getPatrimoineSecteur,
   getMissionSecteurs: _getMissionSecteurs,
   getMissionDetails: _getMissionDetails,

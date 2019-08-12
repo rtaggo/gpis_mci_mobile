@@ -1426,6 +1426,52 @@
         });
       }
     },
+    checkStatutMissionEnCours: function() {
+      let self = this;
+      if (this._currentMission !== null) {
+        let self = this;
+        let statutMissionEnCoursUrl = `${this._options.baseRESTServicesURL}/mission_en_cours.php?mission=${self._currentMission.features[0].properties.mission_id}`;
+        $.ajax({
+          type: 'GET',
+          url: statutMissionEnCoursUrl,
+          success: function(response) {
+            console.log(`${statutMissionEnCoursUrl}: `, response);
+            if (response.code === 200) {
+              if (response.statut_mission_encours !== null) {
+                $('#statut_mission').text(response.statut_mission_encours);
+                if (response.statut_mission_encours == 'En direction') {
+                  $('#btnMissionEnRoute').attr('disabled', true);
+                  $('#btnMissionDebut').attr('disabled', false);
+                  $('#btnMissionFin').attr('disabled', true);
+                } else if (response.statut_mission_encours == 'Début') {
+                  $('#btnMissionEnRoute').attr('disabled', true);
+                  $('#btnMissionDebut').attr('disabled', true);
+                  $('#btnMissionFin').attr('disabled', false);
+                } else if (response.statut_mission_encours == 'Mission créée') {
+                  $('#btnMissionEnRoute').attr('disabled', false);
+                  $('#btnMissionDebut').attr('disabled', true);
+                  $('#btnMissionFin').attr('disabled', true);
+                }
+                setTimeout(function() {
+                  self.checkStatutMissionEnCours();
+                }, GGO.CHECK_MISSION_INTERVALLE);
+              }
+            } else {
+              setTimeout(function() {
+                self.checkStatutMissionEnCours();
+              }, GGO.CHECK_MISSION_INTERVALLE);
+            }
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            if (textStatus === 'abort') {
+              console.warn(`[GET] ${statutMissionEnCoursUrl} Request aborted`);
+            } else {
+              console.error(`${statutMissionEnCoursUrl} request error : ${textStatus}`, errorThrown);
+            }
+          }
+        });
+      }
+    },
     checkMissionSousSecteur: function() {
       if (this._currentMission !== null) {
         let self = this;
@@ -1552,6 +1598,7 @@
           $('#missionFooter').removeClass('slds-hide');
           this.checkMissionStatut();
           this.checkMissionRenfort();
+          this.checkStatutMissionEnCours();
           this.checkPauseTime();
           this.updateButtons();
           this.checkMissionSousSecteur();
@@ -1737,7 +1784,7 @@
             <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_horizontal slds-hint-parent">
               <span class="slds-form-element__label">Statut</span>
               <div class="slds-form-element__control">
-                <div class="slds-form-element__static">${mission.properties.statut}</div>
+                <div class="slds-form-element__static" id="statut_mission">${mission.properties.statut}</div>
               </div>
             </div>
           </div>
