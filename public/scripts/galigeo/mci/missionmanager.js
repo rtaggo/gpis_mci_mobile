@@ -1489,11 +1489,11 @@
                 $('#btnMissionSignalement').addClass('slds-hide');
                 $('#btnMissionAdresse').removeClass('slds-hide');
               } else if (!response.verification_sous_secteur & response.verification_type_missions) {
-                // mission pas sur le secteur mais c'est une mission ronde/ Pause -> seulement boutons En direction, Debut & Adresse
-                $('#btnMissionFin').addClass('slds-hide');
+                // mission pas sur le secteur mais c'est une mission ronde/ Pause -> boutons En direction, Début, Fin & Signalement
+                $('#btnMissionFin').removeClass('slds-hide');
                 $('#btnMissionDebut').removeClass('slds-hide');
-                $('#btnMissionSignalement').addClass('slds-hide');
-                $('#btnMissionAdresse').removeClass('slds-hide');
+                $('#btnMissionSignalement').removeClass('slds-hide');
+                $('#btnMissionAdresse').addClass('slds-hide');
               } else if (response.verification_sous_secteur & !response.verification_type_missions) {
                 // mission  sur le secteur mais ce n'est pas une mission ronde/ Pause -> seulement boutons En direction & Adresse
                 $('#btnMissionFin').addClass('slds-hide');
