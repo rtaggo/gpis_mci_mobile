@@ -25,7 +25,9 @@
         $('#btnMissionEnRoute').attr('disabled', true);
         $('#btnMissionDebut').attr('disabled', false);
         $('#btnMissionFin').attr('disabled', true);
-        // $('#btnMissionSignalement').attr('disabled', true);
+        $('#btnMissionSignalement').addClass('slds-hide');
+        $('#btnMissionAdresse').removeClass('slds-hide');
+
         $('#mainContainer-card-body').prepend(
           $(`
           <div id="udpate-mission-spinner" class="slds-spinner_container">
@@ -56,6 +58,8 @@
         $('#btnMissionEnRoute').attr('disabled', true);
         $('#btnMissionDebut').attr('disabled', true);
         $('#btnMissionFin').attr('disabled', false);
+        $('#btnMissionSignalement').removeClass('slds-hide');
+        $('#btnMissionAdresse').addClass('slds-hide');
         // $('#btnMissionSignalement').attr('disabled', false);
         $('#mainContainer-card-body').prepend(
           $(`
@@ -1443,14 +1447,23 @@
                   $('#btnMissionEnRoute').attr('disabled', true);
                   $('#btnMissionDebut').attr('disabled', false);
                   $('#btnMissionFin').attr('disabled', true);
+                  $('#btnMissionSignalement').addClass('slds-hide');
+                  $('#btnMissionAdresse').removeClass('slds-hide');
+
                 } else if (response.statut_mission_encours == 'Début') {
                   $('#btnMissionEnRoute').attr('disabled', true);
                   $('#btnMissionDebut').attr('disabled', true);
                   $('#btnMissionFin').attr('disabled', false);
+                  $('#btnMissionSignalement').removeClass('slds-hide');
+                  $('#btnMissionAdresse').addClass('slds-hide');
+
                 } else if (response.statut_mission_encours == 'Mission créée') {
                   $('#btnMissionEnRoute').attr('disabled', false);
                   $('#btnMissionDebut').attr('disabled', true);
                   $('#btnMissionFin').attr('disabled', true);
+                  $('#btnMissionSignalement').addClass('slds-hide');
+                  $('#btnMissionAdresse').removeClass('slds-hide');
+                  
                 }
                 setTimeout(function() {
                   self.checkStatutMissionEnCours();
