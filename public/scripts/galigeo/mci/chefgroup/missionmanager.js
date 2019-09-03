@@ -1349,15 +1349,15 @@
         $('#btnMissionRejoindre')
           .attr('disabled', true)
           .addClass('slds-hide');
-        $('#btnMissionPosition')
-          .attr('disabled', false)
-          .removeClass('slds-hide')
-          .attr('style', ' background-color: #0070d2; border-color: #0070d2;')
-          .click(
-            function(e) {
-              self.positionMission(this);
-            }.bind(mission)
-          );
+        // $('#btnMissionPosition')
+        //   .attr('disabled', false)
+        //   .removeClass('slds-hide')
+        //   .attr('style', ' background-color: #0070d2; border-color: #0070d2;')
+        //   .click(
+        //     function(e) {
+        //       self.positionMission(this);
+        //     }.bind(mission)
+        //   );
         $(`#missionListContent tr`)
           .removeClass('slds-is-selected')
           .attr('aria-selected', false);
