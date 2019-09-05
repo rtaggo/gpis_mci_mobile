@@ -91,6 +91,8 @@
       });
 
       $('#btnMissionFin').click(function(e) {
+        $('#btnMissionSignalement').addClass('slds-hide');
+        $('#btnMissionAdresse').addClass('slds-hide');
         self.updateMissionStatus(
           self._currentMission.features[0].properties.mission_id,
           5,
@@ -1879,7 +1881,7 @@
         $('#mission-renfort-info').removeClass('slds-hide');
       } else {
         $('#mission-renfort-info').addClass('slds-hide');
-        $('#mission-btn-list').removeClass('slds-hide');
+        //$('#mission-btn-list').removeClass('slds-hide');
       }
       $('#missionContent')
         .empty()
