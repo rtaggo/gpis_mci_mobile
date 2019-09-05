@@ -1286,7 +1286,11 @@
         if (this._position) {
           $('#btnMissionPosition')
             .attr('disabled', true)
-            .attr('style', ' background-color: #bab7af; border-color: #bab7af;');
+            .attr('style', 'background-color: #bab7af; border-color: #bab7af;');
+        } else {
+          $('#btnMissionPosition')
+            .attr('disabled', false)
+            .attr('style', 'background-color: #0070d2; border-color: #0070d2;');
         }
         $('#btnMissionRejoindre')
           .attr('disabled', true)
