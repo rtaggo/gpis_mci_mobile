@@ -237,6 +237,8 @@
             GGO.postLogoutForm();
           }
         });
+      } else {
+        GGO.postLogoutForm();
       }
     } else if (typeof options.userRole !== 'undefined' && (options.userRole === 'charly' || options.userRole === 'alpha')) {
       console.warn(`Might be usefull to disconnect the user ${options.userName} with role ${options.role} from the system`);
