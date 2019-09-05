@@ -1610,7 +1610,7 @@
           this.checkMissionRenfort();
           this.checkStatutMissionEnCours();
           this.checkPauseTime();
-          this.updateButtons();
+          //this.updateButtons();
           this.checkMissionSousSecteur();
         } else {
           this.checkMission();
