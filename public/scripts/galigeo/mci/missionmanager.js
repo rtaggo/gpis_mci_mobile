@@ -1449,21 +1449,18 @@
                   $('#btnMissionFin').attr('disabled', true);
                   $('#btnMissionSignalement').addClass('slds-hide');
                   $('#btnMissionAdresse').removeClass('slds-hide');
-
                 } else if (response.statut_mission_encours == 'Début') {
                   $('#btnMissionEnRoute').attr('disabled', true);
                   $('#btnMissionDebut').attr('disabled', true);
                   $('#btnMissionFin').attr('disabled', false);
                   $('#btnMissionSignalement').removeClass('slds-hide');
                   $('#btnMissionAdresse').addClass('slds-hide');
-
                 } else if (response.statut_mission_encours == 'Mission créée') {
                   $('#btnMissionEnRoute').attr('disabled', false);
                   $('#btnMissionDebut').attr('disabled', true);
                   $('#btnMissionFin').attr('disabled', true);
                   $('#btnMissionSignalement').addClass('slds-hide');
                   $('#btnMissionAdresse').removeClass('slds-hide');
-                  
                 }
                 setTimeout(function() {
                   self.checkStatutMissionEnCours();
@@ -1525,7 +1522,7 @@
                 // cas particulier de la Pause
                 $('#btnMissionFin').removeClass('slds-hide');
                 $('#btnMissionDebut').removeClass('slds-hide');
-                $('#btnMissionSignalement').removeClass('slds-hide');
+                $('#btnMissionSignalement').addClass('slds-hide');
                 $('#btnMissionAdresse').addClass('slds-hide');
               }
             }
