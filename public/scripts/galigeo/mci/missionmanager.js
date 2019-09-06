@@ -58,7 +58,11 @@
         $('#btnMissionEnRoute').attr('disabled', true);
         $('#btnMissionDebut').attr('disabled', true);
         $('#btnMissionFin').attr('disabled', false);
-        $('#btnMissionSignalement').removeClass('slds-hide');
+        if (self._currentMission.features[0].properties.type_mission === 'Pause') {
+          $('#btnMissionSignalement').addClass('slds-hide');
+        } else {
+          $('#btnMissionSignalement').removeClass('slds-hide');
+        }
         $('#btnMissionAdresse').addClass('slds-hide');
         // $('#btnMissionSignalement').attr('disabled', false);
         $('#mainContainer-card-body').prepend(
@@ -87,6 +91,7 @@
         );
         if (self._currentMission.features[0].properties.type_mission === 'Pause') {
           self.debutPause(self._options.patrouille.id);
+          $('#btnMissionSignalement').addClass('slds-hide');
         }
       });
 
@@ -1455,7 +1460,12 @@
                   $('#btnMissionEnRoute').attr('disabled', true);
                   $('#btnMissionDebut').attr('disabled', true);
                   $('#btnMissionFin').attr('disabled', false);
-                  $('#btnMissionSignalement').removeClass('slds-hide');
+                  if (self._currentMission.features[0].properties.type_mission === 'Pause') {
+                    $('#btnMissionSignalement').addClass('slds-hide');
+                  } else {
+                    $('#btnMissionSignalement').removeClass('slds-hide');
+                  }
+
                   $('#btnMissionAdresse').addClass('slds-hide');
                 } else if (response.statut_mission_encours == 'Mission créée') {
                   $('#btnMissionEnRoute').attr('disabled', false);
@@ -1519,7 +1529,6 @@
                 $('#btnMissionSignalement').removeClass('slds-hide');
                 $('#btnMissionAdresse').addClass('slds-hide');
               }
-
               if (self._currentMission.features[0].properties.type_mission == 'Pause') {
                 // cas particulier de la Pause
                 $('#btnMissionFin').removeClass('slds-hide');
