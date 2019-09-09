@@ -109,6 +109,10 @@
           }.bind(self)
         );
       });
+
+      $('#btnAttenteMission').click(function(e) {
+        self.checkMission();
+      });
       $('#btnMissionSignalement').click(function(e) {
         self.openSignalementModal();
         self.fetchTypeSignalements();
@@ -1585,6 +1589,7 @@
     },
     checkMission: function() {
       let self = this;
+      console.log('checkMission');
       setTimeout(function() {
         self.fetchMission();
       }, GGO.CHECK_MISSION_INTERVALLE);

@@ -107,14 +107,20 @@
 							<div class="slds-spinner__dot-a"></div>
 							<div class="slds-spinner__dot-b"></div>
 						</div>
-						<h2>en attente de mission ... </h2>					
+						<button id="btnAttenteMission" class="slds-button slds-button_destructive" style="background-color:#706e6b; border-color: #706e6b;">en attente de mission ...</button>				
 					</div>
 					<div id="missionContent" class="slds-scrollable_y slds-hide" style="position: absolute; top: 15px; left: 18px; right: 13px; bottom: 60px;">
-
 					</div>
 				</div>
 				<footer id="missionFooter" class="slds-card__footer slds-hide" style="position: absolute; bottom: 0px; left: 0px; right: 0px; padding: 0.5rem 0.5rem;">
-						<div id="mission-renfort-info" class="mission-renfort">En renfort</div>
+						<ul id="mission-renfort-info" class="slds-button-group-row">
+								<li class="slds-button-group-item">
+										<button id="btnMissionRenfort" class="slds-button slds-button_destructive disabled" style="padding-left: 50px; padding-right: 50px; background-color: #000000; border-color: #000000;">En renfort</button>
+								</li>
+								<li class="slds-button-group-item">
+										<button id="btnMissionAdresseRenfort" class="slds-button slds-button_destructive" style="background-color: #000000; border-color: #000000;">Adresses du site</button>
+								</li>
+							</ul>
 					<ul id="mission-btn-list" class="slds-button-group-row">
 						<li class="slds-button-group-item">
 							<button id="btnMissionEnRoute" class="slds-button slds-button_brand" style="padding-left: 8px; padding-right: 8px; background-color: #FFC100; border-color: #FFC100;">En direction</button>
