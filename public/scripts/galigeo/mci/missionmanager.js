@@ -1503,26 +1503,14 @@
           success: function(response) {
             console.log(`${verificationMissionUrl}: `, response);
             if (response.code === 200) {
-              if (!response.verification_sous_secteur & !response.verification_type_missions) {
-                // mission pas sur le secteur et pas une mission ronde/ Pause -> seulement boutons En direction & Adresse
+              if (!response.verification_type_missions) {
+                // pas une mission ronde/ Pause -> seulement boutons En direction & Adresse
                 $('#btnMissionFin').addClass('slds-hide');
                 $('#btnMissionDebut').addClass('slds-hide');
                 $('#btnMissionSignalement').addClass('slds-hide');
                 $('#btnMissionAdresse').removeClass('slds-hide');
-              } else if (!response.verification_sous_secteur & response.verification_type_missions) {
-                // mission pas sur le secteur mais c'est une mission ronde/ Pause -> boutons En direction, Début, Fin & Signalement
-                $('#btnMissionFin').removeClass('slds-hide');
-                $('#btnMissionDebut').removeClass('slds-hide');
-                $('#btnMissionSignalement').removeClass('slds-hide');
-                $('#btnMissionAdresse').addClass('slds-hide');
-              } else if (response.verification_sous_secteur & !response.verification_type_missions) {
-                // mission  sur le secteur mais ce n'est pas une mission ronde/ Pause -> seulement boutons En direction & Adresse
-                $('#btnMissionFin').addClass('slds-hide');
-                $('#btnMissionDebut').addClass('slds-hide');
-                $('#btnMissionSignalement').addClass('slds-hide');
-                $('#btnMissionAdresse').removeClass('slds-hide');
-              } else if (response.verification_sous_secteur & response.verification_type_missions) {
-                // mission  sur le secteur et c'est une mission ronde/ Pause ->  boutons En direction, Début, Fin & Signalement
+              } else if (response.verification_type_missions) {
+                // mission ronde -> boutons En direction, Début, Fin & Signalement
                 $('#btnMissionFin').removeClass('slds-hide');
                 $('#btnMissionDebut').removeClass('slds-hide');
                 $('#btnMissionSignalement').removeClass('slds-hide');
