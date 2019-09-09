@@ -25,8 +25,8 @@
         $('#btnMissionEnRoute').attr('disabled', true);
         $('#btnMissionDebut').attr('disabled', false);
         $('#btnMissionFin').attr('disabled', true);
-        $('#btnMissionSignalement').addClass('slds-hide');
         $('#btnMissionAdresse').removeClass('slds-hide');
+        $('#btnMissionSignalement').addClass('slds-hide');
 
         $('#mainContainer-card-body').prepend(
           $(`
@@ -58,13 +58,12 @@
         $('#btnMissionEnRoute').attr('disabled', true);
         $('#btnMissionDebut').attr('disabled', true);
         $('#btnMissionFin').attr('disabled', false);
-        if (self._currentMission.features[0].properties.type_mission === 'Pause') {
+        $('#btnMissionSignalement').removeClass('slds-hide');
+        $('#btnMissionAdresse').addClass('slds-hide');
+        if (self._currentMission.features[0].properties.type_mission == 'Pause') {
           $('#btnMissionSignalement').addClass('slds-hide');
-        } else {
-          $('#btnMissionSignalement').removeClass('slds-hide');
-          $('#btnMissionAdresse').addClass('slds-hide');
+          $('#btnMissionAdresse').removeClass('slds-hide');
         }
-
         $('#mainContainer-card-body').prepend(
           $(`
           <div id="udpate-mission-spinner" class="slds-spinner_container">
@@ -1446,31 +1445,79 @@
           type: 'GET',
           url: statutMissionEnCoursUrl,
           success: function(response) {
-            console.log(`${statutMissionEnCoursUrl}: `, response);
             if (response.code === 200) {
               if (response.statut_mission_encours !== null) {
                 $('#statut_mission').text(response.statut_mission_encours);
-                if (response.statut_mission_encours == 'En direction') {
+                if (response.statut_mission_encours == 'En direction' && self._currentMission.features[0].properties.type_mission == 'Ronde') {
+                  $('#btnMissionEnRoute').removeClass('slds-hide');
+                  $('#btnMissionDebut').removeClass('slds-hide');
+                  $('#btnMissionFin').removeClass('slds-hide');
                   $('#btnMissionEnRoute').attr('disabled', true);
                   $('#btnMissionDebut').attr('disabled', false);
                   $('#btnMissionFin').attr('disabled', true);
-                  $('#btnMissionSignalement').addClass('slds-hide');
                   $('#btnMissionAdresse').removeClass('slds-hide');
-                } else if (response.statut_mission_encours == 'Début') {
+                  $('#btnMissionSignalement').addClass('slds-hide');
+                } else if (response.statut_mission_encours == 'Début' && self._currentMission.features[0].properties.type_mission == 'Ronde') {
+                  $('#btnMissionEnRoute').removeClass('slds-hide');
+                  $('#btnMissionDebut').removeClass('slds-hide');
+                  $('#btnMissionFin').removeClass('slds-hide');
                   $('#btnMissionEnRoute').attr('disabled', true);
                   $('#btnMissionDebut').attr('disabled', true);
                   $('#btnMissionFin').attr('disabled', false);
-                  if (self._currentMission.features[0].properties.type_mission === 'Pause') {
-                    $('#btnMissionSignalement').addClass('slds-hide');
-                    $('#btnMissionAdresse').removeClass('slds-hide');
-                  } else {
-                    $('#btnMissionSignalement').removeClass('slds-hide');
-                    $('#btnMissionAdresse').addClass('slds-hide');
-                  }
-                } else if (response.statut_mission_encours == 'Mission créée') {
+                  $('#btnMissionAdresse').addClass('slds-hide');
+                  $('#btnMissionSignalement').removeClass('slds-hide');
+                } else if (response.statut_mission_encours == 'Mission créée' && self._currentMission.features[0].properties.type_mission == 'Ronde') {
+                  $('#btnMissionEnRoute').removeClass('slds-hide');
+                  $('#btnMissionDebut').removeClass('slds-hide');
+                  $('#btnMissionFin').removeClass('slds-hide');
                   $('#btnMissionEnRoute').attr('disabled', false);
                   $('#btnMissionDebut').attr('disabled', true);
                   $('#btnMissionFin').attr('disabled', true);
+                  $('#btnMissionSignalement').addClass('slds-hide');
+                  $('#btnMissionAdresse').removeClass('slds-hide');
+                } else if (response.statut_mission_encours == 'En direction' && self._currentMission.features[0].properties.type_mission == 'Pause') {
+                  $('#btnMissionEnRoute').removeClass('slds-hide');
+                  $('#btnMissionDebut').removeClass('slds-hide');
+                  $('#btnMissionFin').removeClass('slds-hide');
+                  $('#btnMissionEnRoute').attr('disabled', true);
+                  $('#btnMissionDebut').attr('disabled', false);
+                  $('#btnMissionFin').attr('disabled', true);
+                  $('#btnMissionAdresse').removeClass('slds-hide');
+                  $('#btnMissionSignalement').addClass('slds-hide');
+                } else if (response.statut_mission_encours == 'Début' && self._currentMission.features[0].properties.type_mission == 'Pause') {
+                  $('#btnMissionEnRoute').removeClass('slds-hide');
+                  $('#btnMissionDebut').removeClass('slds-hide');
+                  $('#btnMissionFin').removeClass('slds-hide');
+                  $('#btnMissionEnRoute').attr('disabled', true);
+                  $('#btnMissionDebut').attr('disabled', true);
+                  $('#btnMissionFin').attr('disabled', false);
+                  $('#btnMissionAdresse').removeClass('slds-hide');
+                  $('#btnMissionSignalement').addClass('slds-hide');
+                } else if (response.statut_mission_encours == 'Mission créée' && self._currentMission.features[0].properties.type_mission == 'Pause') {
+                  $('#btnMissionEnRoute').removeClass('slds-hide');
+                  $('#btnMissionDebut').removeClass('slds-hide');
+                  $('#btnMissionFin').removeClass('slds-hide');
+                  $('#btnMissionEnRoute').attr('disabled', false);
+                  $('#btnMissionDebut').attr('disabled', true);
+                  $('#btnMissionFin').attr('disabled', true);
+                  $('#btnMissionSignalement').addClass('slds-hide');
+                  $('#btnMissionAdresse').removeClass('slds-hide');
+                } else if (response.statut_mission_encours == 'En direction' && self._currentMission.features[0].properties.type_mission != 'Pause') {
+                  $('#btnMissionEnRoute').attr('disabled', true);
+                  $('#btnMissionDebut').addClass('slds-hide');
+                  $('#btnMissionFin').addClass('slds-hide');
+                  $('#btnMissionSignalement').addClass('slds-hide');
+                  $('#btnMissionAdresse').removeClass('slds-hide');
+                } else if (response.statut_mission_encours == 'Début' && self._currentMission.features[0].properties.type_mission != 'Pause') {
+                  $('#btnMissionEnRoute').attr('disabled', true);
+                  $('#btnMissionDebut').addClass('slds-hide');
+                  $('#btnMissionFin').addClass('slds-hide');
+                  $('#btnMissionSignalement').addClass('slds-hide');
+                  $('#btnMissionAdresse').removeClass('slds-hide');
+                } else if (response.statut_mission_encours == 'Mission créée' && self._currentMission.features[0].properties.type_mission != 'Pause') {
+                  $('#btnMissionEnRoute').attr('disabled', false);
+                  $('#btnMissionDebut').addClass('slds-hide');
+                  $('#btnMissionFin').addClass('slds-hide');
                   $('#btnMissionSignalement').addClass('slds-hide');
                   $('#btnMissionAdresse').removeClass('slds-hide');
                 }
@@ -1591,7 +1638,7 @@
           $('#missionFooter').removeClass('slds-hide');
           this.checkMissionStatut();
           this.checkMissionRenfort();
-          this.checkMissionSousSecteur();
+          // this.checkMissionSousSecteur();
           this.checkStatutMissionEnCours();
           this.checkPauseTime();
         } else {
