@@ -1553,6 +1553,22 @@
         self.fetchMission();
       }, GGO.CHECK_MISSION_INTERVALLE);
     },
+    updateButtons: function() {
+      let self = this;
+      if (self._currentMission.features[0].properties.statut == 'En direction') {
+        $('#btnMissionEnRoute').attr('disabled', true);
+        $('#btnMissionDebut').attr('disabled', false);
+        $('#btnMissionFin').attr('disabled', true);
+      } else if (self._currentMission.features[0].properties.statut == 'Début') {
+        $('#btnMissionEnRoute').attr('disabled', true);
+        $('#btnMissionDebut').attr('disabled', true);
+        $('#btnMissionFin').attr('disabled', false);
+      } else if (self._currentMission.features[0].properties.statut == 'Mission créée') {
+        $('#btnMissionEnRoute').attr('disabled', false);
+        $('#btnMissionDebut').attr('disabled', true);
+        $('#btnMissionFin').attr('disabled', true);
+      }
+    },
     fetchMission: function() {
       let self = this;
       let missionUrl = `${this._options.baseRESTServicesURL}/mission_sous_secteur.php?patrouille=${this._options.patrouille.id}`;
@@ -1605,7 +1621,7 @@
           this.checkMissionSousSecteur();
           this.checkStatutMissionEnCours();
           this.checkPauseTime();
-          console.log($('#btnMissionSignalement'));
+          //this.updateButtons();
         } else {
           this.checkMission();
         }
