@@ -62,8 +62,9 @@
           $('#btnMissionSignalement').addClass('slds-hide');
         } else {
           $('#btnMissionSignalement').removeClass('slds-hide');
+          $('#btnMissionAdresse').addClass('slds-hide');
         }
-        $('#btnMissionAdresse').addClass('slds-hide');
+
         $('#mainContainer-card-body').prepend(
           $(`
           <div id="udpate-mission-spinner" class="slds-spinner_container">
@@ -1461,11 +1462,11 @@
                   $('#btnMissionFin').attr('disabled', false);
                   if (self._currentMission.features[0].properties.type_mission === 'Pause') {
                     $('#btnMissionSignalement').addClass('slds-hide');
+                    $('#btnMissionAdresse').removeClass('slds-hide');
                   } else {
                     $('#btnMissionSignalement').removeClass('slds-hide');
+                    $('#btnMissionAdresse').addClass('slds-hide');
                   }
-
-                  $('#btnMissionAdresse').addClass('slds-hide');
                 } else if (response.statut_mission_encours == 'Mission créée') {
                   $('#btnMissionEnRoute').attr('disabled', false);
                   $('#btnMissionDebut').attr('disabled', true);
@@ -1588,8 +1589,6 @@
           $('#waiting4Mission').addClass('slds-hide');
           $('#missionContent').removeClass('slds-hide');
           $('#missionFooter').removeClass('slds-hide');
-          $('#btnMissionSignalement').addClass('slds-hide');
-          $('#btnMissionAdresse').removeClass('slds-hide');
           this.checkMissionStatut();
           this.checkMissionRenfort();
           this.checkMissionSousSecteur();
@@ -1862,8 +1861,6 @@
         $('#mission-renfort-info').removeClass('slds-hide');
       } else {
         $('#mission-renfort-info').addClass('slds-hide');
-        $('#btnMissionSignalement').addClass('slds-hide');
-        $('#btnMissionAdresse').removeClass('slds-hide');
         //$('#mission-btn-list').removeClass('slds-hide');
       }
       $('#missionContent')
