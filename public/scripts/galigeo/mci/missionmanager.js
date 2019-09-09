@@ -1618,10 +1618,10 @@
           $('#missionFooter').removeClass('slds-hide');
           this.checkMissionStatut();
           this.checkMissionRenfort();
+          this.checkMissionSousSecteur();
           this.checkStatutMissionEnCours();
           this.checkPauseTime();
           //this.updateButtons();
-          this.checkMissionSousSecteur();
         } else {
           this.checkMission();
         }
