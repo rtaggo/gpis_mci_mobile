@@ -64,7 +64,6 @@
           $('#btnMissionSignalement').removeClass('slds-hide');
         }
         $('#btnMissionAdresse').addClass('slds-hide');
-        // $('#btnMissionSignalement').attr('disabled', false);
         $('#mainContainer-card-body').prepend(
           $(`
           <div id="udpate-mission-spinner" class="slds-spinner_container">
