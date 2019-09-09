@@ -1874,6 +1874,8 @@
         $('#mission-renfort-info').removeClass('slds-hide');
       } else {
         $('#mission-renfort-info').addClass('slds-hide');
+        $('#btnMissionSignalement').addClass('slds-hide');
+        $('#btnMissionAdresse').removeClass('slds-hide');
         //$('#mission-btn-list').removeClass('slds-hide');
       }
       $('#missionContent')
@@ -1907,17 +1909,6 @@
           self.openIncidenteModal();
           self.fetchFormIncidentes($(this).val());
         });
-      /*
-      if (typeof $('#signalement_list') !== 'undefined') {
-        var list_signalements = document.getElementById('signalements').getElementsByTagName('li');
-        for (var i = 0; i < list_signalements.length; i++) {
-          list_signalements[i].onclick = function(e) {
-            self.openReaffectationModal();
-            self.fetchFormSignalements($(this)[0].value);
-          };
-        }
-      }
-      */
     }
   };
   GGO.MissionManagerSingleton = (function() {
