@@ -87,6 +87,34 @@
       new L.control.zoom({
         position: 'bottomright'
       }).addTo(this._map);
+      this._map.on('moveend', function(e) {
+        console.log('[TODO] zoom end');
+        self.updateActivite(JSON.parse(sessionStorage.patrouille).id);
+      });
+    },
+    updateActivite: function(patrouille_id) {
+      let self = this;
+      let activiteUrl = `/services/rest/mci/activite_map.php`;
+      let reqBody = {
+        patrouille_id: patrouille_id
+      };
+      $.ajax({
+        type: 'POST',
+        url: activiteUrl,
+        data: JSON.stringify(reqBody),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function(response) {
+          console.log(`Response`, response);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`Request aborted`);
+          } else {
+            console.error(`Error request: ${textStatus}`, errorThrown);
+          }
+        }
+      });
     },
     fetchPatrimoine_SousSecteurs: function() {
       var self = this;
@@ -108,11 +136,17 @@
       });
     },
     handleSectorFetched: function(response) {
+      var self = this;
       if (response.code === 200) {
         let patrimoineGgeoJSON = response['patrimoine'];
         if (typeof patrimoineGgeoJSON !== 'undefined') {
           this._classifyPatrimoine(patrimoineGgeoJSON);
-          this._patrimoineLayer = L.mapbox.featureLayer(patrimoineGgeoJSON).addTo(this._map);
+          this._patrimoineLayer = L.mapbox
+            .featureLayer(patrimoineGgeoJSON)
+            .addTo(this._map)
+            .on('click', function(e) {
+              self.updateActivite(JSON.parse(sessionStorage.patrouille).id);
+            });
           //this._patrimoineLayer.on('layeradd', this.onFeatureAddedToPatrimoineLayer.bind(this));
 
           //this._patrimoineLayer.setGeoJSON(patrimoineGgeoJSON);
