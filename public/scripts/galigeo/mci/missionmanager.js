@@ -124,6 +124,11 @@
         self.openAdressesModal();
         self.fetchAdresses();
       });
+      $('#btnMissionAdresseRenfort').click(function(e) {
+        self.openAdressesModal();
+        self.fetchAdresses();
+      });
+      
     },
     finishCurrentMission: function() {
       this._currentMission = null;
