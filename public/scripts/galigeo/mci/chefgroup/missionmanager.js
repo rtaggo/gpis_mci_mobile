@@ -546,7 +546,8 @@
         sous_categorie: sous_categorie_id,
         niveau: niveauVal,
         observation: observationVal,
-        photo: this._snapshotBase64 || ''
+        photo: this._snapshotBase64 || '',
+        patrouille_id: self._options.patrouille.id
       };
       console.log(formSignalement);
       const saveSignalementUrl = `${this._options.baseRESTServicesURL}/signalement.php`;
@@ -576,7 +577,8 @@
       let formReaffectation = {
         mission_id: self._currentMission.features[0].properties.mission_id,
         signalement_id: $('#btnReaffecter').attr('data-signalementid'), // $('#btnReaffecter')[0].value,
-        photo: this._snapshotBase64 || null
+        photo: this._snapshotBase64 || null,
+        patrouille_id: self._options.patrouille.id
       };
 
       const reaffecctationUrl = `${this._options.baseRESTServicesURL}/reaffectation.php`;
@@ -601,9 +603,9 @@
         }
       });
     },
-    fetchFormSignalements: function(signalement_id) {
+    fetchFormSignalements: function(signalement_id, patrouille_id) {
       let self = this;
-      const reaffectationSignalementUrl = `${this._options.baseRESTServicesURL}/reaffectation.php?signalement_id=${signalement_id}`;
+      const reaffectationSignalementUrl = `${this._options.baseRESTServicesURL}/reaffectation.php?patrouille_id=${patrouille_id}&signalement_id=${signalement_id}`;
       $.ajax({
         type: 'GET',
         url: reaffectationSignalementUrl,
@@ -659,7 +661,7 @@
     },
     fetchTypeSignalements: function() {
       let self = this;
-      const typeSignalementUrl = `${this._options.baseRESTServicesURL}/signalement.php?mission_id=${self._currentMission.features[0].properties.mission_id}&type_signalement=&categorie=`;
+      const typeSignalementUrl = `${this._options.baseRESTServicesURL}/signalement.php?patrouille_id=${self._options.patrouille.id}&mission_id=${self._currentMission.features[0].properties.mission_id}&type_signalement=&categorie=`;
       console.log(typeSignalementUrl);
       $.ajax({
         type: 'GET',
@@ -816,7 +818,7 @@
 
     fetchCategorie: function(type_signalement) {
       const self = this;
-      const categorieUrl = `${this._options.baseRESTServicesURL}/signalement.php?mission_id=${self._currentMission.features[0].properties.mission_id}&type_signalement=${type_signalement.id}&categorie=`;
+      const categorieUrl = `${this._options.baseRESTServicesURL}/signalement.php?patrouille_id=${self._options.patrouille.id}&mission_id=${self._currentMission.features[0].properties.mission_id}&type_signalement=${type_signalement.id}&categorie=`;
       $.ajax({
         type: 'GET',
         url: categorieUrl,
@@ -836,7 +838,7 @@
     },
     fetchSousCategorie: function(categorie) {
       const self = this;
-      const sousCategorieUrl = `${this._options.baseRESTServicesURL}/signalement.php?mission_id=${self._currentMission.features[0].properties.mission_id}&type_signalement=&categorie=${categorie.id}`;
+      const sousCategorieUrl = `${this._options.baseRESTServicesURL}/signalement.php?patrouille_id=${self._options.patrouille.id}&mission_id=${self._currentMission.features[0].properties.mission_id}&type_signalement=&categorie=${categorie.id}`;
       $.ajax({
         type: 'GET',
         url: sousCategorieUrl,

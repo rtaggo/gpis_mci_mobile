@@ -223,9 +223,9 @@ const _getNeighborhood = async reqQuery => {
   return neighborhoodResponse;
 };
 
-const _getSignalement = async (mission_id, type_signalement, categorie) => {
+const _getSignalement = async (mission_id, type_signalement, categorie, patrouille_id) => {
   console.log(`[dev-rest] _getSignalement`);
-  let signalementUrl = `${require('../../config').get('BACKEND_URL')}/signalement.php?mission_id=${mission_id}&type_signalement=${type_signalement}&categorie=${categorie}`;
+  let signalementUrl = `${require('../../config').get('BACKEND_URL')}/signalement.php?patrouille_id=${patrouille_id}&mission_id=${mission_id}&type_signalement=${type_signalement}&categorie=${categorie}`;
   let signalementResponse = await doAsyncGET(signalementUrl);
   return signalementResponse;
 };
@@ -269,16 +269,16 @@ const _getPausePost = async formPause => {
   return pauseResponse;
 };
 
-const _getReaffectationSignalement = async signalement_id => {
+const _getReaffectationSignalement = async (signalement_id, patrouille_id) => {
   console.log(`[dev-rest] _getReaffectationSignalement`);
-  let reaffectationUrl = `${require('../../config').get('BACKEND_URL')}/reaffectation.php?signalement_id=${signalement_id}`;
+  let reaffectationUrl = `${require('../../config').get('BACKEND_URL')}/reaffectation.php?patrouille_id=${patrouille_id}&signalement_id=${signalement_id}`;
   let reaffectationResponse = await doAsyncGET(reaffectationUrl);
   return reaffectationResponse;
 };
 
-const _getIncidente = async incidente_id => {
+const _getIncidente = async (incidente_id, patrouille_id) => {
   console.log(`[dev-rest] _getIncidente`);
-  let incidenteUrl = `${require('../../config').get('BACKEND_URL')}/incidente.php?incidente_id=${incidente_id}`;
+  let incidenteUrl = `${require('../../config').get('BACKEND_URL')}/incidente.php?patrouille_id=${patrouille_id}&incidente_id=${incidente_id}`;
   let incidenteResponse = await doAsyncGET(incidenteUrl);
   return incidenteResponse;
 };
@@ -338,6 +338,13 @@ const _getStatutMissionEnCours = async missionId => {
   return statutMissionEnCoursResponse;
 };
 
+const _getActivite = async patrouille_id => {
+  console.log(`[dev-rest] _getActivite patrouilleId=${patrouille_id}`);
+  let activiteUrl = `${require('../../config').get('BACKEND_URL')}/activite.php?patrouille_id=${patrouille_id}`;
+  let activiteResponse = await doAsyncGET(activiteUrl);
+  return activiteResponse;
+};
+
 /* list to exports */
 module.exports = {
   login: _login,
@@ -366,6 +373,7 @@ module.exports = {
   getPatrimoineSecteur: _getPatrimoineSecteur,
   getMissionSecteurs: _getMissionSecteurs,
   getMissionDetails: _getMissionDetails,
+  getActivite: _getActivite,
   joinMission: _joinMission,
   positionMission: _positionMission
 };

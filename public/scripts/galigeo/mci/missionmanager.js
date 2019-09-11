@@ -42,6 +42,7 @@
         self.updateMissionStatus(
           self._currentMission.features[0].properties.mission_id,
           1,
+          self._options.patrouille.id,
           function(response) {
             console.log('>> En route callback', response, self);
             if (response.code === 200) {
@@ -78,6 +79,7 @@
         self.updateMissionStatus(
           self._currentMission.features[0].properties.mission_id,
           2,
+          self._options.patrouille.id,
           function(response) {
             console.log('>> En route callback', response, self);
             if (response.code === 200) {
@@ -100,6 +102,7 @@
         self.updateMissionStatus(
           self._currentMission.features[0].properties.mission_id,
           5,
+          self._options.patrouille.id,
           function(response) {
             console.log('>> En route callback', response, self);
             if (response.code === 200) {
@@ -132,12 +135,13 @@
       //self.fakeTimeOutbeforeFetchingMission();
       this.checkMission();
     },
-    updateMissionStatus: function(missionId, statusCode, callback) {
+    updateMissionStatus: function(missionId, statusCode, patrouilleId, callback) {
       let self = this;
       let updateStatusUrl = `${this._options.baseRESTServicesURL}/maj_mission.php`;
       let reqBody = {
         mission_id: missionId,
-        code: statusCode
+        code: statusCode,
+        patrouille_id: patrouilleId
       };
       $.ajax({
         type: 'POST',
@@ -796,7 +800,8 @@
         sous_categorie: sous_categorie_id,
         niveau: niveauVal,
         observation: observationVal,
-        photo: this._snapshotBase64 || ''
+        photo: this._snapshotBase64 || '',
+        patrouille_id: self._options.patrouille.id
       };
       console.log(formSignalement);
       const saveSignalementUrl = `${this._options.baseRESTServicesURL}/signalement.php`;
@@ -852,9 +857,9 @@
         }
       });
     },
-    fetchFormSignalements: function(signalement_id) {
+    fetchFormSignalements: function(signalement_id, patrouille_id) {
       let self = this;
-      const reaffectationSignalementUrl = `${this._options.baseRESTServicesURL}/reaffectation.php?signalement_id=${signalement_id}`;
+      const reaffectationSignalementUrl = `${this._options.baseRESTServicesURL}/reaffectation.php?patrouille_id=${patrouille_id}&signalement_id=${signalement_id}`;
       $.ajax({
         type: 'GET',
         url: reaffectationSignalementUrl,
@@ -873,7 +878,7 @@
     },
     fetchFormIncidentes: function(incidente_id) {
       let self = this;
-      const incidenteUrl = `${this._options.baseRESTServicesURL}/incidente.php?incidente_id=${incidente_id}`;
+      const incidenteUrl = `${this._options.baseRESTServicesURL}/incidente.php?patrouille_id=${self._options.patrouille.id}&incidente_id=${incidente_id}`;
       $.ajax({
         type: 'GET',
         url: incidenteUrl,
@@ -1098,7 +1103,7 @@
     },
     fetchTypeSignalements: function() {
       let self = this;
-      const typeSignalementUrl = `${this._options.baseRESTServicesURL}/signalement.php?mission_id=${self._currentMission.features[0].properties.mission_id}&type_signalement=&categorie=`;
+      const typeSignalementUrl = `${this._options.baseRESTServicesURL}/signalement.php?patrouille_id=${self._options.patrouille.id}&mission_id=${self._currentMission.features[0].properties.mission_id}&type_signalement=&categorie=`;
       console.log(typeSignalementUrl);
       $.ajax({
         type: 'GET',
@@ -1120,7 +1125,7 @@
     },
     fetchAdresses: function() {
       let self = this;
-      const typeSignalementUrl = `${this._options.baseRESTServicesURL}/signalement.php?mission_id=${self._currentMission.features[0].properties.mission_id}&type_signalement=&categorie=`;
+      const typeSignalementUrl = `${this._options.baseRESTServicesURL}/signalement.php?patrouille_id=${self._options.patrouille.id}&mission_id=${self._currentMission.features[0].properties.mission_id}&type_signalement=&categorie=`;
       console.log(typeSignalementUrl);
       $.ajax({
         type: 'GET',
@@ -1300,7 +1305,7 @@
 
     fetchCategorie: function(type_signalement) {
       const self = this;
-      const categorieUrl = `${this._options.baseRESTServicesURL}/signalement.php?mission_id=${self._currentMission.features[0].properties.mission_id}&type_signalement=${type_signalement.id}&categorie=`;
+      const categorieUrl = `${this._options.baseRESTServicesURL}/signalement.php?patrouille_id=${self._options.patrouille.id}&mission_id=${self._currentMission.features[0].properties.mission_id}&type_signalement=${type_signalement.id}&categorie=`;
       $.ajax({
         type: 'GET',
         url: categorieUrl,
@@ -1320,7 +1325,7 @@
     },
     fetchSousCategorie: function(categorie) {
       const self = this;
-      const sousCategorieUrl = `${this._options.baseRESTServicesURL}/signalement.php?mission_id=${self._currentMission.features[0].properties.mission_id}&type_signalement=&categorie=${categorie.id}`;
+      const sousCategorieUrl = `${this._options.baseRESTServicesURL}/signalement.php?patrouille_id=${self._options.patrouille.id}&mission_id=${self._currentMission.features[0].properties.mission_id}&type_signalement=&categorie=${categorie.id}`;
       $.ajax({
         type: 'GET',
         url: sousCategorieUrl,
@@ -1435,6 +1440,40 @@
               console.warn(`[GET] ${renfortMissionUrl} Request aborted`);
             } else {
               console.error(`${renfortMissionUrl} request error : ${textStatus}`, errorThrown);
+            }
+          }
+        });
+      }
+    },
+    checkActivite: function() {
+      let self = this;
+      if (this._currentMission !== null) {
+        let self = this;
+        let activiteUrl = `${this._options.baseRESTServicesURL}/activite.php?patrouille_id=${this._options.patrouille.id}`;
+        $.ajax({
+          type: 'GET',
+          url: activiteUrl,
+          success: function(response) {
+            console.log(`${activiteUrl}: `, response);
+            if (response.code === 200) {
+              if (!response.actif) {
+                GGO.SessionIssuePrompt('Perte de la session', `Veuillez vous reconnecter.`, $('#appContainer').empty());
+              } else {
+                setTimeout(function() {
+                  self.checkActivite();
+                }, GGO.CHECK_MISSION_INTERVALLE);
+              }
+            } else {
+              setTimeout(function() {
+                self.checkActivite();
+              }, GGO.CHECK_MISSION_INTERVALLE);
+            }
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            if (textStatus === 'abort') {
+              console.warn(`[GET] ${activiteUrl} Request aborted`);
+            } else {
+              console.error(`${activiteUrl} request error : ${textStatus}`, errorThrown);
             }
           }
         });
@@ -1590,6 +1629,7 @@
     checkMission: function() {
       let self = this;
       console.log('checkMission');
+      this.checkActivite();
       setTimeout(function() {
         self.fetchMission();
       }, GGO.CHECK_MISSION_INTERVALLE);
@@ -1927,7 +1967,7 @@
           .off()
           .click(function(e) {
             self.openReaffectationModal();
-            self.fetchFormSignalements($(this).val());
+            self.fetchFormSignalements($(this).val(), self._options.patrouille.id);
           });
         $('#incidentes li')
           .off()
