@@ -237,7 +237,7 @@ router.get('/voisinage.php', (req, res, next) => {
 router.get('/signalement.php', (req, res, next) => {
   console.log(`[MCI_REST_API][GET] /signalement.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
-  mcimodule.getSignalement(req.query.mission_id, req.query.type_signalement, req.query.categorie).then(signalementResponse => {
+  mcimodule.getSignalement(req.query.mission_id, req.query.type_signalement, req.query.categorie, req.query.patrouille_id).then(signalementResponse => {
     res.header('Content-Type', 'application/json');
     res.json(signalementResponse);
   });
@@ -295,7 +295,7 @@ router.get('/mission_en_cours.php', (req, res, next) => {
 router.get('/reaffectation.php', (req, res, next) => {
   console.log(`[MCI_REST_API][GET] /reaffectation.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
-  mcimodule.getReaffectationSignalement(req.query.signalement_id).then(reaffectationResponse => {
+  mcimodule.getReaffectationSignalement(req.query.signalement_id, req.query.patrouille_id).then(reaffectationResponse => {
     res.header('Content-Type', 'application/json');
     res.json(reaffectationResponse);
   });
@@ -304,9 +304,18 @@ router.get('/reaffectation.php', (req, res, next) => {
 router.get('/incidente.php', (req, res, next) => {
   console.log(`[MCI_REST_API][GET] /incidente.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
-  mcimodule.getIncidente(req.query.incidente_id).then(incidenteResponse => {
+  mcimodule.getIncidente(req.query.incidente_id, req.query.patrouille_id).then(incidenteResponse => {
     res.header('Content-Type', 'application/json');
     res.json(incidenteResponse);
+  });
+});
+
+router.get('/activite.php', (req, res, next) => {
+  console.log(`[MCI_REST_API][GET] /activite.php ${JSON.stringify(req.query)}`);
+  const mcimodule = getMCIModule();
+  mcimodule.getActivite(req.query.patrouille_id).then(activiteResponse => {
+    res.header('Content-Type', 'application/json');
+    res.json(activiteResponse);
   });
 });
 

@@ -219,24 +219,28 @@
         });
       }
     } else if (typeof patrouilleId == 'undefined') {
-      if (options.fonction == 'fin') {
-        const patrouillesUrl = `${options.baseRESTServicesURL}/fin_vacation.php?patrouille=${options.userName}`;
-        $.ajax({
-          type: 'GET',
-          url: patrouillesUrl,
-          success: function(response) {
-            console.log(`Revoke Patrouille response: `, response);
-            GGO.postLogoutForm();
-          },
-          error: function(jqXHR, textStatus, errorThrown) {
-            if (textStatus === 'abort') {
-              console.warn(`${patrouillesUrl} Request aborted`);
-            } else {
-              console.error(`Error for ${patrouillesUrl} request: ${textStatus}`, errorThrown);
+      if (typeof options !== 'undefined') {
+        if (options.fonction == 'fin') {
+          const patrouillesUrl = `${options.baseRESTServicesURL}/fin_vacation.php?patrouille=${options.userName}`;
+          $.ajax({
+            type: 'GET',
+            url: patrouillesUrl,
+            success: function(response) {
+              console.log(`Revoke Patrouille response: `, response);
+              GGO.postLogoutForm();
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+              if (textStatus === 'abort') {
+                console.warn(`${patrouillesUrl} Request aborted`);
+              } else {
+                console.error(`Error for ${patrouillesUrl} request: ${textStatus}`, errorThrown);
+              }
+              GGO.postLogoutForm();
             }
-            GGO.postLogoutForm();
-          }
-        });
+          });
+        } else {
+          GGO.postLogoutForm();
+        }
       } else {
         GGO.postLogoutForm();
       }
