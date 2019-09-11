@@ -269,6 +269,22 @@ const _getPausePost = async formPause => {
   return pauseResponse;
 };
 
+const _activiteMapPost = async formActiviteMap => {
+  console.log(`[dev-rest] _activitePost`);
+  let activiteMapUrlPost = `${require('../../config').get('BACKEND_URL')}/activite_map.php`;
+
+  let options = {
+    method: 'POST',
+    uri: activiteMapUrlPost,
+    body: formActiviteMap.body,
+    json: true // Automatically stringifies the body to JSON
+  };
+
+  let activiteMapResponse = await doAsyncPOST(options);
+  console.log('Resp: ' + activiteMapResponse);
+  return activiteMapResponse;
+};
+
 const _getReaffectationSignalement = async (signalement_id, patrouille_id) => {
   console.log(`[dev-rest] _getReaffectationSignalement`);
   let reaffectationUrl = `${require('../../config').get('BACKEND_URL')}/reaffectation.php?patrouille_id=${patrouille_id}&signalement_id=${signalement_id}`;
@@ -363,6 +379,7 @@ module.exports = {
   getPause: _getPause,
   getSignalementPost: _getSignalementPost,
   getPausePost: _getPausePost,
+  activiteMapPost: _activiteMapPost,
   getReaffectationSignalement: _getReaffectationSignalement,
   getIncidente: _getIncidente,
   getReaffectationPost: _getReaffectationPost,
