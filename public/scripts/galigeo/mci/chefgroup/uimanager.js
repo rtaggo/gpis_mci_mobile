@@ -47,12 +47,14 @@
           $('#topleft_container .slds-popover').addClass('slds-hide');
         }
         $('#legend_popover').toggleClass('slds-hide');
+        self.updateActivite(sessionStorage.chefsGroupe);
       });
       $('#basemapIcon').click(function(e) {
         if ($('#basemap_popover').hasClass('slds-hide')) {
           $('#topleft_container .slds-popover').addClass('slds-hide');
         }
         $('#basemap_popover').toggleClass('slds-hide');
+        self.updateActivite(sessionStorage.chefsGroupe);
       });
       $('#swiper_handle').swipe({
         swipeStatus: function(event, phase, direction, distance, duration, fingers, fingerData, currentDirection) {
@@ -187,6 +189,30 @@
         height: this._viewSize.height - bCardHeight + 'px'
       });
       GGO.EventBus.dispatch(GGO.EVENTS.INVALIDATEMAPSIZE);
+    },
+    updateActivite: function(patrouille_id) {
+      let self = this;
+      let activiteUrl = `/services/rest/mci/activite_map.php`;
+      let reqBody = {
+        patrouille_id: patrouille_id
+      };
+      $.ajax({
+        type: 'POST',
+        url: activiteUrl,
+        data: JSON.stringify(reqBody),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function(response) {
+          console.log(`Response`, response);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`Request aborted`);
+          } else {
+            console.error(`Error request: ${textStatus}`, errorThrown);
+          }
+        }
+      });
     }
   };
 
