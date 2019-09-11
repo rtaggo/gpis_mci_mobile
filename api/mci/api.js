@@ -71,6 +71,19 @@ router.post('/pause.php', (req, res, next) => {
   });
 });
 
+router.post('/activite_map.php', (req, res, next) => {
+  console.log(`[MCI_REST_API][POST] /activite_map ${JSON.stringify(req.body)}`);
+  const mcimodule = getMCIModule();
+  mcimodule.activiteMapPost(req).then(resp => {
+    //console.log(resp);
+    if (resp.code !== 200) {
+      res.status(500).json(resp);
+    } else {
+      res.status(200).json(resp);
+    }
+  });
+});
+
 router.post('/reaffectation.php', (req, res, next) => {
   console.log(`[MCI_REST_API][POST] /reaffectation ${JSON.stringify(req.body)}`);
   const mcimodule = getMCIModule();
