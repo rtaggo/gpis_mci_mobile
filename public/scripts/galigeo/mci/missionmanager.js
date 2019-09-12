@@ -127,8 +127,8 @@
       $('#btnMissionAdresseRenfort').click(function(e) {
         self.openAdressesModal();
         self.fetchAdresses();
+        self.checkMissionStatut();
       });
-      
     },
     finishCurrentMission: function() {
       this._currentMission = null;
