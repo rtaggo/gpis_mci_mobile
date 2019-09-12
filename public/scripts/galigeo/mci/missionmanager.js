@@ -1958,7 +1958,7 @@
         $('#mission-renfort-info').removeClass('slds-hide');
       } else {
         $('#mission-renfort-info').addClass('slds-hide');
-        //$('#mission-btn-list').removeClass('slds-hide');
+        $('#mission-btn-list').removeClass('slds-hide');
       }
       $('#missionContent')
         .empty()
