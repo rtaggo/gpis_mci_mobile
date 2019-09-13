@@ -123,6 +123,12 @@
       $('#btnMissionAdresse').click(function(e) {
         self.openAdressesModal();
         self.fetchAdresses();
+        self.checkMissionStatut();
+      });
+      $('#btnMissionAdresseRenfort').click(function(e) {
+        self.openAdressesModal();
+        self.fetchAdresses();
+        self.checkMissionStatut();
       });
     },
     finishCurrentMission: function() {
@@ -1953,7 +1959,7 @@
         $('#mission-renfort-info').removeClass('slds-hide');
       } else {
         $('#mission-renfort-info').addClass('slds-hide');
-        //$('#mission-btn-list').removeClass('slds-hide');
+        $('#mission-btn-list').removeClass('slds-hide');
       }
       $('#missionContent')
         .empty()
