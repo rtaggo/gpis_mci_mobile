@@ -123,6 +123,7 @@
       $('#btnMissionAdresse').click(function(e) {
         self.openAdressesModal();
         self.fetchAdresses();
+        self.checkMissionStatut();
       });
       $('#btnMissionAdresseRenfort').click(function(e) {
         self.openAdressesModal();
