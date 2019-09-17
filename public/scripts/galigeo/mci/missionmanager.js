@@ -90,6 +90,7 @@
             }
           }.bind(self)
         );
+        self.checkPauseTime();
         if (self._currentMission.features[0].properties.type_mission === 'Pause') {
           self.debutPause(self._options.patrouille.id);
           $('#btnMissionSignalement').addClass('slds-hide');
@@ -124,6 +125,7 @@
         self.openAdressesModal();
         self.fetchAdresses();
         self.checkMissionStatut();
+        self.checkPauseTime();
       });
       $('#btnMissionAdresseRenfort').click(function(e) {
         self.openAdressesModal();
