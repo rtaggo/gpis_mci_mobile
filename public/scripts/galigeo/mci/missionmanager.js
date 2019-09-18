@@ -1637,7 +1637,6 @@
     checkMission: function() {
       let self = this;
       console.log('checkMission');
-      this.checkActivite();
       setTimeout(function() {
         self.fetchMission();
       }, GGO.CHECK_MISSION_INTERVALLE);
@@ -1651,6 +1650,7 @@
         success: function(response) {
           console.log(`${missionUrl}: `, response);
           self.handleMissionFetched(response);
+          self.checkActivite();
         },
         error: function(jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
