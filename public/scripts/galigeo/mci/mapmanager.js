@@ -271,31 +271,35 @@
       let props = feature.properties;
     },
     displayMission: function(missionGeoJSON) {
-      if (typeof this._missionLayer === 'undefined' || this._missionLayer === null) {
-        this._missionLayer = L.mapbox
-          .featureLayer()
-          .addTo(this._map)
-          .on('layeradd', function(l) {
-            console.log('Layer added to mission layer', l);
-            l.layer.options.zIndexOffset = 1000;
-          });
-      }
-      let mission = missionGeoJSON.features[0];
-      let markerProperties = {
-        'marker-color': GGO.shadeHexColor(this._getColorForNiveauOpe(mission.properties['niveau_operationnel']), -0.15),
-        'marker-symbol': mission.properties['niveau_operationnel'] || '',
-        'marker-size': 'large'
-      };
+      if ((missionGeoJSON.features[0].properties.codesite !== 'BASE') & (missionGeoJSON.features[0].geometry.coordinates[0] == 2.312445) & (missionGeoJSON.features[0].geometry.coordinates[1] == 48.89391)) {
+      } else {
+        if (typeof this._missionLayer === 'undefined' || this._missionLayer === null) {
+          this._missionLayer = L.mapbox
+            .featureLayer()
+            .addTo(this._map)
+            .on('layeradd', function(l) {
+              console.log('Layer added to mission layer', l);
+              l.layer.options.zIndexOffset = 1000;
+            });
+        }
 
-      /*
+        let mission = missionGeoJSON.features[0];
+        let markerProperties = {
+          'marker-color': GGO.shadeHexColor(this._getColorForNiveauOpe(mission.properties['niveau_operationnel']), -0.15),
+          'marker-symbol': mission.properties['niveau_operationnel'] || '',
+          'marker-size': 'large'
+        };
+
+        /*
       let missionGeoJSON = turf.point(mission.coordinates);
       $.extend(missionGeoJSON.properties, markerProperties);
       this._missionLayer.setGeoJSON(missionGeoJSON);
       this._map.fitBounds(this._missionLayer.getBounds(), { maxZoom: 14 });
       */
-      $.extend(mission.properties, markerProperties);
-      this._missionLayer.setGeoJSON(missionGeoJSON);
-      this._map.fitBounds(this._missionLayer.getBounds(), { maxZoom: 14 });
+        $.extend(mission.properties, markerProperties);
+        this._missionLayer.setGeoJSON(missionGeoJSON);
+        this._map.fitBounds(this._missionLayer.getBounds(), { maxZoom: 14 });
+      }
     },
     clearMission: function() {
       if (typeof this._missionLayer !== 'undefined' && this._missionLayer !== null) {
