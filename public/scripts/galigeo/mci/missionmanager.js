@@ -1268,6 +1268,8 @@
     },
 
     handleClickChooseTypeSignalement: function() {
+      $('#parent_categorie2s').addClass('slds-hide');
+      $('#parent_sous_categorie').addClass('slds-hide');
       const selectCtnr = $('#select-type-signalement');
       let typeSignalementId = selectCtnr.val();
       if (typeSignalementId === '' || selectCtnr[0].selectedOptions.length === 0) {
