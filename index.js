@@ -86,11 +86,10 @@ app.post('/connexion.php', (req, res, next) => {
 });
 */
 app.get('/logout', (req, res, next) => {
-  console.log(`/logout`);
   if (req.session) {
     req.session.destroy(function(err) {
       if (err) {
-        console.log(`Error while destroying session ${err}`);
+        console.error(`Error while destroying session ${err}`);
         return next(err);
       } else {
         return res.redirect('/');
@@ -114,9 +113,6 @@ app.use('/services/rest/user', require('./api/user/api'));
 
 // GPIS MCI SERVICES
 app.use('/services/rest/mci', require('./api/mci/api'));
-
-// ELEPHANTBLEU SERVICES
-// app.use('/services/rest/elephantbleu', require('./api/elephantbleu/api'));
 
 // GEOSERVICE
 app.use('/services/rest/geoservice', require('./api/geoservice/api'));

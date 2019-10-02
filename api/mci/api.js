@@ -18,10 +18,11 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/connexion.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][POST] /login ${JSON.stringify(req.body)}`);
+  //console.log(`[MCI_REST_API][POST] /login ${JSON.stringify(req.body)}`);
   const mcimodule = getMCIModule();
   mcimodule.login(req.body.login, req.body.password).then(loginResponse => {
     if (loginResponse.code !== 200) {
+      console.error(`Login error with code ${loginResponse.code}: ${JSON.stringify(loginResponse)}`);
       res.status(500).json(loginResponse);
     } else {
       req.session.loggedin = true;
@@ -32,10 +33,11 @@ router.post('/connexion.php', (req, res, next) => {
 });
 
 router.post('/save_password.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][POST] /newPassword ${JSON.stringify(req.body)}`);
+  //console.log(`[MCI_REST_API][POST] /newPassword ${JSON.stringify(req.body)}`);
   const mcimodule = getMCIModule();
   mcimodule.newPassword(req.body.login, req.body.password).then(newPasswordResponse => {
     if (newPasswordResponse.code !== 200) {
+      console.error(`Save Password error with code ${newPasswordResponse.code}: ${JSON.stringify(newPasswordResponse)}`);
       res.status(500).json(newPasswordResponse);
     } else {
       req.session.loggedin = true;
@@ -46,11 +48,12 @@ router.post('/save_password.php', (req, res, next) => {
 });
 
 router.post('/signalement.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][POST] /signalement`);
+  //console.log(`[MCI_REST_API][POST] /signalement`);
   const mcimodule = getMCIModule();
   mcimodule.getSignalementPost(req).then(resp => {
     //console.log(resp)
     if (resp.code !== 200) {
+      console.error(`Get Signalement error with code ${resp.code}: ${JSON.stringify(resp)}`);
       res.status(500).json(resp);
     } else {
       res.status(200).json(resp);
@@ -59,11 +62,12 @@ router.post('/signalement.php', (req, res, next) => {
 });
 
 router.post('/pause.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][POST] /pause`);
+  //console.log(`[MCI_REST_API][POST] /pause`);
   const mcimodule = getMCIModule();
   mcimodule.getPausePost(req).then(resp => {
     //console.log(resp);
     if (resp.code !== 200) {
+      console.error(`Pause error with code ${resp.code}: ${JSON.stringify(resp)}`);
       res.status(500).json(resp);
     } else {
       res.status(200).json(resp);
@@ -72,11 +76,12 @@ router.post('/pause.php', (req, res, next) => {
 });
 
 router.post('/activite_map.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][POST] /activite_map ${JSON.stringify(req.body)}`);
+  //console.log(`[MCI_REST_API][POST] /activite_map ${JSON.stringify(req.body)}`);
   const mcimodule = getMCIModule();
   mcimodule.activiteMapPost(req).then(resp => {
     //console.log(resp);
     if (resp.code !== 200) {
+      console.error(`Activite Map error with code ${resp.code}: ${JSON.stringify(resp)}`);
       res.status(500).json(resp);
     } else {
       res.status(200).json(resp);
@@ -85,11 +90,12 @@ router.post('/activite_map.php', (req, res, next) => {
 });
 
 router.post('/reaffectation.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][POST] /reaffectation ${JSON.stringify(req.body)}`);
+  //console.log(`[MCI_REST_API][POST] /reaffectation ${JSON.stringify(req.body)}`);
   const mcimodule = getMCIModule();
   mcimodule.getReaffectationPost(req).then(resp => {
     //console.log(resp)
     if (resp.code !== 200) {
+      console.error(`Reaffectation error with code ${resp.code}: ${JSON.stringify(resp)}`);
       res.status(500).json(resp);
     } else {
       res.status(200).json(resp);
@@ -98,7 +104,7 @@ router.post('/reaffectation.php', (req, res, next) => {
 });
 
 router.get('/patrouilles.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][GET] /patrouilles.php`);
+  //console.log(`[MCI_REST_API][GET] /patrouilles.php`);
   const mcimodule = getMCIModule();
   mcimodule.getPatrouilles().then(patrouilles => {
     res.header('Content-Type', 'application/json');
@@ -107,7 +113,7 @@ router.get('/patrouilles.php', (req, res, next) => {
 });
 
 router.get('/liberer_patrouille.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][GET] /liberer_patrouille.php`);
+  //console.log(`[MCI_REST_API][GET] /liberer_patrouille.php`);
   const mcimodule = getMCIModule();
   mcimodule.libererPatrouille(req.query.patrouille).then(resp => {
     res.header('Content-Type', 'application/json');
@@ -116,7 +122,7 @@ router.get('/liberer_patrouille.php', (req, res, next) => {
 });
 
 router.get('/fin_vacation.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][GET] /fin_vacation.php`);
+  //console.log(`[MCI_REST_API][GET] /fin_vacation.php`);
   const mcimodule = getMCIModule();
   mcimodule.finVacation(req.query.patrouille).then(resp => {
     res.header('Content-Type', 'application/json');
@@ -125,7 +131,7 @@ router.get('/fin_vacation.php', (req, res, next) => {
 });
 
 router.get('/sous_secteurs.php', (req, res, next) => {
-  console.log(`[MCI API][GET] /sous_secteurs.php`);
+  //console.log(`[MCI API][GET] /sous_secteurs.php`);
   const mcimodule = getMCIModule();
   mcimodule.getSousSecteurs(req.query.patrouille).then(sssecteurs => {
     res.header('Content-Type', 'application/json');
@@ -134,7 +140,7 @@ router.get('/sous_secteurs.php', (req, res, next) => {
 });
 
 router.get('/secteurs.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][GET] /secteurs`);
+  //console.log(`[MCI_REST_API][GET] /secteurs`);
   const mcimodule = getMCIModule();
   mcimodule.getSecteurs().then(secteurs => {
     res.header('Content-Type', 'application/json');
@@ -143,7 +149,7 @@ router.get('/secteurs.php', (req, res, next) => {
 });
 
 router.get('/chefs_groupe.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][GET] /chefs_groupe ${JSON.stringify(req.query)}`);
+  //console.log(`[MCI_REST_API][GET] /chefs_groupe ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
   mcimodule.getChefsGroupe(req.query.chef_connected).then(chefs_groupe => {
     res.header('Content-Type', 'application/json');
@@ -152,7 +158,7 @@ router.get('/chefs_groupe.php', (req, res, next) => {
 });
 
 router.get('/patrimoine_secteur.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][GET] /patrimoine_secteur.php ${JSON.stringify(req.query)}`);
+  //console.log(`[MCI_REST_API][GET] /patrimoine_secteur.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
   mcimodule.getPatrimoineSecteur(req.query.secteurs).then(patrimoineResponse => {
     res.header('Content-Type', 'application/json');
@@ -161,14 +167,8 @@ router.get('/patrimoine_secteur.php', (req, res, next) => {
 });
 
 router.get('/mission_secteur.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][GET] /mission_secteur.php ${JSON.stringify(req.query)}`);
+  //console.log(`[MCI_REST_API][GET] /mission_secteur.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
-  /*
-  mcimodule.getMissionSecteurs(req.query.secteurs, req.query.id_chef_groupe).then(missionResponse => {
-    res.header('Content-Type', 'application/json');
-    res.json(missionResponse);
-  });
-  */
   mcimodule.getMissionSecteurs(req.query).then(missionResponse => {
     res.header('Content-Type', 'application/json');
     res.json(missionResponse);
@@ -177,7 +177,7 @@ router.get('/mission_secteur.php', (req, res, next) => {
 
 // selection_mission.php
 router.get('/selection_mission.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][GET] /selection_mission.php ${JSON.stringify(req.query)}`);
+  //console.log(`[MCI_REST_API][GET] /selection_mission.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
   mcimodule.getMissionDetails(req.query.mission).then(missionResponse => {
     res.header('Content-Type', 'application/json');
@@ -187,7 +187,7 @@ router.get('/selection_mission.php', (req, res, next) => {
 
 // rejoindre.php
 router.get('/rejoindre.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][GET] /rejoindre.php ${JSON.stringify(req.query)}`);
+  //console.log(`[MCI_REST_API][GET] /rejoindre.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
   mcimodule.joinMission(req.query).then(response => {
     res.header('Content-Type', 'application/json');
@@ -197,7 +197,7 @@ router.get('/rejoindre.php', (req, res, next) => {
 
 // position.php
 router.get('/position.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][GET] /position.php ${JSON.stringify(req.query)}`);
+  //console.log(`[MCI_REST_API][GET] /position.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
   mcimodule.positionMission(req.query).then(response => {
     res.header('Content-Type', 'application/json');
@@ -206,7 +206,7 @@ router.get('/position.php', (req, res, next) => {
 });
 
 router.get('/patrimoine_sous_secteur.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][GET] /patrimoine_sous_secteur.php ${JSON.stringify(req.query)}`);
+  //console.log(`[MCI_REST_API][GET] /patrimoine_sous_secteur.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
   mcimodule.getPatrimoineSousSecteur(req.query.patrouille, req.query.sssecteurs).then(patrimoineResponse => {
     res.header('Content-Type', 'application/json');
@@ -215,7 +215,7 @@ router.get('/patrimoine_sous_secteur.php', (req, res, next) => {
 });
 
 router.get('/mission_sous_secteur.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][GET] /mission_sous_secteur.php ${JSON.stringify(req.query)}`);
+  //console.log(`[MCI_REST_API][GET] /mission_sous_secteur.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
   mcimodule.getMission(req.query.patrouille).then(missionResponse => {
     res.header('Content-Type', 'application/json');
@@ -224,7 +224,7 @@ router.get('/mission_sous_secteur.php', (req, res, next) => {
 });
 
 router.get('/verification.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][GET] /verification.php ${JSON.stringify(req.query)}`);
+  //console.log(`[MCI_REST_API][GET] /verification.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
   mcimodule.getVerification(req.query.mission, req.query.sssecteurs).then(verificationResponse => {
     res.header('Content-Type', 'application/json');
@@ -233,14 +233,8 @@ router.get('/verification.php', (req, res, next) => {
 });
 
 router.get('/voisinage.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][GET] /voisinage.php ${JSON.stringify(req.query)}`);
+  //console.log(`[MCI_REST_API][GET] /voisinage.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
-  /*
-  mcimodule.getNeighborhood(req.query.patrouille, req.query.sssecteurs).then(voisinageResponse => {
-    res.header('Content-Type', 'application/json');
-    res.json(voisinageResponse);
-  });
-  */
   mcimodule.getNeighborhood(req.query).then(voisinageResponse => {
     res.header('Content-Type', 'application/json');
     res.json(voisinageResponse);
@@ -248,7 +242,7 @@ router.get('/voisinage.php', (req, res, next) => {
 });
 
 router.get('/signalement.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][GET] /signalement.php ${JSON.stringify(req.query)}`);
+  //console.log(`[MCI_REST_API][GET] /signalement.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
   mcimodule.getSignalement(req.query.mission_id, req.query.type_signalement, req.query.categorie, req.query.patrouille_id).then(signalementResponse => {
     res.header('Content-Type', 'application/json');
@@ -257,7 +251,7 @@ router.get('/signalement.php', (req, res, next) => {
 });
 
 router.get('/pause.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][GET] /pause.php ${JSON.stringify(req.query)}`);
+  //console.log(`[MCI_REST_API][GET] /pause.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
   mcimodule.getPause(req.query.id_patrouille).then(pauseResponse => {
     res.header('Content-Type', 'application/json');
@@ -266,11 +260,12 @@ router.get('/pause.php', (req, res, next) => {
 });
 
 router.post('/maj_mission.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][POST] /maj_mission ${JSON.stringify(req.body)}`);
+  //console.log(`[MCI_REST_API][POST] /maj_mission ${JSON.stringify(req.body)}`);
   const mcimodule = getMCIModule();
   mcimodule.postMaJMission(req).then(resp => {
     //console.log(resp)
     if (resp.code !== 200) {
+      console.error(`MaJ Mission error with code ${resp.code}: ${JSON.stringify(resp)}`);
       res.status(500).json(resp);
     } else {
       res.status(200).json(resp);
@@ -279,7 +274,7 @@ router.post('/maj_mission.php', (req, res, next) => {
 });
 
 router.get('/statut_mission.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][GET] /statut_mission.php ${JSON.stringify(req.query)}`);
+  //console.log(`[MCI_REST_API][GET] /statut_mission.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
   mcimodule.getStatutMission(req.query.patrouille, req.query.mission).then(signalementResponse => {
     res.header('Content-Type', 'application/json');
@@ -288,7 +283,7 @@ router.get('/statut_mission.php', (req, res, next) => {
 });
 
 router.get('/renforts.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][GET] /renforts.php ${JSON.stringify(req.query)}`);
+  //console.log(`[MCI_REST_API][GET] /renforts.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
   mcimodule.getRenfortsMission(req.query.patrouille, req.query.mission).then(renfortsResponse => {
     res.header('Content-Type', 'application/json');
@@ -297,7 +292,7 @@ router.get('/renforts.php', (req, res, next) => {
 });
 
 router.get('/mission_en_cours.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][GET] /mission_en_cours.php ${JSON.stringify(req.query)}`);
+  //console.log(`[MCI_REST_API][GET] /mission_en_cours.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
   mcimodule.getStatutMissionEnCours(req.query.mission).then(statutMissionEnCoursResponse => {
     res.header('Content-Type', 'application/json');
@@ -306,7 +301,7 @@ router.get('/mission_en_cours.php', (req, res, next) => {
 });
 
 router.get('/reaffectation.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][GET] /reaffectation.php ${JSON.stringify(req.query)}`);
+  //console.log(`[MCI_REST_API][GET] /reaffectation.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
   mcimodule.getReaffectationSignalement(req.query.signalement_id, req.query.patrouille_id).then(reaffectationResponse => {
     res.header('Content-Type', 'application/json');
@@ -315,7 +310,7 @@ router.get('/reaffectation.php', (req, res, next) => {
 });
 
 router.get('/incidente.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][GET] /incidente.php ${JSON.stringify(req.query)}`);
+  //console.log(`[MCI_REST_API][GET] /incidente.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
   mcimodule.getIncidente(req.query.incidente_id, req.query.patrouille_id).then(incidenteResponse => {
     res.header('Content-Type', 'application/json');
@@ -324,7 +319,7 @@ router.get('/incidente.php', (req, res, next) => {
 });
 
 router.get('/activite.php', (req, res, next) => {
-  console.log(`[MCI_REST_API][GET] /activite.php ${JSON.stringify(req.query)}`);
+  //console.log(`[MCI_REST_API][GET] /activite.php ${JSON.stringify(req.query)}`);
   const mcimodule = getMCIModule();
   mcimodule.getActivite(req.query.patrouille_id).then(activiteResponse => {
     res.header('Content-Type', 'application/json');
@@ -333,7 +328,7 @@ router.get('/activite.php', (req, res, next) => {
 });
 
 /**
- * Errors on "/elephantbleu/*" routes.
+ * Errors on "/mci/*" routes.
  */
 router.use((err, req, res, next) => {
   // Format error and forward to generic error handler for logging and
