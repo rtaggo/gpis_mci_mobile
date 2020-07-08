@@ -1,53 +1,61 @@
-'use strict';
+"use strict";
 
-const express = require('express');
-var session = require('express-session');
-const path = require('path');
-const bodyParser = require('body-parser');
+const express = require("express");
+var session = require("express-session");
+const path = require("path");
+const bodyParser = require("body-parser");
 
-const config = require('./config');
+const config = require("./config");
 
 const PORT = process.env.PORT || 5000;
 
 const app = express();
 
-const fakeUsers = [{ id: 1, username: 'mana', password: 'mana', role: 'india' }, { id: 2, username: 'laura', password: 'laura', role: 'charly' }, { id: 3, username: 'pdx', password: 'pdx', role: 'alpha' }];
+const fakeUsers = [
+  { id: 1, username: "mana", password: "mana", role: "india" },
+  { id: 2, username: "laura", password: "laura", role: "charly" },
+  { id: 3, username: "pdx", password: "pdx", role: "alpha" },
+];
 
 app.use(
   session({
-    secret: 'secret',
+    secret: "secret",
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
   })
 );
 
-app.disable('etag');
+app.disable("etag");
 
 /* Try 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 */
-app.use(bodyParser.json({ limit: '10mb', extended: true }));
-app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
+app.use(bodyParser.json({ limit: "10mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 
 // [END enable_parser]
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   if (req.session.loggedin && req.session.soussecteur) {
-    res.sendFile(path.join(__dirname, '/views/index.html'));
+    res.sendFile(path.join(__dirname, "/views/index.html"));
   } else {
-    res.sendFile(path.join(__dirname, '/views/login.html'));
+    res.sendFile(path.join(__dirname, "/views/login.html"));
   }
 });
 
-app.get('/map.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/views/index.html'));
+app.get("/download.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "/views/download.html"));
 });
 
-app.get('/chefgroup.html', (req, res) => {
-  res.sendFile(path.join(__dirname, '/views/index_chefgroup.html'));
+app.get("/map.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "/views/index.html"));
+});
+
+app.get("/chefgroup.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "/views/index_chefgroup.html"));
 });
 
 /*
@@ -85,14 +93,14 @@ app.post('/connexion.php', (req, res, next) => {
   });
 });
 */
-app.get('/logout', (req, res, next) => {
+app.get("/logout", (req, res, next) => {
   if (req.session) {
-    req.session.destroy(function(err) {
+    req.session.destroy(function (err) {
       if (err) {
         console.error(`Error while destroying session ${err}`);
         return next(err);
       } else {
-        return res.redirect('/');
+        return res.redirect("/");
       }
     });
   }
@@ -104,22 +112,22 @@ app.get('/mobile', (req, res) => {
 });
 */
 // WAKEME UP SERVICES
-app.use('/services/wakeup', (req, res) => {
-  res.json({ message: 'alive', code: 200 });
+app.use("/services/wakeup", (req, res) => {
+  res.json({ message: "alive", code: 200 });
 });
 
 // GPIS MCI SERVICES
-app.use('/services/rest/user', require('./api/user/api'));
+app.use("/services/rest/user", require("./api/user/api"));
 
 // GPIS MCI SERVICES
-app.use('/services/rest/mci', require('./api/mci/api'));
+app.use("/services/rest/mci", require("./api/mci/api"));
 
 // GEOSERVICE
-app.use('/services/rest/geoservice', require('./api/geoservice/api'));
+app.use("/services/rest/geoservice", require("./api/geoservice/api"));
 
 // Basic 404 handler
 app.use((req, res) => {
-  res.status(404).send('Not Found');
+  res.status(404).send("Not Found");
 });
 
 // Basic error handler
@@ -128,7 +136,7 @@ app.use((err, req, res) => {
   console.error(err);
   // If our routes specified a specific response, then send that. Otherwise,
   // send a generic message so as not to leak anything.
-  res.status(500).send(err.response || 'Something broke!');
+  res.status(500).send(err.response || "Something broke!");
 });
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
