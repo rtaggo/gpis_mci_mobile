@@ -1,5 +1,5 @@
 {
   "MCI_MODE"  : "dev-rest",
-  "BACKEND_URL" : "http://extranet.gie-gpis.com:82/fichierPHP/",
+  "BACKEND_URL" : "http://extranet.gie-gpis.com:8}/fichierPHP/",
   "GEOSERVICE" : "openrouteservice"
-2
+}
