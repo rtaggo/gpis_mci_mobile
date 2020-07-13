@@ -165,10 +165,7 @@
             if (parseInt(f.properties.motif_id) == 1) {
               f.properties['marker-symbol'] = 'circle'; 
             }
-            if (parseInt(f.properties.motif_id) == 2) {
-              f.properties['marker-symbol'] = 'triangle';
-            }
-            
+            f.properties['marker-symbol'] = 'triangle';
           }
           f.properties['marker-color'] = GGO.getColorForStatutMission(parseInt(f.properties.statut_mission));
           f.properties['description'] = f.properties.codesite;
