@@ -162,6 +162,9 @@
         response.mission_ronde.features.forEach(f => {
           f.properties['marker-size'] = 'small';
           if (parseInt(f.properties.type_mission_id) == 6) {
+            if (parseInt(f.properties.motif_id) == 1) {
+              f.properties['marker-symbol'] = 'circle'; 
+            }
             f.properties['marker-symbol'] = 'triangle';
           }
           f.properties['marker-color'] = GGO.getColorForStatutMission(parseInt(f.properties.statut_mission));
