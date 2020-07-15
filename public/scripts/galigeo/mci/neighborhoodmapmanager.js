@@ -165,7 +165,7 @@
             if (parseInt(f.properties.motif_id) == 1) {
               f.properties['marker-symbol'] = 'music'; 
             }
-            else f.properties['marker-symbol'] = 'school';
+            else f.properties['marker-symbol'] = 'pitch';
           }
           f.properties['marker-color'] = GGO.getColorForStatutMission(parseInt(f.properties.statut_mission));
           f.properties['description'] = f.properties.codesite;
