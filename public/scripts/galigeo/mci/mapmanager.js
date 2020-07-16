@@ -250,6 +250,12 @@
       noInt = noInt % colorPalette.length;
       return colorPalette[noInt];
     },
+    _getColorForRondesFin: function(stat) {
+      //const rdYlBu = ['#d73027', '#fc8d59', '#fee090', '#e0f3f8', '#91bfdb', '#4575b4'];
+      //const colorPalette = ['#d73027', '#fc8d59', '#fee08b', '#d9ef8b', '#91cf60', '#1a9850'];
+      const colorPalette = GGO.getColorPalette(rondes_fin); //rdYlBu;
+      return colorPalette[0];
+    },
     _classifySecteurs: function(geojson) {
       let colors = GGO.getColorPalette('secteurs');
       geojson.features.forEach((f, i) => {
@@ -261,7 +267,10 @@
       geojson.features.forEach(f => {
         f.properties['marker-size'] = 'small';
         f.properties['marker-symbol'] = f.properties['niveau_operationnel'];
-        f.properties['marker-color'] = this._getColorForNiveauOpe(f.properties['niveau_operationnel']);
+        if (f.properties['ronde_finalisee'] == 'true'){
+          f.properties['marker-color'] = this._getColorForRondesFin();
+        }
+        else f.properties['marker-color'] = this._getColorForNiveauOpe(f.properties['niveau_operationnel']);
         f.properties['description'] = f.properties.codesite;
       });
     },
