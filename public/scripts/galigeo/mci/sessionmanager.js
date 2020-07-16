@@ -751,9 +751,9 @@
     handleClickValidateSubSectors: function() {
       console.warn('TODO: click validate selected sectors');
       const selectedSecteurs = $('#listbox-soussecteurs div.slds-listbox__option.slds-is-selected').toArray();
-      if (selectedSecteurs.length === 0 || selectedSecteurs.length > 3) {
+      if (selectedSecteurs.length === 0 || selectedSecteurs.length > 5) {
         $('#sous-secteurs-form-element div.slds-combobox').addClass('slds-has-error');
-        $('#error-message > .slds-form-element__help').text(`Sélection d'un à trois sous-secteurs obligatoire.`);
+        $('#error-message > .slds-form-element__help').text(`Sélection d'un à cinq sous-secteurs obligatoire.`);
         $('#error-message').removeClass('slds-hide');
         return;
       }
