@@ -166,7 +166,7 @@
               f.properties['marker-symbol'] = 'music'; 
             }
             else if (parseInt(f.properties.motif_id) == 2) {
-              f.properties['marker-symbol'] = 'toilets'; 
+              f.properties['marker-symbol'] = 'pitch'; 
             }
             else f.properties['marker-symbol'] = 'triangle';
           }
