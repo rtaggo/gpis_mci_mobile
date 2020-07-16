@@ -253,7 +253,7 @@
     _getColorForRondesFin: function() {
       //const rdYlBu = ['#d73027', '#fc8d59', '#fee090', '#e0f3f8', '#91bfdb', '#4575b4'];
       //const colorPalette = ['#d73027', '#fc8d59', '#fee08b', '#d9ef8b', '#91cf60', '#1a9850'];
-      const colorPalette = GGO.getColorPalette(rondes_fin); //rdYlBu;
+      const colorPalette = GGO.getColorPalette('rondes_fin'); //gris;
       return colorPalette;
     },
     _classifySecteurs: function(geojson) {
