@@ -299,6 +299,11 @@
           'marker-symbol': mission.properties['niveau_operationnel'] || '',
           'marker-size': 'large'
         };
+        let markerPropertiesRondevac = {
+          'marker-color': GGO.shadeHexColor('#808080', -0.15),
+          'marker-symbol': mission.properties['niveau_operationnel'] || '',
+          'marker-size': 'large'
+        };
 
         /*
       let missionGeoJSON = turf.point(mission.coordinates);
@@ -306,9 +311,16 @@
       this._missionLayer.setGeoJSON(missionGeoJSON);
       this._map.fitBounds(this._missionLayer.getBounds(), { maxZoom: 14 });
       */
-        $.extend(mission.properties, markerProperties);
-        this._missionLayer.setGeoJSON(missionGeoJSON);
-        this._map.fitBounds(this._missionLayer.getBounds(), { maxZoom: 14 });
+        if (mission.properties['ronde_finalisee'] == 't'){
+          $.extend(mission.properties, markerPropertiesRondevac);
+            this._missionLayer.setGeoJSON(missionGeoJSON);
+            this._map.fitBounds(this._missionLayer.getBounds(), { maxZoom: 14 });
+        }
+        else {
+          $.extend(mission.properties, markerProperties);
+          this._missionLayer.setGeoJSON(missionGeoJSON);
+          this._map.fitBounds(this._missionLayer.getBounds(), { maxZoom: 14 });
+        }
       }
     },
     clearMission: function() {
