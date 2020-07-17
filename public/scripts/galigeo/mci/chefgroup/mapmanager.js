@@ -267,7 +267,15 @@
         'marker-symbol': mission.properties['niveau_operationnel'] || ''
         //'marker-size': 'small'
       };
-      $.extend(mission.properties, markerProperties);
+      let markerPropertiesRondevac = {
+        'marker-color': GGO.shadeHexColor('#808080', -0.15),
+        'marker-symbol': mission.properties['niveau_operationnel'] || '',
+        'marker-size': 'large'
+      };
+      if (mission.properties['ronde_finalisee'] == 't'){
+        $.extend(mission.properties, markerPropertiesRondevac);
+      }
+      else $.extend(mission.properties, markerProperties);
       /*
       let missionGeoJSON = turf.point(mission.coordinates);
       $.extend(missionGeoJSON.properties, markerProperties);
