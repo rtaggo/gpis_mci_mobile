@@ -102,8 +102,8 @@
       1. appel REST pour recupérer les infos
       2. afficher les infos dans 'prompt-message-wrapper' $('#prompt-message-wrapper').empty()
       */
-      $('#prompt-message-wrapper').empty()
-      const patrouillesUrl = `${self.baseRESTServicesURL}/bilan_vacation.php?patrouille=${self.patrouille.id}`;
+      $('#prompt-message-wrapper').empty();
+      const patrouillesUrl = `${self.baseRESTServicesURL}/bilan_vacation.php?patrouille=${this._options.patrouille}`;
       $.ajax({
         type: 'GET',
         url: patrouillesUrl,
