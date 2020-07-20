@@ -103,27 +103,6 @@
       2. afficher les infos dans 'prompt-message-wrapper' $('#prompt-message-wrapper').empty()
       */
       $('#prompt-message-wrapper').empty()
-      displaySummary : function() {
-            var self = this;
-            var restURL = `${this._options.baseRESTServicesURL}/bilan_vacation.php?patrouille=${this._options.patrouille.id}`;
-            $.ajax({
-              type: 'GET',
-              url: restURL,
-              success: function(response) {
-                console.log(`${restURL} Response : `, response);
-                self.handleSectorFetched(response);
-              },
-              error: function(jqXHR, textStatus, errorThrown) {
-                if (textStatus === 'abort') {
-                  console.warn(`${restURL} Request aborted`);
-                } else {
-                  console.error(`${restURL} Error request: ${textStatus}`, errorThrown);
-                }
-              }
-            });
-          }
-
-
       const patrouillesUrl = `${self.baseRESTServicesURL}/bilan_vacation.php?patrouille=${self.patrouille.id}`;
       $.ajax({
         type: 'GET',
