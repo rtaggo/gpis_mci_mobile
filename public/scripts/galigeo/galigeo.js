@@ -102,7 +102,7 @@
       2. afficher les infos dans 'prompt-message-wrapper' $('#prompt-message-wrapper').empty()
 
       */
-      const patrouillesUrl = `${self.baseRESTServicesURL}/bilan_vacation.php?patrouille=${patrouilleId}`;
+      const patrouillesUrl = `${self.baseRESTServicesURL}/bilan_vacation.php?patrouille=${self.patrouille.id}`;
       $.ajax({
         type: 'GET',
         url: patrouillesUrl,
