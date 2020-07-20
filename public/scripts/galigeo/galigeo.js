@@ -59,7 +59,7 @@
     });
   };
 
-  GGO.SessionSummaryPrompt = function(title, container) {
+  GGO.SessionSummaryPrompt = function(title, container, patrouilleId) {
     container.append(`
         <section role="alertdialog" tabindex="0" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper" class="slds-modal slds-fade-in-open slds-modal_prompt" aria-modal="true">
           <div class="slds-modal__container">
@@ -103,7 +103,7 @@
       2. afficher les infos dans 'prompt-message-wrapper' $('#prompt-message-wrapper').empty()
       */
       $('#prompt-message-wrapper').empty();
-      const patrouillesUrl = `${self.baseRESTServicesURL}/bilan_vacation.php?patrouille=${self.patrouille}`;
+      const patrouillesUrl = `${self.baseRESTServicesURL}/bilan_vacation.php?patrouille=${patrouilleId}`;
       $.ajax({
         type: 'GET',
         url: patrouillesUrl,
