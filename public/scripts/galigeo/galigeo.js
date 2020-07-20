@@ -59,6 +59,45 @@
     });
   };
 
+  GGO.SessionSummaryPrompt = function(title, message, container) {
+    container.empty().append(`
+        <section role="alertdialog" tabindex="0" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper" class="slds-modal slds-fade-in-open slds-modal_prompt" aria-modal="true">
+          <div class="slds-modal__container">
+            <header class="slds-modal__header slds-theme_error slds-theme_alert-texture">
+              <h2 class="slds-text-heading_medium" id="prompt-heading-id">${title}</h2>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium" id="prompt-message-wrapper">
+              <p>${message}</p>
+            </div>
+            <footer class="slds-modal__footer slds-theme_default">
+              <button class="slds-button slds-button_neutral">Fin de vacation</button>
+            </footer>
+          </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    `);
+    $('#appContainer footer > button.slds-button').click(function(e) {
+      GGO.disconnect('fin');
+      /*
+      sessionStorage.clear();
+      var logoutForm = $('<form action="/logout" />');
+
+      $('body').append(logoutForm);
+      logoutForm.submit();
+      */
+    });
+    $('#appContainer footer > button.slds-button').click(function(e) {
+      GGO.disconnect('retour');
+      /*
+      sessionStorage.clear();
+      var logoutForm = $('<form action="/logout" />');
+
+      $('body').append(logoutForm);
+      logoutForm.submit();
+      */
+    });
+  };
+
   GGO.getRandomInteger = function(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -218,6 +257,26 @@
             GGO.postLogoutForm();
           }
         });
+      } else if (options.fonction == 'bilan') {
+        const patrouillesUrl = `${options.baseRESTServicesURL}/bilan_vacation.php?patrouille=${patrouilleId}`;
+        $.ajax({
+          type: 'GET',
+          url: patrouillesUrl,
+          success: function(response) {
+            console.log(`Resume Patrouille response: `, response);
+            //GGO.postLogoutForm();
+            //créer fonction qui affiche la popup
+            GGO.SessionSummaryPrompt();
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            if (textStatus === 'abort') {
+              console.warn(`${patrouillesUrl} Request aborted`);
+            } else {
+              console.error(`Error for ${patrouillesUrl} request: ${textStatus}`, errorThrown);
+            }
+            GGO.postLogoutForm();
+          }
+        });
       }
     } else if (typeof patrouilleId == 'undefined') {
       if (typeof options !== 'undefined') {
@@ -237,6 +296,24 @@
                 console.error(`Error for ${patrouillesUrl} request: ${textStatus}`, errorThrown);
               }
               GGO.postLogoutForm();
+            }
+          });
+        } else if (options.fonction == 'bilan') {
+          const patrouillesUrl = `${options.baseRESTServicesURL}/fin_vacation.php?patrouille=${options.userName}`;
+          $.ajax({
+            type: 'GET',
+            url: patrouillesUrl,
+            success: function(response) {
+              console.log(`Revoke Patrouille response: `, response);
+              //GGO.postLogoutForm();
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+              if (textStatus === 'abort') {
+                console.warn(`${patrouillesUrl} Request aborted`);
+              } else {
+                console.error(`Error for ${patrouillesUrl} request: ${textStatus}`, errorThrown);
+              }
+              //GGO.postLogoutForm();
             }
           });
         } else {
