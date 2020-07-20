@@ -165,6 +165,8 @@
 				);
 			});
 			$('#logoutBtn3').click(function(e){
+				GGO.SessionSummaryPrompt('METTRE TITRE', $('#appContainer'));
+				/*
 				GGO.disconnect(
 					self.galigeo.getPatrouille().id, 
 					{
@@ -172,6 +174,7 @@
 						'fonction': 'bilan'
 					}
 				);
+				*/
 			});
 
 			var windowH = $(window).height();
