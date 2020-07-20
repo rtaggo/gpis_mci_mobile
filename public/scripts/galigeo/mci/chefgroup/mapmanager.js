@@ -246,7 +246,10 @@
       geojson.features.forEach(f => {
         f.properties['marker-size'] = 'small';
         //f.properties['marker-symbol'] = f.properties['niveau_operationnel'];
-        f.properties['marker-color'] = this._getColorForNiveauOpe(f.properties['niveau_operationnel']);
+        if (f.properties['ronde_finalisee'] == 't'){ //marker gris si ronde finalisée pendant la vacation en cours
+          f.properties['marker-color'] = '#808080';
+        }
+        else f.properties['marker-color'] = this._getColorForNiveauOpe(f.properties['niveau_operationnel']);
         f.properties['description'] = f.properties.codesite;
       });
     },
@@ -264,7 +267,15 @@
         'marker-symbol': mission.properties['niveau_operationnel'] || ''
         //'marker-size': 'small'
       };
-      $.extend(mission.properties, markerProperties);
+      let markerPropertiesRondevac = {
+        'marker-color': GGO.shadeHexColor('#808080', -0.15),
+        'marker-symbol': mission.properties['niveau_operationnel'] || '',
+        'marker-size': 'large'
+      };
+      if (mission.properties['ronde_finalisee'] == 't'){
+        $.extend(mission.properties, markerPropertiesRondevac);
+      }
+      else $.extend(mission.properties, markerProperties);
       /*
       let missionGeoJSON = turf.point(mission.coordinates);
       $.extend(missionGeoJSON.properties, markerProperties);
