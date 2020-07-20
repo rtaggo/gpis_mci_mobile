@@ -81,7 +81,13 @@
       const what=$(this).data('what');
       switch (what) {
         case 'end':
-          GGO.disconnect('fin');
+          GGO.disconnect(
+            self.galigeo.getPatrouille().id, 
+            {
+              'baseRESTServicesURL': '/services/rest/mci',
+              'fonction': 'fin'
+            }
+          );
           break;
         case 'return':
           $('.slds-modal').remove();
