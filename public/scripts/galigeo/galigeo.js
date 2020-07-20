@@ -103,7 +103,7 @@
       2. afficher les infos dans 'prompt-message-wrapper' $('#prompt-message-wrapper').empty()
       */
       $('#prompt-message-wrapper').empty()
-      GGO.displaySummary : function() {
+      displaySummary : function() {
             var self = this;
             var restURL = `${this._options.baseRESTServicesURL}/bilan_vacation.php?patrouille=${this._options.patrouille.id}`;
             $.ajax({
