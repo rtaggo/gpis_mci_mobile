@@ -99,10 +99,10 @@
       }
       /* TODO:
       1. appel REST pour recupérer les infos
-      2. afficher les infos dans 'prompt-message-wrapper' $('#rompt-message-wrapper').empty()
+      2. afficher les infos dans 'prompt-message-wrapper' $('#prompt-message-wrapper').empty()
 
       */
-      const patrouillesUrl = `${options.baseRESTServicesURL}/bilan_vacation.php?patrouille=${patrouilleId}`;
+      const patrouillesUrl = `${baseRESTServicesURL}/bilan_vacation.php?patrouille=${patrouilleId}`;
       $.ajax({
         type: 'GET',
         url: patrouillesUrl,
