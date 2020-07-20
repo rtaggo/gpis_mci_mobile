@@ -102,12 +102,15 @@
       2. afficher les infos dans 'prompt-message-wrapper' $('#prompt-message-wrapper').empty()
 
       */
-      const patrouillesUrl = `${self.baseRESTServicesURL}/bilan_vacation.php?patrouille=${self.patrouille.id}`;
+      
+      const patrouillesUrl = `${self.baseRESTServicesURL}/bilan_vacation.php?patrouille=${patrouilleId}`;
       $.ajax({
         type: 'GET',
         url: patrouillesUrl,
         success: function(response) {
           console.log(`Resume Patrouille response: `, response);
+          let displaySummary $('#prompt-message-wrapper').empty();
+          displaySummary.append($(`${response.type_categorie_mission[0]}`));
           // 2. afficher les infos dans 'prompt-message-wrapper' $('#rompt-message-wrapper').empty()
         },
         error: function(jqXHR, textStatus, errorThrown) {
