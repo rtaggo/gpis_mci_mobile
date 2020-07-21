@@ -59,7 +59,7 @@
     });
   };
 
-  GGO.SessionSummaryPrompt = function(title, container, patrouilleId) {
+  GGO.SessionSummaryPrompt = function(title, container, patrouilleId, options) {
     container.append(`
         <section role="alertdialog" tabindex="0" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper" class="slds-modal slds-fade-in-open slds-modal_prompt" aria-modal="true">
           <div class="slds-modal__container">
@@ -103,19 +103,25 @@
       2. afficher les infos dans 'prompt-message-wrapper' $('#prompt-message-wrapper').empty()
       */
       $('#prompt-message-wrapper').empty();
-      const patrouillesUrl = `${self.baseRESTServicesURL}/bilan_vacation.php?patrouille=${patrouilleId}`;
+      const vacationUrl = `${options.baseRESTServicesURL}/bilan_vacation.php?patrouille_id=${patrouilleId}`;
       $.ajax({
         type: 'GET',
-        url: patrouillesUrl,
+        url: vacationUrl,
+        //dataType: 'json',
         success: function(response) {
-          console.log(`Resume Patrouille response: `, response);
+          console.log(`Resume Patrouille Vacation response: `, response);
+          //var infoModal = jQuery('#prompt-message-wrapper');
           // 2. afficher les infos dans 'prompt-message-wrapper' $('#rompt-message-wrapper').empty()
+         // htmlData = '<ul><li>title: '+response.bilan_vacation[0].type_categorie_mission+'</li><li>age: '+response.bilan_vacation[0].nb_missions+'</li></ul>';
+          //$('#prompt-message-wrapper').html(htmlData);
+         // infoModal.html("<p>" + response[0].type_categorie_mission + "</p>"); 
+
         },
         error: function(jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
-            console.warn(`${patrouillesUrl} Request aborted`);
+            console.warn(`${vacationUrl} Request aborted`);
           } else {
-            console.error(`Error for ${patrouillesUrl} request: ${textStatus}`, errorThrown);
+            console.error(`Error for ${vacationUrl} request: ${textStatus}`, errorThrown);
           }
           
         }

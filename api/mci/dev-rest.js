@@ -354,6 +354,13 @@ const _getActivite = async patrouille_id => {
   return activiteResponse;
 };
 
+const _getSummaryVacation = async patrouille_id => {
+  //console.log(`[dev-rest] _getActivite patrouilleId=${patrouille_id}`);
+  let vacationUrl = `${require('../../config').get('BACKEND_URL')}/bilan_vacation.php?patrouille_id=${patrouille_id}`;
+  let vacationResponse = await doAsyncGET(vacationUrl);
+  return vacationResponse;
+};
+
 /* list to exports */
 module.exports = {
   login: _login,
@@ -384,6 +391,7 @@ module.exports = {
   getMissionSecteurs: _getMissionSecteurs,
   getMissionDetails: _getMissionDetails,
   getActivite: _getActivite,
+  getSummaryVacation: _getSummaryVacation,
   joinMission: _joinMission,
   positionMission: _positionMission
 };

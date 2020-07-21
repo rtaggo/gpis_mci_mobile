@@ -165,7 +165,11 @@
 				);
 			});
 			$('#logoutBtn3').click(function(e){
-				GGO.SessionSummaryPrompt('METTRE TITRE', $('#appContainer'));
+				GGO.SessionSummaryPrompt('Bilan de la vacation', $('#appContainer'), self.galigeo.getPatrouille().id, 
+					{
+						'baseRESTServicesURL': '/services/rest/mci'
+					}
+				);
 				/*
 				GGO.disconnect(
 					self.galigeo.getPatrouille().id, 
