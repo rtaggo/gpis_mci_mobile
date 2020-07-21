@@ -61,7 +61,7 @@
 
   GGO.SessionSummaryPrompt = function(title, container, patrouilleId, options) {
     container.append(`
-        <section role="alertdialog" tabindex="0" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper" class="slds-modal slds-fade-in-open slds-modal_prompt" aria-modal="true">
+        <section role="alertdialog" tabindex="0" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper" class="slds-modal slds-fade-in-open slds-modal_prompt" aria-modal="true" style="z-index: 10000;">
           <div class="slds-modal__container">
             <header class="slds-modal__header slds-theme_error slds-theme_alert-texture">
               <h2 class="slds-text-heading_medium" id="prompt-heading-id">${title}</h2>
@@ -102,7 +102,6 @@
       1. appel REST pour recupérer les infos
       2. afficher les infos dans 'prompt-message-wrapper' $('#prompt-message-wrapper').empty()
       */
-      $('#prompt-message-wrapper').empty();
       const vacationUrl = `${options.baseRESTServicesURL}/bilan_vacation.php?patrouille_id=${patrouilleId}`;
       $.ajax({
         type: 'GET',
@@ -110,12 +109,51 @@
         //dataType: 'json',
         success: function(response) {
           console.log(`Resume Patrouille Vacation response: `, response);
-          //var infoModal = jQuery('#prompt-message-wrapper');
-          // 2. afficher les infos dans 'prompt-message-wrapper' $('#rompt-message-wrapper').empty()
-         // htmlData = '<ul><li>title: '+response.bilan_vacation[0].type_categorie_mission+'</li><li>age: '+response.bilan_vacation[0].nb_missions+'</li></ul>';
-          //$('#prompt-message-wrapper').html(htmlData);
-         // infoModal.html("<p>" + response[0].type_categorie_mission + "</p>"); 
-
+          let type_cat_missions = [
+            {
+              type_cat : 1,
+              label: 'Rondes', 
+              nb: 0,
+            },
+            {
+              type_cat : 2,
+              label: 'Interventions', 
+              nb: 0,
+            },
+            {
+              type_cat : 3,
+              label: 'Activités dirigées', 
+              nb: 0,
+            },
+            {
+              type_cat : 4,
+              label: 'OPC', 
+              nb: 0,
+            }
+          ];
+          
+         
+         if (response.code === 200) {
+          response.bilan_vacation.forEach(b => {
+            let cat_miss = type_cat_missions.find(m => m.type_cat === b.type_categorie_mission);
+            if (cat_miss) {
+              cat_miss.nb = b.nb_missions;
+            }
+          });
+          $('#prompt-message-wrapper').empty().append($(`
+            <div class="slds-region_narrow" style="width:100%;">
+              <dl class="slds-dl_horizontal">
+                ${type_cat_missions
+                  //.filter(m => m.nb > 0) /* Si besoin de filtrage */
+                  .map(b => {
+                  return `<dt class="slds-dl_horizontal__label" style="width:50%;">${b.label}:</dt>
+                  <dd class="slds-dl_horizontal__detail" style="width:50%;">${b.nb}</dd>`;
+                }).join('')}
+              </dl>
+            </div>`));
+         } else {
+           // mettre message d'erreur
+         }
         },
         error: function(jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
