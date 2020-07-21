@@ -31,6 +31,9 @@
     },
     getUserRole: function() {
       return this._options.userRole;
+    },
+    getChefsGroupe: function() {
+      return this._options.chefsGroupe;
     }
   };
 })();

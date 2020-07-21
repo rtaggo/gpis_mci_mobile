@@ -56,22 +56,21 @@
       $('body').append(logoutForm);
       logoutForm.submit();
       */
-    });
+    })
   };
 
-  GGO.SessionSummaryPrompt = function(title, container, patrouilleId, options) {
+  GGO.SessionSummaryPrompt = function(title, container, options) {
     container.append(`
         <section role="alertdialog" tabindex="0" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper" class="slds-modal slds-fade-in-open slds-modal_prompt" aria-modal="true" style="z-index: 10000;">
           <div class="slds-modal__container">
-            <header class="slds-modal__header slds-theme_error slds-theme_alert-texture">
+            <header class="slds-modal__header slds-theme_alt-inverse slds-theme_alert-texture">
               <h2 class="slds-text-heading_medium" id="prompt-heading-id">${title}</h2>
             </header>
             <div class="slds-modal__content slds-p-around_medium" id="prompt-message-wrapper">
             </div>
             <footer class="slds-modal__footer slds-theme_default">
-              <button class="slds-button slds-button_neutral" data-what="end">Fin de vacation</button>
-              <button class="slds-button slds-button_neutral" data-what="return">Retour</button>
-
+            <button class="slds-button slds-button_neutral" data-what="return">Retour</button>
+              <button class="slds-button slds-button_destructive" data-what="end">Fin de vacation</button>
             </footer>
           </div>
         </section>
@@ -81,8 +80,9 @@
       const what=$(this).data('what');
       switch (what) {
         case 'end':
+          let patrouille = self.galigeo.getPatrouille();
           GGO.disconnect(
-            self.galigeo.getPatrouille().id, 
+            patrouille ? patrouille.id : undefined, 
             {
               'baseRESTServicesURL': '/services/rest/mci',
               'fonction': 'fin'
@@ -102,7 +102,15 @@
       1. appel REST pour recupérer les infos
       2. afficher les infos dans 'prompt-message-wrapper' $('#prompt-message-wrapper').empty()
       */
-      const vacationUrl = `${options.baseRESTServicesURL}/bilan_vacation.php?patrouille_id=${patrouilleId}`;
+      let paramsArr = [];
+      if (options.patrouilleId) {
+        paramsArr.push(`patrouille_id=${options.patrouilleId}`);
+      } else {
+        paramsArr.push(`chef_groupe=${options.userName}`);
+        paramsArr.push(`chefs_groupe=${options.chefsGroupe}`)
+        
+      }
+      const vacationUrl = `${options.baseRESTServicesURL}/bilan_vacation.php?${paramsArr.join('&')}`;
       $.ajax({
         type: 'GET',
         url: vacationUrl,
@@ -146,7 +154,7 @@
                 ${type_cat_missions
                   //.filter(m => m.nb > 0) /* Si besoin de filtrage */
                   .map(b => {
-                  return `<dt class="slds-dl_horizontal__label" style="width:50%;">${b.label}:</dt>
+                  return `<dt class="slds-dl_horizontal__label" style="width:50%;"><b>${b.label}</b>:</dt>
                   <dd class="slds-dl_horizontal__detail" style="width:50%;">${b.nb}</dd>`;
                 }).join('')}
               </dl>
@@ -309,7 +317,7 @@
             GGO.postLogoutForm();
           }
         });
-      } else if (options.fonction == 'fin') {
+      } else if (options.fonction === 'fin') {
         const patrouillesUrl = `${options.baseRESTServicesURL}/fin_vacation.php?patrouille=${patrouilleId}`;
         $.ajax({
           type: 'GET',
@@ -328,9 +336,9 @@
           }
         });
       } 
-    } else if (typeof patrouilleId == 'undefined') {
+    } else if (typeof patrouilleId === 'undefined') {
       if (typeof options !== 'undefined') {
-        if (options.fonction == 'fin') {
+        if (options.fonction === 'fin') {
           const patrouillesUrl = `${options.baseRESTServicesURL}/fin_vacation.php?patrouille=${options.userName}`;
           $.ajax({
             type: 'GET',

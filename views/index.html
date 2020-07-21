@@ -165,8 +165,9 @@
 				);
 			});
 			$('#logoutBtn3').click(function(e){
-				GGO.SessionSummaryPrompt('Bilan de la vacation', $('#appContainer'), self.galigeo.getPatrouille().id, 
+				GGO.SessionSummaryPrompt('Bilan de la vacation', $('#appContainer'), 
 					{
+						id_patrouille: self.galigeo.getPatrouille().id,
 						'baseRESTServicesURL': '/services/rest/mci'
 					}
 				);

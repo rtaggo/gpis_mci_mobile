@@ -354,9 +354,19 @@ const _getActivite = async patrouille_id => {
   return activiteResponse;
 };
 
-const _getSummaryVacation = async patrouille_id => {
+const _getSummaryVacation = async (patrouille_id, chef_groupe, chefs_groupe) => {
   //console.log(`[dev-rest] _getActivite patrouilleId=${patrouille_id}`);
-  let vacationUrl = `${require('../../config').get('BACKEND_URL')}/bilan_vacation.php?patrouille_id=${patrouille_id}`;
+  let params = [];
+  if (patrouille_id) {
+    params.push(`patrouille_id=${patrouille_id}`);
+  }
+  if (chef_groupe) {
+    params.push(`chef_groupe=${chef_groupe}`);
+  }
+  if (chefs_groupe) {
+    params.push(`chefs_groupe=${chefs_groupe}`);
+  }
+  let vacationUrl = `${require('../../config').get('BACKEND_URL')}/bilan_vacation.php?${params.join('&')}`;
   let vacationResponse = await doAsyncGET(vacationUrl);
   return vacationResponse;
 };
