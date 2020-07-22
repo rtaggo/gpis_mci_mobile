@@ -5,7 +5,7 @@ const request = require('request');
 const rp = require('request-promise');
 const bodyParser = require('body-parser');
 
-const doAsyncGET = async url => {
+const doAsyncGET = async (url) => {
   let res = null;
   try {
     res = await rp(url);
@@ -19,7 +19,7 @@ const doAsyncGET = async url => {
   }
 };
 
-const doAsyncPOST = async options => {
+const doAsyncPOST = async (options) => {
   try {
     let res = await rp(options);
     //console.log(res);
@@ -37,7 +37,7 @@ const doAsyncPostREQUEST = async (url, data) => {
   request.post(
     url,
     {
-      json: data
+      json: data,
     },
     (error, res, body) => {
       console.log(body);
@@ -58,9 +58,9 @@ const _login = async (loginInput, passwordInput) => {
     uri: loginUrl,
     body: {
       login: loginInput,
-      password: passwordInput
+      password: passwordInput,
     },
-    json: true // Automatically stringifies the body to JSON
+    json: true, // Automatically stringifies the body to JSON
   };
   let loginResponse = await doAsyncPOST(options);
   //let loginResponse = await doAsyncPostREQUEST(loginUrl, { login: usernameInput, password: passwordInput });
@@ -76,9 +76,9 @@ const _newPassword = async (loginInput, passwordInput) => {
     uri: newPasswordUrl,
     body: {
       login: loginInput,
-      password: passwordInput
+      password: passwordInput,
     },
-    json: true // Automatically stringifies the body to JSON
+    json: true, // Automatically stringifies the body to JSON
   };
   let newPasswordResponse = await doAsyncPOST(options);
   //console.log('Resp: ' + newPasswordResponse);
@@ -92,21 +92,21 @@ const _getPatrouilles = async () => {
   return patrouilles;
 };
 
-const _libererPatrouille = async patrouilleId => {
+const _libererPatrouille = async (patrouilleId) => {
   //console.log(`[dev-rest] _libererPatrouille patrouilleId=${patrouilleId}`);
   let revokePatrouilleUrl = `${require('../../config').get('BACKEND_URL')}/liberer_patrouille.php?patrouille=${patrouilleId}`;
   let resp = await doAsyncGET(revokePatrouilleUrl);
   return resp;
 };
 
-const _finVacation = async patrouilleId => {
+const _finVacation = async (patrouilleId) => {
   //console.log(`[dev-rest] _finVacation patrouilleId=${patrouilleId}`);
   let finVacationUrl = `${require('../../config').get('BACKEND_URL')}/fin_vacation.php?patrouille=${patrouilleId}`;
   let resp = await doAsyncGET(finVacationUrl);
   return resp;
 };
 
-const _getSousSecteurs = async patrouilleId => {
+const _getSousSecteurs = async (patrouilleId) => {
   //console.log(`[dev-rest] _getSousSecteurs patrouilleId=${patrouilleId}`);
   let sousSecteurseUrl = `${require('../../config').get('BACKEND_URL')}/sous_secteurs.php?patrouille=${patrouilleId}`;
   let sssecteurs = await doAsyncGET(sousSecteurseUrl);
@@ -125,14 +125,14 @@ const _getSecteurs = async () => {
   return secteurs;
 };
 
-const _getChefsGroupe = async chefGroupeConnected => {
+const _getChefsGroupe = async (chefGroupeConnected) => {
   //console.log(`[dev-rest] _getChefsGroupe`);
   let chefsGroupeUrl = `${require('../../config').get('BACKEND_URL')}/chefs_groupe.php?chef_connected=${chefGroupeConnected}`;
   let chefsGroupe = await doAsyncGET(chefsGroupeUrl);
   return chefsGroupe;
 };
 
-const _getPatrimoineSecteur = async secteurs => {
+const _getPatrimoineSecteur = async (secteurs) => {
   //console.log(`[dev-rest] _getPatrimoineSecteur secteurs=${secteurs}`);
   let patrimoineUrl = `${require('../../config').get('BACKEND_URL')}/patrimoine_secteur.php?secteurs=${secteurs}`;
   let patrimoineResponse = await doAsyncGET(patrimoineUrl);
@@ -153,7 +153,7 @@ const _getVerification = async (missionId, soussecteurs) => {
   return verificationResponse;
 };
 
-const _getMission = async patrouilleId => {
+const _getMission = async (patrouilleId) => {
   //console.log(`[dev-rest] _getMission patrouilleId=${patrouilleId}`);
   let patrimoineUrl = `${require('../../config').get('BACKEND_URL')}/mission_sous_secteur.php?patrouille=${patrouilleId}`;
   let patrimoineResponse = await doAsyncGET(patrimoineUrl);
@@ -169,10 +169,10 @@ const _getMissionSecteurs = async (secteurIds, chefGroupeId) => {
   return missionSecteursResponse;
 };
 */
-const _getMissionSecteurs = async reqQuery => {
+const _getMissionSecteurs = async (reqQuery) => {
   //console.log(`[dev-rest] _getMissionSecteurs`);
   const requestParams = Object.keys(reqQuery)
-    .map(k => `${k}=${reqQuery[k]}`)
+    .map((k) => `${k}=${reqQuery[k]}`)
     .join('&');
   //console.log(`Request parameters: ${requestParams}`);
   let missionSecteursUrl = `${require('../../config').get('BACKEND_URL')}/mission_secteur.php?${requestParams}`;
@@ -181,7 +181,7 @@ const _getMissionSecteurs = async reqQuery => {
 };
 
 // getMissionDetails
-const _getMissionDetails = async missionId => {
+const _getMissionDetails = async (missionId) => {
   //console.log(`[dev-rest] _getMissionDetails missionId=${missionId}`);
   let missionDetailsUrl = `${require('../../config').get('BACKEND_URL')}/selection_mission.php?mission=${missionId}`;
   let missionDetailsResponse = await doAsyncGET(missionDetailsUrl);
@@ -189,7 +189,7 @@ const _getMissionDetails = async missionId => {
 };
 
 // joinMission
-const _joinMission = async reqQuery => {
+const _joinMission = async (reqQuery) => {
   //console.log(`[dev-rest] _joinMission request query=${JSON.stringify(reqQuery)}`);
   let joinMissionUrl = `${require('../../config').get('BACKEND_URL')}/rejoindre.php?mission=${reqQuery.mission}&chef_groupe=${reqQuery.chef_groupe}&chefs_groupe=${reqQuery.chefs_groupe}`;
   let joinMissionResponse = await doAsyncGET(joinMissionUrl);
@@ -197,18 +197,18 @@ const _joinMission = async reqQuery => {
 };
 
 // positionMission
-const _positionMission = async reqQuery => {
+const _positionMission = async (reqQuery) => {
   //console.log(`[dev-rest] _positionMission request query=${JSON.stringify(reqQuery)}`);
   let positionMissionUrl = `${require('../../config').get('BACKEND_URL')}/position.php?mission=${reqQuery.mission}&chef_groupe=${reqQuery.chef_groupe}&chefs_groupe=${reqQuery.chefs_groupe}`;
   let positionMissionResponse = await doAsyncGET(positionMissionUrl);
   return positionMissionResponse;
 };
 
-const _getNeighborhood = async reqQuery => {
+const _getNeighborhood = async (reqQuery) => {
   console.log(`[dev-rest] _getNeighborhood`);
   //let neighborhoodUrl = `${require('../../config').get('BACKEND_URL')}/voisinage.php?patrouille=${patrouilleId}&sssecteurs=${sssecteurs}`;
   const requestParams = Object.keys(reqQuery)
-    .map(k => `${k}=${reqQuery[k]}`)
+    .map((k) => `${k}=${reqQuery[k]}`)
     .join('&');
   //console.log(`Request parameters: ${requestParams}`);
   let neighborhoodUrl = `${require('../../config').get('BACKEND_URL')}/voisinage.php?${requestParams}`;
@@ -223,14 +223,14 @@ const _getSignalement = async (mission_id, type_signalement, categorie, patrouil
   return signalementResponse;
 };
 
-const _getPause = async id_patrouille => {
+const _getPause = async (id_patrouille) => {
   //console.log(`[dev-rest] _getPause`);
   let pauseUrl = `${require('../../config').get('BACKEND_URL')}/pause.php?id_patrouille=${id_patrouille}`;
   let pauseResponse = await doAsyncGET(pauseUrl);
   return pauseResponse;
 };
 
-const _getSignalementPost = async formSignalement => {
+const _getSignalementPost = async (formSignalement) => {
   //console.log(`[dev-rest] _getSignalementPost`);
   let signalementUrlPost = `${require('../../config').get('BACKEND_URL')}/signalement.php`;
 
@@ -238,7 +238,7 @@ const _getSignalementPost = async formSignalement => {
     method: 'POST',
     uri: signalementUrlPost,
     body: formSignalement.body,
-    json: true // Automatically stringifies the body to JSON
+    json: true, // Automatically stringifies the body to JSON
   };
 
   let signalementResponse = await doAsyncPOST(options);
@@ -246,7 +246,7 @@ const _getSignalementPost = async formSignalement => {
   return signalementResponse;
 };
 
-const _getPausePost = async formPause => {
+const _getPausePost = async (formPause) => {
   //console.log(`[dev-rest] _getPausePost`);
   let pauseUrlPost = `${require('../../config').get('BACKEND_URL')}/pause.php`;
 
@@ -254,7 +254,7 @@ const _getPausePost = async formPause => {
     method: 'POST',
     uri: pauseUrlPost,
     body: formPause.body,
-    json: true // Automatically stringifies the body to JSON
+    json: true, // Automatically stringifies the body to JSON
   };
 
   let pauseResponse = await doAsyncPOST(options);
@@ -262,7 +262,7 @@ const _getPausePost = async formPause => {
   return pauseResponse;
 };
 
-const _activiteMapPost = async formActiviteMap => {
+const _activiteMapPost = async (formActiviteMap) => {
   //console.log(`[dev-rest] _activitePost`);
   let activiteMapUrlPost = `${require('../../config').get('BACKEND_URL')}/activite_map.php`;
 
@@ -270,7 +270,7 @@ const _activiteMapPost = async formActiviteMap => {
     method: 'POST',
     uri: activiteMapUrlPost,
     body: formActiviteMap.body,
-    json: true // Automatically stringifies the body to JSON
+    json: true, // Automatically stringifies the body to JSON
   };
 
   let activiteMapResponse = await doAsyncPOST(options);
@@ -292,7 +292,7 @@ const _getIncidente = async (incidente_id, patrouille_id) => {
   return incidenteResponse;
 };
 
-const _getReaffectationPost = async formreaffectation => {
+const _getReaffectationPost = async (formreaffectation) => {
   //console.log(`[dev-rest] _getReaffectationPost`);
   let reaffectationUrlPost = `${require('../../config').get('BACKEND_URL')}/reaffectation.php`;
 
@@ -300,7 +300,7 @@ const _getReaffectationPost = async formreaffectation => {
     method: 'POST',
     uri: reaffectationUrlPost,
     body: formreaffectation.body,
-    json: true // Automatically stringifies the body to JSON
+    json: true, // Automatically stringifies the body to JSON
   };
 
   let reaffectationResponse = await doAsyncPOST(options);
@@ -309,7 +309,7 @@ const _getReaffectationPost = async formreaffectation => {
   return reaffectationResponse;
 };
 
-const _postMaJMission = async missionStatus => {
+const _postMaJMission = async (missionStatus) => {
   //console.log(`[dev-rest] _postMaJMission`);
   let majMissionUrlPost = `${require('../../config').get('BACKEND_URL')}/maj_mission.php`;
 
@@ -317,7 +317,7 @@ const _postMaJMission = async missionStatus => {
     method: 'POST',
     uri: majMissionUrlPost,
     body: missionStatus.body,
-    json: true // Automatically stringifies the body to JSON
+    json: true, // Automatically stringifies the body to JSON
   };
 
   let majMissionnResponse = await doAsyncPOST(options);
@@ -340,14 +340,14 @@ const _getRenfortsMission = async (patrouilleId, missionId) => {
   return renfortsMissionResponse;
 };
 
-const _getStatutMissionEnCours = async missionId => {
+const _getStatutMissionEnCours = async (missionId) => {
   //console.log(`[dev-rest] _getStatutMissionEnCours missionid=${missionId}`);
   let statutMissionEnCoursUrl = `${require('../../config').get('BACKEND_URL')}/mission_en_cours.php?mission=${missionId}`;
   let statutMissionEnCoursResponse = await doAsyncGET(statutMissionEnCoursUrl);
   return statutMissionEnCoursResponse;
 };
 
-const _getActivite = async patrouille_id => {
+const _getActivite = async (patrouille_id) => {
   //console.log(`[dev-rest] _getActivite patrouilleId=${patrouille_id}`);
   let activiteUrl = `${require('../../config').get('BACKEND_URL')}/activite.php?patrouille_id=${patrouille_id}`;
   let activiteResponse = await doAsyncGET(activiteUrl);
@@ -369,6 +369,19 @@ const _getSummaryVacation = async (patrouille_id, chef_groupe, chefs_groupe) => 
   let vacationUrl = `${require('../../config').get('BACKEND_URL')}/bilan_vacation.php?${params.join('&')}`;
   let vacationResponse = await doAsyncGET(vacationUrl);
   return vacationResponse;
+};
+
+const _getRestrictionsForCookie = async () => {
+  //console.log(`[dev-rest] _getRestrictionsForCookie `);
+  let cookieUrl = `${require('../../config').get('BACKEND_URL')}/cookie_restrictions.php?`;
+  let cookieResponse = await doAsyncGET(cookieUrl);
+  return cookieResponse;
+};
+const _getPatrouilles = async () => {
+  //console.log(`[dev-rest] _getPatrouilles`);
+  let patrouilleUrl = `${require('../../config').get('BACKEND_URL')}/patrouilles.php`;
+  let patrouilles = await doAsyncGET(patrouilleUrl);
+  return patrouilles;
 };
 
 /* list to exports */
@@ -403,5 +416,5 @@ module.exports = {
   getActivite: _getActivite,
   getSummaryVacation: _getSummaryVacation,
   joinMission: _joinMission,
-  positionMission: _positionMission
+  positionMission: _positionMission,
 };
