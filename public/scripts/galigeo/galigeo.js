@@ -427,6 +427,7 @@
       }
       document.cookie = escape(sKey) + '=' + escape(sValue) + sExpires + (sDomain ? '; domain=' + sDomain : '') + (sPath ? '; path=' + sPath : '') + (bSecure ? '; secure' : '') + ';SameSite=Lax';
     },
+
     removeItem: function (sKey) {
       if (!sKey || !this.hasItem(sKey)) {
         return;
