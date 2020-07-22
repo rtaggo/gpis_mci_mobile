@@ -13,7 +13,28 @@ const GGO = require('../galigeo');
     check_forbidden: function () {
       let self = this;
       // faire appel ajax
-      // gestion cookie, etc....
+
+      let the_url = 'http//toto.com';
+      $.ajax({
+        type: 'GET',
+        url: the_url,
+        //dataType: 'json',
+        success: function (response) {
+          if (response.code === 200) {
+            // filtrer en fonction de ce qui est dans le cookie
+            // voir les etapes du fichier de ce matin
+          }
+          self.await_before_recall();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`${vacationUrl} Request aborted`);
+          } else {
+            console.error(`Error for ${vacationUrl} request: ${textStatus}`, errorThrown);
+          }
+          self.await_before_recall();
+        },
+      });
     },
     await_before_recall: function () {
       setTimeout(() => {
