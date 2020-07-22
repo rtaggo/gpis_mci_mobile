@@ -856,10 +856,13 @@
       });
     },
     checkMission: function() {
-      let self = this;
-      setTimeout(function() {
-        if (self._periodicCheckMission) {
-          self.fetchMission();
+      //let self = this;
+      if (this._fetchMissionTimer) {
+        clearTimeout(this._fetchMissionTimer);
+      }
+      this._fetchMissionTimer  = setTimeout(() => {
+        if (this._periodicCheckMission) {
+          this.fetchMission();
           /*
           self._periodicCheckMission = false;
           */

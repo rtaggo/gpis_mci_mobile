@@ -163,7 +163,15 @@
 					}
 				);
 			});
-
+			$('#logoutBtn3').click(function(e){
+				GGO.SessionSummaryPrompt('Bilan de la vacation', $('#appContainer'),  
+					{
+						userName: self.galigeo.getUserLogin(),
+						chefsGroupe: self.galigeo.getChefsGroupe(),
+						'baseRESTServicesURL': '/services/rest/mci'
+					}
+				);
+			});
 
 			var windowH = $(window).height();
 			$('body').css({

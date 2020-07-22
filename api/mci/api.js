@@ -327,6 +327,15 @@ router.get('/activite.php', (req, res, next) => {
   });
 });
 
+router.get('/bilan_vacation.php', (req, res, next) => {
+  //console.log(`[MCI_REST_API][GET] /activite.php ${JSON.stringify(req.query)}`);
+  const mcimodule = getMCIModule();
+  mcimodule.getSummaryVacation(req.query.patrouille_id, req.query.chef_groupe, req.query.chefs_groupe ).then(vacationResponse => {
+    res.header('Content-Type', 'application/json');
+    res.json(vacationResponse);
+  });
+});
+
 /**
  * Errors on "/mci/*" routes.
  */

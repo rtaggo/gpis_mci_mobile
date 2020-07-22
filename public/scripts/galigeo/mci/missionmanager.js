@@ -1460,33 +1460,43 @@
       if (this._currentMission !== null) {
         let self = this;
         let activiteUrl = `${this._options.baseRESTServicesURL}/activite.php?patrouille_id=${this._options.patrouille.id}`;
-        $.ajax({
-          type: 'GET',
-          url: activiteUrl,
-          success: function(response) {
-            console.log(`${activiteUrl}: `, response);
-            if (response.code === 200) {
-              if (!response.actif) {
-                GGO.SessionIssuePrompt('Perte de la session', `Veuillez vous reconnecter.`, $('#appContainer').empty());
+        if (!self._checkActiviteRequest) {
+          self._checkActiviteRequest = $.ajax({
+            type: 'GET',
+            url: activiteUrl,
+            success: function(response) {
+              console.log(`${activiteUrl}: `, response);
+              if (response.code === 200) {
+                if (!response.actif) {
+                  GGO.SessionIssuePrompt('Perte de la session', `Veuillez vous reconnecter.`, $('#appContainer').empty());
+                } else {    
+                  if (self._checkActivityTimer) {
+                    clearTimeout(self._checkActivityTimer);
+                  }            
+                  self._checkActivityTimer = setTimeout(function() {
+                    self.checkActivite();
+                  }, GGO.CHECK_MISSION_INTERVALLE);
+                }
               } else {
-                setTimeout(function() {
+                if (self._checkActivityTimer) {
+                  clearTimeout(self._checkActivityTimer);
+                }            
+                self._checkActivityTimer = setTimeout(function() {
                   self.checkActivite();
                 }, GGO.CHECK_MISSION_INTERVALLE);
               }
-            } else {
-              setTimeout(function() {
-                self.checkActivite();
-              }, GGO.CHECK_MISSION_INTERVALLE);
+              delete self._checkActiviteRequest;
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+              if (textStatus === 'abort') {
+                console.warn(`[GET] ${activiteUrl} Request aborted`);
+              } else {
+                console.error(`${activiteUrl} request error : ${textStatus}`, errorThrown);
+              }
+              delete self._checkActiviteRequest;
             }
-          },
-          error: function(jqXHR, textStatus, errorThrown) {
-            if (textStatus === 'abort') {
-              console.warn(`[GET] ${activiteUrl} Request aborted`);
-            } else {
-              console.error(`${activiteUrl} request error : ${textStatus}`, errorThrown);
-            }
-          }
-        });
+          });
+        }
       }
     },
     checkStatutMissionEnCours: function() {
@@ -1639,7 +1649,10 @@
     checkMission: function() {
       let self = this;
       console.log('checkMission');
-      setTimeout(function() {
+      if (self._checkMissionTimer) {
+        clearTimeout(self._checkMissionTimer);
+      }
+      self._checkMissionTimer = setTimeout(function() {
         self.fetchMission();
       }, GGO.CHECK_MISSION_INTERVALLE);
     },
