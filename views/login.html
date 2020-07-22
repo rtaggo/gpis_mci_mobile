@@ -1,152 +1,136 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <script src="/scripts/vendors/jquery/jquery-3.3.1.min.js"></script>
-  <!--
-	<script src="/scripts/vendors/jquery/jquery.mobile-1.5.0-alpha.1.min.js"></script>
-	<script src="/scripts/vendors/jquery/jquery.touchSwipe.min.js"></script>
-	<script src="/scripts/vendors/jquery/jquery.scrollTo.min.js"></script>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <script src="/scripts/vendors/jquery/jquery-3.3.1.min.js"></script>
+    <!--
+  <script src="/scripts/vendors/jquery/jquery.mobile-1.5.0-alpha.1.min.js"></script>
+  <script src="/scripts/vendors/jquery/jquery.touchSwipe.min.js"></script>
+  <script src="/scripts/vendors/jquery/jquery.scrollTo.min.js"></script>
   -->
-	<link rel="stylesheet" type="text/css" href="/styles/slds/assets/styles/salesforce-lightning-design-system-vf.css" />
+    <link rel="stylesheet" type="text/css" href="/styles/slds/assets/styles/salesforce-lightning-design-system-vf.css" />
 
-	<link rel="stylesheet" type="text/css" href="/styles/galigeo.css" />
+    <link rel="stylesheet" type="text/css" href="/styles/galigeo.css" />
 
-  <script src="/scripts/galigeo/galigeo.js"></script>
-  <script src="/scripts/galigeo/mci/sessionmanager.js"></script>
+    <script src="/scripts/galigeo/galigeo.js"></script>
+    <script src="/scripts/galigeo/mci/sessionmanager.js"></script>
+  </head>
+  <body>
+    <div id="appContainer" class="ggoslds">
+      <div style="position: absolute; top: 5px; left: 5px;">
+        <img src="/images/logo_gpis.png" style="height: 50px;" />
+      </div>
 
-</head>
-<body>
-	<div id="appContainer" class="ggoslds">
-    <div style="position:absolute; top: 5px; left: 5px">
-      <img src="/images/logo_gpis.png" style="height: 50px;"/>
-    </div>
-
-
-		<div id="mainContainer" class="slds-grid slds-gutters slds-p-around_small" style="padding: 3rem;">
-      <div class="slds-align_absolute-center" style="height: 50%;">
-        <div class="">    
-          <div class="slds-text-heading_large slds-p-around_medium" style="display: block;text-align: center;">MCI Mobile <span class="slds-text-heading_small">(V2 Beta)</span></div>
-          <div id="patrouille_name" class="slds-text-heading_large slds-p-around_xx-small slds-hide" style="display: block;text-align: center; font-weight:bold;">
-
-          </div>
-          <article class="slds-card slds-p-around-medium" style="display: block; width:300px;">
-            <div class="slds-card__body slds-card__body_inner">
-              <div class="slds-form">
-                <div class="slds-form-element slds-form-element_stacked">
-                  <abbr class="slds-required" title="required">* </abbr><label class="slds-form-element__label" for="user-login-input">Nom d'utilisateur</label>
-                  <div class="slds-form-element__control">
-                    <input type="text" id="user-login-input" placeholder="Login" class="slds-input">
-                  </div>
-                </div>
-                <div class="slds-form-element slds-form-element_stacked">
-                  <abbr class="slds-required" title="required">* </abbr><label class="slds-form-element__label" for="user-password-input">Mot de passe</label>
-                  <div class="slds-form-element__control">
-                    <input type="password" id="user-password-input" placeholder="Password" class="slds-input">
-                  </div>
-                </div>
-                <div id="new-password-form-element" class="slds-form-element slds-form-element_stacked slds-hide">
-                  <abbr class="slds-required" title="required">* </abbr><label class="slds-form-element__label" for="user-newpassword-input">Nouveau mot de passe</label>
-                  <div class="slds-form-element__control">
-                    <input type="text" id="user-newpassword-input" placeholder="Password" class="slds-input">
-                  </div>
-                </div>
-                <div id="patrouille-form-element" class="slds-form-element slds-form-element_stacked slds-hide">
-                  <label class="slds-form-element__label" for="select-patrouille">
-                    <abbr class="slds-required" title="required">* </abbr>Patrouille
-                  </label>
-                  <div class="slds-form-element__control">
-                    <div class="slds-select_container">
-                      <select class="slds-select" id="select-patrouille" required="">
-                      </select>
+      <div id="mainContainer" class="slds-grid slds-gutters slds-p-around_small" style="padding: 3rem;">
+        <div class="slds-align_absolute-center" style="height: 50%;">
+          <div class="">
+            <div class="slds-text-heading_large slds-p-around_medium" style="display: block; text-align: center;">MCI Mobile <span class="slds-text-heading_small">(V2 Beta)</span></div>
+            <div id="patrouille_name" class="slds-text-heading_large slds-p-around_xx-small slds-hide" style="display: block; text-align: center; font-weight: bold;"></div>
+            <article class="slds-card slds-p-around-medium" style="display: block; width: 300px;">
+              <div class="slds-card__body slds-card__body_inner">
+                <div class="slds-form">
+                  <div class="slds-form-element slds-form-element_stacked">
+                    <abbr class="slds-required" title="required">* </abbr><label class="slds-form-element__label" for="user-login-input">Nom d'utilisateur</label>
+                    <div class="slds-form-element__control">
+                      <input type="text" id="user-login-input" placeholder="Login" class="slds-input" />
                     </div>
                   </div>
-                </div>
-                <div id="chefs-groupe-form-element" class="slds-form-element slds-form-element_stacked slds-hide">
-                  <label class="slds-form-element__label" for="combobox-chefs-groupe">
-                    <abbr class="slds-required" title="required">* </abbr>Chefs de groupe
-                  </label>
-                  <div class="slds-form-element__control">
-                    <div class="slds-combobox_container slds-size_small">
-                      <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click" aria-expanded="false" aria-haspopup="listbox" role="combobox">
-                        <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
-                          <input type="text" class="slds-input slds-combobox__input" id="combobox-chefs-groupe" aria-controls="listbox-unique-id" autoComplete="off" role="textbox" placeholder="" readonly="" />
-                          <span class="slds-icon_container slds-icon-utility-down slds-input__icon slds-input__icon_right">
-                            <svg class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default" aria-hidden="true">
-                              <use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#down"></use>
-                            </svg>
-                            <span class="slds-assistive-text">Description of icon when needed</span>
-                          </span>
-                        </div>
-                        <div id="listbox-chefs-groupe" role="listbox" class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid">
-
-                        </div>
+                  <div class="slds-form-element slds-form-element_stacked">
+                    <abbr class="slds-required" title="required">* </abbr><label class="slds-form-element__label" for="user-password-input">Mot de passe</label>
+                    <div class="slds-form-element__control">
+                      <input type="password" id="user-password-input" placeholder="Password" class="slds-input" />
+                    </div>
+                  </div>
+                  <div id="new-password-form-element" class="slds-form-element slds-form-element_stacked slds-hide">
+                    <abbr class="slds-required" title="required">* </abbr><label class="slds-form-element__label" for="user-newpassword-input">Nouveau mot de passe</label>
+                    <div class="slds-form-element__control">
+                      <input type="text" id="user-newpassword-input" placeholder="Password" class="slds-input" />
+                    </div>
+                  </div>
+                  <div id="patrouille-form-element" class="slds-form-element slds-form-element_stacked slds-hide">
+                    <label class="slds-form-element__label" for="select-patrouille"> <abbr class="slds-required" title="required">* </abbr>Patrouille </label>
+                    <div class="slds-form-element__control">
+                      <div class="slds-select_container">
+                        <select class="slds-select" id="select-patrouille" required=""> </select>
                       </div>
                     </div>
-                    <div id="listbox-selections-chefs-groupe" role="listbox" aria-orientation="horizontal" class="slds-hide">
-                    </div>  
                   </div>
-                </div>
-                <div id="sous-secteurs-form-element" class="slds-form-element slds-form-element_stacked slds-hide">
-                  <label class="slds-form-element__label" for="combobox-soussecteurs">
-                    <abbr class="slds-required" title="required">* </abbr>Sous-secteurs
-                  </label>
-                  <div class="slds-form-element__control">
-                    <div class="slds-combobox_container slds-size_small">
-                      <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click" aria-expanded="false" aria-haspopup="listbox" role="combobox">
-                        <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
-                          <input type="text" class="slds-input slds-combobox__input" id="combobox-soussecteurs" aria-controls="listbox-unique-id" autoComplete="off" role="textbox" placeholder="Choisir 1 à 5 sous-secteur(s)" readonly="" />
-                          <span class="slds-icon_container slds-icon-utility-down slds-input__icon slds-input__icon_right">
-                            <svg class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default" aria-hidden="true">
-                              <use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#down"></use>
-                            </svg>
-                            <span class="slds-assistive-text">Description of icon when needed</span>
-                          </span>
-                        </div>
-                        <div id="listbox-soussecteurs" role="listbox" class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid">
-
+                  <div id="chefs-groupe-form-element" class="slds-form-element slds-form-element_stacked slds-hide">
+                    <label class="slds-form-element__label" for="combobox-chefs-groupe"> <abbr class="slds-required" title="required">* </abbr>Chefs de groupe </label>
+                    <div class="slds-form-element__control">
+                      <div class="slds-combobox_container slds-size_small">
+                        <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                          <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                            <input type="text" class="slds-input slds-combobox__input" id="combobox-chefs-groupe" aria-controls="listbox-unique-id" autocomplete="off" role="textbox" placeholder="" readonly="" />
+                            <span class="slds-icon_container slds-icon-utility-down slds-input__icon slds-input__icon_right">
+                              <svg class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default" aria-hidden="true">
+                                <use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#down"></use>
+                              </svg>
+                              <span class="slds-assistive-text">Description of icon when needed</span>
+                            </span>
+                          </div>
+                          <div id="listbox-chefs-groupe" role="listbox" class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid"></div>
                         </div>
                       </div>
+                      <div id="listbox-selections-chefs-groupe" role="listbox" aria-orientation="horizontal" class="slds-hide"></div>
                     </div>
-                    <div id="listbox-selections-secteurs" role="listbox" aria-orientation="horizontal" class="slds-hide">
-                    </div>  
+                  </div>
+                  <div id="sous-secteurs-form-element" class="slds-form-element slds-form-element_stacked slds-hide">
+                    <label class="slds-form-element__label" for="combobox-soussecteurs"> <abbr class="slds-required" title="required">* </abbr>Sous-secteurs </label>
+                    <div class="slds-form-element__control">
+                      <div class="slds-combobox_container slds-size_small">
+                        <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                          <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                            <input type="text" class="slds-input slds-combobox__input" id="combobox-soussecteurs" aria-controls="listbox-unique-id" autocomplete="off" role="textbox" placeholder="Choisir 1 à 5 sous-secteur(s)" readonly="" />
+                            <span class="slds-icon_container slds-icon-utility-down slds-input__icon slds-input__icon_right">
+                              <svg class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default" aria-hidden="true">
+                                <use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#down"></use>
+                              </svg>
+                              <span class="slds-assistive-text">Description of icon when needed</span>
+                            </span>
+                          </div>
+                          <div id="listbox-soussecteurs" role="listbox" class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid"></div>
+                        </div>
+                      </div>
+                      <div id="listbox-selections-secteurs" role="listbox" aria-orientation="horizontal" class="slds-hide"></div>
+                    </div>
+                  </div>
+                  <div id="error-message" class="slds-form-element slds-has-error slds-hide">
+                    <div class="slds-form-element__help">Login et mot de passe doivent être renseignés.</div>
                   </div>
                 </div>
-                <div id="error-message" class="slds-form-element slds-has-error slds-hide">
-                  <div class="slds-form-element__help" >Login et mot de passe doivent être renseignés.</div>
-                </div>      
               </div>
-            </div>
-            <footer class="slds-card__footer">
-              <button id="login-btn" class="slds-button slds-button_neutral">Connexion</button>
-              <button id="login-btn-new" class="slds-button slds-button_neutral slds-hide">Confirmation</button>
-              <button id="patrouille-validate-btn" class="slds-button slds-button_neutral slds-hide">Valider</button>
+              <footer class="slds-card__footer">
+                <button id="login-btn" class="slds-button slds-button_neutral">Connexion</button>
+                <button id="login-btn-new" class="slds-button slds-button_neutral slds-hide">Confirmation</button>
+                <button id="patrouille-validate-btn" class="slds-button slds-button_neutral slds-hide">Valider</button>
 
-              <button id="chefs_groupe-validate-btn" class="slds-button slds-button_neutral slds-hide">Valider</button>
-              <button id="chefs_groupe-cancel-btn" class="slds-button slds-button_neutral slds-hide">Annuler</button>
-              <button id="sous-secteurs-validate-btn" class="slds-button slds-button_neutral slds-hide">Valider</button>
-              <button id="sous-secteurs-cancel-btn" class="slds-button slds-button_neutral slds-hide">Annuler</button>
-
-            </footer>
-          </article>
+                <button id="chefs_groupe-validate-btn" class="slds-button slds-button_neutral slds-hide">Valider</button>
+                <button id="chefs_groupe-cancel-btn" class="slds-button slds-button_neutral slds-hide">Annuler</button>
+                <button id="sous-secteurs-validate-btn" class="slds-button slds-button_neutral slds-hide">Valider</button>
+                <button id="sous-secteurs-cancel-btn" class="slds-button slds-button_neutral slds-hide">Annuler</button>
+              </footer>
+            </article>
+          </div>
         </div>
       </div>
+      <div class="slds-hide">
+        <form id="formAuth" action="/login" method="POST">
+          <input type="text" name="username" required />
+          <input type="password" name="password" required />
+          <input type="submit" />
+        </form>
+      </div>
     </div>
-    <div class='slds-hide'>
-      <form id='formAuth' action='/login' method='POST'>
-        <input type='text' name='username' required>
-        <input type='password' name='password' required>
-        <input type='submit'/>
-      </form>
-    </div>
-	</div>
-	
-	<script>
-		var self = this;
-		$(document).ready(function(e){
-      console.log(' >> document is ready');
-      /*
+
+    <script>
+      var self = this;
+      $(document).ready(function (e) {
+        console.log(' >> document is ready');
+        // suppression d'un cookie existant contenant la liste des sites interdits
+        GGO.docCookies.removeItem('gpis_forbidden_sites');
+        /*
       $('#login-btn').click(function(e){
         let loginVal = $('#user-login-input').val();
         let pwdVal = $('#user-password-input').val();
@@ -193,8 +177,8 @@
         }
       });
       */
-      GGO.SessionManagerSingleton.getInstance();
-		});
-	</script>
-</body>
+        GGO.SessionManagerSingleton.getInstance();
+      });
+    </script>
+  </body>
 </html>
