@@ -373,15 +373,9 @@ const _getSummaryVacation = async (patrouille_id, chef_groupe, chefs_groupe) => 
 
 const _getRestrictionsForCookie = async () => {
   //console.log(`[dev-rest] _getRestrictionsForCookie `);
-  let cookieUrl = `${require('../../config').get('BACKEND_URL')}/cookie_restrictions.php?`;
+  let cookieUrl = `${require('../../config').get('BACKEND_URL')}/cookie_restrictions.php`;
   let cookieResponse = await doAsyncGET(cookieUrl);
   return cookieResponse;
-};
-const _getPatrouilles = async () => {
-  //console.log(`[dev-rest] _getPatrouilles`);
-  let patrouilleUrl = `${require('../../config').get('BACKEND_URL')}/patrouilles.php`;
-  let patrouilles = await doAsyncGET(patrouilleUrl);
-  return patrouilles;
 };
 
 /* list to exports */
@@ -415,6 +409,7 @@ module.exports = {
   getMissionDetails: _getMissionDetails,
   getActivite: _getActivite,
   getSummaryVacation: _getSummaryVacation,
+  getRestrictionsForCookie: _getRestrictionsForCookie,
   joinMission: _joinMission,
   positionMission: _positionMission,
 };
