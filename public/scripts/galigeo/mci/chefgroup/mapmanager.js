@@ -1,6 +1,6 @@
-(function() {
+(function () {
   'use strict';
-  GGO.MapManager = function(options) {
+  GGO.MapManager = function (options) {
     this._options = options || {};
     this._options.baseRESTServicesURL = this._options.baseRESTServicesURL || '/services/rest/mci';
     this._options.mapboxAccessToken = this._options.mapboxAccessToken || 'pk.eyJ1IjoicnRhZ2dvIiwiYSI6Ijg5YWI5YzlkYzJiYzg2Mjg2YWQyMTQyZjRkZWFiMWM5In0._yZGbo26CQle1_JfHPxWzg';
@@ -12,55 +12,56 @@
       'stroke-width': 1,
       'stroke-opacity': 1,
       fill: '#FF00FF',
-      'fill-opacity': 0.2
+      'fill-opacity': 0.2,
     };
     this._basemaps = {
       streets: L.tileLayer('//server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
         attribution: '',
         minZoom: 1,
-        maxZoom: 19
+        maxZoom: 19,
       }),
       grey: L.tileLayer('//services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
         attribution: '',
         minZoom: 1,
-        maxZoom: 15
+        maxZoom: 15,
       }),
       imagery: L.tileLayer('//services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
         attribution: '',
         minZoom: 1,
-        maxZoom: 19
+        maxZoom: 19,
       }),
       osm: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }),
       black: L.tileLayer('//services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
         attribution: '© Galigeo | ESRI',
         minZoom: 1,
-        maxZoom: 15
-      })
+        maxZoom: 15,
+      }),
     };
 
     this.init();
   };
 
   GGO.MapManager.prototype = {
-    init: function() {
+    init: function () {
       this.setupListeners();
       this.setupMap();
     },
-    setupListeners: function() {
+    setupListeners: function () {
       var self = this;
-      GGO.EventBus.addEventListener(GGO.EVENTS.APPISREADY, function(e) {
+      GGO.EventBus.addEventListener(GGO.EVENTS.APPISREADY, function (e) {
         console.log('Received GGO.EVENTS.APPISREADY');
         self.fetchPatrimoine_Secteur();
+        self.await_refresh_patrimoine();
       });
-      GGO.EventBus.addEventListener(GGO.EVENTS.SHOWMISSIONMLOCATION, function(e) {
+      GGO.EventBus.addEventListener(GGO.EVENTS.SHOWMISSIONMLOCATION, function (e) {
         console.log('Received GGO.EVENTS.SHOWMISSIONMLOCATION');
         let mission = e.target;
         self.displayMission(mission);
       });
-      GGO.EventBus.addEventListener(GGO.EVENTS.CLEARMISSIONMLOCATION, function(e) {
+      GGO.EventBus.addEventListener(GGO.EVENTS.CLEARMISSIONMLOCATION, function (e) {
         console.log('Received GGO.EVENTS.CLEARMISSIONMLOCATION');
         self.clearMission();
       });
@@ -73,15 +74,15 @@
       */
 
       // INVALIDATEMAPSIZE
-      GGO.EventBus.addEventListener(GGO.EVENTS.INVALIDATEMAPSIZE, function(e) {
+      GGO.EventBus.addEventListener(GGO.EVENTS.INVALIDATEMAPSIZE, function (e) {
         console.log('Received GGO.EVENTS.INVALIDATEMAPSIZE');
         self.invalidateMapSize();
       });
     },
-    getMap: function() {
+    getMap: function () {
       return this._map;
     },
-    setupMap: function() {
+    setupMap: function () {
       var self = this;
 
       this._currentBasemap = 'streets';
@@ -92,34 +93,67 @@
         zoomControl: false,
         contextmenu: true,
         contextmenuWidth: 140,
-        layers: [this._basemaps['streets']]
+        layers: [this._basemaps['streets']],
       }).setView([48.853507, 2.348015], 12);
       new L.control.zoom({
-        position: 'bottomright'
+        position: 'bottomright',
       }).addTo(this._map);
     },
-
-    fetchPatrimoine_Secteur: function() {
+    await_refresh_patrimoine: function () {
+      setTimeout(() => {
+        this.refresh_patrimoine();
+      }, GGO.CHECK_PATRIMOINE_INTERVALLE);
+    },
+    refresh_patrimoine: function () {
       var self = this;
       let uniqueSecteurNames = this._options.secteurs.join(',');
       var restURL = `${this._options.baseRESTServicesURL}/patrimoine_secteur.php?secteurs=${uniqueSecteurNames}`;
       $.ajax({
         type: 'GET',
         url: restURL,
-        success: function(response) {
-          console.log(`${restURL} Response : `, response);
-          self.handleSectorFetched(response);
+        success: function (response) {
+          console.log(`Refresh patrimoine Response : `, response);
+          if (response.code === 200) {
+            let patrimoineGgeoJSON = response['patrimoine'];
+            if (typeof patrimoineGgeoJSON !== 'undefined') {
+              self._classifyPatrimoine(patrimoineGgeoJSON);
+              self._patrimoineLayer.setGeoJSON(patrimoineGgeoJSON);
+            }
+          }
+          self.await_refresh_patrimoine();
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
             console.warn(`${restURL} Request aborted`);
           } else {
             console.error(`${restURL} Error request: ${textStatus}`, errorThrown);
           }
-        }
+          self.await_refresh_patrimoine();
+        },
       });
     },
-    handleSectorFetched: function(response) {
+
+    fetchPatrimoine_Secteur: function () {
+      var self = this;
+      let uniqueSecteurNames = this._options.secteurs.join(',');
+      var restURL = `${this._options.baseRESTServicesURL}/patrimoine_secteur.php?secteurs=${uniqueSecteurNames}`;
+      $.ajax({
+        type: 'GET',
+        url: restURL,
+        success: function (response) {
+          console.log(`${restURL} Response : `, response);
+          self.handleSectorFetched(response);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`${restURL} Request aborted`);
+          } else {
+            console.error(`${restURL} Error request: ${textStatus}`, errorThrown);
+          }
+        },
+      });
+    },
+    handleSectorFetched: function (response) {
       if (response.code === 200) {
         let secteursGeoJSON = response['secteur'];
         if (typeof secteursGeoJSON !== 'undefined') {
@@ -138,32 +172,32 @@
           this._classifyPatrimoine(patrimoineGgeoJSON);
           this._patrimoineLayer = L.mapbox
             .featureLayer(patrimoineGgeoJSON, {
-              pointToLayer: function(feature, latlng) {
+              pointToLayer: function (feature, latlng) {
                 let geojsonMarkerOptions = {
                   radius: 6,
                   fillColor: feature.properties['marker-color'],
                   color: '#808080',
                   weight: 1,
                   opacity: 1,
-                  fillOpacity: 0.9
+                  fillOpacity: 0.9,
                 };
                 let lyr = L.circleMarker(latlng, geojsonMarkerOptions);
                 return lyr;
-              }
+              },
             })
             .addTo(this._map);
           //this._patrimoineLayer.on('layeradd', this.onFeatureAddedToPatrimoineLayer.bind(this));
           //this._patrimoineLayer.setGeoJSON(patrimoineGgeoJSON);
           this._buildLegend();
           this._buildBasemapList();
-          this._patrimoineLayer.setFilter(function(f) {
+          this._patrimoineLayer.setFilter(function (f) {
             return parseInt(f.properties.niveau_operationnel) !== 0;
           });
         }
       } else {
       }
     },
-    _buildBasemapList: function() {
+    _buildBasemapList: function () {
       let self = this;
       let listContent = $(`
         <div class="slds-form-element__control" id="radioButtonContainerId" >
@@ -184,17 +218,15 @@
         </div>
       `);
       //
-      listContent.find('input').click(function(e) {
+      listContent.find('input').click(function (e) {
         self._map.removeLayer(self._basemaps['streets']);
         self._map.removeLayer(self._basemaps['imagery']);
         self._map.addLayer(self._basemaps[$(this).val()]);
       });
 
-      $('#dialog-body-basemap')
-        .empty()
-        .append(listContent);
+      $('#dialog-body-basemap').empty().append(listContent);
     },
-    _buildLegend: function() {
+    _buildLegend: function () {
       const colorPalette = GGO.getDefaultColorPalette();
       let self = this;
       let lgdContent = $(`
@@ -208,25 +240,21 @@
         </div>
       `);
 
-      lgdContent.find('.slds-badge[data-no="0"]').click(function(e) {
-        $(this)
-          .parent()
-          .toggleClass('disabled-legend-item');
+      lgdContent.find('.slds-badge[data-no="0"]').click(function (e) {
+        $(this).parent().toggleClass('disabled-legend-item');
         $(this).toggleClass('filtered_no');
         self._filterPatrimoineLayer();
       });
-      $('#dialog-body-legend')
-        .empty()
-        .append(lgdContent);
+      $('#dialog-body-legend').empty().append(lgdContent);
     },
-    _filterPatrimoineLayer: function() {
+    _filterPatrimoineLayer: function () {
       let filteredNO = $('#dialog-body-legend .filtered_no');
-      const filteredNOValues = new Set(filteredNO.toArray().map(b => $(b).attr('data-no')));
-      this._patrimoineLayer.setFilter(function(f) {
+      const filteredNOValues = new Set(filteredNO.toArray().map((b) => $(b).attr('data-no')));
+      this._patrimoineLayer.setFilter(function (f) {
         return !filteredNOValues.has(f.properties.niveau_operationnel);
       });
     },
-    _getColorForNiveauOpe: function(no) {
+    _getColorForNiveauOpe: function (no) {
       const rdYlBu = ['#d73027', '#fc8d59', '#fee090', '#e0f3f8', '#91bfdb', '#4575b4'];
       //const colorPalette = ['#d73027', '#fc8d59', '#fee08b', '#d9ef8b', '#91cf60', '#1a9850'];
       const colorPalette = GGO.getDefaultColorPalette(); //rdYlBu;
@@ -234,7 +262,7 @@
       noInt = noInt % colorPalette.length;
       return colorPalette[noInt];
     },
-    _classifySecteurs: function(geojson) {
+    _classifySecteurs: function (geojson) {
       let colors = GGO.getColorPalette('secteurs');
       geojson.features.forEach((f, i) => {
         f.properties['description'] = `Secteur ${f.properties.name_secteur}`;
@@ -242,40 +270,39 @@
         $.extend(f.properties, this._secteurDrawingProperties, { fill: col, stroke: col });
       });
     },
-    _classifyPatrimoine: function(geojson) {
-      geojson.features.forEach(f => {
+    _classifyPatrimoine: function (geojson) {
+      geojson.features.forEach((f) => {
         f.properties['marker-size'] = 'small';
         //f.properties['marker-symbol'] = f.properties['niveau_operationnel'];
-        if (f.properties['ronde_finalisee'] == 't'){ //marker gris si ronde finalisée pendant la vacation en cours
+        if (f.properties['ronde_finalisee'] == 't') {
+          //marker gris si ronde finalisée pendant la vacation en cours
           f.properties['marker-color'] = '#808080';
-        }
-        else f.properties['marker-color'] = this._getColorForNiveauOpe(f.properties['niveau_operationnel']);
+        } else f.properties['marker-color'] = this._getColorForNiveauOpe(f.properties['niveau_operationnel']);
         f.properties['description'] = f.properties.codesite;
       });
     },
-    onFeatureAddedToPatrimoineLayer: function(e) {
+    onFeatureAddedToPatrimoineLayer: function (e) {
       let marker = e.layer;
       let feature = marker.feature;
       let props = feature.properties;
     },
-    displayMission: function(mission) {
+    displayMission: function (mission) {
       if (typeof this._missionLayer === 'undefined' || this._missionLayer === null) {
         this._missionLayer = L.mapbox.featureLayer().addTo(this._options.app._mapManager._map);
       }
       let markerProperties = {
         'marker-color': GGO.shadeHexColor(this._getColorForNiveauOpe(mission.properties['niveau_operationnel']), -0.15),
-        'marker-symbol': mission.properties['niveau_operationnel'] || ''
+        'marker-symbol': mission.properties['niveau_operationnel'] || '',
         //'marker-size': 'small'
       };
       let markerPropertiesRondevac = {
         'marker-color': GGO.shadeHexColor('#808080', -0.15),
         'marker-symbol': mission.properties['niveau_operationnel'] || '',
-        'marker-size': 'large'
+        'marker-size': 'large',
       };
-      if (mission.properties['ronde_finalisee'] == 't'){
+      if (mission.properties['ronde_finalisee'] == 't') {
         $.extend(mission.properties, markerPropertiesRondevac);
-      }
-      else $.extend(mission.properties, markerProperties);
+      } else $.extend(mission.properties, markerProperties);
       /*
       let missionGeoJSON = turf.point(mission.coordinates);
       $.extend(missionGeoJSON.properties, markerProperties);
@@ -284,13 +311,13 @@
       */
       let missionGeoJSON = {
         type: 'FeatureCollection',
-        features: [mission]
+        features: [mission],
       };
       //$.extend(mission.properties, markerProperties);
       this._missionLayer.setGeoJSON(missionGeoJSON);
       this._map.fitBounds(this._missionLayer.getBounds(), { maxZoom: 14 });
     },
-    clearMission: function() {
+    clearMission: function () {
       if (typeof this._missionLayer !== 'undefined' && this._missionLayer !== null) {
         this._missionLayer.clearLayers();
       }
@@ -298,28 +325,28 @@
         this._map.fitBounds(this._secteurLayer.getBounds());
       }
     },
-    updateMapSize: function() {
+    updateMapSize: function () {
       $('#map').addClass('halfheight_map');
       this._map.invalidateSize(false);
     },
-    invalidateMapSize: function() {
+    invalidateMapSize: function () {
       this._map.invalidateSize(false);
-    }
+    },
   };
 
-  GGO.MapManagerSingleton = (function() {
+  GGO.MapManagerSingleton = (function () {
     let instance;
     function createInstance(options) {
       let mapMgr = new GGO.MapManager(options);
       return mapMgr;
     }
     return {
-      getInstance: function(options) {
+      getInstance: function (options) {
         if (!instance) {
           instance = createInstance(options);
         }
         return instance;
-      }
+      },
     };
   })();
 })();
