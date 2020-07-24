@@ -200,6 +200,7 @@
   GGO.CHECK_MISSION_INTERVALLE = 7000;
   GGO.CHECK_PAUSE_INTERVALLE = 10000 * 6 * 5;
   GGO.CHECK_RESTRICTIONS_INTERVALLE = 1000;
+  GGO.CHECK_PATRIMOINE_INTERVALLE = 120000;
   GGO.COLORPALETTES = {
     rdYlBu: ['#4874bf', '#228714', '#edeb2a', '#f99e38', '#ff0000', '#000000'],
     secteurs: ['#8dd3c7', '#ffffb3', '#bebada', '#fb8072', '#80b1d3', '#fdb462', '#b3de69', '#fccde5', '#d9d9d9'],
@@ -208,21 +209,41 @@
   };
 
   GGO.notifyNewMissionSound = function (code) {
+    let name_music = null;
+    /*
     if (code === 1) {
       var name_music = '/sounds/new_mission.mp3'; // new mission
     } else if (code === 2) {
       var name_music = '/sounds/kaxon_velo.mp3'; // fin de pause
+    } else if (code === 3) {
+      var name_music = '/sounds/new_alert.mp3'; // fin de pause
     }
-    try {
-      var music = new Audio(name_music);
-      var p = music.play();
-      p.then((event) => {
-        console.log(event);
-      }).catch((err) => {
-        console.log(err.message);
-      });
-    } catch (error) {
-      console.error(`Error while playing sound`, error);
+    */
+    switch (code) {
+      case 1:
+        name_music = '/sounds/new_mission.mp3';
+        break;
+      case 2:
+        name_music = '/sounds/kaxon_velo.mp3';
+        break;
+      case 3:
+        name_music = '/sounds/new_restriction.mp3';
+        break;
+      default:
+        console.war(`code ${code} non supporté`);
+    }
+    if (name_music) {
+      try {
+        var music = new Audio(name_music);
+        var p = music.play();
+        p.then((event) => {
+          console.log(event);
+        }).catch((err) => {
+          console.log(err.message);
+        });
+      } catch (error) {
+        console.error(`Error while playing sound`, error);
+      }
     }
   };
 

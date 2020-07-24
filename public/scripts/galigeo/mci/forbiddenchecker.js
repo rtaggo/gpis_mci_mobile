@@ -39,6 +39,7 @@
 
             if (sites.length > 0) {
               console.log(`Nouvelles Restrictions response: `, response);
+              GGO.notifyNewMissionSound(3);
               // update du cookie
               GGO.docCookies.setItem('gpis_forbidden_sites', JSON.stringify([...sites.map((s) => s.id), ...sites_set]), 31536e3, '/', null);
               // afficher la popup
@@ -286,7 +287,7 @@
               $('#forbiddens_content')
                 .empty()
                 .append(
-                  $(`<div id="general">
+                  $(`<div id="general" class="slds-p-around_x-small">
           ${
             interdits.length > 0
               ? `

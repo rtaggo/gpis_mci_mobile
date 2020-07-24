@@ -49,6 +49,7 @@
       GGO.EventBus.addEventListener(GGO.EVENTS.APPISREADY, function (e) {
         console.log('Received GGO.EVENTS.APPISREADY');
         self.fetchPatrimoine_SousSecteurs();
+        self.await_refresh_patrimoine();
       });
       GGO.EventBus.addEventListener(GGO.EVENTS.SHOWMISSIONMLOCATION, function (e) {
         console.log('Received GGO.EVENTS.SHOWMISSIONMLOCATION');
@@ -113,6 +114,38 @@
           } else {
             console.error(`Error request: ${textStatus}`, errorThrown);
           }
+        },
+      });
+    },
+    await_refresh_patrimoine: function () {
+      setTimeout(() => {
+        this.refresh_patrimoine();
+      }, GGO.CHECK_PATRIMOINE_INTERVALLE);
+    },
+    refresh_patrimoine: function () {
+      var self = this;
+      var restURL = `${this._options.baseRESTServicesURL}/patrimoine_sous_secteur.php?patrouille=${this._options.patrouille.id}&sssecteurs=${this._options.secteurs.map((s) => s.id).join(',')}`;
+      $.ajax({
+        type: 'GET',
+        url: restURL,
+        success: function (response) {
+          console.log(`Refresh patrimoine Response : `, response);
+          if (response.code === 200) {
+            let patrimoineGgeoJSON = response['patrimoine'];
+            if (typeof patrimoineGgeoJSON !== 'undefined') {
+              self._classifyPatrimoine(patrimoineGgeoJSON);
+              self._patrimoineLayer.setGeoJSON(patrimoineGgeoJSON);
+            }
+          }
+          self.await_refresh_patrimoine();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`${restURL} Request aborted`);
+          } else {
+            console.error(`${restURL} Error request: ${textStatus}`, errorThrown);
+          }
+          self.await_refresh_patrimoine();
         },
       });
     },
