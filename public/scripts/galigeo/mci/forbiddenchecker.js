@@ -122,7 +122,7 @@
               };
               GGO.AlertRestrictionsPrompt('Nouvelles restrictions', $('#appContainer'));
               */
-              self.alertRestrictionsPrompt('Nouvelles restrictions', $('#appContainer'), sites, options);
+              self.alertRestrictionsPrompt('Nouvelles restrictions <br> dans les sous-secteurs suivants', $('#appContainer'), sites, options);
             }
           }
           self.await_before_recall();
@@ -149,7 +149,7 @@
             <header class="slds-modal__header slds-theme_error slds-theme_alert-texture">
               <h2 class="slds-text-heading_medium" id="prompt-heading-id">${title}</h2>
             </header>
-            <div class="slds-modal__content slds-p-around_medium" id="prompt-message-wrapper">
+            <div class="slds-modal__content slds-p-around_small" style="padding-left : 1rem ; padding-right : 1rem" id="prompt-message-wrapper">
             </div>
             <footer class="slds-modal__footer slds-theme_default">
               <button class="slds-button slds-button_neutral" data-what="return">Fermer</button>
@@ -195,7 +195,12 @@
           ${
             interdits.length > 0
               ? `
-              <div id="interdits" style="width:50%; float:left">
+              <div id="interdits" style="width:33%; float:left; text-align:center">
+                <span class="slds-icon_container slds-icon_container_circle  slds-icon-action-close" title="Description of icon when needed">
+                  <svg class="slds-icon slds-icon_xx-small .slds-icon-text-error" aria-hidden="true">
+                    <use xlink:href="/styles/slds/assets/icons/action-sprite/svg/symbols.svg#close"></use>
+                  </svg>
+                </span>
                 <ul >
                   <li style="font-size :large" >Interdits<br></li> 
                   ${interdits
@@ -210,7 +215,12 @@
             ${
               renforces.length > 0
                 ? `
-              <div id="renforces" style="width:50% ; float:right">
+              <div id="renforces" style="width:33%; display:inline-block; text-align:center">
+                <span class="slds-icon_container slds-icon_container_circle  slds-icon-action-new-group" title="Description of icon when needed">
+                  <svg class="slds-icon slds-icon_xx-small .slds-icon-text-error" aria-hidden="true">
+                    <use xlink:href="/styles/slds/assets/icons/action-sprite/svg/symbols.svg#new_group"></use>
+                  </svg>
+                </span>
                 <ul>
                   <li style="font-size :large">Renforcés<br></li>
                   ${renforces
@@ -225,7 +235,12 @@
             ${
               restreints.length > 0
                 ? `
-              <div id="renforces" style="width:50% ; float:right">
+              <div id="renforces" style="width:33%; float:right; text-align:center">
+                <span class="slds-icon_container slds-icon_container_circle  slds-icon-action-share-link" style="background-color:#fba70e" title="Description of icon when needed">
+                  <svg class="slds-icon slds-icon_xx-small .slds-icon-text-error" aria-hidden="true">
+                    <use xlink:href="/styles/slds/assets/icons/action-sprite/svg/symbols.svg#share_link"></use>
+                  </svg>
+                </span>
                 <ul>
                   <li style="font-size :large">Restreints<br></li>
                   ${restreints
@@ -291,7 +306,12 @@
           ${
             interdits.length > 0
               ? `
-              <div id="interdits" style="width:50%; float:left">
+              <div id="interdits" style="width:33%; float:left ; text-align:center">
+                <span class="slds-icon_container slds-icon_container_circle  slds-icon-action-close" title="Description of icon when needed">
+                  <svg class="slds-icon slds-icon_xx-small .slds-icon-text-error" aria-hidden="true">
+                    <use xlink:href="/styles/slds/assets/icons/action-sprite/svg/symbols.svg#close"></use>
+                  </svg>
+                </span>
                 <ul >
                   <li style="font-size :large" >Interdits<br></li> 
                   ${interdits
@@ -306,7 +326,12 @@
             ${
               renforces.length > 0
                 ? `
-              <div id="renforces" style="width:50% ; float:right">
+              <div id="renforces" style="width:33% ; display:inline-block; text-align:center">
+                <span class="slds-icon_container slds-icon_container_circle  slds-icon-action-new-group" title="Description of icon when needed">
+                  <svg class="slds-icon slds-icon_xx-small .slds-icon-text-error" aria-hidden="true">
+                    <use xlink:href="/styles/slds/assets/icons/action-sprite/svg/symbols.svg#new_group"></use>
+                  </svg>
+                </span>
                 <ul>
                   <li style="font-size :large">Renforcés<br></li>
                   ${renforces
@@ -321,7 +346,12 @@
             ${
               restreints.length > 0
                 ? `
-              <div id="renforces" style="width:50% ; float:right">
+              <div id="renforces" style="width:33% ; float:right ; text-align:center">
+                <span class="slds-icon_container slds-icon_container_circle  slds-icon-action-share-link" style="background-color:#fba70e" title="Description of icon when needed">
+                  <svg class="slds-icon slds-icon_xx-small .slds-icon-text-error" aria-hidden="true">
+                    <use xlink:href="/styles/slds/assets/icons/action-sprite/svg/symbols.svg#share_link"></use>
+                  </svg>
+                </span>
                 <ul>
                   <li style="font-size :large">Restreints<br></li>
                   ${restreints
