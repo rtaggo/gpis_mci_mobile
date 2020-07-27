@@ -149,7 +149,7 @@
             <header class="slds-modal__header slds-theme_error slds-theme_alert-texture">
               <h2 class="slds-text-heading_medium" id="prompt-heading-id">${title}</h2>
             </header>
-            <div class="slds-modal__content slds-p-around_small" style="padding-left : 1rem ; padding-right : 1rem" id="prompt-message-wrapper">
+            <div class="slds-modal__content slds-p-around_small slds-scrollable_y" style="padding-left : 1rem ; padding-right : 1rem" id="prompt-message-wrapper">
             </div>
             <footer class="slds-modal__footer slds-theme_default">
               <button class="slds-button slds-button_neutral" data-what="return">Fermer</button>
@@ -272,7 +272,7 @@
           </button>
         </div>
         <div class="slds-panel__body" style="height:calc(100% - 49px);position:relative;">
-          <div id="forbiddens_content" style="position: absolute; top: 0; left: 0; bottom: 0; right: 0px;"></div>
+          <div id="forbiddens_content" class="slds-scrollable_y" style="position: absolute; top: 0; left: 0; bottom: 0; right: 0px;"></div>
         </div>
       </div>
       `);
