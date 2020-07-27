@@ -261,7 +261,7 @@
     },
     display_forbiddens: function () {
       let panelContent = $(`
-      <div id="forbiddensPanel" class="slds-panel slds-panel_docked slds-panel_docked-left slds-is-open" aria-hidden="false" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0;z-index:10000; overflow: hidden;">
+      <div id="forbiddensPanel" class="slds-panel slds-panel_docked slds-panel_docked-left slds-is-open slds-scrollable_y" aria-hidden="false" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0;z-index:10000; overflow: hidden;">
         <div class="slds-panel__header">
           <h2 class="slds-panel__header-title slds-text-heading_small slds-truncate">Restrictions</h2>
           <button class="slds-button slds-button_icon slds-button_icon-small slds-panel__close" title="Collapse Panel Header">
