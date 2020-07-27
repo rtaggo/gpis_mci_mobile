@@ -34,7 +34,7 @@
 
             // Liste de site recu
             // Warning: changer id si besoin
-            let sites = response.sites_crise;
+            let sites = response.crise;
             sites = sites.filter((s) => !sites_crise_set.has(s.id));
 
             if (sites.length > 0) {
