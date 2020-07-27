@@ -230,6 +230,9 @@
       case 3:
         name_music = '/sounds/new_restriction.mp3';
         break;
+      case 4:
+        name_music = '/sounds/new_crisis.mp3';
+        break;
       default:
         console.war(`code ${code} non supporté`);
     }
