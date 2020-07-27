@@ -1,6 +1,6 @@
-(function() {
+(function () {
   'use strict';
-  GGO.MissionManager = function(options) {
+  GGO.MissionManager = function (options) {
     this._options = options || {};
     //this._options.mciurl = '/services/rest/mci';
     this._options.baseRESTServicesURL = this._options.baseRESTServicesURL || '/services/rest/mci';
@@ -10,16 +10,16 @@
   };
 
   GGO.MissionManager.prototype = {
-    _init: function() {
+    _init: function () {
       this.setupListeners();
     },
-    setupListeners: function() {
+    setupListeners: function () {
       let self = this;
-      GGO.EventBus.addEventListener(GGO.EVENTS.APPISREADY, function(e) {
+      GGO.EventBus.addEventListener(GGO.EVENTS.APPISREADY, function (e) {
         console.log('Received GGO.EVENTS.APPISREADY');
         self.checkMission();
       });
-      $('#btnMissionEnRoute').click(function(e) {
+      $('#btnMissionEnRoute').click(function (e) {
         let theMission = self._currentMission.features[0];
         self._currentMission.statut = 'En direction';
         $('#btnMissionEnRoute').attr('disabled', true);
@@ -43,7 +43,7 @@
           self._currentMission.features[0].properties.mission_id,
           1,
           self._options.patrouille.id,
-          function(response) {
+          function (response) {
             console.log('>> En route callback', response, self);
             if (response.code === 200) {
               $('#udpate-mission-spinner').remove();
@@ -54,7 +54,7 @@
           }.bind(self)
         );
       });
-      $('#btnMissionDebut').click(function(e) {
+      $('#btnMissionDebut').click(function (e) {
         self._currentMission.statut = 'Début';
         $('#btnMissionEnRoute').attr('disabled', true);
         $('#btnMissionDebut').attr('disabled', true);
@@ -80,7 +80,7 @@
           self._currentMission.features[0].properties.mission_id,
           2,
           self._options.patrouille.id,
-          function(response) {
+          function (response) {
             console.log('>> En route callback', response, self);
             if (response.code === 200) {
               $('#udpate-mission-spinner').remove();
@@ -97,14 +97,14 @@
         }
       });
 
-      $('#btnMissionFin').click(function(e) {
+      $('#btnMissionFin').click(function (e) {
         $('#btnMissionSignalement').addClass('slds-hide');
         $('#btnMissionAdresse').addClass('slds-hide');
         self.updateMissionStatus(
           self._currentMission.features[0].properties.mission_id,
           5,
           self._options.patrouille.id,
-          function(response) {
+          function (response) {
             console.log('>> En route callback', response, self);
             if (response.code === 200) {
               $('#udpate-mission-spinner').remove();
@@ -114,26 +114,30 @@
         );
       });
 
-      $('#btnAttenteMission').click(function(e) {
+      $('#btnAttenteMission').click(function (e) {
         self.checkMission();
       });
-      $('#btnMissionSignalement').click(function(e) {
+      $('#btnMissionSignalement').click(function (e) {
         self.openSignalementModal();
         self.fetchTypeSignalements();
       });
-      $('#btnMissionAdresse').click(function(e) {
+      $('#btnMissionAdresse').click(function (e) {
         self.openAdressesModal();
         self.fetchAdresses();
         self.checkMissionStatut();
         self.checkPauseTime();
       });
-      $('#btnMissionAdresseRenfort').click(function(e) {
+      $('#btnMissionAdresseRenfort').click(function (e) {
         self.openAdressesModal();
         self.fetchAdresses();
         self.checkMissionStatut();
       });
+      $('#btnSignalementRenfort').click(function (e) {
+        self.openSignalementModal();
+        self.fetchTypeSignalements();
+      });
     },
-    finishCurrentMission: function() {
+    finishCurrentMission: function () {
       this._currentMission = null;
       GGO.EventBus.dispatch(GGO.EVENTS.MISSIONCOMPLETED);
 
@@ -143,13 +147,13 @@
       //self.fakeTimeOutbeforeFetchingMission();
       this.checkMission();
     },
-    updateMissionStatus: function(missionId, statusCode, patrouilleId, callback) {
+    updateMissionStatus: function (missionId, statusCode, patrouilleId, callback) {
       let self = this;
       let updateStatusUrl = `${this._options.baseRESTServicesURL}/maj_mission.php`;
       let reqBody = {
         mission_id: missionId,
         code: statusCode,
-        patrouille_id: patrouilleId
+        patrouille_id: patrouilleId,
       };
       $.ajax({
         type: 'POST',
@@ -157,26 +161,26 @@
         data: JSON.stringify(reqBody),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
-        success: function(response) {
+        success: function (response) {
           console.log(`Response`, response);
           if (typeof callback === 'function') {
             callback(response);
           }
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
             console.warn(`Request aborted`);
           } else {
             console.error(`Error request: ${textStatus}`, errorThrown);
           }
-        }
+        },
       });
     },
-    debutPause: function(patrouilleId) {
+    debutPause: function (patrouilleId) {
       let self = this;
       let debutPauseUrl = `${this._options.baseRESTServicesURL}/pause.php`;
       let reqBody = {
-        id_patrouille: patrouilleId
+        id_patrouille: patrouilleId,
       };
       console.log(JSON.stringify(reqBody));
       $.ajax({
@@ -185,19 +189,19 @@
         data: JSON.stringify(reqBody),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
-        success: function(response) {
+        success: function (response) {
           console.log(`Response`, response);
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
             console.warn(`Request aborted`);
           } else {
             console.error(`Error request: ${textStatus}`, errorThrown);
           }
-        }
+        },
       });
     },
-    openSignalementModal: function() {
+    openSignalementModal: function () {
       let self = this;
       let modal = `
       <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-signalement-content" class="slds-modal slds-fade-in-open slds-modal_large">
@@ -332,7 +336,7 @@
         <!-- End Modal Container -->
       </section>
       `;
-      window.onmousedown = function(e) {
+      window.onmousedown = function (e) {
         var el = e.target;
         if (el.tagName.toLowerCase() == 'option' && el.parentNode.hasAttribute('multiple')) {
           e.preventDefault();
@@ -348,32 +352,30 @@
       };
       let theModal = $(modal);
 
-      theModal.find('#select-adresse').change(function() {
+      theModal.find('#select-adresse').change(function () {
         $('#modal-signalement-content .slds-form-element__help').addClass('slds-hide');
         $('#modal-signalement-content .slds-has-error').removeClass('slds-has-error');
       });
 
-      theModal.find('#select-type-signalement').change(function() {
+      theModal.find('#select-type-signalement').change(function () {
         $('#modal-signalement-content .slds-form-element__help').addClass('slds-hide');
         $('#modal-signalement-content .slds-has-error').removeClass('slds-has-error');
 
         self.handleClickChooseTypeSignalement();
       });
 
-      theModal.find('#select-type-lieu').change(function() {
+      theModal.find('#select-type-lieu').change(function () {
         $('#modal-signalement-content .slds-form-element__help').addClass('slds-hide');
         $('#modal-signalement-content .slds-has-error').removeClass('slds-has-error');
-        const niveauOK = $(this)
-          .find(':selected')
-          .data('niveau');
+        const niveauOK = $(this).find(':selected').data('niveau');
         self.handleClickChooseTypeLieu(niveauOK);
       });
 
-      theModal.find('.snapshotdiv').click(function(e) {
+      theModal.find('.snapshotdiv').click(function (e) {
         $('#snapshot_input').trigger('click');
       });
 
-      theModal.find('input[type="file"]').on('change', function(e) {
+      theModal.find('input[type="file"]').on('change', function (e) {
         console.log('input file changed');
         var files = this.files,
           errors = '';
@@ -398,21 +400,17 @@
         }
       });
 
-      $('body').append(
-        $('<div id="signalement-modal" class="ggoslds"></div>')
-          .append(theModal)
-          .append($('<div class="slds-backdrop slds-backdrop_open"></div>'))
-      );
-      $('#btnSignalementCancel').click(function(e) {
+      $('body').append($('<div id="signalement-modal" class="ggoslds"></div>').append(theModal).append($('<div class="slds-backdrop slds-backdrop_open"></div>')));
+      $('#btnSignalementCancel').click(function (e) {
         $('#signalement-modal').remove();
       });
-      $('#btnSignalementOk').click(function(e) {
+      $('#btnSignalementOk').click(function (e) {
         //self.saveSignalement();
         //$('#signalement-modal').remove();
         self.checkBeforeSaveSignalement();
       });
     },
-    openAdressesModal: function() {
+    openAdressesModal: function () {
       let self = this;
       let modal = `
       <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-signalement-content" class="slds-modal slds-fade-in-open slds-modal_large">
@@ -447,38 +445,32 @@
       `;
       let theModal = $(modal);
 
-      theModal.find('#select-adresse').change(function() {
+      theModal.find('#select-adresse').change(function () {
         $('#modal-signalement-content .slds-form-element__help').addClass('slds-hide');
         $('#modal-signalement-content .slds-has-error').removeClass('slds-has-error');
       });
 
-      $('body').append(
-        $('<div id="signalement-modal" class="ggoslds"></div>')
-          .append(theModal)
-          .append($('<div class="slds-backdrop slds-backdrop_open"></div>'))
-      );
-      $('#btnSignalementCancel').click(function(e) {
+      $('body').append($('<div id="signalement-modal" class="ggoslds"></div>').append(theModal).append($('<div class="slds-backdrop slds-backdrop_open"></div>')));
+      $('#btnSignalementCancel').click(function (e) {
         $('#signalement-modal').remove();
       });
     },
-    readImage: function(file) {
+    readImage: function (file) {
       let self = this;
       let reader = new FileReader();
       let elPreview = $('.snapshotdiv').empty();
       let removeImgLink = $('<a href="">Supprimer</a>');
-      removeImgLink.click(function(e) {
+      removeImgLink.click(function (e) {
         e.preventDefault();
         e.stopImmediatePropagation();
         self._snapshotBase64 = null;
-        $('.snapshotdiv')
-          .empty()
-          .append(`<svg class="slds-icon slds-icon_large slds-icon-text-default slds-shrink-none slds-m-around_small" aria-hidden="true"><use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#photo"></use></svg>`);
+        $('.snapshotdiv').empty().append(`<svg class="slds-icon slds-icon_large slds-icon-text-default slds-shrink-none slds-m-around_small" aria-hidden="true"><use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#photo"></use></svg>`);
       });
       elPreview.append(removeImgLink);
-      reader.addEventListener('load', function() {
+      reader.addEventListener('load', function () {
         var image = new Image();
 
-        image.addEventListener('load', function() {
+        image.addEventListener('load', function () {
           var imageInfo = file.name + ' ' + image.width + '×' + image.height + ' ' + file.type + ' ' + Math.round(file.size / 1024) + 'KB';
           // Show image
           elPreview.prepend($('<div class="snapshotImgDiv slds-p-around_small"></div>').append(this));
@@ -494,7 +486,7 @@
 
       reader.readAsDataURL(file);
     },
-    openReaffectationModal: function() {
+    openReaffectationModal: function () {
       let self = this;
       let modal = `
       <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-signalement-content" class="slds-modal slds-fade-in-open slds-modal_large">
@@ -633,11 +625,11 @@
       `;
 
       let theModal = $(modal);
-      theModal.find('.snapshotdiv').click(function(e) {
+      theModal.find('.snapshotdiv').click(function (e) {
         $('#snapshot_input').trigger('click');
       });
 
-      theModal.find('input[type="file"]').on('change', function(e) {
+      theModal.find('input[type="file"]').on('change', function (e) {
         console.log('input file changed');
         var files = this.files,
           errors = '';
@@ -661,40 +653,28 @@
           alert(errors);
         }
       });
-      $('body').append(
-        $('<div id="reaffectation-signalement-modal" class="ggoslds"></div>')
-          .append(theModal)
-          .append($('<div class="slds-backdrop slds-backdrop_open"></div>'))
-      );
-      $('#btnReaffectationCancel').click(function(e) {
+      $('body').append($('<div id="reaffectation-signalement-modal" class="ggoslds"></div>').append(theModal).append($('<div class="slds-backdrop slds-backdrop_open"></div>')));
+      $('#btnReaffectationCancel').click(function (e) {
         $('#reaffectation-signalement-modal').remove();
       });
-      $('#btnReaffecter').click(function(e) {
+      $('#btnReaffecter').click(function (e) {
         self.validateReacffectation();
         $('#reaffectation-signalement-modal').remove();
       });
     },
-    validateSignalementInput: function(value2Check, containerId, errorHelperId) {
+    validateSignalementInput: function (value2Check, containerId, errorHelperId) {
       let allGood = true;
       if (value2Check === '') {
-        $(`#${containerId}`)
-          .parent()
-          .parent()
-          .parent()
-          .addClass('slds-has-error');
+        $(`#${containerId}`).parent().parent().parent().addClass('slds-has-error');
         $(`#${errorHelperId}`).removeClass('slds-hide');
         allGood = false;
       } else {
-        $(`#${containerId}`)
-          .parent()
-          .parent()
-          .parent()
-          .removeClass('slds-has-error');
+        $(`#${containerId}`).parent().parent().parent().removeClass('slds-has-error');
         $(`#${errorHelperId}`).addClass('slds-hide');
       }
       return allGood;
     },
-    checkBeforeSaveSignalement: function() {
+    checkBeforeSaveSignalement: function () {
       $('#btnSignalementOk').attr('disabled', true);
       let self = this;
       let allGood = true;
@@ -751,7 +731,7 @@
         sous_categorie: sous_categorie_id,
         niveau: niveauVal,
         observation: observationVal,
-        photo: this._snapshotBase64 || ''
+        photo: this._snapshotBase64 || '',
       };
       if (allGood) {
         this.saveSignalement(formSignalement);
@@ -759,7 +739,7 @@
         $('#btnSignalementOk').attr('disabled', false);
       }
     },
-    saveSignalement: function(formSignalement) {
+    saveSignalement: function (formSignalement) {
       let self = this;
 
       console.log(formSignalement);
@@ -770,22 +750,22 @@
         data: JSON.stringify(formSignalement),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
-        success: function(response) {
+        success: function (response) {
           console.log(`Response`, response);
           self._snapshotBase64 = null;
           $('#signalement-modal').remove();
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
             console.warn(`Request aborted`);
           } else {
             console.error(`Error request: ${textStatus}`, errorThrown);
           }
           $('#signalement-modal').remove();
-        }
+        },
       });
     },
-    saveSignalement_old: function() {
+    saveSignalement_old: function () {
       let self = this;
 
       const id_mission = self._currentMission.features[0].properties.mission_id; //mission[0].innerHTML;
@@ -809,7 +789,7 @@
         niveau: niveauVal,
         observation: observationVal,
         photo: this._snapshotBase64 || '',
-        patrouille_id: self._options.patrouille.id
+        patrouille_id: self._options.patrouille.id,
       };
       console.log(formSignalement);
       const saveSignalementUrl = `${this._options.baseRESTServicesURL}/signalement.php`;
@@ -821,26 +801,26 @@
         data: JSON.stringify(formSignalement),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
-        success: function(response) {
+        success: function (response) {
           console.log(`Response`, response);
           self._snapshotBase64 = null;
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
             console.warn(`Request aborted`);
           } else {
             console.error(`Error request: ${textStatus}`, errorThrown);
           }
-        }
+        },
       });
     },
-    validateReacffectation: function() {
+    validateReacffectation: function () {
       $('#btnReaffecter').attr('disabled', true);
       let self = this;
       let formReaffectation = {
         mission_id: self._currentMission.features[0].properties.mission_id,
         signalement_id: $('#btnReaffecter').attr('data-signalementid'), // $('#btnReaffecter')[0].value,
-        photo: this._snapshotBase64 || null
+        photo: this._snapshotBase64 || null,
       };
 
       const reaffecctationUrl = `${this._options.baseRESTServicesURL}/reaffectation.php`;
@@ -851,59 +831,59 @@
         data: JSON.stringify(formReaffectation),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
-        success: function(response) {
+        success: function (response) {
           console.log(`Response`, response);
           $('#reaffectation-signalement-modal').remove();
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
             console.warn(`Request aborted`);
           } else {
             console.error(`Error request: ${textStatus}`, errorThrown);
           }
           $('#reaffectation-signalement-modal').remove();
-        }
+        },
       });
     },
-    fetchFormSignalements: function(signalement_id, patrouille_id) {
+    fetchFormSignalements: function (signalement_id, patrouille_id) {
       let self = this;
       const reaffectationSignalementUrl = `${this._options.baseRESTServicesURL}/reaffectation.php?patrouille_id=${patrouille_id}&signalement_id=${signalement_id}`;
       $.ajax({
         type: 'GET',
         url: reaffectationSignalementUrl,
-        success: function(response) {
+        success: function (response) {
           console.log(`${reaffectationSignalementUrl}`, response);
           self.handleFormSignalementFetched(response, signalement_id);
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
             console.warn(`${reaffectationSignalementUrl} Request aborted`);
           } else {
             console.error(`Error for ${reaffectationSignalementUrl} request: ${textStatus}`, errorThrown);
           }
-        }
+        },
       });
     },
-    fetchFormIncidentes: function(incidente_id) {
+    fetchFormIncidentes: function (incidente_id) {
       let self = this;
       const incidenteUrl = `${this._options.baseRESTServicesURL}/incidente.php?patrouille_id=${self._options.patrouille.id}&incidente_id=${incidente_id}`;
       $.ajax({
         type: 'GET',
         url: incidenteUrl,
-        success: function(response) {
+        success: function (response) {
           console.log(`${incidenteUrl}`, response);
           self.handleFormIncidenteFetched(response, incidente_id);
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
             console.warn(`${incidenteUrl} Request aborted`);
           } else {
             console.error(`Error for ${incidenteUrl} request: ${textStatus}`, errorThrown);
           }
-        }
+        },
       });
     },
-    openIncidenteModal: function() {
+    openIncidenteModal: function () {
       let self = this;
       let modal = `
       <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-incidente-content" class="slds-modal slds-fade-in-open slds-modal_large">
@@ -1028,16 +1008,12 @@
       `;
 
       let theModal = $(modal);
-      $('body').append(
-        $('<div id="incidente-modal" class="ggoslds"></div>')
-          .append(theModal)
-          .append($('<div class="slds-backdrop slds-backdrop_open"></div>'))
-      );
-      $('#btnIncidenteCancel').click(function(e) {
+      $('body').append($('<div id="incidente-modal" class="ggoslds"></div>').append(theModal).append($('<div class="slds-backdrop slds-backdrop_open"></div>')));
+      $('#btnIncidenteCancel').click(function (e) {
         $('#incidente-modal').remove();
       });
     },
-    handleFormSignalementFetched: function(response, signalement_id) {
+    handleFormSignalementFetched: function (response, signalement_id) {
       console.log(`>> handleTypeSignalementFetched`, response);
       const self = this;
 
@@ -1073,7 +1049,7 @@
 
       $('#modal-signalement-content .slds-spinner_container').remove();
     },
-    handleFormIncidenteFetched: function(response, incidente_id) {
+    handleFormIncidenteFetched: function (response, incidente_id) {
       console.log(`>> handleFormIncidenteFetched`, response);
       const self = this;
 
@@ -1109,56 +1085,56 @@
       $('#observation').val(response.incidente[0].observations);
       $('#modal-incidente-content .slds-spinner_container').remove();
     },
-    fetchTypeSignalements: function() {
+    fetchTypeSignalements: function () {
       let self = this;
       const typeSignalementUrl = `${this._options.baseRESTServicesURL}/signalement.php?patrouille_id=${self._options.patrouille.id}&mission_id=${self._currentMission.features[0].properties.mission_id}&type_signalement=&categorie=`;
       console.log(typeSignalementUrl);
       $.ajax({
         type: 'GET',
         url: typeSignalementUrl,
-        success: function(response) {
+        success: function (response) {
           console.log(`${typeSignalementUrl}`, response);
           self.handleTypeSignalementFetched(response);
           self.handleAdresseFetched(response);
           self.handleTypeLieuFetched(response);
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
             console.warn(`${typeSignalementUrl} Request aborted`);
           } else {
             console.error(`Error for ${typeSignalementUrl} request: ${textStatus}`, errorThrown);
           }
-        }
+        },
       });
     },
-    fetchAdresses: function() {
+    fetchAdresses: function () {
       let self = this;
       const typeSignalementUrl = `${this._options.baseRESTServicesURL}/signalement.php?patrouille_id=${self._options.patrouille.id}&mission_id=${self._currentMission.features[0].properties.mission_id}&type_signalement=&categorie=`;
       console.log(typeSignalementUrl);
       $.ajax({
         type: 'GET',
         url: typeSignalementUrl,
-        success: function(response) {
+        success: function (response) {
           console.log(`${typeSignalementUrl}`, response);
           self.handleModalAdresseFetched(response);
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
             console.warn(`${typeSignalementUrl} Request aborted`);
           } else {
             console.error(`Error for ${typeSignalementUrl} request: ${textStatus}`, errorThrown);
           }
-        }
+        },
       });
     },
-    handleTypeSignalementFetched: function(response) {
+    handleTypeSignalementFetched: function (response) {
       console.log(`>> handleTypeSignalementFetched`, response);
       const self = this;
       let selectCtnr = $('#select-type-signalement').empty();
       selectCtnr.append(
         $(`
         <option value="">Sélectionner un type de signalement</option> 
-        ${response.type_signalement.map(p => `<option value="${p.id}" >${p.libelle}</option>`).join('')}
+        ${response.type_signalement.map((p) => `<option value="${p.id}" >${p.libelle}</option>`).join('')}
       `)
       );
       /*
@@ -1168,36 +1144,36 @@
       });
       */
     },
-    handleModalAdresseFetched: function(response) {
+    handleModalAdresseFetched: function (response) {
       console.log(`>> handleModalAdresseFetched`, response);
       const self = this;
       let selectCtnr = $('#select-adresse-modal').empty();
       selectCtnr.append(
         $(`
         <option value="">Liste d'adresses du site</option> 
-        ${response.adresses.map(p => `<option value="${p.id}" >${p.adresse}</option>`).join('')}
+        ${response.adresses.map((p) => `<option value="${p.id}" >${p.adresse}</option>`).join('')}
       `)
       );
     },
-    handleAdresseFetched: function(response) {
+    handleAdresseFetched: function (response) {
       console.log(`>> handleAdresseFetched`, response);
       const self = this;
       let selectCtnr = $('#select-adresse').empty();
       selectCtnr.append(
         $(`
         <option value="">Sélectionner une adresse</option> 
-        ${response.adresses.map(p => `<option value="${p.id}" >${p.adresse}</option>`).join('')}
+        ${response.adresses.map((p) => `<option value="${p.id}" >${p.adresse}</option>`).join('')}
       `)
       );
     },
-    handleTypeLieuFetched: function(response) {
+    handleTypeLieuFetched: function (response) {
       console.log(`>> handleTypeLieuFetched`, response);
       const self = this;
       let selectCtnr = $('#select-type-lieu').empty();
       selectCtnr.append(
         $(`
         <option value="">Sélectionner un type de lieu</option> 
-        ${response.type_lieu.map(p => `<option value="${p.id}" data-niveau="${p.niveau}" >${p.libelle}</option>`).join('')}
+        ${response.type_lieu.map((p) => `<option value="${p.id}" data-niveau="${p.niveau}" >${p.libelle}</option>`).join('')}
       `)
       );
       /*
@@ -1210,7 +1186,7 @@
       });
       */
     },
-    handleCategorieFetched: function(response) {
+    handleCategorieFetched: function (response) {
       console.log(`>> handleCategorieFetched`, response);
       const self = this;
       $('#parent_categorie').removeClass('slds-hide');
@@ -1218,56 +1194,56 @@
       selectCtnr.append(
         $(`
         <option value="">Sélectionner une catégorie</option> 
-        ${response.categorie.map(p => `<option value="${p.id}" >${p.libelle}</option>`).join('')}
+        ${response.categorie.map((p) => `<option value="${p.id}" >${p.libelle}</option>`).join('')}
       `)
       );
       $('#select-categorie')
         .off()
-        .change(function() {
+        .change(function () {
           $('#modal-signalement-content .slds-has-error').removeClass('slds-has-error');
           self.handleClickChooseCategorie();
         });
     },
-    handleSousCategorieFetched: function(response) {
+    handleSousCategorieFetched: function (response) {
       console.log(`>> handleSousCategorieFetched`, response);
       const self = this;
       let selectCtnr2 = $('#select-sous-categorie').empty();
       selectCtnr2.append(
         $(`
         <option value="">Sélectionner une sous-categorie</option> 
-        ${response.sous_categorie.map(p => `<option value="${p.id}" >${p.libelle}</option>`).join('')}
+        ${response.sous_categorie.map((p) => `<option value="${p.id}" >${p.libelle}</option>`).join('')}
       `)
       );
       if (`${response.sous_categorie}` != '') {
         $('#parent_sous_categorie').removeClass('slds-hide');
       }
     },
-    handleCategorie2sFetched: function(response) {
+    handleCategorie2sFetched: function (response) {
       console.log(`>> handleCategorie2sFetched`, response);
       const self = this;
       let selectCtnr2 = $('#select-categorie2s').empty();
       selectCtnr2.append(
         $(`
-          ${response.categorie_2s.map(p => `<option value="${p.id}" >${p.libelle}</option>`).join('')}
+          ${response.categorie_2s.map((p) => `<option value="${p.id}" >${p.libelle}</option>`).join('')}
       `)
       );
       if (`${response.categorie_2s}` != '') {
         $('#parent_categorie2s').removeClass('slds-hide');
       }
     },
-    handleClickChooseCategorie: function() {
+    handleClickChooseCategorie: function () {
       const selectCtnr = $('#select-categorie');
       let catgorieId = selectCtnr.val();
       let selectedOption = $(selectCtnr[0].selectedOptions[0]);
 
       let selectedCategorie = {
-        id: catgorieId
+        id: catgorieId,
       };
       console.log(selectedCategorie);
       this.fetchSousCategorie(selectedCategorie);
     },
 
-    handleClickChooseTypeSignalement: function() {
+    handleClickChooseTypeSignalement: function () {
       $('#parent_categorie2s').addClass('slds-hide');
       $('#parent_sous_categorie').addClass('slds-hide');
       const selectCtnr = $('#select-type-signalement');
@@ -1279,12 +1255,12 @@
       let selectedOption = $(selectCtnr[0].selectedOptions[0]);
 
       let selectedTypeSignalement = {
-        id: typeSignalementId
+        id: typeSignalementId,
       };
       console.log(selectedTypeSignalement);
       this.fetchCategorie(selectedTypeSignalement);
     },
-    handleClickChooseTypeLieu: function(niveauOK) {
+    handleClickChooseTypeLieu: function (niveauOK) {
       const selectCtnr = $('#select-type-lieu');
       let typeLieuId = selectCtnr.val();
       if (typeLieuId === '' || selectCtnr[0].selectedOptions.length === 0) {
@@ -1294,7 +1270,7 @@
       let selectedOption = $(selectCtnr[0].selectedOptions[0]);
 
       let selectedTypeLieu = {
-        id: typeLieuId
+        id: typeLieuId,
       };
       if (niveauOK) {
         $('#parent_niveau').removeClass('slds-hide');
@@ -1307,52 +1283,52 @@
         selectNiveau.append(
           $(`
         <option value=""> </option> 
-        ${list_niveau.map(p => `<option value="${p}" >${p}</option>`).join('')}
+        ${list_niveau.map((p) => `<option value="${p}" >${p}</option>`).join('')}
       `)
         );
       }
     },
 
-    fetchCategorie: function(type_signalement) {
+    fetchCategorie: function (type_signalement) {
       const self = this;
       const categorieUrl = `${this._options.baseRESTServicesURL}/signalement.php?patrouille_id=${self._options.patrouille.id}&mission_id=${self._currentMission.features[0].properties.mission_id}&type_signalement=${type_signalement.id}&categorie=`;
       $.ajax({
         type: 'GET',
         url: categorieUrl,
-        success: function(response) {
+        success: function (response) {
           console.log(`${categorieUrl}: `, response);
           self.handleCategorieFetched(response);
           self.handleCategorie2sFetched(response);
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
             console.warn(`[GET] ${categorieUrl} Request aborted`);
           } else {
             console.error(`[GET] ${categorieUrl} ERROR: ${textStatus}`, errorThrown);
           }
-        }
+        },
       });
     },
-    fetchSousCategorie: function(categorie) {
+    fetchSousCategorie: function (categorie) {
       const self = this;
       const sousCategorieUrl = `${this._options.baseRESTServicesURL}/signalement.php?patrouille_id=${self._options.patrouille.id}&mission_id=${self._currentMission.features[0].properties.mission_id}&type_signalement=&categorie=${categorie.id}`;
       $.ajax({
         type: 'GET',
         url: sousCategorieUrl,
-        success: function(response) {
+        success: function (response) {
           console.log(`${sousCategorieUrl}: `, response);
           self.handleSousCategorieFetched(response);
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
             console.warn(`[GET] ${sousCategorieUrl} Request aborted`);
           } else {
             console.error(`[GET] ${sousCategorieUrl} ERROR: ${textStatus}`, errorThrown);
           }
-        }
+        },
       });
     },
-    checkMissionStatut: function() {
+    checkMissionStatut: function () {
       let self = this;
       if (this._currentMission !== null) {
         let self = this;
@@ -1360,33 +1336,33 @@
         $.ajax({
           type: 'GET',
           url: statutMissionUrl,
-          success: function(response) {
+          success: function (response) {
             console.log(`${statutMissionUrl}: `, response);
             if (response.code === 200) {
               if (response.statut === 'Fin' || response.statut === 'Nouvelle mission') {
                 self.finishCurrentMission();
               } else {
-                setTimeout(function() {
+                setTimeout(function () {
                   self.checkMissionStatut();
                 }, GGO.CHECK_MISSION_INTERVALLE);
               }
             } else {
-              setTimeout(function() {
+              setTimeout(function () {
                 self.checkMissionStatut();
               }, GGO.CHECK_MISSION_INTERVALLE);
             }
           },
-          error: function(jqXHR, textStatus, errorThrown) {
+          error: function (jqXHR, textStatus, errorThrown) {
             if (textStatus === 'abort') {
               console.warn(`[GET] ${statutMissionUrl} Request aborted`);
             } else {
               console.error(`${statutMissionUrl} request error : ${textStatus}`, errorThrown);
             }
-          }
+          },
         });
       }
     },
-    checkPauseTime: function() {
+    checkPauseTime: function () {
       let self = this;
       if (this._currentMission !== null) {
         if (self._currentMission.features[0].properties.type_mission === 'Pause') {
@@ -1395,34 +1371,34 @@
           $.ajax({
             type: 'GET',
             url: pauseUrl,
-            success: function(response) {
+            success: function (response) {
               console.log(`${pauseUrl}: `, response);
               if (response.code === 200) {
                 if (response.fin_pause & (self._currentMission.features[0].properties.statut === 'Début')) {
                   GGO.notifyNewMissionSound(2);
                 } else {
-                  setTimeout(function() {
+                  setTimeout(function () {
                     self.checkPauseTime();
                   }, GGO.CHECK_MISSION_INTERVALLE);
                 }
               } else {
-                setTimeout(function() {
+                setTimeout(function () {
                   self.checkPauseTime();
                 }, GGO.CHECK_MISSION_INTERVALLE);
               }
             },
-            error: function(jqXHR, textStatus, errorThrown) {
+            error: function (jqXHR, textStatus, errorThrown) {
               if (textStatus === 'abort') {
                 console.warn(`[GET] ${pauseUrl} Request aborted`);
               } else {
                 console.error(`${statutMissionUrl} request error : ${textStatus}`, errorThrown);
               }
-            }
+            },
           });
         }
       }
     },
-    checkMissionRenfort: function() {
+    checkMissionRenfort: function () {
       let self = this;
       if (this._currentMission !== null) {
         let self = this;
@@ -1430,32 +1406,32 @@
         $.ajax({
           type: 'GET',
           url: renfortMissionUrl,
-          success: function(response) {
+          success: function (response) {
             console.log(`${renfortMissionUrl}: `, response);
             if (response.code === 200) {
               if (response.renfort !== null) {
                 $('#list_renfort').text(response.renfort.replace('{', '').replace('}', ''));
-                setTimeout(function() {
+                setTimeout(function () {
                   self.checkMissionRenfort();
                 }, GGO.CHECK_MISSION_INTERVALLE);
               }
             } else {
-              setTimeout(function() {
+              setTimeout(function () {
                 self.checkMissionRenfort();
               }, GGO.CHECK_MISSION_INTERVALLE);
             }
           },
-          error: function(jqXHR, textStatus, errorThrown) {
+          error: function (jqXHR, textStatus, errorThrown) {
             if (textStatus === 'abort') {
               console.warn(`[GET] ${renfortMissionUrl} Request aborted`);
             } else {
               console.error(`${renfortMissionUrl} request error : ${textStatus}`, errorThrown);
             }
-          }
+          },
         });
       }
     },
-    checkActivite: function() {
+    checkActivite: function () {
       let self = this;
       if (this._currentMission !== null) {
         let self = this;
@@ -1464,42 +1440,42 @@
           self._checkActiviteRequest = $.ajax({
             type: 'GET',
             url: activiteUrl,
-            success: function(response) {
+            success: function (response) {
               console.log(`${activiteUrl}: `, response);
               if (response.code === 200) {
                 if (!response.actif) {
                   GGO.SessionIssuePrompt('Perte de la session', `Veuillez vous reconnecter.`, $('#appContainer').empty());
-                } else {    
+                } else {
                   if (self._checkActivityTimer) {
                     clearTimeout(self._checkActivityTimer);
-                  }            
-                  self._checkActivityTimer = setTimeout(function() {
+                  }
+                  self._checkActivityTimer = setTimeout(function () {
                     self.checkActivite();
                   }, GGO.CHECK_MISSION_INTERVALLE);
                 }
               } else {
                 if (self._checkActivityTimer) {
                   clearTimeout(self._checkActivityTimer);
-                }            
-                self._checkActivityTimer = setTimeout(function() {
+                }
+                self._checkActivityTimer = setTimeout(function () {
                   self.checkActivite();
                 }, GGO.CHECK_MISSION_INTERVALLE);
               }
               delete self._checkActiviteRequest;
             },
-            error: function(jqXHR, textStatus, errorThrown) {
+            error: function (jqXHR, textStatus, errorThrown) {
               if (textStatus === 'abort') {
                 console.warn(`[GET] ${activiteUrl} Request aborted`);
               } else {
                 console.error(`${activiteUrl} request error : ${textStatus}`, errorThrown);
               }
               delete self._checkActiviteRequest;
-            }
+            },
           });
         }
       }
     },
-    checkStatutMissionEnCours: function() {
+    checkStatutMissionEnCours: function () {
       let self = this;
       if (this._currentMission !== null) {
         let self = this;
@@ -1507,7 +1483,7 @@
         $.ajax({
           type: 'GET',
           url: statutMissionEnCoursUrl,
-          success: function(response) {
+          success: function (response) {
             if (response.code === 200) {
               if (response.statut_mission_encours !== null) {
                 $('#statut_mission').text(response.statut_mission_encours);
@@ -1584,34 +1560,34 @@
                   $('#btnMissionSignalement').addClass('slds-hide');
                   $('#btnMissionAdresse').removeClass('slds-hide');
                 }
-                setTimeout(function() {
+                setTimeout(function () {
                   self.checkStatutMissionEnCours();
                 }, GGO.CHECK_MISSION_INTERVALLE);
               }
             } else {
-              setTimeout(function() {
+              setTimeout(function () {
                 self.checkStatutMissionEnCours();
               }, GGO.CHECK_MISSION_INTERVALLE);
             }
           },
-          error: function(jqXHR, textStatus, errorThrown) {
+          error: function (jqXHR, textStatus, errorThrown) {
             if (textStatus === 'abort') {
               console.warn(`[GET] ${statutMissionEnCoursUrl} Request aborted`);
             } else {
               console.error(`${statutMissionEnCoursUrl} request error : ${textStatus}`, errorThrown);
             }
-          }
+          },
         });
       }
     },
-    checkMissionSousSecteur: function() {
+    checkMissionSousSecteur: function () {
       if (this._currentMission !== null) {
         let self = this;
-        let verificationMissionUrl = `${this._options.baseRESTServicesURL}/verification.php?mission=${this._currentMission.features[0].properties.mission_id}&sssecteurs=${this._options.secteurs.map(s => s.id).join(',')}`;
+        let verificationMissionUrl = `${this._options.baseRESTServicesURL}/verification.php?mission=${this._currentMission.features[0].properties.mission_id}&sssecteurs=${this._options.secteurs.map((s) => s.id).join(',')}`;
         $.ajax({
           type: 'GET',
           url: verificationMissionUrl,
-          success: function(response) {
+          success: function (response) {
             console.log(`${verificationMissionUrl}: `, response);
             if (response.code === 200) {
               if (!response.verification_type_missions) {
@@ -1636,47 +1612,47 @@
               }
             }
           },
-          error: function(jqXHR, textStatus, errorThrown) {
+          error: function (jqXHR, textStatus, errorThrown) {
             if (textStatus === 'abort') {
               console.warn(`[GET] ${verificationMissionUrl} Request aborted`);
             } else {
               console.error(`${verificationMissionUrl} request error : ${textStatus}`, errorThrown);
             }
-          }
+          },
         });
       }
     },
-    checkMission: function() {
+    checkMission: function () {
       let self = this;
       console.log('checkMission');
       if (self._checkMissionTimer) {
         clearTimeout(self._checkMissionTimer);
       }
-      self._checkMissionTimer = setTimeout(function() {
+      self._checkMissionTimer = setTimeout(function () {
         self.fetchMission();
       }, GGO.CHECK_MISSION_INTERVALLE);
     },
-    fetchMission: function() {
+    fetchMission: function () {
       let self = this;
       let missionUrl = `${this._options.baseRESTServicesURL}/mission_sous_secteur.php?patrouille=${this._options.patrouille.id}`;
       $.ajax({
         type: 'GET',
         url: missionUrl,
-        success: function(response) {
+        success: function (response) {
           console.log(`${missionUrl}: `, response);
           self.handleMissionFetched(response);
           self.checkActivite();
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
             console.warn(`[GET] ${missionUrl} Request aborted`);
           } else {
             console.error(`${missionUrl} request error : ${textStatus}`, errorThrown);
           }
-        }
+        },
       });
     },
-    handleMissionFetched: function(response) {
+    handleMissionFetched: function (response) {
       switch (response.code) {
         case 200:
           this.handleMissionResponseOK(response);
@@ -1692,13 +1668,13 @@
           $('#waiting4Mission h2').text(response.message);
       }
     },
-    handleMissionResponseOK: function(response) {
+    handleMissionResponseOK: function (response) {
       if (response.features.length > 0) {
         let theMission = response.features[0];
         if (theMission.properties.statut !== 'Fin') {
           this._currentMission = {
             type: 'FeatureCollection',
-            features: response.features
+            features: response.features,
           };
           this.renderMissionViewMode();
           $('#waiting4Mission').addClass('slds-hide');
@@ -1719,7 +1695,7 @@
       }
     },
 
-    renderMissionViewMode: function() {
+    renderMissionViewMode: function () {
       GGO.EventBus.dispatch(GGO.EVENTS.SHOWMISSIONMLOCATION, this._currentMission);
       let mission = this._currentMission.features[0];
       let content = $(`<div class="slds-form" role="list"></div>`);
@@ -1914,7 +1890,7 @@
         <div class="slds-form-element__static"  id="incidentes">
           <ul class="slds-list_dotted">
             ${mission.properties.incidente
-              .map(s => {
+              .map((s) => {
                 return `
                 <li id='incidente_list_${s.incidente_id}' value=${s.incidente_id}>${moment(s.date).format('DD/MM/YYYY  HH:mm')} : ${s.libelle}
                   <span class="incidente-observation">${s.observations}</span>
@@ -1947,7 +1923,7 @@
         <div class="slds-form-element__static" id="signalements">
           <ul class="slds-list_dotted" id = "parent-list">
             ${mission.properties.signalement
-              .map(s => {
+              .map((s) => {
                 return `<li id='signalement_list_${s.id}' value=${s.id}>${moment(s.date).format('DD/MM/YYYY  HH:mm')} : ${s.libelle}</li>`;
               })
               .join('')}
@@ -1978,9 +1954,7 @@
         $('#mission-renfort-info').addClass('slds-hide');
         $('#mission-btn-list').removeClass('slds-hide');
       }
-      $('#missionContent')
-        .empty()
-        .append(content);
+      $('#missionContent').empty().append(content);
       /*
       TODO: refactor
       $('#signalement_list li').click(function(e) { console.log($(this).val()); }) 
@@ -1988,13 +1962,13 @@
       if (!mission.properties.renfort) {
         $('#signalements li')
           .off()
-          .click(function(e) {
+          .click(function (e) {
             self.openReaffectationModal();
             self.fetchFormSignalements($(this).val(), self._options.patrouille.id);
           });
         $('#incidentes li')
           .off()
-          .click(function(e) {
+          .click(function (e) {
             console.log($(this));
             self.openIncidenteModal();
             self.fetchFormIncidentes($(this).val());
@@ -2004,26 +1978,26 @@
       }
       $('#incidentes li')
         .off()
-        .click(function(e) {
+        .click(function (e) {
           console.log($(this));
           self.openIncidenteModal();
           self.fetchFormIncidentes($(this).val());
         });
-    }
+    },
   };
-  GGO.MissionManagerSingleton = (function() {
+  GGO.MissionManagerSingleton = (function () {
     let instance;
     function createInstance(options) {
       let missionMgr = new GGO.MissionManager(options);
       return missionMgr;
     }
     return {
-      getInstance: function(options) {
+      getInstance: function (options) {
         if (!instance) {
           instance = createInstance(options);
         }
         return instance;
-      }
+      },
     };
   })();
 })();

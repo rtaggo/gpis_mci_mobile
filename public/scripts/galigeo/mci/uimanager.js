@@ -1,45 +1,48 @@
-(function() {
+(function () {
   'use strict';
-  GGO.UIManager = function(options) {
+  GGO.UIManager = function (options) {
     this._options = options || {};
     this._init();
   };
 
   GGO.UIManager.prototype = {
-    _init: function() {
+    _init: function () {
       this._viewSize = {
         width: $(window).width(),
-        height: this._options.windowHeight || $(window).height()
+        height: this._options.windowHeight || $(window).height(),
       };
       this._viewSize.halfHeight = this._viewSize.height / 2;
       this._viewSize.twothirdHeight = this._viewSize.height * (2 / 3);
       this._viewSize.thirdHeight = this._viewSize.height / 3;
       this._viewSize.heightThreshold = this._viewSize.height / 7;
       $('#map').css({
-        height: this._viewSize.thirdHeight + 'px'
+        height: this._viewSize.thirdHeight + 'px',
       });
       $('#mission-card-Container').css({
-        'max-height': this._viewSize.twothirdHeight + 'px'
+        'max-height': this._viewSize.twothirdHeight + 'px',
       });
       $('#mission-card-Container .slds-card__body').css({
         height: this._viewSize.twothirdHeight - 20 + 'px',
-        'max-height': this._viewSize.twothirdHeight - 20 + 'px'
+        'max-height': this._viewSize.twothirdHeight - 20 + 'px',
       });
       this._setupListeners();
     },
-    _setupListeners: function() {
+    _setupListeners: function () {
       let self = this;
-      $('#neighborhoodIcon').click(function(e) {
+      $('#neighborhoodIcon').click(function (e) {
         GGO.EventBus.dispatch(GGO.EVENTS.NEIGHBORHOOD);
       });
-      $('#legendIcon').click(function(e) {
+      $('#forbiddensIcon').click(function (e) {
+        GGO.ForbiddenCheckerSingleton.getInstance().display_forbiddens();
+      });
+      $('#legendIcon').click(function (e) {
         if ($('#legend_popover').hasClass('slds-hide')) {
           $('#topleft_container .slds-popover').addClass('slds-hide');
         }
         $('#legend_popover').toggleClass('slds-hide');
         self.updateActivite(JSON.parse(sessionStorage.patrouille).id);
       });
-      $('#basemapIcon').click(function(e) {
+      $('#basemapIcon').click(function (e) {
         if ($('#basemap_popover').hasClass('slds-hide')) {
           $('#topleft_container .slds-popover').addClass('slds-hide');
         }
@@ -47,7 +50,7 @@
         self.updateActivite(JSON.parse(sessionStorage.patrouille).id);
       });
       $('#swiper_handle').swipe({
-        swipeStatus: function(event, phase, direction, distance, duration, fingers, fingerData, currentDirection) {
+        swipeStatus: function (event, phase, direction, distance, duration, fingers, fingerData, currentDirection) {
           if (phase !== 'cancel' && phase !== 'end') {
             //$('#legend_popover').addClass('slds-hide');
             $('#topleft_container .slds-popover').addClass('slds-hide');
@@ -56,12 +59,12 @@
               var tempCardHeight = self._viewSize.height - fingerData[0].end.y;
               $('#mission-card-Container').css({
                 height: tempCardHeight,
-                'max-height': tempCardHeight
+                'max-height': tempCardHeight,
               });
               tempCardHeight -= 20;
               $('#mission-card-Container .slds-card__body').css({
                 height: tempCardHeight + 'px',
-                'max-height': tempCardHeight + 'px'
+                'max-height': tempCardHeight + 'px',
               });
             }
           } else if (phase === 'end') {
@@ -70,14 +73,14 @@
           }
         },
         //Default is 75px, set to 0 for demo so any distance triggers swipe
-        threshold: 0
+        threshold: 0,
       });
     },
-    updateActivite: function(patrouille_id) {
+    updateActivite: function (patrouille_id) {
       let self = this;
       let activiteUrl = `/services/rest/mci/activite_map.php`;
       let reqBody = {
-        patrouille_id: patrouille_id
+        patrouille_id: patrouille_id,
       };
       $.ajax({
         type: 'POST',
@@ -85,19 +88,19 @@
         data: JSON.stringify(reqBody),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
-        success: function(response) {
+        success: function (response) {
           console.log(`Response`, response);
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
             console.warn(`Request aborted`);
           } else {
             console.error(`Error request: ${textStatus}`, errorThrown);
           }
-        }
+        },
       });
     },
-    _handleSwipeUpDownEnd: function(direction, data) {
+    _handleSwipeUpDownEnd: function (direction, data) {
       var self = this;
       var bCardHeight = 24;
       switch (direction) {
@@ -157,12 +160,12 @@
       }
       $('#mission-card-Container').css({
         height: bCardHeight + 'px',
-        'max-height': bCardHeight + 'px'
+        'max-height': bCardHeight + 'px',
       });
       bCardHeight -= 20;
       $('#mission-card-Container .slds-card__body').css({
         height: bCardHeight + 'px',
-        'max-height': bCardHeight + 'px'
+        'max-height': bCardHeight + 'px',
       });
       /*
       if (bCardHeight < 32) {
@@ -172,25 +175,25 @@
       }
       */
       $('#map').css({
-        height: this._viewSize.height - bCardHeight + 'px'
+        height: this._viewSize.height - bCardHeight + 'px',
       });
       GGO.EventBus.dispatch(GGO.EVENTS.INVALIDATEMAPSIZE);
-    }
+    },
   };
 
-  GGO.UIManagerSingleton = (function() {
+  GGO.UIManagerSingleton = (function () {
     let instance;
     function createInstance(options) {
       let uiMgr = new GGO.UIManager(options);
       return uiMgr;
     }
     return {
-      getInstance: function(options) {
+      getInstance: function (options) {
         if (!instance) {
           instance = createInstance(options);
         }
         return instance;
-      }
+      },
     };
   })();
 })();

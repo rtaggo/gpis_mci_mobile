@@ -199,6 +199,7 @@
 
   GGO.CHECK_MISSION_INTERVALLE = 7000;
   GGO.CHECK_PAUSE_INTERVALLE = 10000 * 6 * 5;
+  GGO.CHECK_RESTRICTIONS_INTERVALLE = 1000;
   GGO.CHECK_PATRIMOINE_INTERVALLE = 120000;
   GGO.COLORPALETTES = {
     rdYlBu: ['#4874bf', '#228714', '#edeb2a', '#f99e38', '#ff0000', '#000000'],
@@ -208,21 +209,41 @@
   };
 
   GGO.notifyNewMissionSound = function (code) {
+    let name_music = null;
+    /*
     if (code === 1) {
       var name_music = '/sounds/new_mission.mp3'; // new mission
     } else if (code === 2) {
       var name_music = '/sounds/kaxon_velo.mp3'; // fin de pause
+    } else if (code === 3) {
+      var name_music = '/sounds/new_alert.mp3'; // fin de pause
     }
-    try {
-      var music = new Audio(name_music);
-      var p = music.play();
-      p.then((event) => {
-        console.log(event);
-      }).catch((err) => {
-        console.log(err.message);
-      });
-    } catch (error) {
-      console.error(`Error while playing sound`, error);
+    */
+    switch (code) {
+      case 1:
+        name_music = '/sounds/new_mission.mp3';
+        break;
+      case 2:
+        name_music = '/sounds/kaxon_velo.mp3';
+        break;
+      case 3:
+        name_music = '/sounds/new_restriction.mp3';
+        break;
+      default:
+        console.war(`code ${code} non supporté`);
+    }
+    if (name_music) {
+      try {
+        var music = new Audio(name_music);
+        var p = music.play();
+        p.then((event) => {
+          console.log(event);
+        }).catch((err) => {
+          console.log(err.message);
+        });
+      } catch (error) {
+        console.error(`Error while playing sound`, error);
+      }
     }
   };
 
@@ -383,6 +404,62 @@
     INVALIDATEMAPSIZE: 'invalidemapsize',
     NEIGHBORHOOD: 'neighborhood',
     CLEARMISSIONMLOCATION: 'clearmissionlocation',
+  };
+
+  GGO.docCookies = {
+    getItem: function (sKey) {
+      if (!sKey || !this.hasItem(sKey)) {
+        return null;
+      }
+      return unescape(document.cookie.replace(new RegExp('(?:^|.*;\\s*)' + escape(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*((?:[^;](?!;))*[^;]?).*'), '$1'));
+    },
+    /**
+     * docCookies.setItem(sKey, sValue, vEnd, sPath, sDomain, bSecure)
+     *
+     * @argument sKey (String): the name of the cookie;
+     * @argument sValue (String): the value of the cookie;
+     * @optional argument vEnd (Number, String, Date Object or null): the max-age in seconds (e.g., 31536e3 for a year) or the
+     *  expires date in GMTString format or in Date Object format; if not specified it will expire at the end of session;
+     * @optional argument sPath (String or null): e.g., "/", "/mydir"; if not specified, defaults to the current path of the current document location;
+     * @optional argument sDomain (String or null): e.g., "example.com", ".example.com" (includes all subdomains) or "subdomain.example.com"; if not
+     * specified, defaults to the host portion of the current document location;
+     * @optional argument bSecure (Boolean or null): cookie will be transmitted only over secure protocol as https;
+     * @return undefined;
+     **/
+
+    setItem: function (sKey, sValue, vEnd, sPath, sDomain, bSecure) {
+      if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/.test(sKey)) {
+        return;
+      }
+      var sExpires = '';
+      if (vEnd) {
+        switch (typeof vEnd) {
+          case 'number':
+            sExpires = '; max-age=' + vEnd;
+            break;
+          case 'string':
+            sExpires = '; expires=' + vEnd;
+            break;
+          case 'object':
+            if (vEnd.hasOwnProperty('toGMTString')) {
+              sExpires = '; expires=' + vEnd.toGMTString();
+            }
+            break;
+        }
+      }
+      document.cookie = escape(sKey) + '=' + escape(sValue) + sExpires + (sDomain ? '; domain=' + sDomain : '') + (sPath ? '; path=' + sPath : '') + (bSecure ? '; secure' : '') + ';SameSite=Lax';
+    },
+    removeItem: function (sKey) {
+      if (!sKey || !this.hasItem(sKey)) {
+        return;
+      }
+      var oExpDate = new Date();
+      oExpDate.setDate(oExpDate.getDate() - 1);
+      document.cookie = escape(sKey) + '=; expires=' + oExpDate.toGMTString() + '; path=/';
+    },
+    hasItem: function (sKey) {
+      return new RegExp('(?:^|;\\s*)' + escape(sKey).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=').test(document.cookie);
+    },
   };
 })();
 /* end GGO: put code below in galigeo.js */
