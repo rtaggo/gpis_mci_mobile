@@ -345,6 +345,15 @@ router.get('/cookie_restrictions.php', (req, res, next) => {
   });
 });
 
+router.get('/crise.php', (req, res, next) => {
+  //console.log(`[MCI_REST_API][GET] /activite.php ${JSON.stringify(req.query)}`);
+  const mcimodule = getMCIModule();
+  mcimodule.getCrise().then((criseResponse) => {
+    res.header('Content-Type', 'application/json');
+    res.json(criseResponse);
+  });
+});
+
 /**
  * Errors on "/mci/*" routes.
  */
