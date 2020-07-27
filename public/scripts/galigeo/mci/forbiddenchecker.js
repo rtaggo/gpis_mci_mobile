@@ -271,8 +271,8 @@
             <span class="slds-assistive-text">Collapse Panel Header</span>
           </button>
         </div>
-        <div class="slds-panel__body slds-scrollable_y" style="height:calc(100% - 49px);position:relative;">
-          <div id="forbiddens_content" style="position: absolute; top: 0; left: 0; bottom: 0; right: 0px;"></div>
+        <div class="slds-panel__body " style="height:calc(100% - 49px);position:relative;">
+          <div id="forbiddens_content" class="slds-scrollable_y" style="position: absolute; top: 0; left: 0; bottom: 0; right: 0px;"></div>
         </div>
       </div>
       `);
