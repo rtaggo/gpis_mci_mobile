@@ -70,7 +70,7 @@
             <header class="slds-modal__header slds-theme_error slds-theme_alert-texture">
               <h2 class="slds-text-heading_medium" id="prompt-heading-id">${title}</h2>
             </header>
-            <div class="slds-modal__content slds-p-around_small slds-scrollable_y" style="padding-left : 1rem ; padding-right : 1rem" id="prompt-message-wrapper">
+            <div class="slds-modal__content slds-p-around_small slds-scrollable" style="padding-left : 1rem ; padding-right : 1rem" id="prompt-message-wrapper">
             </div>
             <footer class="slds-modal__footer slds-theme_default">
               <button class="slds-button slds-button_neutral" data-what="return">Fermer</button>
@@ -105,7 +105,7 @@
                   <div style="font-size :large ; font-weight : bold " >Code noir<br></div> 
                   ${code_noir
                     .map((b) => {
-                      return `<div style="font-size :medium">${b.secteur_libelle} - ${b.site_libelle} ( ${b.patrouille_libelle} )</div>`;
+                      return `<div style="font-size :medium">${b.secteur_libelle} - ${b.site_libelle} ( ${b.patrouilles_libelle} )</div>`;
                     })
                     .join('')}
                 
@@ -125,7 +125,7 @@
                   <div style="font-size :large ; font-weight : bold  ; color : #ff0000 ">Code Rouge<br></div>
                   ${code_rouge
                     .map((b) => {
-                      return `<div style="font-size :medium">${b.secteur_libelle} - ${b.site_libelle} ( ${b.patrouille_libelle} )</div>`;
+                      return `<div style="font-size :medium">${b.secteur_libelle} - ${b.site_libelle} ( ${b.patrouilles_libelle} )</div>`;
                     })
                     .join('')}
                 
