@@ -144,23 +144,23 @@
       }
 
       container.append(`
-        <section id="popup_restrictions" role="alertdialog" tabindex="0" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper" class="slds-modal slds-fade-in-open slds-modal_prompt" aria-modal="true" style="z-index: 10000;">
+        <section id="popup_restrictions" role="alertdialog" tabindex="0" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper-restr" class="slds-modal slds-fade-in-open slds-modal_prompt" aria-modal="true" style="z-index: 10000;">
           <div class="slds-modal__container">
             <header class="slds-modal__header slds-theme_error slds-theme_alert-texture">
               <h2 class="slds-text-heading_medium" id="prompt-heading-id">${title}</h2>
             </header>
-            <div class="slds-modal__content slds-p-around_small slds-scrollable_y" style="padding-left : 1rem ; padding-right : 1rem" id="prompt-message-wrapper">
+            <div class="slds-modal__content slds-p-around_small slds-scrollable_y" style="padding-left : 1rem ; padding-right : 1rem" id="prompt-message-wrapper-restr">
             </div>
             <footer class="slds-modal__footer slds-theme_default">
               <button class="slds-button slds-button_neutral" data-what="return">Fermer</button>
             </footer>
           </div>
         </section>
-        <div class="slds-backdrop slds-backdrop_open"></div>
+        <div class="slds-backdrop slds-backdrop_open" id="backdrop_restr" ></div>
       `);
       $('#appContainer footer > button.slds-button').click(function (e) {
-        $('.slds-modal').remove();
-        $('.slds-backdrop').remove();
+        $('#popup_restrictions').remove();
+        $('#backdrop_restr').remove();
       });
       let type_lieu_restriction = [
         {
@@ -188,7 +188,7 @@
       const interdits = [...new Set(sites.filter((s) => s.type_restriction_id === 2).map((s) => s.libelle))];
       const renforces = [...new Set(sites.filter((s) => s.type_restriction_id === 3).map((s) => s.libelle))];
       const restreints = [...new Set(sites.filter((s) => s.type_restriction_id === 4).map((s) => s.libelle))];
-      $('#prompt-message-wrapper')
+      $('#prompt-message-wrapper-restr')
         .empty()
         .append(
           $(`<div id="general">

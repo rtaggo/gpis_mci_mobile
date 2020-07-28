@@ -43,7 +43,7 @@
               // update du cookie
               GGO.docCookies.setItem('gpis_crisis', JSON.stringify([...sites.map((s) => s.id), ...sites_crise_set]), 31536e3, '/', null);
               //affichage de la popup
-              self.alertCrisesPrompt('Nouvelle Gestion de Crise', $('#appContainer'), sites, options);
+              self.alertCrisesPrompt('Situation de crise en cours', $('#appContainer'), sites, options);
             }
           }
           self.await_before_recall();
@@ -65,30 +65,45 @@
       }
 
       container.append(`
-        <section id="popup_crises" role="alertdialog" tabindex="0" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper" class="slds-modal slds-fade-in-open slds-modal_prompt" aria-modal="true" style="z-index: 10000;">
+        <section id="popup_crises" role="alertdialog" tabindex="0" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper-crisis" class="slds-modal slds-fade-in-open slds-modal_prompt" aria-modal="true" style="z-index: 10000;">
           <div class="slds-modal__container">
             <header class="slds-modal__header slds-theme_error slds-theme_alert-texture">
               <h2 class="slds-text-heading_medium" id="prompt-heading-id">${title}</h2>
             </header>
-            <div class="slds-modal__content slds-p-around_small slds-scrollable" style="padding-left : 1rem ; padding-right : 1rem" id="prompt-message-wrapper">
+            <div class="slds-modal__content slds-p-around_small slds-scrollable" style="padding-left : 1rem ; padding-right : 1rem" id="prompt-message-wrapper-crisis">
             </div>
             <footer class="slds-modal__footer slds-theme_default">
               <button class="slds-button slds-button_neutral" data-what="return">Fermer</button>
             </footer>
           </div>
         </section>
-        <div class="slds-backdrop slds-backdrop_open"></div>
+        <div class="slds-backdrop slds-backdrop_open" id="backdrop_crisis"></div>
       `);
       $('#appContainer footer > button.slds-button').click(function (e) {
-        $('.slds-modal').remove();
-        $('.slds-backdrop').remove();
+        $('#popup_crises').remove();
+        $('#backdrop_crisis').remove();
       });
 
       //const code_noir = [...new Set(sites.filter((s) => s.type_urgence === 1).map((s) => s.site_libelle))];
       const code_noir = [...new Set(sites.filter((s) => s.type_urgence === 1))];
+      const code_noir_bis = code_noir;
+      code_noir_bis.forEach(function (v) {
+        delete v.id;
+      });
+      const code_noir_ter = Array.from(new Set(code_noir_bis.map((a) => a.chrono_id))).map((id) => {
+        return code_noir_bis.find((a) => a.chrono_id === id);
+      });
+      console.log(code_noir_ter);
       //const code_rouge = [...new Set(sites.filter((s) => s.type_urgence === 2).map((s) => s.libelle))];
       const code_rouge = [...new Set(sites.filter((s) => s.type_urgence === 2))];
-      $('#prompt-message-wrapper')
+      const code_rouge_bis = code_rouge;
+      code_rouge_bis.forEach(function (v) {
+        delete v.id;
+      });
+      const code_rouge_ter = Array.from(new Set(code_rouge_bis.map((a) => a.chrono_id))).map((id) => {
+        return code_rouge_bis.find((a) => a.chrono_id === id);
+      });
+      $('#prompt-message-wrapper-crisis')
         .empty()
         .append(
           $(`<div id="general">
@@ -103,7 +118,7 @@
                 </span>
                 
                   <div style="font-size :large ; font-weight : bold " >Code noir<br></div> 
-                  ${code_noir
+                  ${code_noir_ter
                     .map((b) => {
                       return `<div style="font-size :medium">${b.secteur_libelle} - ${b.site_libelle} ( ${b.patrouilles_libelle} )</div>`;
                     })
@@ -123,7 +138,7 @@
                 </span>
                 
                   <div style="font-size :large ; font-weight : bold  ; color : #ff0000 ">Code Rouge<br></div>
-                  ${code_rouge
+                  ${code_rouge_ter
                     .map((b) => {
                       return `<div style="font-size :medium">${b.secteur_libelle} - ${b.site_libelle} ( ${b.patrouilles_libelle} )</div>`;
                     })
