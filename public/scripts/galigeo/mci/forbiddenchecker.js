@@ -210,7 +210,7 @@
                     .join('')}
                 </ul>
               </div>`
-              : ''
+              : `<div id="interdits" style="width:33%; float:left; color:#ffffff">.</div>`
           }
             ${
               renforces.length > 0
@@ -250,7 +250,7 @@
                     .join('')}
                 </ul>
               </div>`
-                : ''
+                : `<div id="restreints" style="width:33%; float:right; color:#ffffff">.</div>`
             }`)
         );
     },
@@ -323,12 +323,12 @@
                     .join('')}
                 </ul>
               </div>`
-              : ''
+              : `<div id="interdits" style="width:33%; float:left; color:#ffffff">.</div>`
           }
             ${
               renforces.length > 0
                 ? `
-              <div id="renforces" style="width:33% ; display:inline-block; text-align:center">
+              <div id="renforces" style="width:33% ; display:inline-block; text-align:center ">
                 <span class="slds-icon_container slds-icon_container_circle  slds-icon-action-new-group" title="Description of icon when needed">
                   <svg class="slds-icon slds-icon_xx-small .slds-icon-text-error" aria-hidden="true">
                     <use xlink:href="/styles/slds/assets/icons/action-sprite/svg/symbols.svg#new_group"></use>
@@ -364,7 +364,7 @@
                 </ul>
               </div>
             </div>`
-                : ''
+                : `<div id="restreints" style="width:33%; float:right; color:#ffffff">.</div>`
             }`)
                 );
             }
