@@ -132,7 +132,7 @@
         self.fetchAdresses();
         self.checkMissionStatut();
       });
-      $('#btnSignalementRenfort').click(function (e) {
+      $('#btnMissionSignalementRenfort').click(function (e) {
         self.openSignalementModal();
         self.fetchTypeSignalements();
       });
@@ -327,6 +327,7 @@
               </div>
             </div>           
             <footer class="slds-modal__footer">
+              <button id="btnSignalementHistorique" class="slds-button" style="background-color:#FFA533 ; color:white ; border: none; padding:2px 10px;" >Historique</button>
               <button id="btnSignalementOk" class="slds-button slds-button_brand">Valider</button>
               <button id="btnSignalementCancel" class="slds-button slds-button_neutral">Annuler</button>
             </footer>
@@ -401,6 +402,9 @@
       });
 
       $('body').append($('<div id="signalement-modal" class="ggoslds"></div>').append(theModal).append($('<div class="slds-backdrop slds-backdrop_open"></div>')));
+      $('#btnSignalementHistorique').click(function (e) {
+        self.openHistoriqueSignalementModal();
+      });
       $('#btnSignalementCancel').click(function (e) {
         $('#signalement-modal').remove();
       });
@@ -409,6 +413,88 @@
         //$('#signalement-modal').remove();
         self.checkBeforeSaveSignalement();
       });
+    },
+    openHistoriqueSignalementModal: function () {
+      GGO.EventBus.dispatch(GGO.EVENTS.SHOWMISSIONMLOCATION, this._currentMission);
+      let mission = this._currentMission.features[0];
+      //let content = $(`<div class="slds-form" role="list"></div>`);
+      let self = this;
+      let renfort = '';
+      if (mission.properties.renforts_patrouille !== null) {
+        renfort = mission.properties.renforts_patrouille.replace('{', '').replace('}', '');
+      }
+      // signalements
+      let signalementContent = '<div class="slds-form-element__static"><p>Aucun signalement</p></div>';
+      if (typeof mission.properties.signalement !== 'undefined' && Array.isArray(mission.properties.signalement) && mission.properties.signalement.length > 0) {
+        signalementContent = `
+        <div class="slds-form-element__static" id="signalements">
+          <ul class="slds-list_dotted" id = "parent-list">
+            ${mission.properties.signalement
+              .map((s) => {
+                return `<li id='signalement_list_${s.id}' value=${s.id}>${moment(s.date).format('DD/MM/YYYY  HH:mm')} : ${s.libelle}</li>`;
+              })
+              .join('')}
+          </ul>
+        </div>
+        `;
+      }
+      let modalHistorique = `
+      <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" id="historique-signalement-modal" aria-describedby="modal-historique-signalement-content" class="slds-modal slds-fade-in-open slds-modal_large">
+        <!-- Start Modal Container -->
+        <div class="slds-modal__container" style="margin: 0px; padding: 0px; height: 100%">
+          <header class="slds-modal__header">
+            <div style="float:left">
+              <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate" style="float:left">Historique des Signalements</h2>
+            </div>
+            <div style="float:right">
+              <button id= "btnCloseModalHistorique" class="slds-button slds-button_icon" >
+                <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                  <use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                </svg>
+              </button>
+            </div>
+          </header>
+          <!-- Start Modal Content -->
+          <div class="slds-modal__content slds-p-around_medium slds-scrollable_y" id="modal-historique-signalement-content" style="height: 80%">
+            <div class="slds-form" role="list">
+              <div class="slds-form__row">
+                <div class="slds-form__item" role="listitem" >
+                  <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                    <div class="slds-form-element__control" >
+                    ${signalementContent}
+                    </div>
+                  </div>
+                </div>
+              </div>          
+            </div>           
+            <!-- <footer class="slds-modal__footer" style="position:absolute bottom: 5px">
+              <button id="btnHistoriqueCancel" class="slds-button slds-button_neutral">Fermer</button>
+            </footer> -->
+          </div>
+          <!-- End Modal Content -->
+        </div>
+        <!-- End Modal Container -->
+      </section>
+      `;
+      let theModalHistorique = $(modalHistorique);
+
+      $('body').append($('<div id="historique-signalement-modal" class="ggoslds"></div>').append(theModalHistorique).append($('<div class="slds-backdrop slds-backdrop_open" id="backdrop_historique_signalement"></div>')));
+      $('#btnHistoriqueCancel').click(function (e) {
+        $('#historique-signalement-modal').remove();
+      });
+      $('#btnCloseModalHistorique').click(function (e) {
+        $('#historique-signalement-modal').remove();
+      });
+      ///if (!mission.properties.renfort) {
+      $('#signalements li')
+        .off()
+        .click(function (e) {
+          self.openReaffectationModal();
+          self.fetchFormSignalements($(this).val(), self._options.patrouille.id);
+        });
+      //} else {
+      // $("#renfort_label")[0].innerHTML = "Patrouille leader";
+      //}
     },
     openAdressesModal: function () {
       let self = this;
@@ -660,6 +746,10 @@
       $('#btnReaffecter').click(function (e) {
         self.validateReacffectation();
         $('#reaffectation-signalement-modal').remove();
+        if ($('#historique-signalement-modal')) {
+          $('#historique-signalement-modal').remove();
+          $('#signalement-modal').remove();
+        }
       });
     },
     validateSignalementInput: function (value2Check, containerId, errorHelperId) {
