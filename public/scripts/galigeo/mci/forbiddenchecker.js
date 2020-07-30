@@ -385,6 +385,12 @@
     // $('#forbiddens_content').empty().append(...)
   };
 
+  $('.slds-modal').on('shown.bs.slds-modal', function () {
+    if ($('.slds-modal').length > 1) {
+      $('.slds-backdrop').not(':first').remove();
+    }
+  });
+
   GGO.ForbiddenCheckerSingleton = (function () {
     let instance;
     function createInstance(options) {

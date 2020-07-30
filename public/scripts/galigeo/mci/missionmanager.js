@@ -427,8 +427,8 @@
       let signalementContent = '<div class="slds-form-element__static"><p>Aucun signalement</p></div>';
       if (typeof mission.properties.signalement !== 'undefined' && Array.isArray(mission.properties.signalement) && mission.properties.signalement.length > 0) {
         signalementContent = `
-        <div class="slds-form-element__static" id="signalements">
-          <ul class="slds-list_dotted" id = "parent-list">
+        <div class="slds-form-element__static" style="font-size: 1.1rem;" id="signalements">
+          <ul class="slds-list_dotted" style="line-height: 1.8;" id = "parent-list">
             ${mission.properties.signalement
               .map((s) => {
                 return `<li id='signalement_list_${s.id}' value=${s.id}>${moment(s.date).format('DD/MM/YYYY  HH:mm')} : ${s.libelle}</li>`;
@@ -439,6 +439,7 @@
         `;
       }
       let modalHistorique = `
+      
       <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" id="historique-signalement-modal" aria-describedby="modal-historique-signalement-content" class="slds-modal slds-fade-in-open slds-modal_large">
         <!-- Start Modal Container -->
         <div class="slds-modal__container" style="margin: 0px; padding: 0px; height: 100%">
@@ -455,7 +456,7 @@
             </div>
           </header>
           <!-- Start Modal Content -->
-          <div class="slds-modal__content slds-p-around_medium slds-scrollable_y" id="modal-historique-signalement-content" style="height: 80%">
+          <div class="slds-modal__content slds-p-around_medium slds-scrollable_y" id="modal-historique-signalement-content" style="height: 100%">
             <div class="slds-form" role="list">
               <div class="slds-form__row">
                 <div class="slds-form__item" role="listitem" >
