@@ -143,10 +143,10 @@
     handleNeighborhoodVehiclesFetched: function (response) {
       console.log('handleNeighborhoodVehiclesFetched', response);
       let zoomDone = false;
-      let test = response.map((s) => 
-        
-      )
-      let vehiclesGgeoJSON = [
+      var GeoJSON = [];
+      GeoJSON.parse(response, { Point: [response.vehicles.position.longitudeY, response.vehicles.position.latitudeX], include: [response.vehicles.immat] });
+      /* let vehiclesGgeoJSON = response.map((s) => 
+      [
         {
           type: 'Feature',
           properties:{
@@ -157,14 +157,9 @@
             coordinates: [response.vehicles.position.longitudeY, response.vehicles.position.latitudeX]
           }
         },
-        {
-          type: 'Feature',
-          geometry: {
-            type: 'Point',
-            coordinates: [-122.413682, 37.775408]
-          }
-        }
-      ];
+      ]
+      ); */
+
       /*
         on pourrait faire: 
         let colors = [...GGO.getColorPalette('secteurs')].reverse()
