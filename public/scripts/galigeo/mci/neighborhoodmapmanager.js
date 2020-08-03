@@ -1,6 +1,6 @@
-(function() {
+(function () {
   'use strict';
-  GGO.NeighborhoodMapManager = function(options) {
+  GGO.NeighborhoodMapManager = function (options) {
     this._options = options || {};
     this._options.baseRESTServicesURL = this._options.baseRESTServicesURL || '/services/rest/mci';
     this._options.mapboxAccessToken = this._options.mapboxAccessToken || 'pk.eyJ1IjoicnRhZ2dvIiwiYSI6Ijg5YWI5YzlkYzJiYzg2Mjg2YWQyMTQyZjRkZWFiMWM5In0._yZGbo26CQle1_JfHPxWzg';
@@ -12,24 +12,24 @@
       'stroke-width': 1,
       'stroke-opacity': 1,
       fill: '#FF00FF',
-      'fill-opacity': 0.7
+      'fill-opacity': 0.7,
     };
 
     this.init();
   };
 
   GGO.NeighborhoodMapManager.prototype = {
-    init: function() {
+    init: function () {
       this.setupListeners();
     },
-    setupListeners: function() {
+    setupListeners: function () {
       let self = this;
-      GGO.EventBus.addEventListener(GGO.EVENTS.NEIGHBORHOOD, function(e) {
+      GGO.EventBus.addEventListener(GGO.EVENTS.NEIGHBORHOOD, function (e) {
         console.log('[GGO.NeighborhoodMapManager] Received GGO.EVENTS.NEIGHBORHOOD');
         self.buildPanel();
       });
     },
-    buildPanel: function() {
+    buildPanel: function () {
       console.log(`buildPanel`);
       let panelContent = $(`
       <div id="neighborhoodMapPanel" class="slds-panel slds-panel_docked slds-panel_docked-left slds-is-open" aria-hidden="false" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0;z-index:10000; overflow: hidden;">
@@ -47,17 +47,17 @@
         </div>
       </div>
       `);
-      panelContent.find('.slds-panel__header button.slds-panel__close').click(function(e) {
+      panelContent.find('.slds-panel__header button.slds-panel__close').click(function (e) {
         $('#neighborhoodMapPanel').remove();
       });
       $('#appContainer').append(panelContent);
       this.setupMap();
     },
-    setupMap: function() {
+    setupMap: function () {
       let streetsTL = L.tileLayer('//server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
         attribution: '',
         minZoom: 1,
-        maxZoom: 19
+        maxZoom: 19,
       });
       this._map = L.map(this._mapDivId, {
         attributionControl: false,
@@ -65,41 +65,178 @@
         zoomControl: false,
         contextmenu: true,
         contextmenuWidth: 140,
-        layers: [streetsTL]
+        layers: [streetsTL],
       }).setView([48.853507, 2.348015], 12);
+      this.authenticateOcean();
       this.fetchNeighborhood();
     },
-    _getNeighborhoodURL: function() {
+    _getNeighborhoodURL: function () {
       console.log(this._options);
       if (this._options.userRole === 'india') {
         /*console.log(`Build neighborhood url for patrouille  ${JSON.stringify(this._options.patrouille)} with sectors ${JSON.stringify(this._options.secteurs)}`);*/
-        return `${this._options.baseRESTServicesURL}/voisinage.php?patrouille=${this._options.patrouille.id}&sssecteurs=${this._options.secteurs.map(s => s.id).join(',')}`;
+        return `${this._options.baseRESTServicesURL}/voisinage.php?patrouille=${this._options.patrouille.id}&sssecteurs=${this._options.secteurs.map((s) => s.id).join(',')}`;
       } else {
         /* case of charly or alpha */
         return `${this._options.baseRESTServicesURL}/voisinage.php?chefs_groupe=${this._options.chefsGroupe}&secteurs=${this._options.secteurs.join(',')}`;
       }
     },
-    fetchNeighborhood: function() {
+    authenticateOcean: function () {
+      let self = this;
+      let restAuthURL = 'https://v3.oceansystem.com/ocean-3.0.0/restapi/auth/authenticate?login=galigeo1&password=GPIS03';
+      $.ajax({
+        type: 'POST',
+        url: restAuthURL,
+        success: function (response) {
+          console.log(`${restAuthURL} token : `, response);
+          const token = response.token;
+          self.fetchNeighborhoodVehicles(response);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`${restAuthURL} Request aborted`);
+          } else {
+            console.error(`${restAuthURL} Error request: ${textStatus}`, errorThrown);
+          }
+        },
+      });
+    },
+    fetchNeighborhoodVehicles: function (response) {
+      let self = this;
+      let token = response.token;
+      let positionsURL = `https://v3.oceansystem.com/ocean-3.0.0/restapi/mobility/v1/vehiclePositions?token=${token}`;
+      $.ajax({
+        type: 'GET',
+        url: positionsURL,
+        success: function (response) {
+          console.log(`${positionsURL} positions : `, response);
+          self.handleNeighborhoodVehiclesFetched(response);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`${positionsURL} Request aborted`);
+          } else {
+            console.error(`${positionsURL} Error request: ${textStatus}`, errorThrown);
+          }
+        },
+      });
+    },
+    fetchNeighborhood: function () {
       let self = this;
       //var restURL = `${this._options.baseRESTServicesURL}/voisinage.php?patrouille=${this._options.patrouille.id}&sssecteurs=${this._options.secteurs.map(s => s.id).join(',')}`;
       let restURL = this._getNeighborhoodURL();
       $.ajax({
         type: 'GET',
         url: restURL,
-        success: function(response) {
+        success: function (response) {
           console.log(`${restURL} Response : `, response);
           self.handleNeighborhoodFetched(response);
         },
-        error: function(jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
             console.warn(`${restURL} Request aborted`);
           } else {
             console.error(`${restURL} Error request: ${textStatus}`, errorThrown);
           }
-        }
+        },
       });
     },
-    handleNeighborhoodFetched: function(response) {
+    handleNeighborhoodVehiclesFetched: function (response) {
+      console.log('handleNeighborhoodVehiclesFetched', response);
+      let zoomDone = false;
+      let test = response.map((s) => 
+        
+      )
+      let vehiclesGgeoJSON = [
+        {
+          type: 'Feature',
+          properties:{
+            immat : response.vehicles.immat
+          },
+          geometry: {
+            type: 'Point',
+            coordinates: [response.vehicles.position.longitudeY, response.vehicles.position.latitudeX]
+          }
+        },
+        {
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [-122.413682, 37.775408]
+          }
+        }
+      ];
+      /*
+        on pourrait faire: 
+        let colors = [...GGO.getColorPalette('secteurs')].reverse()
+        [...GGO.getColorPalette('secteurs')] : clone du tableau (car reverse affecte le tableau source)
+      */
+      let colors = GGO.getColorPalette('secteurs_voisinages');
+      if (typeof response.sous_secteur !== 'undefined') {
+        response.sous_secteur.features.forEach((f, i) => {
+          f.properties['description'] = `Sous-Secteur ${f.properties.name_sous_secteur}`;
+          let col = colors[i];
+          $.extend(f.properties, this._secteurDrawingProperties, { fill: col, stroke: col });
+        });
+        this._secteurLayer = L.mapbox.featureLayer().addTo(this._map).setGeoJSON(response.sous_secteur);
+        //this._map.fitBounds(this._secteurLayer.getBounds());
+        zoomDone = true;
+      }
+      if (typeof response.secteur !== 'undefined') {
+        response.secteur.features.forEach((f, i) => {
+          f.properties['description'] = `Secteur ${f.properties.name_sous_secteur}`;
+          let col = colors[i];
+          $.extend(f.properties, this._secteurDrawingProperties, { fill: col, stroke: col });
+        });
+        this._secteurLayer = L.mapbox.featureLayer().addTo(this._map).setGeoJSON(response.secteur);
+        //this._map.fitBounds(this._secteurLayer.getBounds());
+        zoomDone = true;
+      }
+      if (typeof response.chef_groupe !== 'undefined') {
+        // response.chef_groupe.features.forEach((f, i) => {
+        //   f.properties['marker-size'] = 'small';
+        // });
+        this._secteurLayer = L.mapbox
+          .featureLayer(response.chef_groupe, {
+            pointToLayer: function (feature, latlng) {
+              let geojsonMarkerOptions = {
+                radius: 6,
+                fillColor: feature.properties['marker-color'],
+                color: '#808080',
+                weight: 1,
+                opacity: 0,
+                fillOpacity: 0,
+              };
+              let lyr = L.circleMarker(latlng, geojsonMarkerOptions);
+              return lyr;
+            },
+          })
+          .addTo(this._map)
+          .on('layeradd', this.onChefGroupeAdded.bind(this))
+          .setGeoJSON(response.chef_groupe);
+        zoomDone = true;
+      }
+      if (typeof response.mission_ronde !== 'undefined') {
+        response.mission_ronde.features.forEach((f) => {
+          f.properties['marker-size'] = 'small';
+          if (parseInt(f.properties.type_mission_id) == 6) {
+            if (parseInt(f.properties.motif_id) == 1) {
+              f.properties['marker-symbol'] = 'music';
+            } else if (parseInt(f.properties.motif_id) == 2) {
+              f.properties['marker-symbol'] = 'pitch';
+            } else f.properties['marker-symbol'] = 'triangle';
+          }
+          f.properties['marker-color'] = GGO.getColorForStatutMission(parseInt(f.properties.statut_mission));
+          f.properties['description'] = f.properties.codesite;
+          console.log(f.properties.statut_mission);
+          //f.properties['description'] = `${f.properties.patrouille_id}`;
+        });
+        this._lastMissionsLayer = L.mapbox.featureLayer().addTo(this._map).on('layeradd', this.onMissionsAdded.bind(this)).setGeoJSON(response.mission_ronde);
+        if (!zoomDone) {
+          //this._map.fitBounds(this._lastMissionsLayer.getBounds());
+        }
+      }
+    },
+    handleNeighborhoodFetched: function (response) {
       console.log('handleNeighborhoodFetched', response);
       let zoomDone = false;
       /*
@@ -114,10 +251,7 @@
           let col = colors[i];
           $.extend(f.properties, this._secteurDrawingProperties, { fill: col, stroke: col });
         });
-        this._secteurLayer = L.mapbox
-          .featureLayer()
-          .addTo(this._map)
-          .setGeoJSON(response.sous_secteur);
+        this._secteurLayer = L.mapbox.featureLayer().addTo(this._map).setGeoJSON(response.sous_secteur);
         //this._map.fitBounds(this._secteurLayer.getBounds());
         zoomDone = true;
       }
@@ -127,10 +261,7 @@
           let col = colors[i];
           $.extend(f.properties, this._secteurDrawingProperties, { fill: col, stroke: col });
         });
-        this._secteurLayer = L.mapbox
-          .featureLayer()
-          .addTo(this._map)
-          .setGeoJSON(response.secteur);
+        this._secteurLayer = L.mapbox.featureLayer().addTo(this._map).setGeoJSON(response.secteur);
         //this._map.fitBounds(this._secteurLayer.getBounds());
         zoomDone = true;
       }
@@ -140,18 +271,18 @@
         // });
         this._secteurLayer = L.mapbox
           .featureLayer(response.chef_groupe, {
-            pointToLayer: function(feature, latlng) {
+            pointToLayer: function (feature, latlng) {
               let geojsonMarkerOptions = {
                 radius: 6,
                 fillColor: feature.properties['marker-color'],
                 color: '#808080',
                 weight: 1,
                 opacity: 0,
-                fillOpacity: 0
+                fillOpacity: 0,
               };
               let lyr = L.circleMarker(latlng, geojsonMarkerOptions);
               return lyr;
-            }
+            },
           })
           .addTo(this._map)
           .on('layeradd', this.onChefGroupeAdded.bind(this))
@@ -159,27 +290,21 @@
         zoomDone = true;
       }
       if (typeof response.mission_ronde !== 'undefined') {
-        response.mission_ronde.features.forEach(f => {
+        response.mission_ronde.features.forEach((f) => {
           f.properties['marker-size'] = 'small';
           if (parseInt(f.properties.type_mission_id) == 6) {
             if (parseInt(f.properties.motif_id) == 1) {
-              f.properties['marker-symbol'] = 'music'; 
-            }
-            else if (parseInt(f.properties.motif_id) == 2) {
-              f.properties['marker-symbol'] = 'pitch'; 
-            }
-            else f.properties['marker-symbol'] = 'triangle';
+              f.properties['marker-symbol'] = 'music';
+            } else if (parseInt(f.properties.motif_id) == 2) {
+              f.properties['marker-symbol'] = 'pitch';
+            } else f.properties['marker-symbol'] = 'triangle';
           }
           f.properties['marker-color'] = GGO.getColorForStatutMission(parseInt(f.properties.statut_mission));
           f.properties['description'] = f.properties.codesite;
           console.log(f.properties.statut_mission);
           //f.properties['description'] = `${f.properties.patrouille_id}`;
         });
-        this._lastMissionsLayer = L.mapbox
-          .featureLayer()
-          .addTo(this._map)
-          .on('layeradd', this.onMissionsAdded.bind(this))
-          .setGeoJSON(response.mission_ronde);
+        this._lastMissionsLayer = L.mapbox.featureLayer().addTo(this._map).on('layeradd', this.onMissionsAdded.bind(this)).setGeoJSON(response.mission_ronde);
         if (!zoomDone) {
           //this._map.fitBounds(this._lastMissionsLayer.getBounds());
         }
@@ -196,7 +321,7 @@
       }
     },
     */
-    onMissionsAdded: function(e) {
+    onMissionsAdded: function (e) {
       let marker = e.layer;
       marker
         .bindTooltip(`${marker.feature.properties['name_patrouille']}`, {
@@ -204,11 +329,11 @@
           direction: 'top',
           noHide: true,
           permanent: true,
-          className: 'class-tooltip'
+          className: 'class-tooltip',
         })
         .openTooltip();
     },
-    onChefGroupeAdded: function(e) {
+    onChefGroupeAdded: function (e) {
       let marker = e.layer;
       marker
         .bindTooltip(`${marker.feature.properties['libelle']}`, {
@@ -216,25 +341,25 @@
           direction: 'top',
           noHide: true,
           permanent: true,
-          className: 'class-tooltip-ChefGroupe'
+          className: 'class-tooltip-ChefGroupe',
         })
         .openTooltip();
-    }
+    },
   };
 
-  GGO.NeighborhoodMapManagerSingleton = (function() {
+  GGO.NeighborhoodMapManagerSingleton = (function () {
     let instance;
     function createInstance(options) {
       let missionMgr = new GGO.NeighborhoodMapManager(options);
       return missionMgr;
     }
     return {
-      getInstance: function(options) {
+      getInstance: function (options) {
         if (!instance) {
           instance = createInstance(options);
         }
         return instance;
-      }
+      },
     };
   })();
 })();
