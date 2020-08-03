@@ -144,23 +144,23 @@
       }
 
       container.append(`
-        <section id="popup_restrictions" role="alertdialog" tabindex="0" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper" class="slds-modal slds-fade-in-open slds-modal_prompt" aria-modal="true" style="z-index: 10000;">
+        <section id="popup_restrictions" role="alertdialog" tabindex="0" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper-restr" class="slds-modal slds-fade-in-open slds-modal_prompt" aria-modal="true" style="z-index: 10000;">
           <div class="slds-modal__container">
             <header class="slds-modal__header slds-theme_error slds-theme_alert-texture">
               <h2 class="slds-text-heading_medium" id="prompt-heading-id">${title}</h2>
             </header>
-            <div class="slds-modal__content slds-p-around_small slds-scrollable_y" style="padding-left : 1rem ; padding-right : 1rem" id="prompt-message-wrapper">
+            <div class="slds-modal__content slds-p-around_small slds-scrollable_y" style="padding-left : 1rem ; padding-right : 1rem" id="prompt-message-wrapper-restr">
             </div>
             <footer class="slds-modal__footer slds-theme_default">
               <button class="slds-button slds-button_neutral" data-what="return">Fermer</button>
             </footer>
           </div>
         </section>
-        <div class="slds-backdrop slds-backdrop_open"></div>
+        <div class="slds-backdrop slds-backdrop_open" id="backdrop_restr" ></div>
       `);
       $('#appContainer footer > button.slds-button').click(function (e) {
-        $('.slds-modal').remove();
-        $('.slds-backdrop').remove();
+        $('#popup_restrictions').remove();
+        $('#backdrop_restr').remove();
       });
       let type_lieu_restriction = [
         {
@@ -188,7 +188,7 @@
       const interdits = [...new Set(sites.filter((s) => s.type_restriction_id === 2).map((s) => s.libelle))];
       const renforces = [...new Set(sites.filter((s) => s.type_restriction_id === 3).map((s) => s.libelle))];
       const restreints = [...new Set(sites.filter((s) => s.type_restriction_id === 4).map((s) => s.libelle))];
-      $('#prompt-message-wrapper')
+      $('#prompt-message-wrapper-restr')
         .empty()
         .append(
           $(`<div id="general">
@@ -210,7 +210,7 @@
                     .join('')}
                 </ul>
               </div>`
-              : ''
+              : `<div id="interdits" style="width:33%; float:left; color:#ffffff">.</div>`
           }
             ${
               renforces.length > 0
@@ -250,7 +250,7 @@
                     .join('')}
                 </ul>
               </div>`
-                : ''
+                : `<div id="restreints" style="width:33%; float:right; color:#ffffff">.</div>`
             }`)
         );
     },
@@ -271,7 +271,7 @@
             <span class="slds-assistive-text">Collapse Panel Header</span>
           </button>
         </div>
-        <div class="slds-panel__body " style="height:calc(100% - 49px);position:relative;">
+        <div class="slds-panel__body" style="height:calc(100% - 49px);position:relative;">
           <div id="forbiddens_content" class="slds-scrollable_y" style="position: absolute; top: 0; left: 0; bottom: 0; right: 0px;"></div>
         </div>
       </div>
@@ -297,6 +297,8 @@
               console.log(`Restrictions response: `, response);
 
               const interdits = [...new Set(sites.filter((s) => s.type_restriction_id === 2).map((s) => s.nom))];
+              //const interdits = [...new Set(sites.filter((s) => s.type_restriction_id === 2))];
+              //const interdits_s = [...new Set(sites.filter((s) => s.type_restriction_id === 2).map((s) => s.libelle))];
               const renforces = [...new Set(sites.filter((s) => s.type_restriction_id === 3).map((s) => s.nom))];
               const restreints = [...new Set(sites.filter((s) => s.type_restriction_id === 4).map((s) => s.nom))];
               $('#forbiddens_content')
@@ -321,12 +323,12 @@
                     .join('')}
                 </ul>
               </div>`
-              : ''
+              : `<div id="interdits" style="width:33%; float:left; color:#ffffff">.</div>`
           }
             ${
               renforces.length > 0
                 ? `
-              <div id="renforces" style="width:33% ; display:inline-block; text-align:center">
+              <div id="renforces" style="width:33% ; display:inline-block; text-align:center ">
                 <span class="slds-icon_container slds-icon_container_circle  slds-icon-action-new-group" title="Description of icon when needed">
                   <svg class="slds-icon slds-icon_xx-small .slds-icon-text-error" aria-hidden="true">
                     <use xlink:href="/styles/slds/assets/icons/action-sprite/svg/symbols.svg#new_group"></use>
@@ -362,7 +364,7 @@
                 </ul>
               </div>
             </div>`
-                : ''
+                : `<div id="restreints" style="width:33%; float:right; color:#ffffff">.</div>`
             }`)
                 );
             }

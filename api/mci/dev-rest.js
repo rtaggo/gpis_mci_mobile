@@ -378,6 +378,13 @@ const _getRestrictionsForCookie = async () => {
   return cookieResponse;
 };
 
+const _getCrise = async () => {
+  //console.log(`[dev-rest] _getRestrictionsForCookie `);
+  let criseUrl = `${require('../../config').get('BACKEND_URL')}/crise.php`;
+  let criseResponse = await doAsyncGET(criseUrl);
+  return criseResponse;
+};
+
 /* list to exports */
 module.exports = {
   login: _login,
@@ -410,6 +417,7 @@ module.exports = {
   getActivite: _getActivite,
   getSummaryVacation: _getSummaryVacation,
   getRestrictionsForCookie: _getRestrictionsForCookie,
+  getCrise: _getCrise,
   joinMission: _joinMission,
   positionMission: _positionMission,
 };

@@ -201,6 +201,7 @@
   GGO.CHECK_PAUSE_INTERVALLE = 10000 * 6 * 5;
   GGO.CHECK_RESTRICTIONS_INTERVALLE = 30000;
   GGO.CHECK_PATRIMOINE_INTERVALLE = 120000;
+  GGO.CHECK_CRISES_INTERVALLE = 1000;
   GGO.COLORPALETTES = {
     rdYlBu: ['#4874bf', '#228714', '#edeb2a', '#f99e38', '#ff0000', '#000000'],
     secteurs: ['#8dd3c7', '#ffffb3', '#bebada', '#fb8072', '#80b1d3', '#fdb462', '#b3de69', '#fccde5', '#d9d9d9'],
@@ -228,6 +229,9 @@
         break;
       case 3:
         name_music = '/sounds/new_restriction.mp3';
+        break;
+      case 4:
+        name_music = '/sounds/new_crisis.mp3';
         break;
       default:
         console.war(`code ${code} non supporté`);
