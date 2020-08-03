@@ -327,7 +327,8 @@
               </div>
             </div>           
             <footer class="slds-modal__footer">
-              <button id="btnSignalementHistorique" class="slds-button" style="background-color:#FFA533 ; color:white ; border: none; padding:2px 10px;" >Historique</button>
+              <button id="btnSignalementHistoriqueGrey" disabled="" class="slds-button" style="background-color:#FFFFFF ; color:#808080 ;border: none; padding:1px 10px;" >Historique</button>
+              <button id="btnSignalementHistorique" class="slds-button slds-hide" style="background-color:#FFA533 ; color:white ;border: none; padding:1px 10px;" >Historique</button>
               <button id="btnSignalementOk" class="slds-button slds-button_brand">Valider</button>
               <button id="btnSignalementCancel" class="slds-button slds-button_neutral">Annuler</button>
             </footer>
@@ -352,16 +353,21 @@
         }
       };
       let theModal = $(modal);
-
+      GGO.EventBus.dispatch(GGO.EVENTS.SHOWMISSIONMLOCATION, this._currentMission);
+      let mission = this._currentMission.features[0];
       theModal.find('#select-adresse').change(function () {
         $('#modal-signalement-content .slds-form-element__help').addClass('slds-hide');
         $('#modal-signalement-content .slds-has-error').removeClass('slds-has-error');
+        self.handleClickChooseAdress();
+        //$('#btnSignalementHistoriqueGrey').addClass('slds-hide');
+        //$('#btnSignalementHistorique').removeClass('slds-hide');
+        //var button = document.getElementById('btnSignalementHistorique');
+        //button.style.background = 'rgba(255,165,51)';
       });
 
       theModal.find('#select-type-signalement').change(function () {
         $('#modal-signalement-content .slds-form-element__help').addClass('slds-hide');
         $('#modal-signalement-content .slds-has-error').removeClass('slds-has-error');
-
         self.handleClickChooseTypeSignalement();
       });
 
@@ -425,12 +431,14 @@
         renfort = mission.properties.renforts_patrouille.replace('{', '').replace('}', '');
       }
       // signalements
+      //let temp = $('#select-adresse').val();
       let signalementContent = '<div class="slds-form-element__static"><p>Aucun signalement</p></div>';
       if (typeof mission.properties.signalement !== 'undefined' && Array.isArray(mission.properties.signalement) && mission.properties.signalement.length > 0) {
         signalementContent = `
         <div class="slds-form-element__static" style="font-size: 1.1rem;" id="signalements">
           <ul class="slds-list_dotted" style="line-height: 1.8;" id = "parent-list">
             ${mission.properties.signalement
+              .filter((s) => s.adresse_signalement === $('#select-adresse').val())
               .map((s) => {
                 return `<li id='signalement_list_${s.id}' value=${s.id}>${moment(s.date).format('DD/MM/YYYY  HH:mm')} : ${s.libelle}</li>`;
               })
@@ -1368,12 +1376,24 @@
       }
       typeSignalementId = parseInt(typeSignalementId);
       let selectedOption = $(selectCtnr[0].selectedOptions[0]);
-
       let selectedTypeSignalement = {
         id: typeSignalementId,
       };
       console.log(selectedTypeSignalement);
       this.fetchCategorie(selectedTypeSignalement);
+    },
+    handleClickChooseAdress: function () {
+      GGO.EventBus.dispatch(GGO.EVENTS.SHOWMISSIONMLOCATION, this._currentMission);
+      let mission = this._currentMission.features[0];
+      let listAdressesSignalements = [...new Set(mission.properties.signalement.map((s) => s.adresse_signalement))];
+      let adressetest = $('#select-adresse').val();
+      if (listAdressesSignalements.includes(adressetest)) {
+        $('#btnSignalementHistoriqueGrey').addClass('slds-hide');
+        $('#btnSignalementHistorique').removeClass('slds-hide');
+      } else {
+        $('#btnSignalementHistoriqueGrey').removeClass('slds-hide');
+        $('#btnSignalementHistorique').addClass('slds-hide');
+      }
     },
     handleClickChooseTypeLieu: function (niveauOK) {
       const selectCtnr = $('#select-type-lieu');
