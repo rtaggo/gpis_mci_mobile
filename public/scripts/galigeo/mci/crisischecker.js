@@ -156,6 +156,19 @@
     },
   };
 
+  /* $('.slds-modal').on('shown.bs.slds-modal', function () {
+    if ($('.slds-modal').length > 1) {
+      $('.slds-backdrop').not(':first').remove();
+    }
+  });
+  $(document).on('show.bs.modal', '.modal', function () {
+    var zIndex = 1040 + (10 * $('.modal:visible').length);
+    $(this).css('z-index', zIndex);
+    setTimeout(function() {
+        $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+    }, 0);
+}); */
+
   GGO.CrisisCheckerSingleton = (function () {
     let instance;
     function createInstance(options) {

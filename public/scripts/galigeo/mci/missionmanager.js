@@ -132,7 +132,7 @@
         self.fetchAdresses();
         self.checkMissionStatut();
       });
-      $('#btnSignalementRenfort').click(function (e) {
+      $('#btnMissionSignalementRenfort').click(function (e) {
         self.openSignalementModal();
         self.fetchTypeSignalements();
       });
@@ -327,6 +327,8 @@
               </div>
             </div>           
             <footer class="slds-modal__footer">
+              <button id="btnSignalementHistoriqueGrey" disabled="" class="slds-button" style="background-color:#FFFFFF ; color:#808080 ;border: none; padding:1px 10px;" >Historique</button>
+              <button id="btnSignalementHistorique" class="slds-button slds-hide" style="background-color:#FFA533 ; color:white ;border: none; padding:1px 10px;" >Historique</button>
               <button id="btnSignalementOk" class="slds-button slds-button_brand">Valider</button>
               <button id="btnSignalementCancel" class="slds-button slds-button_neutral">Annuler</button>
             </footer>
@@ -351,16 +353,21 @@
         }
       };
       let theModal = $(modal);
-
+      GGO.EventBus.dispatch(GGO.EVENTS.SHOWMISSIONMLOCATION, this._currentMission);
+      let mission = this._currentMission.features[0];
       theModal.find('#select-adresse').change(function () {
         $('#modal-signalement-content .slds-form-element__help').addClass('slds-hide');
         $('#modal-signalement-content .slds-has-error').removeClass('slds-has-error');
+        self.handleClickChooseAdress();
+        //$('#btnSignalementHistoriqueGrey').addClass('slds-hide');
+        //$('#btnSignalementHistorique').removeClass('slds-hide');
+        //var button = document.getElementById('btnSignalementHistorique');
+        //button.style.background = 'rgba(255,165,51)';
       });
 
       theModal.find('#select-type-signalement').change(function () {
         $('#modal-signalement-content .slds-form-element__help').addClass('slds-hide');
         $('#modal-signalement-content .slds-has-error').removeClass('slds-has-error');
-
         self.handleClickChooseTypeSignalement();
       });
 
@@ -401,6 +408,10 @@
       });
 
       $('body').append($('<div id="signalement-modal" class="ggoslds"></div>').append(theModal).append($('<div class="slds-backdrop slds-backdrop_open"></div>')));
+      $('#btnSignalementHistorique').click(function (e) {
+        //$('#signalement-modal').remove();
+        self.openHistoriqueSignalementModal();
+      });
       $('#btnSignalementCancel').click(function (e) {
         $('#signalement-modal').remove();
       });
@@ -409,6 +420,108 @@
         //$('#signalement-modal').remove();
         self.checkBeforeSaveSignalement();
       });
+    },
+    openHistoriqueSignalementModal: function () {
+      GGO.EventBus.dispatch(GGO.EVENTS.SHOWMISSIONMLOCATION, this._currentMission);
+      let mission = this._currentMission.features[0];
+      //let content = $(`<div class="slds-form" role="list"></div>`);
+      let self = this;
+      let renfort = '';
+      if (mission.properties.renforts_patrouille !== null) {
+        renfort = mission.properties.renforts_patrouille.replace('{', '').replace('}', '');
+      }
+      // signalements
+      //let temp = $('#select-adresse').val();
+      let signalementContent = '<div class="slds-form-element__static"><p>Aucun signalement</p></div>';
+      if (typeof mission.properties.signalement !== 'undefined' && Array.isArray(mission.properties.signalement) && mission.properties.signalement.length > 0) {
+        signalementContent = `
+        <div class="slds-form-element__static" style="font-size: 1.1rem;" id="signalements">
+          <ul class="slds-list_dotted" style="line-height: 1.8;" id = "parent-list">
+            ${mission.properties.signalement
+              .filter((s) => s.adresse_signalement === $('#select-adresse').val())
+              .map((s) => {
+                return `<li id='signalement_list_${s.id}' value=${s.id}>${moment(s.date).format('DD/MM/YYYY  HH:mm')} : ${s.libelle}</li>`;
+              })
+              .join('')}
+          </ul>
+        </div>
+        `;
+      }
+      let modalHistorique = `
+      
+      <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" id="historique-signalement-modal" aria-describedby="modal-historique-signalement-content" class="slds-modal slds-fade-in-open slds-modal_large">
+        <!-- Start Modal Container -->
+        <div class="slds-modal__container" style="margin: 0px; padding: 0px; height: 100%">
+          <header class="slds-modal__header">
+            <div style="float:left">
+              <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate" style="float:left">Historique des Signalements</h2>
+            </div>
+            <div style="float:right">
+              <button id= "btnCloseModalHistorique" class="slds-button slds-button_icon" >
+                <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                  <use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                </svg>
+              </button>
+            </div>
+          </header>
+          <!-- Start Modal Content -->
+          <div class="slds-modal__content slds-p-around_medium slds-scrollable_y" id="modal-historique-signalement-content" style="height: 100%">
+            <div class="slds-form" role="list">
+              <div class="slds-form__row">
+                <div class="slds-form__item" role="listitem" >
+                  <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                    <div class="slds-form-element__control" >
+                    ${signalementContent}
+                    </div>
+                  </div>
+                </div>
+              </div>          
+            </div>   
+                    
+            <!-- <footer class="slds-modal__footer" style="position:absolute bottom: 5px">
+              <button id="btnHistoriqueCancel" class="slds-button slds-button_neutral">Fermer</button>
+            </footer> -->
+          </div>
+          <footer class="slds-modal__footer" style="position: relative; bottom: 0;right: 0;left: 0;">
+                <button id="btnHistoriqueCancel" class="slds-button slds-button_neutral">Annuler</button>
+          </footer>
+          <!-- End Modal Content -->
+        </div>
+        <!-- End Modal Container -->
+      </section>
+      `;
+      let theModalHistorique = $(modalHistorique);
+
+      $('body').append($('<div id="historique-signalement-modal" class="ggoslds"></div>').append(theModalHistorique).append($('<div class="slds-backdrop slds-backdrop_open" id="backdrop_historique_signalement"></div>')));
+      /*  OLD Renfort ne pouvaient pas signaler
+     if (!mission.properties.renfort) {
+      $('#signalements li')
+        .off()
+        .click(function (e) {
+          self.openReaffectationModal();
+          self.fetchFormSignalements($(this).val(), self._options.patrouille.id);
+        });
+      } else {
+       $("#renfort_label")[0].innerHTML = "Patrouille leader";
+      } */
+      $('#signalements li')
+        .off()
+        .click(function (e) {
+          //$('#signalement-modal').remove();
+          self.openReaffectationModal();
+          self.fetchFormSignalements($(this).val(), self._options.patrouille.id);
+        });
+      $('#btnHistoriqueCancel').click(function (e) {
+        $('#historique-signalement-modal').remove();
+      });
+      $('#btnCloseModalHistorique').click(function (e) {
+        $('#historique-signalement-modal').remove();
+        //self.openSignalementModal();
+        //self.fetchTypeSignalements();
+      });
+      if (!mission.properties.renfort) {
+        $('#renfort_label')[0].innerHTML = 'Patrouille leader';
+      }
     },
     openAdressesModal: function () {
       let self = this;
@@ -489,126 +602,125 @@
     openReaffectationModal: function () {
       let self = this;
       let modal = `
-      <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-signalement-content" class="slds-modal slds-fade-in-open slds-modal_large">
+      <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-reaffectation-content" class="slds-modal slds-fade-in-open slds-modal_large">
         <!-- Start Modal Container -->
-        <div class="slds-modal__container" style="margin: 0px; padding: 0px;">
+        <div class="slds-modal__container" style="margin: 0px; padding: 0px;height: 100%">
           <header class="slds-modal__header">
-            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Signalement</h2>
+            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Réaffectation</h2>
           </header>
           <!-- Start Modal Content -->
-          <div class="slds-modal__content slds-p-around_medium" id="modal-signalement-content">
-            <div class="slds-form" role="list">
-              <div class="slds-form__row">
-                <div class="slds-form__item" role="listitem" >
-                  <div class="slds-form-element slds-form-element_stacked slds-is-editing">
-                    <label class="slds-form-element__label" for="signalement-input-adresse"><abbr class="slds-required" title="required">* </abbr>Adresse</label>
-                    <div class="slds-form-element__control" >
-                      <div class="slds-select_container">
-                        <select class="slds-select" id="adresse" required="" disabled></select>
+          <div class="slds-modal__content slds-p-around_medium "  id="modal-reaffectation-content" style="height: 100%">
+            <div class="slds-form" role="list"> 
+              <div>
+                <div class="slds-form__row">
+                  <div class="slds-form__item" role="listitem" >
+                    <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                      <label class="slds-form-element__label" for="signalement-input-adresse"><abbr class="slds-required" title="required">* </abbr>Adresse</label>
+                      <div class="slds-form-element__control" >
+                        <div class="slds-select_container">
+                          <select class="slds-select" id="adresse_reaffectation" required="" disabled></select>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="slds-form__row">
-                <div class="slds-form__item" role="listitem" >
-                  <div class="slds-form-element slds-form-element_stacked slds-is-editing">
-                    <label class="slds-form-element__label" for="signalement-input-type"><abbr class="slds-required" title="required">* </abbr>Type de signalement</label>
-                    <div class="slds-form-element__control" >
-                      <div class="slds-select_container">
-                        <select class="slds-select" id="type_signalement" required="" disabled></select>
+                <div class="slds-form__row">
+                  <div class="slds-form__item" role="listitem" >
+                    <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                      <label class="slds-form-element__label" for="signalement-input-type"><abbr class="slds-required" title="required">* </abbr>Type de signalement</label>
+                      <div class="slds-form-element__control" >
+                        <div class="slds-select_container">
+                          <select class="slds-select" id="type_signalement_reaffectation" required="" disabled></select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>          
+                <div id="parent_categorie_reaffectation" class="slds-form__row slds-hide">
+                  <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                      <label class="slds-form-element__label" for="signalement-input-categorie">Catégorie</label>
+                      <div class="slds-form-element__control">
+                        <div class="slds-select_container">
+                          <select class="slds-select" id="categorie_reaffectation" required="" disabled></select>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>          
-              <div id="parent_categorie" class="slds-form__row slds-hide">
-                <div class="slds-form__item" role="listitem">
-                  <div class="slds-form-element slds-form-element_stacked slds-is-editing">
-                    <label class="slds-form-element__label" for="signalement-input-categorie">Catégorie</label>
-                    <div class="slds-form-element__control">
-                      <div class="slds-select_container">
-                        <select class="slds-select" id="categorie" required="" disabled></select>
+                <div id="parent_sous_categorie_reaffectation" class="slds-form__row slds-hide">
+                  <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                      <label class="slds-form-element__label" for="signalement-input-souscategorie">Sous-Catégorie</label>
+                      <div class="slds-form-element__control">
+                        <div class="slds-select_container">
+                          <select class="slds-select" id="sous-categorie_reaffectation" required="" disabled></select>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div id="parent_sous_categorie" class="slds-form__row slds-hide">
-                <div class="slds-form__item" role="listitem">
-                  <div class="slds-form-element slds-form-element_stacked slds-is-editing">
-                    <label class="slds-form-element__label" for="signalement-input-souscategorie">Sous-Catégorie</label>
-                    <div class="slds-form-element__control">
-                      <div class="slds-select_container">
-                        <select class="slds-select" id="sous-categorie" required="" disabled></select>
+                <div id="parent_categorie2s_reaffectation" class="slds-form__row slds-hide">
+                  <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                      <label class="slds-form-element__label" for="signalement-input-categorie2nd">Catégorie 2nd</label>
+                      <div class="slds-form-element__control">
+                        <div class="slds-select_container">
+                          <select class="slds-select" id="categorie2s_reaffectation" required="" disabled></select>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div id="parent_categorie2s" class="slds-form__row slds-hide">
-                <div class="slds-form__item" role="listitem">
-                  <div class="slds-form-element slds-form-element_stacked slds-is-editing">
-                    <label class="slds-form-element__label" for="signalement-input-categorie2nd">Catégorie 2nd</label>
-                    <div class="slds-form-element__control">
-                      <div class="slds-select_container">
-                        <select class="slds-select" id="categorie2s" required="" disabled></select>
+                <div class="slds-form__row">
+                  <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                      <label class="slds-form-element__label" for="signalement-input-typelieu">Type de lieu</label>
+                      <div class="slds-form-element__control">
+                        <div class="slds-select_container">
+                          <select class="slds-select" id="type-lieu_reaffectation" required="" disabled></select>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="slds-form__row">
-                <div class="slds-form__item" role="listitem">
-                  <div class="slds-form-element slds-form-element_stacked slds-is-editing">
-                    <label class="slds-form-element__label" for="signalement-input-typelieu">Type de lieu</label>
-                    <div class="slds-form-element__control">
-                      <div class="slds-select_container">
-                        <select class="slds-select" id="type-lieu" required="" disabled></select>
+                <div id="parent_niveau_reaffectation" class="slds-form__row slds-hide">
+                  <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_stacked slds-is-editing">
+                      <label class="slds-form-element__label" for="signalement-input-niveau">Niveau</label>
+                      <div class="slds-form-element__control">
+                        <div class="slds-select_container">
+                          <select class="slds-select" id="niveau_reaffectation" required="" disabled></select>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div id="parent_niveau" class="slds-form__row slds-hide">
-                <div class="slds-form__item" role="listitem">
-                  <div class="slds-form-element slds-form-element_stacked slds-is-editing">
-                    <label class="slds-form-element__label" for="signalement-input-niveau">Niveau</label>
-                    <div class="slds-form-element__control">
-                      <div class="slds-select_container">
-                        <select class="slds-select" id="niveau" required="" disabled></select>
+                <div class="slds-form__row ">
+                  <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_stacked">
+                      <label class="slds-form-element__label">Image</label>
+                      <div class="slds-form-element__control">
+                        <div class="snapshotdiv">
+                          <svg class="slds-icon slds-icon_large slds-icon-text-default slds-shrink-none slds-m-around_small" aria-hidden="true"><use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#photo"></use></svg>
+                        </div>
+                        <input id="snapshot_input" type="file" accept="image/*" style="display:none;">
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="slds-form__row ">
-                <div class="slds-form__item" role="listitem">
-                  <div class="slds-form-element slds-form-element_stacked">
-                    <label class="slds-form-element__label">Image</label>
-                    <div class="slds-form-element__control">
-                      <div class="snapshotdiv">
-                        <svg class="slds-icon slds-icon_large slds-icon-text-default slds-shrink-none slds-m-around_small" aria-hidden="true"><use xlink:href="/styles/slds/assets/icons/utility-sprite/svg/symbols.svg#photo"></use></svg>
+                <div class="slds-form__row">
+                  <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_stacked slds-form-element_readonly slds-form-element_1-col">
+                      <label class="slds-form-element__label" for="signalement-input-observation">Observations / Caractéristique</label>
+                      <div class="slds-form-element__control">
+                        <textarea id="observation" class="slds-textarea" disabled></textarea>
                       </div>
-                      <input id="snapshot_input" type="file" accept="image/*" style="display:none;">
                     </div>
                   </div>
-                </div>
-              </div>
-              <div class="slds-form__row">
-                <div class="slds-form__item" role="listitem">
-                  <div class="slds-form-element slds-form-element_stacked slds-form-element_readonly slds-form-element_1-col">
-                    <label class="slds-form-element__label" for="signalement-input-observation">Observations / Caractéristique</label>
-                    <div class="slds-form-element__control">
-                      <textarea id="observation" class="slds-textarea" disabled></textarea>
-                    </div>
-                  </div>
-                </div>
-              </div>           
-              <footer class="slds-modal__footer">
-                <button id="btnReaffecter" value="" class="slds-button slds-button_brand">Reaffecter</button>
-                <button id="btnReaffectationCancel" class="slds-button slds-button_neutral">Annuler</button>
-              </footer>
+                </div>        
+              </div>   
+              
             </div>
             <div class="slds-spinner_container">
               <div role="status" class="slds-spinner slds-spinner_x-small">
@@ -618,6 +730,10 @@
               </div>
             </div>
           </div>
+          <footer class="slds-modal__footer" style="position: relative; bottom: 0;right: 0;left: 0;">
+            <button id="btnReaffecter" value="" class="slds-button slds-button_brand">Reaffecter</button>
+            <button id="btnReaffectationCancel" class="slds-button slds-button_neutral">Annuler</button>
+          </footer>
           <!-- End Modal Content -->
         </div>
         <!-- End Modal Containter -->
@@ -660,6 +776,10 @@
       $('#btnReaffecter').click(function (e) {
         self.validateReacffectation();
         $('#reaffectation-signalement-modal').remove();
+        if ($('#historique-signalement-modal')) {
+          $('#historique-signalement-modal').remove();
+          $('#signalement-modal').remove();
+        }
       });
     },
     validateSignalementInput: function (value2Check, containerId, errorHelperId) {
@@ -1017,37 +1137,40 @@
       console.log(`>> handleTypeSignalementFetched`, response);
       const self = this;
 
-      let selectAdresse = $('#adresse').empty();
+      let selectAdresse = $('#adresse_reaffectation').empty();
       selectAdresse.append($(`<option value="">${response.signalement[0].adresse}</option>`));
 
-      let selectTypeSignalement = $('#type_signalement').empty();
+      let selectTypeSignalement = $('#type_signalement_reaffectation').empty();
       selectTypeSignalement.append($(`<option value="">${response.signalement[0].type_signalement}</option>`));
       if (response.signalement[0].categorie) {
-        $('#parent_categorie').removeClass('slds-hide');
-        let selectCategorie = $('#categorie').empty();
+        $('#parent_categorie_reaffectation').removeClass('slds-hide');
+        let selectCategorie = $('#categorie_reaffectation').empty();
         selectCategorie.append($(`<option value="">${response.signalement[0].categorie}</option>`));
       }
-      let selectTypeLieu = $('#type-lieu').empty();
+      let selectTypeLieu = $('#type-lieu_reaffectation').empty();
       selectTypeLieu.append($(`<option value="">${response.signalement[0].type_lieu}</option>`));
       if (response.signalement[0].sous_categorie) {
-        $('#parent_sous_categorie').removeClass('slds-hide');
-        let selectSousCategorie = $('#sous-categorie').empty();
+        $('#parent_sous_categorie_reaffectation').removeClass('slds-hide');
+        let selectSousCategorie = $('#sous-categorie_reaffectation').empty();
         selectSousCategorie.append($(`<option value="">${response.signalement[0].sous_categorie}</option>`));
       }
       if (response.signalement[0].categorie_2s) {
-        $('#parent_categorie2s').removeClass('slds-hide');
-        let selectCategorie2s = $('#categorie2s').empty();
+        $('#parent_categorie2s_reaffectation').removeClass('slds-hide');
+        let selectCategorie2s = $('#categorie2s_reaffectation').empty();
         selectCategorie2s.append($(`<option value="">${response.signalement[0].categorie_2s}</option>`));
       }
       if (response.signalement[0].niveau) {
-        $('#parent_niveau').removeClass('slds-hide');
-        $('#niveau')[0].value = response.signalement[0].niveau;
+        $('#parent_niveau_reaffectation').removeClass('slds-hide');
+        $('#niveau_reaffectation')[0].value = response.signalement[0].niveau;
       }
 
-      $('#observation').val(response.signalement[0].observations);
+      $('#observation_reaffectation').val(response.signalement[0].observations);
       $('#btnReaffecter').attr('data-signalementid', signalement_id);
 
       $('#modal-signalement-content .slds-spinner_container').remove();
+      if ($('#modal-reaffectation-content')) {
+        $('#modal-reaffectation-content .slds-spinner_container').remove();
+      }
     },
     handleFormIncidenteFetched: function (response, incidente_id) {
       console.log(`>> handleFormIncidenteFetched`, response);
@@ -1253,12 +1376,24 @@
       }
       typeSignalementId = parseInt(typeSignalementId);
       let selectedOption = $(selectCtnr[0].selectedOptions[0]);
-
       let selectedTypeSignalement = {
         id: typeSignalementId,
       };
       console.log(selectedTypeSignalement);
       this.fetchCategorie(selectedTypeSignalement);
+    },
+    handleClickChooseAdress: function () {
+      GGO.EventBus.dispatch(GGO.EVENTS.SHOWMISSIONMLOCATION, this._currentMission);
+      let mission = this._currentMission.features[0];
+      let listAdressesSignalements = [...new Set(mission.properties.signalement.map((s) => s.adresse_signalement))];
+      let adressetest = $('#select-adresse').val();
+      if (listAdressesSignalements.includes(adressetest)) {
+        $('#btnSignalementHistoriqueGrey').addClass('slds-hide');
+        $('#btnSignalementHistorique').removeClass('slds-hide');
+      } else {
+        $('#btnSignalementHistoriqueGrey').removeClass('slds-hide');
+        $('#btnSignalementHistorique').addClass('slds-hide');
+      }
     },
     handleClickChooseTypeLieu: function (niveauOK) {
       const selectCtnr = $('#select-type-lieu');
@@ -1960,22 +2095,14 @@
       $('#signalement_list li').click(function(e) { console.log($(this).val()); }) 
       */
       if (!mission.properties.renfort) {
-        $('#signalements li')
-          .off()
-          .click(function (e) {
-            self.openReaffectationModal();
-            self.fetchFormSignalements($(this).val(), self._options.patrouille.id);
-          });
-        $('#incidentes li')
-          .off()
-          .click(function (e) {
-            console.log($(this));
-            self.openIncidenteModal();
-            self.fetchFormIncidentes($(this).val());
-          });
-      } else {
         $('#renfort_label')[0].innerHTML = 'Patrouille leader';
       }
+      $('#signalements li')
+        .off()
+        .click(function (e) {
+          self.openReaffectationModal();
+          self.fetchFormSignalements($(this).val(), self._options.patrouille.id);
+        });
       $('#incidentes li')
         .off()
         .click(function (e) {
