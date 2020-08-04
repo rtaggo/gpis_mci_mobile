@@ -67,9 +67,13 @@
         contextmenuWidth: 140,
         layers: [streetsTL],
       }).setView([48.853507, 2.348015], 12);
-      this.authenticateOcean();
+
       this.fetchNeighborhood();
+      this.authenticateOcean();
+      //this.getToken();
+      //this.await_refresh_vehicles();
     },
+
     _getNeighborhoodURL: function () {
       console.log(this._options);
       if (this._options.userRole === 'india') {
@@ -88,7 +92,9 @@
         url: restAuthURL,
         success: function (response) {
           console.log(`${restAuthURL} token : `, response);
-          const token = response.token;
+          var token = response.token;
+          //this.token = response.token;
+          //token_glob = response.token;
           self.fetchNeighborhoodVehicles(response);
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -100,6 +106,61 @@
         },
       });
     },
+
+    getToken: function () {
+      let self = this;
+      let restAuthURL = 'https://v3.oceansystem.com/ocean-3.0.0/restapi/auth/authenticate?login=galigeo1&password=GPIS03';
+      $.ajax({
+        type: 'POST',
+        url: restAuthURL,
+        success: function (response) {
+          var tokeng = response.token;
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`${restAuthURL} Request aborted`);
+          } else {
+            console.error(`${restAuthURL} Error request: ${textStatus}`, errorThrown);
+          }
+        },
+      });
+    },
+
+    /* await_refresh_vehicles: function () {
+      setTimeout(() => {
+        this.refresh_vehicles();
+      }, GGO.CHECK_CRISES_INTERVALLE);
+    },
+    refresh_vehicles: function () {
+      let self = this;
+      //self.getToken();
+      //let token = this.token;
+      var token = this.getToken();
+      let positionsURL = `https://v3.oceansystem.com/ocean-3.0.0/restapi/mobility/v1/vehiclePositions?token=${token}`;
+      $.ajax({
+        type: 'GET',
+        url: positionsURL,
+        success: function (response) {
+          console.log(`Refresh vehicles Response : `, response);
+          if (response.code === 200) {
+            self.fetchNeighborhoodVehiclesFetched(response);
+            let vehiclesGgeoJSON = response;
+            if (typeof vehiclesGgeoJSON !== 'undefined') {
+              self._vehiclesLayer.setGeoJSON(vehiclesGgeoJSON);
+            }
+          }
+          self.await_refresh_vehicles();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`${positionsURL} Request aborted`);
+          } else {
+            console.error(`${positionsURL} Error request: ${textStatus}`, errorThrown);
+          }
+          self.await_refresh_vehicles();
+        },
+      });
+    }, */
     fetchNeighborhoodVehicles: function (response) {
       let self = this;
       let token = response.token;
@@ -109,7 +170,30 @@
         url: positionsURL,
         success: function (response) {
           console.log(`${positionsURL} positions : `, response);
-          self.handleNeighborhoodVehiclesFetched(response);
+          var vehicles2 = response.vehicles;
+          var vehiclesGgeoJSON = {};
+          vehiclesGgeoJSON.type = 'FeatureCollection';
+          vehiclesGgeoJSON.features = [];
+
+          for (var k in vehicles2) {
+            if (vehicles2[k].position && vehicles2[k].position.latitudeY !== 85 && vehicles2[k].position.latitudeY !== 0) {
+              var newFeature = {
+                type: 'Feature',
+                geometry: {
+                  type: 'Point',
+                  coordinates: [parseFloat(vehicles2[k].position.longitudeX), parseFloat(vehicles2[k].position.latitudeY)],
+                },
+                properties: {
+                  immat: vehicles2[k].immat,
+                  test: vehicles2[k].position.latitudeY,
+                },
+              };
+              vehiclesGgeoJSON.features.push(newFeature);
+              //geojson['features'].push(newFeature);
+            } else {
+            }
+          }
+          self.handleNeighborhoodVehiclesFetched(vehiclesGgeoJSON);
         },
         error: function (jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
@@ -142,95 +226,37 @@
     },
     handleNeighborhoodVehiclesFetched: function (response) {
       console.log('handleNeighborhoodVehiclesFetched', response);
-      let zoomDone = false;
-      var GeoJSON = [];
-      GeoJSON.parse(response, { Point: [response.vehicles.position.longitudeY, response.vehicles.position.latitudeX], include: [response.vehicles.immat] });
-      /* let vehiclesGgeoJSON = response.map((s) => 
-      [
-        {
-          type: 'Feature',
-          properties:{
-            immat : response.vehicles.immat
+      //console.log(response);
+      response.features.forEach((f) => {
+        f.properties['marker-size'] = 'medium';
+        f.properties['marker-color'] = '#000000';
+        f.properties['marker-symbol'] = 'car';
+        f.properties['description'] = f.properties.immat;
+        //console.log(f.properties.statut_mission);
+        //f.properties['description'] = `${f.properties.patrouille_id}`;
+      });
+      this._vehiclesLayer = L.mapbox
+        .featureLayer
+        /*response, {
+          pointToLayer: function (feature, latlng) {
+            let geojsonMarkerOptions = {
+              radius: 6,
+              fillColor: feature.properties['marker-color'],
+              //color: '#808080',
+              //weight: 1,
+              opacity: 1,
+              fillOpacity: 1,
+            };
+            let lyr = L.circleMarker(latlng, geojsonMarkerOptions);
+            return lyr;
           },
-          geometry: {
-            type: 'Point',
-            coordinates: [response.vehicles.position.longitudeY, response.vehicles.position.latitudeX]
-          }
-        },
-      ]
-      ); */
-
-      /*
-        on pourrait faire: 
-        let colors = [...GGO.getColorPalette('secteurs')].reverse()
-        [...GGO.getColorPalette('secteurs')] : clone du tableau (car reverse affecte le tableau source)
-      */
-      let colors = GGO.getColorPalette('secteurs_voisinages');
-      if (typeof response.sous_secteur !== 'undefined') {
-        response.sous_secteur.features.forEach((f, i) => {
-          f.properties['description'] = `Sous-Secteur ${f.properties.name_sous_secteur}`;
-          let col = colors[i];
-          $.extend(f.properties, this._secteurDrawingProperties, { fill: col, stroke: col });
-        });
-        this._secteurLayer = L.mapbox.featureLayer().addTo(this._map).setGeoJSON(response.sous_secteur);
-        //this._map.fitBounds(this._secteurLayer.getBounds());
-        zoomDone = true;
-      }
-      if (typeof response.secteur !== 'undefined') {
-        response.secteur.features.forEach((f, i) => {
-          f.properties['description'] = `Secteur ${f.properties.name_sous_secteur}`;
-          let col = colors[i];
-          $.extend(f.properties, this._secteurDrawingProperties, { fill: col, stroke: col });
-        });
-        this._secteurLayer = L.mapbox.featureLayer().addTo(this._map).setGeoJSON(response.secteur);
-        //this._map.fitBounds(this._secteurLayer.getBounds());
-        zoomDone = true;
-      }
-      if (typeof response.chef_groupe !== 'undefined') {
-        // response.chef_groupe.features.forEach((f, i) => {
-        //   f.properties['marker-size'] = 'small';
-        // });
-        this._secteurLayer = L.mapbox
-          .featureLayer(response.chef_groupe, {
-            pointToLayer: function (feature, latlng) {
-              let geojsonMarkerOptions = {
-                radius: 6,
-                fillColor: feature.properties['marker-color'],
-                color: '#808080',
-                weight: 1,
-                opacity: 0,
-                fillOpacity: 0,
-              };
-              let lyr = L.circleMarker(latlng, geojsonMarkerOptions);
-              return lyr;
-            },
-          })
-          .addTo(this._map)
-          .on('layeradd', this.onChefGroupeAdded.bind(this))
-          .setGeoJSON(response.chef_groupe);
-        zoomDone = true;
-      }
-      if (typeof response.mission_ronde !== 'undefined') {
-        response.mission_ronde.features.forEach((f) => {
-          f.properties['marker-size'] = 'small';
-          if (parseInt(f.properties.type_mission_id) == 6) {
-            if (parseInt(f.properties.motif_id) == 1) {
-              f.properties['marker-symbol'] = 'music';
-            } else if (parseInt(f.properties.motif_id) == 2) {
-              f.properties['marker-symbol'] = 'pitch';
-            } else f.properties['marker-symbol'] = 'triangle';
-          }
-          f.properties['marker-color'] = GGO.getColorForStatutMission(parseInt(f.properties.statut_mission));
-          f.properties['description'] = f.properties.codesite;
-          console.log(f.properties.statut_mission);
-          //f.properties['description'] = `${f.properties.patrouille_id}`;
-        });
-        this._lastMissionsLayer = L.mapbox.featureLayer().addTo(this._map).on('layeradd', this.onMissionsAdded.bind(this)).setGeoJSON(response.mission_ronde);
-        if (!zoomDone) {
-          //this._map.fitBounds(this._lastMissionsLayer.getBounds());
-        }
-      }
+        }*/
+        ()
+        .on('layeradd', this.onVehiclesAdded.bind(this))
+        .addTo(this._map)
+        .setGeoJSON(response);
     },
+
     handleNeighborhoodFetched: function (response) {
       console.log('handleNeighborhoodFetched', response);
       let zoomDone = false;
@@ -337,6 +363,18 @@
           noHide: true,
           permanent: true,
           className: 'class-tooltip-ChefGroupe',
+        })
+        .openTooltip();
+    },
+    onVehiclesAdded: function (e) {
+      let marker = e.layer;
+      marker
+        .bindTooltip(`${marker.feature.properties['immat']}`, {
+          offset: L.point(0, 3),
+          direction: 'bottom',
+          noHide: true,
+          permanent: true,
+          className: 'class-tooltip-Vehicle',
         })
         .openTooltip();
     },

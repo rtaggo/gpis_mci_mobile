@@ -354,6 +354,15 @@ router.get('/crise.php', (req, res, next) => {
   });
 });
 
+router.get('/immatriculations.php', (req, res, next) => {
+  //console.log(`[MCI_REST_API][GET] /immatriculations.php`);
+  const mcimodule = getMCIModule();
+  mcimodule.getImmatriculations().then((immatriculations) => {
+    res.header('Content-Type', 'application/json');
+    res.json(immatriculations);
+  });
+});
+
 /**
  * Errors on "/mci/*" routes.
  */

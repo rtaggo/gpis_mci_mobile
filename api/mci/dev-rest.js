@@ -385,6 +385,13 @@ const _getCrise = async () => {
   return criseResponse;
 };
 
+const _getImmatriculations = async () => {
+  //console.log(`[dev-rest] _getImmatriculations`);
+  let immatriculationUrl = `${require('../../config').get('BACKEND_URL')}/immatriculations.php`;
+  let immatriculations = await doAsyncGET(immatriculationUrl);
+  return immatriculations;
+};
+
 /* list to exports */
 module.exports = {
   login: _login,
@@ -418,6 +425,7 @@ module.exports = {
   getSummaryVacation: _getSummaryVacation,
   getRestrictionsForCookie: _getRestrictionsForCookie,
   getCrise: _getCrise,
+  getImmatriculations: _getImmatriculations,
   joinMission: _joinMission,
   positionMission: _positionMission,
 };

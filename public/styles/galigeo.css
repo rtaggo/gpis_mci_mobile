@@ -1,7 +1,8 @@
 @charset "UTF-8";
 
-html,body {
-	margin: 0px;
+html,
+body {
+  margin: 0px;
   height: 100%;
   position: absolute;
   top: 0;
@@ -38,7 +39,6 @@ body {
   top: 5px;
 }
 
-
 .bottom-card {
   position: absolute !important;
   left: 0px !important;
@@ -63,7 +63,7 @@ body {
   height: 28px;
   position: absolute;
   right: 0px;
-  background: #EFEFEF;
+  background: #efefef;
   border-radius: 0 0 0 20px;
   -moz-border-radius: 0 0 0 20px;
   -webkit-border-radius: 0 0 0 20px;
@@ -102,7 +102,7 @@ body {
 .snapshotdiv {
   line-height: 40px;
   border: 1px solid #73cfff;
-  background-color: #EFEFEF;
+  background-color: #efefef;
   /*
   width: 84px;
   height: 84px;
@@ -147,14 +147,22 @@ body {
   font-size: 24px;
 }
 
-.class-tooltip{
+.class-tooltip {
   font-size: 9px;
-  padding: 2px ;
+  padding: 2px;
   line-height: 100%;
 }
-.class-tooltip-ChefGroupe{
+.class-tooltip-ChefGroupe {
   font-size: 9px;
-  padding: 2px ;
+  padding: 2px;
+  line-height: 100%;
+  color: white;
+  font-weight: bold;
+  background-color: rgb(219, 110, 110);
+}
+.class-tooltip-Vehicle {
+  font-size: 15px;
+  padding: 2px;
   line-height: 100%;
   color: white;
   font-weight: bold;
