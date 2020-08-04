@@ -67,7 +67,7 @@
         contextmenuWidth: 140,
         layers: [streetsTL],
       }).setView([48.853507, 2.348015], 12);
-      this.authenticateOcean();
+      //this.authenticateOcean();
       this.fetchNeighborhood();
     },
     _getNeighborhoodURL: function () {
@@ -144,7 +144,7 @@
       console.log('handleNeighborhoodVehiclesFetched', response);
       let zoomDone = false;
       var GeoJSON = [];
-      GeoJSON.parse(response, { Point: [response.vehicles.position.longitudeY, response.vehicles.position.latitudeX], include: [response.vehicles.immat] });
+      //GeoJSON.parse(response, { Point: [response.vehicles.position.longitudeY, response.vehicles.position.latitudeX], include: [response.vehicles.immat] });
       /* let vehiclesGgeoJSON = response.map((s) => 
       [
         {
@@ -165,71 +165,6 @@
         let colors = [...GGO.getColorPalette('secteurs')].reverse()
         [...GGO.getColorPalette('secteurs')] : clone du tableau (car reverse affecte le tableau source)
       */
-      let colors = GGO.getColorPalette('secteurs_voisinages');
-      if (typeof response.sous_secteur !== 'undefined') {
-        response.sous_secteur.features.forEach((f, i) => {
-          f.properties['description'] = `Sous-Secteur ${f.properties.name_sous_secteur}`;
-          let col = colors[i];
-          $.extend(f.properties, this._secteurDrawingProperties, { fill: col, stroke: col });
-        });
-        this._secteurLayer = L.mapbox.featureLayer().addTo(this._map).setGeoJSON(response.sous_secteur);
-        //this._map.fitBounds(this._secteurLayer.getBounds());
-        zoomDone = true;
-      }
-      if (typeof response.secteur !== 'undefined') {
-        response.secteur.features.forEach((f, i) => {
-          f.properties['description'] = `Secteur ${f.properties.name_sous_secteur}`;
-          let col = colors[i];
-          $.extend(f.properties, this._secteurDrawingProperties, { fill: col, stroke: col });
-        });
-        this._secteurLayer = L.mapbox.featureLayer().addTo(this._map).setGeoJSON(response.secteur);
-        //this._map.fitBounds(this._secteurLayer.getBounds());
-        zoomDone = true;
-      }
-      if (typeof response.chef_groupe !== 'undefined') {
-        // response.chef_groupe.features.forEach((f, i) => {
-        //   f.properties['marker-size'] = 'small';
-        // });
-        this._secteurLayer = L.mapbox
-          .featureLayer(response.chef_groupe, {
-            pointToLayer: function (feature, latlng) {
-              let geojsonMarkerOptions = {
-                radius: 6,
-                fillColor: feature.properties['marker-color'],
-                color: '#808080',
-                weight: 1,
-                opacity: 0,
-                fillOpacity: 0,
-              };
-              let lyr = L.circleMarker(latlng, geojsonMarkerOptions);
-              return lyr;
-            },
-          })
-          .addTo(this._map)
-          .on('layeradd', this.onChefGroupeAdded.bind(this))
-          .setGeoJSON(response.chef_groupe);
-        zoomDone = true;
-      }
-      if (typeof response.mission_ronde !== 'undefined') {
-        response.mission_ronde.features.forEach((f) => {
-          f.properties['marker-size'] = 'small';
-          if (parseInt(f.properties.type_mission_id) == 6) {
-            if (parseInt(f.properties.motif_id) == 1) {
-              f.properties['marker-symbol'] = 'music';
-            } else if (parseInt(f.properties.motif_id) == 2) {
-              f.properties['marker-symbol'] = 'pitch';
-            } else f.properties['marker-symbol'] = 'triangle';
-          }
-          f.properties['marker-color'] = GGO.getColorForStatutMission(parseInt(f.properties.statut_mission));
-          f.properties['description'] = f.properties.codesite;
-          console.log(f.properties.statut_mission);
-          //f.properties['description'] = `${f.properties.patrouille_id}`;
-        });
-        this._lastMissionsLayer = L.mapbox.featureLayer().addTo(this._map).on('layeradd', this.onMissionsAdded.bind(this)).setGeoJSON(response.mission_ronde);
-        if (!zoomDone) {
-          //this._map.fitBounds(this._lastMissionsLayer.getBounds());
-        }
-      }
     },
     handleNeighborhoodFetched: function (response) {
       console.log('handleNeighborhoodFetched', response);
@@ -296,7 +231,7 @@
           }
           f.properties['marker-color'] = GGO.getColorForStatutMission(parseInt(f.properties.statut_mission));
           f.properties['description'] = f.properties.codesite;
-          console.log(f.properties.statut_mission);
+          //console.log(f.properties.statut_mission);
           //f.properties['description'] = `${f.properties.patrouille_id}`;
         });
         this._lastMissionsLayer = L.mapbox.featureLayer().addTo(this._map).on('layeradd', this.onMissionsAdded.bind(this)).setGeoJSON(response.mission_ronde);
