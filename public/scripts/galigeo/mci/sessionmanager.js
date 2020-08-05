@@ -547,7 +547,7 @@
       selectCtnr.append(
         $(`
         <option value="">Sélectionner un véhicule</option> 
-        ${response.immatriculations.map((p) => `<option value="${p.id}" data-immatriculationid="${p.id}" data-immatriculationname="${p.name}">${p.name}</option>`).join('')}
+        ${response.immatriculations.map((p) => `<option value="${p.id}" data-immatriculationid="${p.id}" data-immatriculationconn="${p.connexion}" data-immatriculationname="${p.name}">${p.name}</option>`).join('')}
       `)
       );
       $('#immatriculation-validate-btn')
@@ -588,14 +588,29 @@
       immatriculationId = parseInt(immatriculationId);
       let selectedOption = $(selectCtnr[0].selectedOptions[0]);
       let immatriculationName = selectedOption.attr('data-immatriculationname');
+      let immatriculationConnexion = selectedOption.attr('data-immatriculationconn');
+
       this._selectedImmatriculation = {
         id: immatriculationId,
         name: immatriculationName,
+        connexion: immatriculationConnexion,
       };
+      if (immatriculationConnexion == 't') {
+      }
+      this.assignVehicle(this._selectedImmatriculation, this._selectedPatrouille);
+      this.fetchSousSecteurs(this._selectedPatrouille);
       $('#immatriculation-form-element').addClass('slds-hide');
       $('#immatriculation-validate-btn').addClass('slds-hide');
-      $('#immatriculation_name').text(this._selectedImmatriculation.name).removeClass('slds-hide');
-      this.fetchSousSecteurs(this._selectedPatrouille);
+      $('#immatriculation_name').text(immatriculationName).removeClass('slds-hide');
+      //this.verifyImmatriculation(this._selectedImmatriculation);
+
+      /*GGO.assignVehicle(this._selectedImmatriculation.id, this._selectedPatrouille.id, {
+        baseRESTServicesURL: this._options.baseRESTServicesURL,
+        //callback: this.fetchImmatriculations.bind(this),
+        context: this,
+      });*/
+
+      //this.fetchSousSecteurs(this._selectedPatrouille);
     },
     /**
      * Récupération des sous-secteurs d'une patrouille
@@ -612,6 +627,57 @@
      *      ]
      *    }
      */
+    /*verifyImmatriculation: function (immatriculation) {
+      //let patrouille = this._selectedPatrouille;
+      //let immatriculation = this._selectedImmatriculation;
+      const self = this;
+      //const sousSecteursUrl = `/services/rest/mci/patrouilles/soussecteurs?patrouille=${patrouille.id}`;
+      const verifVehicleUrl = `${this._options.baseRESTServicesURL}/verif_vehicule.php?immatriculation=${immatriculation.id}`;
+      $.ajax({
+        type: 'GET',
+        url: verifVehicleUrl,
+        success: function (response) {
+          console.log(`${verifVehicleUrl}: `, response);
+          if (!response.code === 200) {
+            console.log('ATTENTIOOOOOOOONNNN');
+          }
+          self.assignVehicle();
+
+          //GGO.SessionManager.prototype.fetchSousSecteurs(patrouille);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`[GET] ${verifVehicleUrl} Request aborted`);
+          } else {
+            console.error(`[GET] ${verifVehicleUrl} ERROR: ${textStatus}`, errorThrown);
+          }
+        },
+      });
+    }, */
+    assignVehicle: function (immatriculation, patrouille) {
+      //let patrouille = this._selectedPatrouille;
+      //let immatriculation = this._selectedImmatriculation;
+      const self = this;
+
+      const assignVehiculesUrl = `${this._options.baseRESTServicesURL}/affecter_vehicule.php?immatriculation=${immatriculation.id}&patrouille=${patrouille.id}`;
+      $.ajax({
+        type: 'GET',
+        url: assignVehiculesUrl,
+        success: function (response) {
+          console.log(`${assignVehiculesUrl}: `, response);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`ASSIGNPATROUILLE  ${vehiculesUrl} Request aborted`);
+          } else {
+            console.error(`ASSIGNPATROUILLE Error for ${vehiculesUrl} request: ${textStatus}`, errorThrown);
+          }
+          if (typeof options.callback === 'function') {
+            options.callback.apply(options.context);
+          }
+        },
+      });
+    },
 
     fetchSousSecteurs: function (patrouille) {
       const self = this;
@@ -845,7 +911,7 @@
       location.href = mapUrl;
     },
     handleClickCancelSubSectors: function () {
-      GGO.revokeVehicle(this._selectedImmatriculation.id, {
+      GGO.revokeVehicle(this._selectedImmatriculation.id, this._selectedPatrouille.id, {
         baseRESTServicesURL: this._options.baseRESTServicesURL,
         callback: this.fetchImmatriculations.bind(this),
         context: this,

@@ -319,14 +319,15 @@
     }
   };
 
-  GGO.revokeVehicle = function (immatriculationId, options) {
+  GGO.revokeVehicle = function (immatriculationId, patrouilleId, options) {
     if (typeof immatriculationId !== 'undefined') {
-      const vehiculesUrl = `${options.baseRESTServicesURL}/liberer_vehicule.php?immatriculation=${immatriculationId}`;
+      const vehiculesUrl = `${options.baseRESTServicesURL}/liberer_vehicule.php?immatriculation=${immatriculationId}&patrouille=${patrouilleId}`;
       $.ajax({
         type: 'GET',
         url: vehiculesUrl,
         success: function (response) {
           if (typeof options.callback === 'function') {
+            console.log('VEHICULE REVOKED');
             options.callback.apply(options.context);
           }
         },
@@ -335,31 +336,6 @@
             console.warn(`REVOKEPATROUILLE  ${vehiculesUrl} Request aborted`);
           } else {
             console.error(`REVOKEPATROUILLE Error for ${vehiculesUrl} request: ${textStatus}`, errorThrown);
-          }
-          if (typeof options.callback === 'function') {
-            options.callback.apply(options.context);
-          }
-        },
-      });
-    }
-  };
-
-  GGO.assignVehicle = function (immatriculationId, patrouilleId, options) {
-    if (typeof immatriculationId !== 'undefined') {
-      const vehiculesUrl = `${options.baseRESTServicesURL}/affecter_vehicule.php?immatriculation=${immatriculationId}&patrouille=${patrouilleId}`;
-      $.ajax({
-        type: 'GET',
-        url: vehiculesUrl,
-        success: function (response) {
-          if (typeof options.callback === 'function') {
-            options.callback.apply(options.context);
-          }
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-          if (textStatus === 'abort') {
-            console.warn(`ASSIGNPATROUILLE  ${vehiculesUrl} Request aborted`);
-          } else {
-            console.error(`ASSIGNPATROUILLE Error for ${vehiculesUrl} request: ${textStatus}`, errorThrown);
           }
           if (typeof options.callback === 'function') {
             options.callback.apply(options.context);

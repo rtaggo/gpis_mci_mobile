@@ -392,13 +392,26 @@ const _getImmatriculations = async () => {
   return immatriculations;
 };
 
-const _libererVehicule = async (immatriculationId) => {
-  //console.log(`[dev-rest] _libererPatrouille patrouilleId=${patrouilleId}`);
-  let revokeVehicleUrl = `${require('../../config').get('BACKEND_URL')}/liberer_vehicle.php?immatriculation=${immatriculationId}`;
+const _libererVehicule = async (immatriculationId, patrouilleId) => {
+  //console.log(`[dev-rest] _libererVehicule immatriculationId=${immatriculationId} patrouilleId=${patrouilleId}`);
+  let revokeVehicleUrl = `${require('../../config').get('BACKEND_URL')}/liberer_vehicule.php?immatriculation=${immatriculationId}&patrouille=${patrouilleId}`;
   let resp = await doAsyncGET(revokeVehicleUrl);
   return resp;
 };
 
+const _affecterVehicule = async (immatriculationId, patrouilleId) => {
+  //console.log(`[dev-rest] _affecterVehicule immatriculationId=${immatriculationId} patrouilleId=${patrouilleId}`);
+  let assignVehicleUrl = `${require('../../config').get('BACKEND_URL')}/affecter_vehicule.php?immatriculation=${immatriculationId}&patrouille=${patrouilleId}`;
+  let resp = await doAsyncGET(assignVehicleUrl);
+  return resp;
+};
+
+const _verifierVehicule = async (immatriculationId) => {
+  //console.log(`[dev-rest] _affecterVehicule immatriculationId=${immatriculationId} patrouilleId=${patrouilleId}`);
+  let verifyVehicleUrl = `${require('../../config').get('BACKEND_URL')}/verifier_vehicule.php?immatriculation=${immatriculationId}`;
+  let resp = await doAsyncGET(verifyVehicleUrl);
+  return resp;
+};
 /* list to exports */
 module.exports = {
   login: _login,
@@ -434,6 +447,8 @@ module.exports = {
   getCrise: _getCrise,
   getImmatriculations: _getImmatriculations,
   libererVehicule: _libererVehicule,
+  affecterVehicule: _affecterVehicule,
+  verifierVehicule: _verifierVehicule,
   joinMission: _joinMission,
   positionMission: _positionMission,
 };
