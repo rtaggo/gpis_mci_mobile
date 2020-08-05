@@ -363,6 +363,15 @@ router.get('/immatriculations.php', (req, res, next) => {
   });
 });
 
+router.get('/liberer_vehicule.php', (req, res, next) => {
+  //console.log(`[MCI_REST_API][GET] /liberer_patrouille.php`);
+  const mcimodule = getMCIModule();
+  mcimodule.libererVehicule(req.query.immatriculation).then((resp) => {
+    res.header('Content-Type', 'application/json');
+    res.json(resp);
+  });
+});
+
 /**
  * Errors on "/mci/*" routes.
  */

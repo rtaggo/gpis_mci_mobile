@@ -565,11 +565,19 @@
         .removeClass('slds-hide');
     },
     handleClickCancelImmatriculation: function () {
-      GGO.disconnect(undefined, {
-        userName: this._currentUserName,
-        userRole: this._currentRole,
-        baseRESTServicesURL: '/services/rest/mci',
+      GGO.revokePatrouille(this._selectedPatrouille.id, {
+        baseRESTServicesURL: this._options.baseRESTServicesURL,
+        callback: this.fetchPatrouilles.bind(this),
+        context: this,
       });
+      $('#immatriculation-form-element').addClass('slds-hide');
+      $('#immatriculation-validate-btn').off().addClass('slds-hide');
+      $('#immatriculation-cancel-btn').off().addClass('slds-hide');
+      $('#error-message').addClass('slds-hide');
+      /*
+      $('#patrouille-form-element').removeClass('slds-hide');
+      $('#patrouille-validate-btn').removeClass('slds-hide');
+      */
     },
     handleClickChooseImmatriculation: function () {
       const selectCtnr = $('#select-immatriculation');
@@ -837,7 +845,16 @@
       location.href = mapUrl;
     },
     handleClickCancelSubSectors: function () {
-      GGO.revokePatrouille(this._selectedPatrouille.id, {
+      GGO.revokeVehicle(this._selectedImmatriculation.id, {
+        baseRESTServicesURL: this._options.baseRESTServicesURL,
+        callback: this.fetchImmatriculations.bind(this),
+        context: this,
+      });
+      $('#sous-secteurs-form-element').addClass('slds-hide');
+      $('#sous-secteurs-validate-btn').off().addClass('slds-hide');
+      $('#sous-secteurs-cancel-btn').off().addClass('slds-hide');
+      $('#error-message').addClass('slds-hide');
+      /*GGO.revokePatrouille(this._selectedPatrouille.id, {
         baseRESTServicesURL: this._options.baseRESTServicesURL,
         callback: this.fetchPatrouilles.bind(this),
         context: this,
@@ -846,10 +863,10 @@
       $('#sous-secteurs-validate-btn').off().addClass('slds-hide');
       $('#sous-secteurs-cancel-btn').off().addClass('slds-hide');
       $('#error-message').addClass('slds-hide');
-      /*
-      $('#patrouille-form-element').removeClass('slds-hide');
-      $('#patrouille-validate-btn').removeClass('slds-hide');
       */
+
+      $('#immatriculation-form-element').removeClass('slds-hide');
+      $('#immatriculation-validate-btn').removeClass('slds-hide');
     },
   };
 

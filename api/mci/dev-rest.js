@@ -392,6 +392,13 @@ const _getImmatriculations = async () => {
   return immatriculations;
 };
 
+const _libererVehicule = async (immatriculationId) => {
+  //console.log(`[dev-rest] _libererPatrouille patrouilleId=${patrouilleId}`);
+  let revokeVehicleUrl = `${require('../../config').get('BACKEND_URL')}/liberer_vehicle.php?immatriculation=${immatriculationId}`;
+  let resp = await doAsyncGET(revokeVehicleUrl);
+  return resp;
+};
+
 /* list to exports */
 module.exports = {
   login: _login,
@@ -426,6 +433,7 @@ module.exports = {
   getRestrictionsForCookie: _getRestrictionsForCookie,
   getCrise: _getCrise,
   getImmatriculations: _getImmatriculations,
+  libererVehicule: _libererVehicule,
   joinMission: _joinMission,
   positionMission: _positionMission,
 };
