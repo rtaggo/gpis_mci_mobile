@@ -71,12 +71,12 @@
         layers: [streetsTL],
       }).setView([48.853507, 2.348015], 12);
 
-      this.authenticateOcean(this.fetchNeighborhood());
+      this.fetchNeighborhood(this.authenticateOcean());
 
       // this.fetchNeighborhood();
       //this.authenticateOcean();
       //this.getToken();
-      //this.await_refresh_vehicles();
+      this.await_refresh_vehicles();
     },
 
     _getNeighborhoodURL: function () {
@@ -89,7 +89,7 @@
         return `${this._options.baseRESTServicesURL}/voisinage.php?chefs_groupe=${this._options.chefsGroupe}&secteurs=${this._options.secteurs.join(',')}`;
       }
     },
-    authenticateOcean: function (callback) {
+    authenticateOcean: function () {
       let self = this;
       let restAuthURL = 'https://v3.oceansystem.com/ocean-3.0.0/restapi/auth/authenticate?login=galigeo1&password=GPIS03';
       $.ajax({
@@ -110,9 +110,6 @@
           }
         },
       });
-      if (callback) {
-        callback();
-      }
     },
 
     getToken: function (callback) {
@@ -139,11 +136,18 @@
     },
 
     await_refresh_vehicles: function () {
-      setTimeout(() => {
-        this.refresh_vehicles();
-      }, 20000);
+      var self = this;
+      console.log('toto');
+      setInterval(
+        function () {
+          console.log('deb_rfresh');
+          self.refresh_vehicles();
+        }.bind(this),
+        GGO.CHECK_VEHICULES_INTERVALLE
+      );
     },
     refresh_vehicles: function () {
+      console.log('log_refresh');
       let self = this;
       this.getToken(function (token) {
         let positionsURL = `https://v3.oceansystem.com/ocean-3.0.0/restapi/mobility/v1/vehiclePositions?token=${token}`;
@@ -151,15 +155,11 @@
           type: 'GET',
           url: positionsURL,
           success: function (response) {
-            console.log(`Refresh vehicles Response : `, response);
-            if (response.code === 200) {
-              self.fetchNeighborhoodVehiclesFetched(response);
-              let vehiclesGgeoJSON = response;
-              if (typeof vehiclesGgeoJSON !== 'undefined') {
-                self._vehiclesLayer.setGeoJSON(vehiclesGgeoJSON);
-              }
+            if (response.vehicles) {
+              console.log(`Refresh vehicles Response : `, response);
+              self.convertVehiclePositionstoGEOJSON(response);
             }
-            self.await_refresh_vehicles();
+            //self.await_refresh_vehicles();
           },
           error: function (jqXHR, textStatus, errorThrown) {
             if (textStatus === 'abort') {
@@ -167,10 +167,11 @@
             } else {
               console.error(`${positionsURL} Error request: ${textStatus}`, errorThrown);
             }
-            self.await_refresh_vehicles();
+            //self.await_refresh_vehicles();
           },
         });
       });
+      //self.await_refresh_vehicles();
     },
     fetchNeighborhoodVehicles: function (response) {
       let self = this;
@@ -181,53 +182,7 @@
         url: positionsURL,
         success: function (response) {
           console.log(`${positionsURL} positions : `, response);
-          var vehicles2 = response.vehicles;
-          var vehiclesGgeoJSON = {};
-          vehiclesGgeoJSON.type = 'FeatureCollection';
-          vehiclesGgeoJSON.features = [];
-          self.getImmatPatCouple(function (liste_immat_pat) {
-            //const liste_immat = [...new Set(liste_immat_pat.map((s) => s.immatriculation_libelle))];
-            var vehiclesGgeoJSON = {};
-            vehiclesGgeoJSON.type = 'FeatureCollection';
-            vehiclesGgeoJSON.features = [];
-            for (var k in vehicles2) {
-              if (vehicles2[k].position && vehicles2[k].position.latitudeY !== 85 && vehicles2[k].position.latitudeY !== 0) {
-                //let patrouille_lib = liste_immat_pat.find((m) => m.immatriculation_libelle === vehicles2[k].imat);
-                let vehicule = liste_immat_pat.immat_patrouilles.filter((s) => s.immatriculation_libelle === vehicles2[k].immat);
-                //if (vehicule[0]) {let patrouille_lib = vehicule[0].patrouille_libelle};
-
-                if (vehicule[0] && vehicule[0].patrouille_libelle) {
-                  let patrouille_lib = vehicule[0].patrouille_libelle;
-                  var newFeature = {
-                    type: 'Feature',
-                    geometry: {
-                      type: 'Point',
-                      coordinates: [parseFloat(vehicles2[k].position.longitudeX), parseFloat(vehicles2[k].position.latitudeY)],
-                    },
-                    properties: {
-                      immat: vehicles2[k].immat,
-                      etat: vehicles2[k].position.etat,
-                      patrouille: patrouille_lib,
-                    },
-                  };
-                } else {
-                  var newFeature = {
-                    type: 'Feature',
-                    geometry: {
-                      type: 'Point',
-                      coordinates: [parseFloat(vehicles2[k].position.longitudeX), parseFloat(vehicles2[k].position.latitudeY)],
-                    },
-                    properties: {
-                      immat: vehicles2[k].immat,
-                      etat: vehicles2[k].position.etat,
-                    },
-                  };
-                }
-                vehiclesGgeoJSON.features.push(newFeature);
-              }
-            }
-            self.handleNeighborhoodVehiclesFetched(vehiclesGgeoJSON);
-          });
+          self.convertVehiclePositionstoGEOJSON(response);
 
           /* for (var k in vehicles2) {
             if (vehicles2[k].position && vehicles2[k].position.latitudeY !== 85 && vehicles2[k].position.latitudeY !== 0) {
@@ -275,7 +230,57 @@
         },
       });
     },
-    fetchNeighborhood: function () {
+    convertVehiclePositionstoGEOJSON: function (response) {
+      let self = this;
+      var vehicles2 = response.vehicles;
+      var vehiclesGgeoJSON = {};
+      vehiclesGgeoJSON.type = 'FeatureCollection';
+      vehiclesGgeoJSON.features = [];
+      self.getImmatPatCouple(function (liste_immat_pat) {
+        //const liste_immat = [...new Set(liste_immat_pat.map((s) => s.immatriculation_libelle))];
+        var vehiclesGgeoJSON = {};
+        vehiclesGgeoJSON.type = 'FeatureCollection';
+        vehiclesGgeoJSON.features = [];
+        for (var k in vehicles2) {
+          if (vehicles2[k].position && vehicles2[k].position.latitudeY !== 85 && vehicles2[k].position.latitudeY !== 0) {
+            //let patrouille_lib = liste_immat_pat.find((m) => m.immatriculation_libelle === vehicles2[k].imat);
+            let vehicule = liste_immat_pat.immat_patrouilles.filter((s) => s.immatriculation_libelle === vehicles2[k].immat);
+            //if (vehicule[0]) {let patrouille_lib = vehicule[0].patrouille_libelle};
+
+            if (vehicule[0] && vehicule[0].patrouille_libelle) {
+              let patrouille_lib = vehicule[0].patrouille_libelle;
+              var newFeature = {
+                type: 'Feature',
+                geometry: {
+                  type: 'Point',
+                  coordinates: [parseFloat(vehicles2[k].position.longitudeX), parseFloat(vehicles2[k].position.latitudeY)],
+                },
+                properties: {
+                  immat: vehicles2[k].immat,
+                  etat: vehicles2[k].position.etat,
+                  patrouille: patrouille_lib,
+                },
+              };
+            } else {
+              var newFeature = {
+                type: 'Feature',
+                geometry: {
+                  type: 'Point',
+                  coordinates: [parseFloat(vehicles2[k].position.longitudeX), parseFloat(vehicles2[k].position.latitudeY)],
+                },
+                properties: {
+                  immat: vehicles2[k].immat,
+                  etat: vehicles2[k].position.etat,
+                },
+              };
+            }
+            vehiclesGgeoJSON.features.push(newFeature);
+          }
+        }
+        self.handleNeighborhoodVehiclesFetched(vehiclesGgeoJSON);
+      });
+    },
+    fetchNeighborhood: function (callback) {
       let self = this;
       //var restURL = `${this._options.baseRESTServicesURL}/voisinage.php?patrouille=${this._options.patrouille.id}&sssecteurs=${this._options.secteurs.map(s => s.id).join(',')}`;
       let restURL = this._getNeighborhoodURL();
@@ -294,6 +299,9 @@
           }
         },
       });
+      if (callback) {
+        callback();
+      }
     },
     handleNeighborhoodVehiclesFetched: function (response) {
       console.log('handleNeighborhoodVehiclesFetched', response);
@@ -302,7 +310,7 @@
         f.properties['marker-size'] = 'small';
         f.properties['marker-color'] = GGO.getColorForEtatVehicule(f.properties['etat']);
         f.properties['marker-symbol'] = 'car';
-        f.properties['description'] = f.properties.immat;
+        //f.properties['description'] = f.properties.immat;
         //console.log(f.properties.statut_mission);
         //f.properties['description'] = `${f.properties.patrouille_id}`;
       });
@@ -326,7 +334,7 @@
           if (textStatus === 'abort') {
             console.warn(`Get Correspondance Patrouille-Vehicule  ${getImmatPatUrl} Request aborted`);
           } else {
-            console.error(`ASSIGNPATROUILLE Error for ${getImmatPatUrl} request: ${textStatus}`, errorThrown);
+            console.error(`Get Correspondance Patrouille-Vehicule ${getImmatPatUrl} request: ${textStatus}`, errorThrown);
           }
         },
       });
@@ -450,7 +458,7 @@
           direction: 'bottom',
           noHide: true,
           permanent: true,
-          className: 'class-tooltip-Vehicle',
+          className: 'class-tooltip-vehicle',
         });
         marker.openTooltip();
       } /*else {
