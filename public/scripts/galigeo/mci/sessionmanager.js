@@ -573,6 +573,7 @@
       $('#immatriculation-form-element').addClass('slds-hide');
       $('#immatriculation-validate-btn').off().addClass('slds-hide');
       $('#immatriculation-cancel-btn').off().addClass('slds-hide');
+      $('#patrouille_name').addClass('slds-hide');
       $('#error-message').addClass('slds-hide');
       /*
       $('#patrouille-form-element').removeClass('slds-hide');
@@ -596,7 +597,9 @@
         connexion: immatriculationConnexion,
       };
       if (immatriculationConnexion == 't') {
+        $('#immatriculation-validate-btn').addClass('slds-hide');
       }
+      sessionStorage.immatriculation = JSON.stringify(this._selectedImmatriculation);
       this.assignVehicle(this._selectedImmatriculation, this._selectedPatrouille);
       this.fetchSousSecteurs(this._selectedPatrouille);
       $('#immatriculation-form-element').addClass('slds-hide');
@@ -668,12 +671,9 @@
         },
         error: function (jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
-            console.warn(`ASSIGNPATROUILLE  ${vehiculesUrl} Request aborted`);
+            console.warn(`ASSIGNPATROUILLE  ${assignVehiculesUrl} Request aborted`);
           } else {
-            console.error(`ASSIGNPATROUILLE Error for ${vehiculesUrl} request: ${textStatus}`, errorThrown);
-          }
-          if (typeof options.callback === 'function') {
-            options.callback.apply(options.context);
+            console.error(`ASSIGNPATROUILLE Error for ${assignVehiculesUrl} request: ${textStatus}`, errorThrown);
           }
         },
       });
@@ -930,7 +930,7 @@
       $('#sous-secteurs-cancel-btn').off().addClass('slds-hide');
       $('#error-message').addClass('slds-hide');
       */
-
+      $('#immatriculation_name').addClass('slds-hide');
       $('#immatriculation-form-element').removeClass('slds-hide');
       $('#immatriculation-validate-btn').removeClass('slds-hide');
     },

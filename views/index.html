@@ -158,6 +158,7 @@
 			$('#logoutBtn1').click(function(e){
 				GGO.disconnect(
 					self.galigeo.getPatrouille().id, 
+					self.galigeo.getVehicule().id,
 					{
 						'baseRESTServicesURL': '/services/rest/mci',
 						'fonction': 'deconnexion'
@@ -166,7 +167,8 @@
 			});
 			$('#logoutBtn2').click(function(e){
 				GGO.disconnect(
-					self.galigeo.getPatrouille().id, 
+					self.galigeo.getPatrouille().id,
+					self.galigeo.getVehicule().id, 
 					{
 						'baseRESTServicesURL': '/services/rest/mci',
 						'fonction': 'fin'
@@ -177,6 +179,7 @@
 				GGO.SessionSummaryPrompt('Bilan de la vacation', $('#appContainer'), 
 					{
 						patrouilleId: self.galigeo.getPatrouille().id,
+						immatriculationId: self.galigeo.getVehicule().id,
 						'baseRESTServicesURL': '/services/rest/mci'
 					}
 				);
@@ -206,6 +209,10 @@
 			if (!patrouille) {
 				GGO.SessionIssuePrompt('Patrouille non définie', 'Votre patrouille n\'est pas définie. Veuillez vous reconnecter.', $('#appContainer').empty());
 			}
+			let immatriculation = sessionStorage.getItem('immatriculation');
+			if (!immatriculation) {
+				GGO.SessionIssuePrompt('Immatriculation non définie', 'Votre véhicule n\'est pas défini. Veuillez vous reconnecter.', $('#appContainer').empty());
+			}
 			
 			let secteurs = null;
 			switch(userRole) {
@@ -222,6 +229,7 @@
 			self.galigeo = new GGO.GGOApp ({
 				windowHeight: windowH,
 				patrouille: JSON.parse(patrouille),
+				immatriculation : JSON.parse(immatriculation),
 				secteurs: JSON.parse(secteurs),
 				userRole: userRole
 			});

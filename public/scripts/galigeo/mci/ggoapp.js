@@ -12,6 +12,7 @@
       var modulesOptions = {
         app: this,
         patrouille: this._options.patrouille,
+        immatriculation: this._options.immatriculation,
         secteurs: this._options.secteurs,
         userName: this._options.userName,
         userRole: this._options.userRole,
@@ -27,6 +28,9 @@
     },
     getPatrouille: function () {
       return this._options.patrouille;
+    },
+    getVehicule: function () {
+      return this._options.immatriculation;
     },
     getUserLogin: function () {
       return this._options.userName;

@@ -81,7 +81,8 @@
       switch (what) {
         case 'end':
           let patrouille = self.galigeo.getPatrouille();
-          GGO.disconnect(patrouille ? patrouille.id : undefined, {
+          let immatriculation = self.galigeo.getVehicule();
+          GGO.disconnect(patrouille ? patrouille.id : undefined, immatriculation ? immatriculation.id : undefined, {
             baseRESTServicesURL: '/services/rest/mci',
             fonction: 'fin',
           });
@@ -279,6 +280,18 @@
     }
   };
 
+  GGO.getColorForEtatVehicule = function (etat) {
+    if (etat === 'a') {
+      return '#000000';
+    } else if (etat === 'A') {
+      return '#ff0000';
+    } else if (etat === 'R') {
+      return '#0EC516';
+    } else if (etat === 'T') {
+      return '#FFE800';
+    }
+  };
+
   GGO.shadeHexColor = function (color, percent) {
     /* 
       Percent: 
@@ -301,6 +314,7 @@
         type: 'GET',
         url: patrouillesUrl,
         success: function (response) {
+          console.log(`Patrouille ${patrouilleId} libérée !`);
           if (typeof options.callback === 'function') {
             options.callback.apply(options.context);
           }
@@ -326,8 +340,9 @@
         type: 'GET',
         url: vehiculesUrl,
         success: function (response) {
+          console.log('VEHICULE REVOKED');
           if (typeof options.callback === 'function') {
-            console.log('VEHICULE REVOKED');
+            console.log('VEHICLE REVOKED');
             options.callback.apply(options.context);
           }
         },
@@ -345,16 +360,21 @@
     }
   };
 
-  GGO.disconnect = function (patrouilleId, options) {
+  GGO.disconnect = function (patrouilleId, immatriculationId, options) {
     sessionStorage.clear();
     if (typeof patrouilleId !== 'undefined') {
       if (options.fonction == 'deconnexion') {
-        const patrouillesUrl = `${options.baseRESTServicesURL}/liberer_patrouille.php?patrouille=${patrouilleId}`;
+        const patrouillesUrl = `${options.baseRESTServicesURL}/liberer_patrouille.php?patrouille=${patrouilleId}&immatriculation=${immatriculationId}`;
+        const vehiculesUrl = `${options.baseRESTServicesURL}/liberer_vehicule.php?immatriculation=${immatriculationId}&patrouille=${patrouilleId}`;
         $.ajax({
           type: 'GET',
           url: patrouillesUrl,
           success: function (response) {
             console.log(`Revoke Patrouille response: `, response);
+            GGO.revokeVehicle(immatriculationId, patrouilleId, {
+              baseRESTServicesURL: '/services/rest/mci',
+              fonction: 'deconnexion',
+            });
             GGO.postLogoutForm();
           },
           error: function (jqXHR, textStatus, errorThrown) {
@@ -363,16 +383,40 @@
             } else {
               console.error(`Error for ${patrouillesUrl} request: ${textStatus}`, errorThrown);
             }
+            GGO.revokeVehicle(immatriculationId, patrouilleId, {
+              baseRESTServicesURL: '/services/rest/mci',
+              fonction: 'deconnexion',
+            });
             GGO.postLogoutForm();
           },
         });
+        /*$.ajax({
+          type: 'GET',
+          url: vehiculesUrl,
+          success: function (response) {
+            console.log(`Revoke Vehicule response: `, response);
+            GGO.postLogoutForm();
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            if (textStatus === 'abort') {
+              console.warn(`${vehiculesUrl} Request aborted`);
+            } else {
+              console.error(`Error for ${vehiculesUrl} request: ${textStatus}`, errorThrown);
+            }
+            GGO.postLogoutForm();
+          },
+        }); */
       } else if (options.fonction === 'fin') {
-        const patrouillesUrl = `${options.baseRESTServicesURL}/fin_vacation.php?patrouille=${patrouilleId}`;
+        const patrouillesUrl = `${options.baseRESTServicesURL}/fin_vacation.php?patrouille=${patrouilleId}&immatriculation=${immatriculationId}`;
         $.ajax({
           type: 'GET',
           url: patrouillesUrl,
           success: function (response) {
             console.log(`Revoke Patrouille response: `, response);
+            GGO.revokeVehicle(immatriculationId, patrouilleId, {
+              baseRESTServicesURL: '/services/rest/mci',
+              fonction: 'deconnexion',
+            });
             GGO.postLogoutForm();
           },
           error: function (jqXHR, textStatus, errorThrown) {
@@ -381,6 +425,10 @@
             } else {
               console.error(`Error for ${patrouillesUrl} request: ${textStatus}`, errorThrown);
             }
+            GGO.revokeVehicle(immatriculationId, patrouilleId, {
+              baseRESTServicesURL: '/services/rest/mci',
+              fonction: 'deconnexion',
+            });
             GGO.postLogoutForm();
           },
         });
@@ -388,12 +436,16 @@
     } else if (typeof patrouilleId === 'undefined') {
       if (typeof options !== 'undefined') {
         if (options.fonction === 'fin') {
-          const patrouillesUrl = `${options.baseRESTServicesURL}/fin_vacation.php?patrouille=${options.userName}`;
+          const patrouillesUrl = `${options.baseRESTServicesURL}/fin_vacation.php?patrouille=${options.userName}&immatriculation=${immatriculationId}`;
           $.ajax({
             type: 'GET',
             url: patrouillesUrl,
             success: function (response) {
               console.log(`Revoke Patrouille response: `, response);
+              GGO.revokeVehicle(immatriculationId, patrouilleId, {
+                baseRESTServicesURL: '/services/rest/mci',
+                fonction: 'deconnexion',
+              });
               GGO.postLogoutForm();
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -402,6 +454,10 @@
               } else {
                 console.error(`Error for ${patrouillesUrl} request: ${textStatus}`, errorThrown);
               }
+              GGO.revokeVehicle(immatriculationId, patrouilleId, {
+                baseRESTServicesURL: '/services/rest/mci',
+                fonction: 'deconnexion',
+              });
               GGO.postLogoutForm();
             },
           });

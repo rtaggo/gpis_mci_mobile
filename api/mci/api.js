@@ -115,7 +115,7 @@ router.get('/patrouilles.php', (req, res, next) => {
 router.get('/liberer_patrouille.php', (req, res, next) => {
   //console.log(`[MCI_REST_API][GET] /liberer_patrouille.php`);
   const mcimodule = getMCIModule();
-  mcimodule.libererPatrouille(req.query.patrouille).then((resp) => {
+  mcimodule.libererPatrouille(req.query.patrouille, req.query.immatriculation).then((resp) => {
     res.header('Content-Type', 'application/json');
     res.json(resp);
   });
@@ -124,7 +124,7 @@ router.get('/liberer_patrouille.php', (req, res, next) => {
 router.get('/fin_vacation.php', (req, res, next) => {
   //console.log(`[MCI_REST_API][GET] /fin_vacation.php`);
   const mcimodule = getMCIModule();
-  mcimodule.finVacation(req.query.patrouille).then((resp) => {
+  mcimodule.finVacation(req.query.patrouille, req.query.immatriculation).then((resp) => {
     res.header('Content-Type', 'application/json');
     res.json(resp);
   });
@@ -362,6 +362,19 @@ router.get('/immatriculations.php', (req, res, next) => {
     res.json(immatriculations);
   });
 });
+router.get('/affecter_vehicule.php', (req, res, next) => {
+  //console.log(`[MCI_REST_API][GET] /liberer_patrouille.php`);
+  const mcimodule = getMCIModule();
+  mcimodule.affecterVehicule(req.query.immatriculation, req.query.patrouille).then((assignVehicleResponse) => {
+    if (assignVehicleResponse.code !== 200) {
+      console.error(`MaJ Mission error with code ${assignVehicleResponse.code}: ${JSON.stringify(assignVehicleResponse)}`);
+      res.status(500).json(assignVehicleResponse);
+    } else {
+      res.status(200).json(assignVehicleResponse);
+    }
+    res.header('Content-Type', 'application/json');
+  });
+});
 
 router.get('/liberer_vehicule.php', (req, res, next) => {
   //console.log(`[MCI_REST_API][GET] /liberer_patrouille.php`);
@@ -372,12 +385,12 @@ router.get('/liberer_vehicule.php', (req, res, next) => {
   });
 });
 
-router.get('/affecter_vehicule.php', (req, res, next) => {
+router.get('/immat_patrouilles.php', (req, res, next) => {
   //console.log(`[MCI_REST_API][GET] /liberer_patrouille.php`);
   const mcimodule = getMCIModule();
-  mcimodule.affecterVehicule(req.query.immatriculation, req.query.patrouille).then((assignVehicleResponse) => {
+  mcimodule.getImmatPatCouple().then((assocImmatVehicleResponse) => {
     res.header('Content-Type', 'application/json');
-    res.json(assignVehicleResponse);
+    res.json(assocImmatVehicleResponse);
   });
 });
 

@@ -1,3 +1,5 @@
+//const { getImmatPatCouple } = require('../../../../api/mci/dev-rest');
+
 (function () {
   'use strict';
   GGO.NeighborhoodMapManager = function (options) {
@@ -6,6 +8,7 @@
     this._options.mapboxAccessToken = this._options.mapboxAccessToken || 'pk.eyJ1IjoicnRhZ2dvIiwiYSI6Ijg5YWI5YzlkYzJiYzg2Mjg2YWQyMTQyZjRkZWFiMWM5In0._yZGbo26CQle1_JfHPxWzg';
     this._mapDivId = 'neightborhoodmap';
     L.mapbox.accessToken = this._options.mapboxAccessToken;
+    this._token_ocean;
 
     this._secteurDrawingProperties = {
       stroke: '#FF00FF',
@@ -68,8 +71,10 @@
         layers: [streetsTL],
       }).setView([48.853507, 2.348015], 12);
 
-      this.fetchNeighborhood();
-      this.authenticateOcean();
+      this.authenticateOcean(this.fetchNeighborhood());
+
+      // this.fetchNeighborhood();
+      //this.authenticateOcean();
       //this.getToken();
       //this.await_refresh_vehicles();
     },
@@ -84,7 +89,7 @@
         return `${this._options.baseRESTServicesURL}/voisinage.php?chefs_groupe=${this._options.chefsGroupe}&secteurs=${this._options.secteurs.join(',')}`;
       }
     },
-    authenticateOcean: function () {
+    authenticateOcean: function (callback) {
       let self = this;
       let restAuthURL = 'https://v3.oceansystem.com/ocean-3.0.0/restapi/auth/authenticate?login=galigeo1&password=GPIS03';
       $.ajax({
@@ -105,16 +110,23 @@
           }
         },
       });
+      if (callback) {
+        callback();
+      }
     },
 
-    getToken: function () {
+    getToken: function (callback) {
+      if (this._token_ocean) {
+        callback(this._token_ocean);
+      }
       let self = this;
       let restAuthURL = 'https://v3.oceansystem.com/ocean-3.0.0/restapi/auth/authenticate?login=galigeo1&password=GPIS03';
       $.ajax({
         type: 'POST',
         url: restAuthURL,
         success: function (response) {
-          var tokeng = response.token;
+          self._token_ocean = response.token;
+          callback(self._token_ocean);
         },
         error: function (jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
@@ -126,41 +138,40 @@
       });
     },
 
-    /* await_refresh_vehicles: function () {
+    await_refresh_vehicles: function () {
       setTimeout(() => {
         this.refresh_vehicles();
-      }, GGO.CHECK_CRISES_INTERVALLE);
+      }, 20000);
     },
     refresh_vehicles: function () {
       let self = this;
-      //self.getToken();
-      //let token = this.token;
-      var token = this.getToken();
-      let positionsURL = `https://v3.oceansystem.com/ocean-3.0.0/restapi/mobility/v1/vehiclePositions?token=${token}`;
-      $.ajax({
-        type: 'GET',
-        url: positionsURL,
-        success: function (response) {
-          console.log(`Refresh vehicles Response : `, response);
-          if (response.code === 200) {
-            self.fetchNeighborhoodVehiclesFetched(response);
-            let vehiclesGgeoJSON = response;
-            if (typeof vehiclesGgeoJSON !== 'undefined') {
-              self._vehiclesLayer.setGeoJSON(vehiclesGgeoJSON);
+      this.getToken(function (token) {
+        let positionsURL = `https://v3.oceansystem.com/ocean-3.0.0/restapi/mobility/v1/vehiclePositions?token=${token}`;
+        $.ajax({
+          type: 'GET',
+          url: positionsURL,
+          success: function (response) {
+            console.log(`Refresh vehicles Response : `, response);
+            if (response.code === 200) {
+              self.fetchNeighborhoodVehiclesFetched(response);
+              let vehiclesGgeoJSON = response;
+              if (typeof vehiclesGgeoJSON !== 'undefined') {
+                self._vehiclesLayer.setGeoJSON(vehiclesGgeoJSON);
+              }
             }
-          }
-          self.await_refresh_vehicles();
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-          if (textStatus === 'abort') {
-            console.warn(`${positionsURL} Request aborted`);
-          } else {
-            console.error(`${positionsURL} Error request: ${textStatus}`, errorThrown);
-          }
-          self.await_refresh_vehicles();
-        },
+            self.await_refresh_vehicles();
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            if (textStatus === 'abort') {
+              console.warn(`${positionsURL} Request aborted`);
+            } else {
+              console.error(`${positionsURL} Error request: ${textStatus}`, errorThrown);
+            }
+            self.await_refresh_vehicles();
+          },
+        });
       });
-    }, */
+    },
     fetchNeighborhoodVehicles: function (response) {
       let self = this;
       let token = response.token;
@@ -174,26 +185,86 @@
           var vehiclesGgeoJSON = {};
           vehiclesGgeoJSON.type = 'FeatureCollection';
           vehiclesGgeoJSON.features = [];
+          self.getImmatPatCouple(function (liste_immat_pat) {
+            //const liste_immat = [...new Set(liste_immat_pat.map((s) => s.immatriculation_libelle))];
+            var vehiclesGgeoJSON = {};
+            vehiclesGgeoJSON.type = 'FeatureCollection';
+            vehiclesGgeoJSON.features = [];
+            for (var k in vehicles2) {
+              if (vehicles2[k].position && vehicles2[k].position.latitudeY !== 85 && vehicles2[k].position.latitudeY !== 0) {
+                //let patrouille_lib = liste_immat_pat.find((m) => m.immatriculation_libelle === vehicles2[k].imat);
+                let vehicule = liste_immat_pat.immat_patrouilles.filter((s) => s.immatriculation_libelle === vehicles2[k].immat);
+                //if (vehicule[0]) {let patrouille_lib = vehicule[0].patrouille_libelle};
 
-          for (var k in vehicles2) {
+                if (vehicule[0] && vehicule[0].patrouille_libelle) {
+                  let patrouille_lib = vehicule[0].patrouille_libelle;
+                  var newFeature = {
+                    type: 'Feature',
+                    geometry: {
+                      type: 'Point',
+                      coordinates: [parseFloat(vehicles2[k].position.longitudeX), parseFloat(vehicles2[k].position.latitudeY)],
+                    },
+                    properties: {
+                      immat: vehicles2[k].immat,
+                      etat: vehicles2[k].position.etat,
+                      patrouille: patrouille_lib,
+                    },
+                  };
+                } else {
+                  var newFeature = {
+                    type: 'Feature',
+                    geometry: {
+                      type: 'Point',
+                      coordinates: [parseFloat(vehicles2[k].position.longitudeX), parseFloat(vehicles2[k].position.latitudeY)],
+                    },
+                    properties: {
+                      immat: vehicles2[k].immat,
+                      etat: vehicles2[k].position.etat,
+                    },
+                  };
+                }
+                vehiclesGgeoJSON.features.push(newFeature);
+              }
+            }
+            self.handleNeighborhoodVehiclesFetched(vehiclesGgeoJSON);
+          });
+
+          /* for (var k in vehicles2) {
             if (vehicles2[k].position && vehicles2[k].position.latitudeY !== 85 && vehicles2[k].position.latitudeY !== 0) {
-              var newFeature = {
-                type: 'Feature',
-                geometry: {
-                  type: 'Point',
-                  coordinates: [parseFloat(vehicles2[k].position.longitudeX), parseFloat(vehicles2[k].position.latitudeY)],
-                },
-                properties: {
-                  immat: vehicles2[k].immat,
-                  test: vehicles2[k].position.latitudeY,
-                },
-              };
+              self.getImmatPatCouple(vehicles2[k].immat, function (liste_immat_pat) {
+              if (this.patrouille_id !== undefined) {
+                var newFeature = {
+                  type: 'Feature',
+                  geometry: {
+                    type: 'Point',
+                    coordinates: [parseFloat(vehicles2[k].position.longitudeX), parseFloat(vehicles2[k].position.latitudeY)],
+                  },
+                  properties: {
+                    immat: vehicles2[k].immat,
+                    test: vehicles2[k].position.latitudeY,
+                    patrouille: this.patrouille_id,
+                  },
+                };
+              } else {
+                var newFeature = {
+                  type: 'Feature',
+                  geometry: {
+                    type: 'Point',
+                    coordinates: [parseFloat(vehicles2[k].position.longitudeX), parseFloat(vehicles2[k].position.latitudeY)],
+                  },
+                  properties: {
+                    immat: vehicles2[k].immat,
+                    test: vehicles2[k].position.latitudeY,
+                  },
+                };
+              }
+
               vehiclesGgeoJSON.features.push(newFeature);
               //geojson['features'].push(newFeature);
             } else {
-            }
-          }
-          self.handleNeighborhoodVehiclesFetched(vehiclesGgeoJSON);
+            }*/
+
+          //self.handleNeighborhoodVehiclesFetched(vehiclesGgeoJSON);
         },
         error: function (jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
@@ -228,33 +299,38 @@
       console.log('handleNeighborhoodVehiclesFetched', response);
       //console.log(response);
       response.features.forEach((f) => {
-        f.properties['marker-size'] = 'medium';
-        f.properties['marker-color'] = '#000000';
+        f.properties['marker-size'] = 'small';
+        f.properties['marker-color'] = GGO.getColorForEtatVehicule(f.properties['etat']);
         f.properties['marker-symbol'] = 'car';
         f.properties['description'] = f.properties.immat;
         //console.log(f.properties.statut_mission);
         //f.properties['description'] = `${f.properties.patrouille_id}`;
       });
-      this._vehiclesLayer = L.mapbox
-        .featureLayer
-        /*response, {
-          pointToLayer: function (feature, latlng) {
-            let geojsonMarkerOptions = {
-              radius: 6,
-              fillColor: feature.properties['marker-color'],
-              //color: '#808080',
-              //weight: 1,
-              opacity: 1,
-              fillOpacity: 1,
-            };
-            let lyr = L.circleMarker(latlng, geojsonMarkerOptions);
-            return lyr;
-          },
-        }*/
-        ()
-        .on('layeradd', this.onVehiclesAdded.bind(this))
-        .addTo(this._map)
-        .setGeoJSON(response);
+      this._vehiclesLayer = L.mapbox.featureLayer().on('layeradd', this.onVehiclesAdded.bind(this)).addTo(this._map).setGeoJSON(response);
+    },
+    getImmatPatCouple: function (callback) {
+      //let patrouille = this._selectedPatrouille;
+      //let immatriculation = this._selectedImmatriculation;
+      const self = this;
+      const getImmatPatUrl = `${this._options.baseRESTServicesURL}/immat_patrouilles.php`;
+      $.ajax({
+        type: 'GET',
+        url: getImmatPatUrl,
+        success: function (response) {
+          console.log(`${getImmatPatUrl} Get Liste Correspondance Patrouille-Vehicule: `, response);
+          if (callback) {
+            callback(response);
+          }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`Get Correspondance Patrouille-Vehicule  ${getImmatPatUrl} Request aborted`);
+          } else {
+            console.error(`ASSIGNPATROUILLE Error for ${getImmatPatUrl} request: ${textStatus}`, errorThrown);
+          }
+        },
+      });
+      //self.handleNeighborhoodVehiclesFetched(vehiclesGgeoJSON);
     },
 
     handleNeighborhoodFetched: function (response) {
@@ -368,15 +444,25 @@
     },
     onVehiclesAdded: function (e) {
       let marker = e.layer;
-      marker
-        .bindTooltip(`${marker.feature.properties['immat']}`, {
+      if (marker.feature.properties['patrouille']) {
+        marker.bindTooltip(`${marker.feature.properties['patrouille']}`, {
           offset: L.point(0, 3),
           direction: 'bottom',
           noHide: true,
           permanent: true,
           className: 'class-tooltip-Vehicle',
-        })
-        .openTooltip();
+        });
+        marker.openTooltip();
+      } /*else {
+        marker.bindTooltip(`${marker.feature.properties['immat']}`, {
+          offset: L.point(0, 3),
+          direction: 'bottom',
+          noHide: true,
+          permanent: true,
+          className: 'class-tooltip-Vehicle',
+        });
+      } 
+      marker.openTooltip();*/
     },
   };
 
