@@ -133,9 +133,7 @@
     },
     refresh_vehicles: function () {
       let self = this;
-      if (this._vehiclesLayer) {
-        this._map.removeLayer(this._vehiclesLayer);
-      }
+
       this.getToken(function (token) {
         let positionsURL = `https://v3.oceansystem.com/ocean-3.0.0/restapi/mobility/v1/vehiclePositions?token=${token}`;
         $.ajax({
@@ -264,6 +262,9 @@
       });
       //this._map.removeLayer(this._vehiclesLayer);
       //map.removeLayer(marker);
+      if (this._vehiclesLayer) {
+        this._map.removeLayer(this._vehiclesLayer);
+      }
       this._vehiclesLayer = L.mapbox.featureLayer().on('layeradd', this.onVehiclesAdded.bind(this)).addTo(this._map).setGeoJSON(response);
     },
     getImmatPatCouple: function (callback) {
