@@ -71,11 +71,7 @@
         layers: [streetsTL],
       }).setView([48.853507, 2.348015], 12);
 
-      this.fetchNeighborhood(this.authenticateOcean());
-
-      // this.fetchNeighborhood();
-      //this.authenticateOcean();
-      //this.getToken();
+      this.fetchNeighborhood();
       this.await_refresh_vehicles();
     },
 
@@ -97,9 +93,6 @@
         url: restAuthURL,
         success: function (response) {
           console.log(`${restAuthURL} token : `, response);
-          var token = response.token;
-          //this.token = response.token;
-          //token_glob = response.token;
           self.fetchNeighborhoodVehicles(response);
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -113,9 +106,6 @@
     },
 
     getToken: function (callback) {
-      if (this._token_ocean) {
-        callback(this._token_ocean);
-      }
       let self = this;
       let restAuthURL = 'https://v3.oceansystem.com/ocean-3.0.0/restapi/auth/authenticate?login=galigeo1&password=GPIS03';
       $.ajax({
@@ -137,18 +127,15 @@
 
     await_refresh_vehicles: function () {
       var self = this;
-      console.log('toto');
-      setInterval(
-        function () {
-          console.log('deb_rfresh');
-          self.refresh_vehicles();
-        }.bind(this),
-        GGO.CHECK_VEHICULES_INTERVALLE
-      );
+      setInterval(function () {
+        self.refresh_vehicles();
+      }, GGO.CHECK_VEHICULES_INTERVALLE);
     },
     refresh_vehicles: function () {
-      console.log('log_refresh');
       let self = this;
+      if (this._vehiclesLayer) {
+        this._map.removeLayer(this._vehiclesLayer);
+      }
       this.getToken(function (token) {
         let positionsURL = `https://v3.oceansystem.com/ocean-3.0.0/restapi/mobility/v1/vehiclePositions?token=${token}`;
         $.ajax({
@@ -159,7 +146,6 @@
               console.log(`Refresh vehicles Response : `, response);
               self.convertVehiclePositionstoGEOJSON(response);
             }
-            //self.await_refresh_vehicles();
           },
           error: function (jqXHR, textStatus, errorThrown) {
             if (textStatus === 'abort') {
@@ -167,11 +153,9 @@
             } else {
               console.error(`${positionsURL} Error request: ${textStatus}`, errorThrown);
             }
-            //self.await_refresh_vehicles();
           },
         });
       });
-      //self.await_refresh_vehicles();
     },
     fetchNeighborhoodVehicles: function (response) {
       let self = this;
@@ -183,43 +167,6 @@
         success: function (response) {
           console.log(`${positionsURL} positions : `, response);
           self.convertVehiclePositionstoGEOJSON(response);
-
-          /* for (var k in vehicles2) {
-            if (vehicles2[k].position && vehicles2[k].position.latitudeY !== 85 && vehicles2[k].position.latitudeY !== 0) {
-              self.getImmatPatCouple(vehicles2[k].immat, function (liste_immat_pat) {
-              if (this.patrouille_id !== undefined) {
-                var newFeature = {
-                  type: 'Feature',
-                  geometry: {
-                    type: 'Point',
-                    coordinates: [parseFloat(vehicles2[k].position.longitudeX), parseFloat(vehicles2[k].position.latitudeY)],
-                  },
-                  properties: {
-                    immat: vehicles2[k].immat,
-                    test: vehicles2[k].position.latitudeY,
-                    patrouille: this.patrouille_id,
-                  },
-                };
-              } else {
-                var newFeature = {
-                  type: 'Feature',
-                  geometry: {
-                    type: 'Point',
-                    coordinates: [parseFloat(vehicles2[k].position.longitudeX), parseFloat(vehicles2[k].position.latitudeY)],
-                  },
-                  properties: {
-                    immat: vehicles2[k].immat,
-                    test: vehicles2[k].position.latitudeY,
-                  },
-                };
-              }
-
-              vehiclesGgeoJSON.features.push(newFeature);
-              //geojson['features'].push(newFeature);
-            } else {
-            }*/
-
-          //self.handleNeighborhoodVehiclesFetched(vehiclesGgeoJSON);
         },
         error: function (jqXHR, textStatus, errorThrown) {
           if (textStatus === 'abort') {
@@ -280,7 +227,7 @@
         self.handleNeighborhoodVehiclesFetched(vehiclesGgeoJSON);
       });
     },
-    fetchNeighborhood: function (callback) {
+    fetchNeighborhood: function () {
       let self = this;
       //var restURL = `${this._options.baseRESTServicesURL}/voisinage.php?patrouille=${this._options.patrouille.id}&sssecteurs=${this._options.secteurs.map(s => s.id).join(',')}`;
       let restURL = this._getNeighborhoodURL();
@@ -299,21 +246,24 @@
           }
         },
       });
-      if (callback) {
+      /* if (callback) {
         callback();
-      }
+      } */
     },
     handleNeighborhoodVehiclesFetched: function (response) {
       console.log('handleNeighborhoodVehiclesFetched', response);
       //console.log(response);
       response.features.forEach((f) => {
         f.properties['marker-size'] = 'small';
-        f.properties['marker-color'] = GGO.getColorForEtatVehicule(f.properties['etat']);
+        //f.properties['marker-color'] = GGO.getColorForEtatVehicule(f.properties['etat']);
+        f.properties['marker-color'] = '#000000';
         f.properties['marker-symbol'] = 'car';
-        //f.properties['description'] = f.properties.immat;
+        f.properties['description'] = f.properties.immat;
         //console.log(f.properties.statut_mission);
         //f.properties['description'] = `${f.properties.patrouille_id}`;
       });
+      //this._map.removeLayer(this._vehiclesLayer);
+      //map.removeLayer(marker);
       this._vehiclesLayer = L.mapbox.featureLayer().on('layeradd', this.onVehiclesAdded.bind(this)).addTo(this._map).setGeoJSON(response);
     },
     getImmatPatCouple: function (callback) {
@@ -452,6 +402,8 @@
     },
     onVehiclesAdded: function (e) {
       let marker = e.layer;
+      //marker(marker, { zIndexOffset: 150 });
+      marker.setZIndexOffset(-100);
       if (marker.feature.properties['patrouille']) {
         marker.bindTooltip(`${marker.feature.properties['patrouille']}`, {
           offset: L.point(0, 3),

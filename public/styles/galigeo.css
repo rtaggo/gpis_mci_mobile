@@ -161,8 +161,8 @@ body {
   background-color: rgb(219, 110, 110);
 }
 .class-tooltip-vehicle {
-  font-size: 11px;
-  padding: 2px;
+  font-size: 10px;
+  padding: 1px;
   line-height: 100%;
   color: black;
   border-color: black;
