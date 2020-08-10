@@ -115,7 +115,7 @@ router.get('/patrouilles.php', (req, res, next) => {
 router.get('/liberer_patrouille.php', (req, res, next) => {
   //console.log(`[MCI_REST_API][GET] /liberer_patrouille.php`);
   const mcimodule = getMCIModule();
-  mcimodule.libererPatrouille(req.query.patrouille).then((resp) => {
+  mcimodule.libererPatrouille(req.query.patrouille, req.query.immatriculation).then((resp) => {
     res.header('Content-Type', 'application/json');
     res.json(resp);
   });
@@ -124,7 +124,7 @@ router.get('/liberer_patrouille.php', (req, res, next) => {
 router.get('/fin_vacation.php', (req, res, next) => {
   //console.log(`[MCI_REST_API][GET] /fin_vacation.php`);
   const mcimodule = getMCIModule();
-  mcimodule.finVacation(req.query.patrouille).then((resp) => {
+  mcimodule.finVacation(req.query.patrouille, req.query.immatriculation).then((resp) => {
     res.header('Content-Type', 'application/json');
     res.json(resp);
   });
@@ -351,6 +351,55 @@ router.get('/crise.php', (req, res, next) => {
   mcimodule.getCrise().then((criseResponse) => {
     res.header('Content-Type', 'application/json');
     res.json(criseResponse);
+  });
+});
+
+router.get('/immatriculations.php', (req, res, next) => {
+  //console.log(`[MCI_REST_API][GET] /immatriculations.php`);
+  const mcimodule = getMCIModule();
+  mcimodule.getImmatriculations().then((immatriculations) => {
+    res.header('Content-Type', 'application/json');
+    res.json(immatriculations);
+  });
+});
+router.get('/affecter_vehicule.php', (req, res, next) => {
+  //console.log(`[MCI_REST_API][GET] /liberer_patrouille.php`);
+  const mcimodule = getMCIModule();
+  mcimodule.affecterVehicule(req.query.immatriculation, req.query.patrouille).then((assignVehicleResponse) => {
+    if (assignVehicleResponse.code !== 200) {
+      console.error(`MaJ Mission error with code ${assignVehicleResponse.code}: ${JSON.stringify(assignVehicleResponse)}`);
+      res.status(500).json(assignVehicleResponse);
+    } else {
+      res.status(200).json(assignVehicleResponse);
+    }
+    res.header('Content-Type', 'application/json');
+  });
+});
+
+router.get('/liberer_vehicule.php', (req, res, next) => {
+  //console.log(`[MCI_REST_API][GET] /liberer_patrouille.php`);
+  const mcimodule = getMCIModule();
+  mcimodule.libererVehicule(req.query.immatriculation, req.query.patrouille).then((revokeVehicleResponse) => {
+    res.header('Content-Type', 'application/json');
+    res.json(revokeVehicleResponse);
+  });
+});
+
+router.get('/immat_patrouilles.php', (req, res, next) => {
+  //console.log(`[MCI_REST_API][GET] /liberer_patrouille.php`);
+  const mcimodule = getMCIModule();
+  mcimodule.getImmatPatCouple().then((assocImmatVehicleResponse) => {
+    res.header('Content-Type', 'application/json');
+    res.json(assocImmatVehicleResponse);
+  });
+});
+
+router.get('/verif_vehicule.php', (req, res, next) => {
+  //console.log(`[MCI_REST_API][GET] /liberer_patrouille.php`);
+  const mcimodule = getMCIModule();
+  mcimodule.verifierVehicule(req.query.immatriculation).then((verifyVehicleResponse) => {
+    res.header('Content-Type', 'application/json');
+    res.json(verifyVehicleResponse);
   });
 });
 
