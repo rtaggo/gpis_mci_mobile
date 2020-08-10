@@ -70,7 +70,6 @@
         contextmenuWidth: 140,
         layers: [streetsTL],
       }).setView([48.853507, 2.348015], 12);
-
       this.fetchNeighborhood();
       this.await_refresh_vehicles();
     },
@@ -127,15 +126,14 @@
 
     await_refresh_vehicles: function () {
       var self = this;
+      self.refresh_vehicles();
       setInterval(function () {
         self.refresh_vehicles();
       }, GGO.CHECK_VEHICULES_INTERVALLE);
     },
     refresh_vehicles: function () {
       let self = this;
-      if (this._vehiclesLayer) {
-        this._map.removeLayer(this._vehiclesLayer);
-      }
+
       this.getToken(function (token) {
         let positionsURL = `https://v3.oceansystem.com/ocean-3.0.0/restapi/mobility/v1/vehiclePositions?token=${token}`;
         $.ajax({
@@ -264,6 +262,9 @@
       });
       //this._map.removeLayer(this._vehiclesLayer);
       //map.removeLayer(marker);
+      if (this._vehiclesLayer) {
+        this._map.removeLayer(this._vehiclesLayer);
+      }
       this._vehiclesLayer = L.mapbox.featureLayer().on('layeradd', this.onVehiclesAdded.bind(this)).addTo(this._map).setGeoJSON(response);
     },
     getImmatPatCouple: function (callback) {
@@ -356,7 +357,7 @@
           }
           f.properties['marker-color'] = GGO.getColorForStatutMission(parseInt(f.properties.statut_mission));
           f.properties['description'] = f.properties.codesite;
-          console.log(f.properties.statut_mission);
+          //console.log(f.properties.statut_mission);
           //f.properties['description'] = `${f.properties.patrouille_id}`;
         });
         this._lastMissionsLayer = L.mapbox.featureLayer().addTo(this._map).on('layeradd', this.onMissionsAdded.bind(this)).setGeoJSON(response.mission_ronde);
