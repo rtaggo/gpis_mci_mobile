@@ -127,6 +127,7 @@
 
     await_refresh_vehicles: function () {
       var self = this;
+      self.refresh_vehicles();
       setInterval(function () {
         self.refresh_vehicles();
       }, GGO.CHECK_VEHICULES_INTERVALLE);
