@@ -346,20 +346,23 @@
       }
       if (typeof response.mission_ronde !== 'undefined') {
         response.mission_ronde.features.forEach((f) => {
-          f.properties['marker-size'] = 'small';
-          if (parseInt(f.properties.type_mission_id) == 6) {
-            if (parseInt(f.properties.motif_id) == 1) {
-              f.properties['marker-symbol'] = 'music';
-            } else if (parseInt(f.properties.motif_id) == 2) {
-              f.properties['marker-symbol'] = 'pitch';
-            } else f.properties['marker-symbol'] = 'triangle';
+          if (f.properties.statut_mission != 5) {
+            f.properties['marker-size'] = 'small';
+            if (parseInt(f.properties.type_mission_id) == 6) {
+              if (parseInt(f.properties.motif_id) == 1) {
+                f.properties['marker-symbol'] = 'music';
+              } else if (parseInt(f.properties.motif_id) == 2) {
+                f.properties['marker-symbol'] = 'pitch';
+              } else f.properties['marker-symbol'] = 'triangle';
+            }
+            f.properties['marker-color'] = GGO.getColorForStatutMission(parseInt(f.properties.statut_mission));
+            f.properties['description'] = f.properties.codesite;
+            console.log(f.properties.statut_mission);
+            this._lastMissionsLayer = L.mapbox.featureLayer().addTo(this._map).on('layeradd', this.onMissionsAdded.bind(this)).setGeoJSON(response.mission_ronde);
           }
-          f.properties['marker-color'] = GGO.getColorForStatutMission(parseInt(f.properties.statut_mission));
-          f.properties['description'] = f.properties.codesite;
-          console.log(f.properties.statut_mission);
           //f.properties['description'] = `${f.properties.patrouille_id}`;
         });
-        this._lastMissionsLayer = L.mapbox.featureLayer().addTo(this._map).on('layeradd', this.onMissionsAdded.bind(this)).setGeoJSON(response.mission_ronde);
+
         if (!zoomDone) {
           //this._map.fitBounds(this._lastMissionsLayer.getBounds());
         }
