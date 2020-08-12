@@ -353,7 +353,7 @@
               f.properties['marker-symbol'] = 'music';
             } else if (parseInt(f.properties.motif_id) == 2) {
               f.properties['marker-symbol'] = 'pitch';
-            } else f.properties['marker-symbol'] = 'triangle';
+            } else f.properties['marker-symbol'] = 'fire-station';
           }
           f.properties['marker-color'] = GGO.getColorForStatutMission(parseInt(f.properties.statut_mission));
           f.properties['description'] = f.properties.codesite;
