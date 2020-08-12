@@ -70,7 +70,8 @@
         contextmenuWidth: 140,
         layers: [streetsTL],
       }).setView([48.853507, 2.348015], 12);
-      this.fetchNeighborhood();
+      //this.fetchNeighborhood();
+      this.await_refresh_neighborhood();
       this.await_refresh_vehicles();
     },
 
@@ -122,6 +123,13 @@
           }
         },
       });
+    },
+    await_refresh_neighborhood: function () {
+      var self = this;
+      self.fetchNeighborhood();
+      setInterval(function () {
+        self.fetchNeighborhood();
+      }, GGO.CHECK_MISSION_STATUT_INTERVALLE);
     },
 
     await_refresh_vehicles: function () {
@@ -194,6 +202,7 @@
 
             if (vehicule[0] && vehicule[0].patrouille_libelle) {
               let patrouille_lib = vehicule[0].patrouille_libelle;
+              let pause = vehicule[0].pause;
               var newFeature = {
                 type: 'Feature',
                 geometry: {
@@ -204,6 +213,7 @@
                   immat: vehicles2[k].immat,
                   etat: vehicles2[k].position.etat,
                   patrouille: patrouille_lib,
+                  pause: pause,
                 },
               };
             } else {
@@ -233,7 +243,7 @@
         type: 'GET',
         url: restURL,
         success: function (response) {
-          console.log(`${restURL} Response : `, response);
+          console.log(`${restURL} Refresh Missions : `, response);
           self.handleNeighborhoodFetched(response);
         },
         error: function (jqXHR, textStatus, errorThrown) {
@@ -247,6 +257,7 @@
       /* if (callback) {
         callback();
       } */
+      console.log('error');
     },
     handleNeighborhoodVehiclesFetched: function (response) {
       console.log('handleNeighborhoodVehiclesFetched', response);
@@ -254,6 +265,13 @@
       response.features.forEach((f) => {
         f.properties['marker-size'] = 'small';
         //f.properties['marker-color'] = GGO.getColorForEtatVehicule(f.properties['etat']);
+        /* 
+        if (parseInt(f.properties.pause) == 1) {
+          f.properties['marker-color'] = '#A40DC2';
+        } else {
+          f.properties['marker-color'] = '#000000';
+        }
+        */
         f.properties['marker-color'] = '#000000';
         f.properties['marker-symbol'] = 'car';
         f.properties['description'] = f.properties.immat;
@@ -295,6 +313,15 @@
     handleNeighborhoodFetched: function (response) {
       console.log('handleNeighborhoodFetched', response);
       let zoomDone = false;
+      if (this._sousSecteurLayer) {
+        this._map.removeLayer(this._sousSecteurLayer);
+      }
+      if (this._secteurLayer) {
+        this._map.removeLayer(this._secteurLayer);
+      }
+      if (this._chefGroupeLayer) {
+        this._map.removeLayer(this._chefGroupeLayer);
+      }
       /*
         on pourrait faire: 
         let colors = [...GGO.getColorPalette('secteurs')].reverse()
@@ -307,7 +334,7 @@
           let col = colors[i];
           $.extend(f.properties, this._secteurDrawingProperties, { fill: col, stroke: col });
         });
-        this._secteurLayer = L.mapbox.featureLayer().addTo(this._map).setGeoJSON(response.sous_secteur);
+        this._sousSecteurLayer = L.mapbox.featureLayer().addTo(this._map).setGeoJSON(response.sous_secteur);
         //this._map.fitBounds(this._secteurLayer.getBounds());
         zoomDone = true;
       }
@@ -325,7 +352,7 @@
         // response.chef_groupe.features.forEach((f, i) => {
         //   f.properties['marker-size'] = 'small';
         // });
-        this._secteurLayer = L.mapbox
+        this._chefGroupeLayer = L.mapbox
           .featureLayer(response.chef_groupe, {
             pointToLayer: function (feature, latlng) {
               let geojsonMarkerOptions = {
@@ -360,6 +387,9 @@
           //console.log(f.properties.statut_mission);
           //f.properties['description'] = `${f.properties.patrouille_id}`;
         });
+        if (this._lastMissionsLayer) {
+          this._map.removeLayer(this._lastMissionsLayer);
+        }
         this._lastMissionsLayer = L.mapbox.featureLayer().addTo(this._map).on('layeradd', this.onMissionsAdded.bind(this)).setGeoJSON(response.mission_ronde);
         if (!zoomDone) {
           //this._map.fitBounds(this._lastMissionsLayer.getBounds());
