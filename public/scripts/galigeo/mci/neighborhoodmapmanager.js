@@ -202,6 +202,7 @@
 
             if (vehicule[0] && vehicule[0].patrouille_libelle) {
               let patrouille_lib = vehicule[0].patrouille_libelle;
+              let pause = vehicule[0].pause;
               var newFeature = {
                 type: 'Feature',
                 geometry: {
@@ -212,6 +213,7 @@
                   immat: vehicles2[k].immat,
                   etat: vehicles2[k].position.etat,
                   patrouille: patrouille_lib,
+                  pause: pause,
                 },
               };
             } else {
@@ -263,6 +265,13 @@
       response.features.forEach((f) => {
         f.properties['marker-size'] = 'small';
         //f.properties['marker-color'] = GGO.getColorForEtatVehicule(f.properties['etat']);
+        /* 
+        if (parseInt(f.properties.pause) == 1) {
+          f.properties['marker-color'] = '#A40DC2';
+        } else {
+          f.properties['marker-color'] = '#000000';
+        }
+        */
         f.properties['marker-color'] = '#000000';
         f.properties['marker-symbol'] = 'car';
         f.properties['description'] = f.properties.immat;
