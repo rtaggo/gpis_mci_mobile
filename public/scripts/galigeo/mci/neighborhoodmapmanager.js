@@ -254,10 +254,6 @@
           }
         },
       });
-      /* if (callback) {
-        callback();
-      } */
-      console.log('error');
     },
     handleNeighborhoodVehiclesFetched: function (response) {
       console.log('handleNeighborhoodVehiclesFetched', response);

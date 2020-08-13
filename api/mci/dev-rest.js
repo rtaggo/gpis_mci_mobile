@@ -399,9 +399,22 @@ const _libererVehicule = async (immatriculationId, patrouilleId) => {
   return resp;
 };
 
-const _affecterVehicule = async (immatriculationId, patrouilleId) => {
+const _affecterVehicule = async (immatriculationId, patrouilleId, chef_groupe, chefs_groupe) => {
+  let params = [];
+  if (immatriculationId) {
+    params.push(`patrouille_id=${immatriculationId}`);
+  }
+  if (patrouilleId) {
+    params.push(`patrouille_id=${patrouilleId}`);
+  }
+  if (chef_groupe) {
+    params.push(`chef_groupe=${chef_groupe}`);
+  }
+  if (chefs_groupe) {
+    params.push(`chefs_groupe=${chefs_groupe}`);
+  }
   //console.log(`[dev-rest] _affecterVehicule immatriculationId=${immatriculationId} patrouilleId=${patrouilleId}`);
-  let assignVehicleUrl = `${require('../../config').get('BACKEND_URL')}/affecter_vehicule.php?immatriculation=${immatriculationId}&patrouille=${patrouilleId}`;
+  let assignVehicleUrl = `${require('../../config').get('BACKEND_URL')}/affecter_vehicule.php?${params.join('&')}`;
   let assignVehicleResponse = await doAsyncGET(assignVehicleUrl);
   return assignVehicleResponse;
 };
