@@ -128,7 +128,6 @@
           case 'alpha':
             //GGO.SessionIssuePrompt('Rôle utilisateur non disponible', `Le rôle '<b>${authResponse.role}</b>' n\'est pas disponible pour le moment.<br /> Veuillez vous reconnecter.`, $('#appContainer').empty());
             this._currentUserName = username;
-            sessionStorage.userName = this._currentUserName;
             this.fetchChefsGroup(this._currentUserName);
             break;
           default:
@@ -417,13 +416,7 @@
       });
 
       sessionStorage.chefsGroupe = chefsGroupe;
-      //this.fetchSecteursChefGroup();
-
-      $('#chefs_groupe-validate-btn').addClass('slds-hide');
-      $('#chefs_groupe-cancel-btn').addClass('slds-hide');
-      $('#combobox-chefs-groupe').attr('disabled', true);
-      $('.slds-icon_container.slds-pill__remove').addClass('slds-hide');
-      this.fetchImmatriculations();
+      this.fetchSecteursChefGroup();
     },
     validateChefGroupLoginSteps: function (selectedSecteurs) {
       let mapUrl = `/chefgroup.html`;
@@ -431,101 +424,6 @@
       sessionStorage.role = this._currentRole;
       sessionStorage.username = this._currentUserName;
       location.href = mapUrl;
-    },
-    fetchImmatriculationsChefsGroup: function () {
-      let self = this;
-      $('#immatriculation-form-element').removeClass('slds-hide');
-      const immatriculationsURL = `${this._options.baseRESTServicesURL}/immatriculations.php`;
-      $.ajax({
-        type: 'GET',
-        url: immatriculationsURL,
-        success: function (response) {
-          console.log(`${immatriculationsURL}`, response);
-          self.handleImmatriculationsChefsGroupFetched(response);
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-          if (textStatus === 'abort') {
-            console.warn(`${immatriculationsURL} Request aborted`);
-          } else {
-            console.error(`Error for ${immatriculationsURL} request: ${textStatus}`, errorThrown);
-          }
-        },
-      });
-    },
-    handleImmatriculationsChefsGroupFetched: function (response) {
-      console.log(`>> handleImmatriculationsChefsGroupFetched`, response);
-      const self = this;
-      let selectCtnr = $('#select-immatriculation').empty();
-      selectCtnr.append(
-        $(`
-        <option value="">Sélectionner un véhicule</option> 
-        ${response.immatriculations.map((p) => `<option value="${p.id}" data-immatriculationid="${p.id}" data-immatriculationconn="${p.connexion}" data-immatriculationname="${p.name}">${p.name}</option>`).join('')}
-      `)
-      );
-      $('#immatriculation-validate-btn')
-        .off()
-        .click(function (e) {
-          e.preventDefault();
-          self.handleClickChooseImmatriculationChefsGroup();
-        })
-        .removeClass('slds-hide');
-      $('#immatriculation-cancel-btn')
-        .off()
-        .click(function (e) {
-          self.handleClickCancelImmatriculationChefsGroup();
-        })
-        .removeClass('slds-hide');
-    },
-    handleClickCancelImmatriculationChefsGroup: function () {
-      GGO.revokePatrouille(this._selectedPatrouille.id, {
-        baseRESTServicesURL: this._options.baseRESTServicesURL,
-        callback: this.fetchPatrouilles.bind(this),
-        context: this,
-      });
-      $('#immatriculation-form-element').addClass('slds-hide');
-      $('#immatriculation-validate-btn').off().addClass('slds-hide');
-      $('#immatriculation-cancel-btn').off().addClass('slds-hide');
-      $('#patrouille_name').addClass('slds-hide');
-      $('#error-message').addClass('slds-hide');
-      /*
-      $('#patrouille-form-element').removeClass('slds-hide');
-      $('#patrouille-validate-btn').removeClass('slds-hide');
-      */
-    },
-    handleClickChooseImmatriculationChefsGroup: function () {
-      const selectCtnr = $('#select-immatriculation');
-      let immatriculationId = selectCtnr.val();
-      if (immatriculationId === '' || selectCtnr[0].selectedOptions.length === 0) {
-        return;
-      }
-      immatriculationId = parseInt(immatriculationId);
-      let selectedOption = $(selectCtnr[0].selectedOptions[0]);
-      let immatriculationName = selectedOption.attr('data-immatriculationname');
-      let immatriculationConnexion = selectedOption.attr('data-immatriculationconn');
-
-      this._selectedImmatriculation = {
-        id: immatriculationId,
-        name: immatriculationName,
-        connexion: immatriculationConnexion,
-      };
-      if (immatriculationConnexion == 't') {
-        $('#immatriculation-validate-btn').addClass('slds-hide');
-      }
-      sessionStorage.immatriculation = JSON.stringify(this._selectedImmatriculation);
-      this.assignVehicle(this._selectedImmatriculation, this._selectedPatrouille);
-      this.this.fetchSecteursChefGroup();
-      $('#immatriculation-form-element').addClass('slds-hide');
-      $('#immatriculation-validate-btn').addClass('slds-hide');
-      $('#immatriculation_name').text(immatriculationName).removeClass('slds-hide');
-      //this.verifyImmatriculation(this._selectedImmatriculation);
-
-      /*GGO.assignVehicle(this._selectedImmatriculation.id, this._selectedPatrouille.id, {
-        baseRESTServicesURL: this._options.baseRESTServicesURL,
-        //callback: this.fetchImmatriculations.bind(this),
-        context: this,
-      });*/
-
-      //this.fetchSousSecteurs(this._selectedPatrouille);
     },
     /**
      * Récupération de la liste des patrouilles
@@ -667,42 +565,16 @@
         .removeClass('slds-hide');
     },
     handleClickCancelImmatriculation: function () {
-      switch (this._currentRole) {
-        case 'india':
-          GGO.revokePatrouille(this._selectedPatrouille.id, {
-            baseRESTServicesURL: this._options.baseRESTServicesURL,
-            callback: this.fetchPatrouilles.bind(this),
-            context: this,
-          });
-          $('#immatriculation-form-element').addClass('slds-hide');
-          $('#immatriculation-validate-btn').off().addClass('slds-hide');
-          $('#immatriculation-cancel-btn').off().addClass('slds-hide');
-          $('#patrouille_name').addClass('slds-hide');
-          $('#error-message').addClass('slds-hide');
-          break;
-        case 'charly':
-          this.handleClickCancelSectors();
-        /* this.fetchChefsGroup(this._currentUserName);
-          $('#immatriculation-form-element').addClass('slds-hide');
-          $('#immatriculation-validate-btn').off().addClass('slds-hide');
-          $('#immatriculation-cancel-btn').off().addClass('slds-hide');
-          $('#error-message').addClass('slds-hide');
-          $('#combobox-chefs-groupe').attr('disabled', false);
-          break; */
-        case 'alpha':
-          this.handleClickCancelSectors();
-          /* this.fetchChefsGroup(this._currentUserName);
-          $('#immatriculation-form-element').addClass('slds-hide');
-          $('#immatriculation-validate-btn').off().addClass('slds-hide');
-          $('#immatriculation-cancel-btn').off().addClass('slds-hide');
-          $('#error-message').addClass('slds-hide');
-          $('#combobox-chefs-groupe').attr('disabled', false); */
-
-          break;
-        default:
-          GGO.SessionIssuePrompt('Rôle utilisateur non disponible', `Le rôle '<b>${this._currentRole}</b>' n\'est pas disponible pour le moment.<br /> Veuillez vous reconnecter.`, $('#appContainer').empty());
-      }
-
+      GGO.revokePatrouille(this._selectedPatrouille.id, {
+        baseRESTServicesURL: this._options.baseRESTServicesURL,
+        callback: this.fetchPatrouilles.bind(this),
+        context: this,
+      });
+      $('#immatriculation-form-element').addClass('slds-hide');
+      $('#immatriculation-validate-btn').off().addClass('slds-hide');
+      $('#immatriculation-cancel-btn').off().addClass('slds-hide');
+      $('#patrouille_name').addClass('slds-hide');
+      $('#error-message').addClass('slds-hide');
       /*
       $('#patrouille-form-element').removeClass('slds-hide');
       $('#patrouille-validate-btn').removeClass('slds-hide');
@@ -728,25 +600,11 @@
         $('#immatriculation-validate-btn').addClass('slds-hide');
       }
       sessionStorage.immatriculation = JSON.stringify(this._selectedImmatriculation);
-      switch (this._currentRole) {
-        case 'india':
-          this.assignVehicle(this._selectedImmatriculation, this._selectedPatrouille);
-          this.fetchSousSecteurs(this._selectedPatrouille);
-          break;
-        case 'charly':
-          this.assignVehicle(this._selectedImmatriculation, this._selectedPatrouille);
-          this.fetchSecteursChefGroup();
-          break;
-        case 'alpha':
-          this.fetchSecteursChefGroup();
-          break;
-        default:
-          GGO.SessionIssuePrompt('Rôle utilisateur non disponible', `Le rôle '<b>${this._currentRole}</b>' n\'est pas disponible pour le moment.<br /> Veuillez vous reconnecter.`, $('#appContainer').empty());
-      }
+      this.assignVehicle(this._selectedImmatriculation, this._selectedPatrouille);
+      this.fetchSousSecteurs(this._selectedPatrouille);
       $('#immatriculation-form-element').addClass('slds-hide');
       $('#immatriculation-validate-btn').addClass('slds-hide');
       $('#immatriculation_name').text(immatriculationName).removeClass('slds-hide');
-
       //this.verifyImmatriculation(this._selectedImmatriculation);
 
       /*GGO.assignVehicle(this._selectedImmatriculation.id, this._selectedPatrouille.id, {
@@ -803,17 +661,8 @@
       //let patrouille = this._selectedPatrouille;
       //let immatriculation = this._selectedImmatriculation;
       const self = this;
-      let paramsArr = [];
-      if (patrouille) {
-        paramsArr.push(`immatriculation=${immatriculation.id}`);
-        paramsArr.push(`patrouille=${patrouille.id}`);
-      } else {
-        paramsArr.push(`immatriculation=${immatriculation.id}`);
-        paramsArr.push(`chef_groupe=${sessionStorage.userName}`);
-        paramsArr.push(`chefs_groupe=${sessionStorage.chefsGroupe}`);
-      }
-      const assignVehiculesUrl = `${this._options.baseRESTServicesURL}/affecter_vehicule.php?${paramsArr.join('&')}`;
 
+      const assignVehiculesUrl = `${this._options.baseRESTServicesURL}/affecter_vehicule.php?immatriculation=${immatriculation.id}&patrouille=${patrouille.id}`;
       $.ajax({
         type: 'GET',
         url: assignVehiculesUrl,
