@@ -436,13 +436,24 @@
       //marker(marker, { zIndexOffset: 150 });
       marker.setZIndexOffset(-100);
       if (marker.feature.properties['patrouille']) {
-        marker.bindTooltip(`${marker.feature.properties['patrouille']}`, {
-          offset: L.point(0, 3),
-          direction: 'bottom',
-          noHide: true,
-          permanent: true,
-          className: 'class-tooltip-vehicle',
-        });
+        if (marker.feature.properties['patrouille'].startsWith('G')) {
+          marker.bindTooltip(`${marker.feature.properties['patrouille']}`, {
+            offset: L.point(0, 3),
+            direction: 'bottom',
+            noHide: true,
+            permanent: true,
+            className: 'class-tooltip-vehicle',
+          });
+        } else if (marker.feature.properties['patrouille'].startsWith('C')) {
+          marker.bindTooltip(`${marker.feature.properties['patrouille']}`, {
+            offset: L.point(0, 3),
+            direction: 'bottom',
+            noHide: true,
+            permanent: true,
+            className: 'class-tooltip-vehicle-CG',
+          });
+        }
+
         marker.openTooltip();
       } /*else {
         marker.bindTooltip(`${marker.feature.properties['immat']}`, {

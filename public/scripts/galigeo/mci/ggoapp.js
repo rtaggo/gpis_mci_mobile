@@ -17,6 +17,7 @@
         userName: this._options.userName,
         userRole: this._options.userRole,
         chefsGroupe: this._options.chefsGroupe,
+        chefGroupeId: this._options.chefGroupeId,
       };
       GGO.UIManagerSingleton.getInstance({});
       this._mapManager = new GGO.MapManagerSingleton.getInstance(modulesOptions);
@@ -31,6 +32,9 @@
     },
     getVehicule: function () {
       return this._options.immatriculation;
+    },
+    getChef: function () {
+      return this._options.chefGroupeId;
     },
     getUserLogin: function () {
       return this._options.userName;

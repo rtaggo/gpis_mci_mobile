@@ -128,6 +128,7 @@
           case 'alpha':
             //GGO.SessionIssuePrompt('Rôle utilisateur non disponible', `Le rôle '<b>${authResponse.role}</b>' n\'est pas disponible pour le moment.<br /> Veuillez vous reconnecter.`, $('#appContainer').empty());
             this._currentUserName = username;
+            this.getListeCDG(this._currentUserName);
             this.fetchChefsGroup(this._currentUserName);
             break;
           default:
@@ -154,6 +155,27 @@
           let errMsg = errResponse.message || 'Une erreur est survenue, veuillez contacter votre administrateur';
           $('#error-message > .slds-form-element__help').text(errMsg);
           $('#error-message').removeClass('slds-hide');
+        },
+      });
+    },
+    getListeCDG: function (userName) {
+      let self = this;
+      const listeUrl = `${this._options.baseRESTServicesURL}/liste_cdg.php`;
+      $.ajax({
+        type: 'GET',
+        url: listeUrl,
+        success: function (response) {
+          console.log(`${listeUrl}`, response);
+          var chef_connected = userName;
+          var chef_connected_id = [...new Set(response.cdg.filter((s) => s.libelle === chef_connected).map((s) => s.id))];
+          sessionStorage.chefGroupeConnectedId = chef_connected_id;
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`${listeUrl} Request aborted`);
+          } else {
+            console.error(`Error for ${listeUrl} request: ${textStatus}`, errorThrown);
+          }
         },
       });
     },
@@ -416,7 +438,13 @@
       });
 
       sessionStorage.chefsGroupe = chefsGroupe;
-      this.fetchSecteursChefGroup();
+      //sessionStorage.chefsGroupeId = chefsGroupeId;
+      //this.fetchSecteursChefGroup();
+      $('#chefs_groupe-validate-btn').addClass('slds-hide');
+      $('#chefs_groupe-cancel-btn').addClass('slds-hide');
+      $('#combobox-chefs-groupe').attr('disabled', true);
+      $('.slds-icon_container.slds-pill__remove').addClass('slds-hide');
+      this.fetchImmatriculations();
     },
     validateChefGroupLoginSteps: function (selectedSecteurs) {
       let mapUrl = `/chefgroup.html`;
@@ -600,10 +628,45 @@
         $('#immatriculation-validate-btn').addClass('slds-hide');
       }
       sessionStorage.immatriculation = JSON.stringify(this._selectedImmatriculation);
-      this.assignVehicle(this._selectedImmatriculation, this._selectedPatrouille);
-      this.fetchSousSecteurs(this._selectedPatrouille);
+      switch (this._currentRole) {
+        case 'india':
+          this.assignVehicle(this._selectedImmatriculation, this._selectedPatrouille);
+          this.fetchSousSecteurs(this._selectedPatrouille);
+          break;
+        case 'charly':
+          var str1 = this._currentUserName;
+          var str2 = str1.toUpperCase();
+          var str3 = str2.substr(0, 1);
+          var str4 = str1.substr(str1.length - 2, str1.length);
+          var CGname = str3.concat(str4);
+          this._selectedChefGroup = {
+            id: parseInt(sessionStorage.chefGroupeConnectedId, 10),
+            name: CGname,
+          };
+          this.assignVehicle(this._selectedImmatriculation, this._selectedChefGroup);
+          this.fetchSecteursChefGroup();
+          break;
+        case 'alpha':
+          var str1 = this._currentUserName;
+          var str2 = str1.toUpperCase();
+          var str3 = str2.substr(0, 1);
+          var str4 = str1.substr(str1.length - 2, str1.length);
+          var CGname = str3.concat(str4);
+          this._selectedChefGroup = {
+            id: parseInt(sessionStorage.chefGroupeConnectedId, 10),
+            name: CGname,
+          };
+          this.assignVehicle(this._selectedImmatriculation, this._selectedChefGroup);
+          this.fetchSecteursChefGroup();
+          break;
+        default:
+          GGO.SessionIssuePrompt('Rôle utilisateur non disponible', `Le rôle '<b>${this._currentRole}</b>' n\'est pas disponible pour le moment.<br /> Veuillez vous reconnecter.`, $('#appContainer').empty());
+      }
+      //this.assignVehicle(this._selectedImmatriculation, this._selectedPatrouille);
+      //this.fetchSousSecteurs(this._selectedPatrouille);
       $('#immatriculation-form-element').addClass('slds-hide');
       $('#immatriculation-validate-btn').addClass('slds-hide');
+      $('#immatriculation-cancel-btn').addClass('slds-hide');
       $('#immatriculation_name').text(immatriculationName).removeClass('slds-hide');
       //this.verifyImmatriculation(this._selectedImmatriculation);
 
