@@ -149,7 +149,9 @@
 			console.log(' >> document is ready');
 			$('#logoutBtn1').click(function(e){
 				GGO.disconnect(
-					undefined, 
+					self.galigeo.getChef(), 
+					self.galigeo.getVehicule().id, 
+
 					{
 						userName: self.galigeo.getUserLogin(),
 						userRole: self.galigeo.getUserRole(),
@@ -160,7 +162,8 @@
 			});
 			$('#logoutBtn2').click(function(e){
 				GGO.disconnect(
-					undefined, 
+					self.galigeo.getChef(), 
+					self.galigeo.getVehicule().id, 
 					{
 						userName: self.galigeo.getUserLogin(),
 						userRole: self.galigeo.getUserRole(),
@@ -187,6 +190,9 @@
 			let userRole = sessionStorage.getItem('role');
 			let userName = sessionStorage.getItem('username');
 			let chefsGroupe = sessionStorage.getItem('chefsGroupe');
+			let chefGroupeId = parseInt(sessionStorage.getItem('chefGroupeConnectedId'),10);
+			let immatriculation = sessionStorage.getItem('immatriculation');
+
 			if (!userName) {
 				GGO.SessionIssuePrompt('Utilisateur indéfini', 'Votre nom  d\'utilisateur n\'est pas défini. Veuillez vous reconnecter.', $('#appContainer').empty());
 				return;
@@ -199,7 +205,12 @@
 				GGO.SessionIssuePrompt('Rôle India non autorisé', 'Le rôle India n\'est pas autorisé à suivre ce parcours utilisateur. Veuillez vous reconnecter.', $('#appContainer').empty());
 				return;
 			}
-			
+			if (!chefGroupeId) {
+				GGO.SessionIssuePrompt('ID CDG non défini', 'Votre ID de chef de groupe n\'est pas défini. Veuillez vous reconnecter.', $('#appContainer').empty());
+			}
+			if (!immatriculation) {
+				GGO.SessionIssuePrompt('Immatriculation non définie', 'Votre véhicule n\'est pas défini. Veuillez vous reconnecter.', $('#appContainer').empty());
+			}
 			let secteurs = null;
 			switch(userRole) {
 				case 'charly' : case 'alpha': 
@@ -218,6 +229,8 @@
 				userName:  userName,
 				userRole: userRole,
 				chefsGroupe: chefsGroupe,
+				immatriculation : JSON.parse(immatriculation),
+				chefGroupeId: chefGroupeId,
 				secteurs: JSON.parse(secteurs)
 			});
 			$('.ui-loader').remove();

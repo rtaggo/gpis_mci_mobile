@@ -362,6 +362,16 @@ router.get('/immatriculations.php', (req, res, next) => {
     res.json(immatriculations);
   });
 });
+
+router.get('/liste_cdg.php', (req, res, next) => {
+  //console.log(`[MCI_REST_API][GET] /immatriculations.php`);
+  const mcimodule = getMCIModule();
+  mcimodule.getCDG().then((cdg) => {
+    res.header('Content-Type', 'application/json');
+    res.json(cdg);
+  });
+});
+
 router.get('/affecter_vehicule.php', (req, res, next) => {
   //console.log(`[MCI_REST_API][GET] /liberer_patrouille.php`);
   const mcimodule = getMCIModule();

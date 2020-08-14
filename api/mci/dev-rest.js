@@ -392,6 +392,13 @@ const _getImmatriculations = async () => {
   return immatriculations;
 };
 
+const _getCDG = async () => {
+  //console.log(`[dev-rest] _getImmatriculations`);
+  let cdgUrl = `${require('../../config').get('BACKEND_URL')}/liste_cdg.php`;
+  let cdg = await doAsyncGET(cdgUrl);
+  return cdg;
+};
+
 const _libererVehicule = async (immatriculationId, patrouilleId) => {
   //console.log(`[dev-rest] _libererVehicule immatriculationId=${immatriculationId} patrouilleId=${patrouilleId}`);
   let revokeVehicleUrl = `${require('../../config').get('BACKEND_URL')}/liberer_vehicule.php?immatriculation=${immatriculationId}&patrouille=${patrouilleId}`;
@@ -453,6 +460,7 @@ module.exports = {
   getRestrictionsForCookie: _getRestrictionsForCookie,
   getCrise: _getCrise,
   getImmatriculations: _getImmatriculations,
+  getCDG: _getCDG,
   libererVehicule: _libererVehicule,
   affecterVehicule: _affecterVehicule,
   getImmatPatCouple: _getImmatPatCouple,

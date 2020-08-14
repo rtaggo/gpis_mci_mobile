@@ -128,6 +128,7 @@
           case 'alpha':
             //GGO.SessionIssuePrompt('Rôle utilisateur non disponible', `Le rôle '<b>${authResponse.role}</b>' n\'est pas disponible pour le moment.<br /> Veuillez vous reconnecter.`, $('#appContainer').empty());
             this._currentUserName = username;
+            this.getListeCDG(this._currentUserName);
             this.fetchChefsGroup(this._currentUserName);
             break;
           default:
@@ -154,6 +155,27 @@
           let errMsg = errResponse.message || 'Une erreur est survenue, veuillez contacter votre administrateur';
           $('#error-message > .slds-form-element__help').text(errMsg);
           $('#error-message').removeClass('slds-hide');
+        },
+      });
+    },
+    getListeCDG: function (userName) {
+      let self = this;
+      const listeUrl = `${this._options.baseRESTServicesURL}/liste_cdg.php`;
+      $.ajax({
+        type: 'GET',
+        url: listeUrl,
+        success: function (response) {
+          console.log(`${listeUrl}`, response);
+          var chef_connected = userName;
+          var chef_connected_id = [...new Set(response.cdg.filter((s) => s.libelle === chef_connected).map((s) => s.id))];
+          sessionStorage.chefGroupeConnectedId = chef_connected_id;
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          if (textStatus === 'abort') {
+            console.warn(`${listeUrl} Request aborted`);
+          } else {
+            console.error(`Error for ${listeUrl} request: ${textStatus}`, errorThrown);
+          }
         },
       });
     },
@@ -208,7 +230,7 @@
         $('#chefs_groupe-cancel-btn')
           .off()
           .click(function (e) {
-            self.handleClickCancelSectors();
+            GGO.postLogoutForm();
           })
           .removeClass('slds-hide');
         return;
@@ -276,12 +298,13 @@
       $('#chefs_groupe-cancel-btn')
         .off()
         .click(function (e) {
-          self.handleClickCancelSectors();
+          GGO.postLogoutForm();
         })
         .removeClass('slds-hide');
     },
     handleSecteursFetched: function (response) {
       console.log(`>> handleSecteursFetched`, response);
+      $('#combobox-soussecteurs').attr('placeholder', 'Choisir 1 à 3 secteurs');
       if (response.code !== 200) {
         $('#error-message > .slds-form-element__help').text(`${response.message}`);
         $('#error-message').removeClass('slds-hide');
@@ -307,14 +330,23 @@
       }
     },
     handleClickCancelSectors: function () {
-      GGO.disconnect(undefined, {
-        userName: this._currentUserName,
-        userRole: this._currentRole,
-        baseRESTServicesURL: '/services/rest/mci',
+      let self = this;
+      GGO.revokeVehicle(this._selectedImmatriculation.id, this._selectedChefGroup.id, {
+        baseRESTServicesURL: this._options.baseRESTServicesURL,
+        callback: this.fetchImmatriculations.bind(this),
+        context: this,
       });
+      $('#sous-secteurs-form-element').addClass('slds-hide');
+      $('#sous-secteurs-validate-btn').off().addClass('slds-hide');
+      $('#sous-secteurs-cancel-btn').off().addClass('slds-hide');
+      $('#error-message').addClass('slds-hide');
+      $('#immatriculation_name').addClass('slds-hide');
+      $('#listbox-soussecteurs').empty();
+      let listSelects = $('#listbox-selections-secteurs').empty();
     },
     handleSecteursFetchedCharly: function (response) {
       let self = this;
+
       $('#combobox-soussecteurs').attr('placeholder', 'Choisir 1 à 3 secteurs');
       $('#sous-secteurs-form-element')[0].firstElementChild.innerHTML = '<abbr class="slds-required" title="required">* </abbr>Secteurs';
       let ssUL = $('<ul class="slds-listbox slds-listbox_vertical" role="presentation"></ul>');
@@ -416,7 +448,13 @@
       });
 
       sessionStorage.chefsGroupe = chefsGroupe;
-      this.fetchSecteursChefGroup();
+      //sessionStorage.chefsGroupeId = chefsGroupeId;
+      //this.fetchSecteursChefGroup();
+      $('#chefs_groupe-validate-btn').addClass('slds-hide');
+      $('#chefs_groupe-cancel-btn').addClass('slds-hide');
+      $('#combobox-chefs-groupe').attr('disabled', true);
+      $('.slds-icon_container.slds-pill__remove').addClass('slds-hide');
+      this.fetchImmatriculations();
     },
     validateChefGroupLoginSteps: function (selectedSecteurs) {
       let mapUrl = `/chefgroup.html`;
@@ -557,12 +595,21 @@
           self.handleClickChooseImmatriculation();
         })
         .removeClass('slds-hide');
-      $('#immatriculation-cancel-btn')
-        .off()
-        .click(function (e) {
-          self.handleClickCancelImmatriculation();
-        })
-        .removeClass('slds-hide');
+      if (this._currentRole === 'india') {
+        $('#immatriculation-cancel-btn')
+          .off()
+          .click(function (e) {
+            self.handleClickCancelImmatriculation();
+          })
+          .removeClass('slds-hide');
+      } else if (this._currentRole === 'alpha' || this._currentRole === 'charly') {
+        $('#immatriculation-cancel-btn')
+          .off()
+          .click(function (e) {
+            GGO.postLogoutForm();
+          })
+          .removeClass('slds-hide');
+      }
     },
     handleClickCancelImmatriculation: function () {
       GGO.revokePatrouille(this._selectedPatrouille.id, {
@@ -584,8 +631,13 @@
       const selectCtnr = $('#select-immatriculation');
       let immatriculationId = selectCtnr.val();
       if (immatriculationId === '' || selectCtnr[0].selectedOptions.length === 0) {
+        $('#immatriculation-form-element div.slds-combobox').addClass('slds-has-error');
+        $('#error-message > .slds-form-element__help').text(`Sélection d'un véhicule obligatoire.`);
+        $('#error-message').removeClass('slds-hide');
         return;
       }
+      $('#error-message').addClass('slds-hide');
+      $('#immatriculation-form-element div.slds-combobox').removeClass('slds-has-error');
       immatriculationId = parseInt(immatriculationId);
       let selectedOption = $(selectCtnr[0].selectedOptions[0]);
       let immatriculationName = selectedOption.attr('data-immatriculationname');
@@ -600,10 +652,45 @@
         $('#immatriculation-validate-btn').addClass('slds-hide');
       }
       sessionStorage.immatriculation = JSON.stringify(this._selectedImmatriculation);
-      this.assignVehicle(this._selectedImmatriculation, this._selectedPatrouille);
-      this.fetchSousSecteurs(this._selectedPatrouille);
+      switch (this._currentRole) {
+        case 'india':
+          this.assignVehicle(this._selectedImmatriculation, this._selectedPatrouille);
+          this.fetchSousSecteurs(this._selectedPatrouille);
+          break;
+        case 'charly':
+          var str1 = this._currentUserName;
+          var str2 = str1.toUpperCase();
+          var str3 = str2.substr(0, 1);
+          var str4 = str1.substr(str1.length - 2, str1.length);
+          var CGname = str3.concat(str4);
+          this._selectedChefGroup = {
+            id: parseInt(sessionStorage.chefGroupeConnectedId, 10),
+            name: CGname,
+          };
+          this.assignVehicle(this._selectedImmatriculation, this._selectedChefGroup);
+          this.fetchSecteursChefGroup();
+          break;
+        case 'alpha':
+          var str1 = this._currentUserName;
+          var str2 = str1.toUpperCase();
+          var str3 = str2.substr(0, 1);
+          var str4 = str1.substr(str1.length - 2, str1.length);
+          var CGname = str3.concat(str4);
+          this._selectedChefGroup = {
+            id: parseInt(sessionStorage.chefGroupeConnectedId, 10),
+            name: CGname,
+          };
+          this.assignVehicle(this._selectedImmatriculation, this._selectedChefGroup);
+          this.fetchSecteursChefGroup();
+          break;
+        default:
+          GGO.SessionIssuePrompt('Rôle utilisateur non disponible', `Le rôle '<b>${this._currentRole}</b>' n\'est pas disponible pour le moment.<br /> Veuillez vous reconnecter.`, $('#appContainer').empty());
+      }
+      //this.assignVehicle(this._selectedImmatriculation, this._selectedPatrouille);
+      //this.fetchSousSecteurs(this._selectedPatrouille);
       $('#immatriculation-form-element').addClass('slds-hide');
       $('#immatriculation-validate-btn').addClass('slds-hide');
+      $('#immatriculation-cancel-btn').addClass('slds-hide');
       $('#immatriculation_name').text(immatriculationName).removeClass('slds-hide');
       //this.verifyImmatriculation(this._selectedImmatriculation);
 
