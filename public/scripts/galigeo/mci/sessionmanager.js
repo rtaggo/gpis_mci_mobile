@@ -582,10 +582,11 @@
       console.log(`>> handleImmatriculationsFetched`, response);
       const self = this;
       let selectCtnr = $('#select-immatriculation').empty();
+
       selectCtnr.append(
         $(`
         <option value="">Sélectionner un véhicule</option> 
-        ${response.immatriculations.map((p) => `<option value="${p.id}" data-immatriculationid="${p.id}" data-immatriculationconn="${p.connexion}" data-immatriculationname="${p.name}">${p.name}</option>`).join('')}
+        ${response.immatriculations.map((p) => `<option value="${p.id}" style="color:${p.color}; font-style:${p.fontstyle}" data-immatriculationid="${p.id}" data-immatriculationconn="${p.connexion}" data-immatriculationname="${p.name}">${p.name}</option>`).join('')}
       `)
       );
       $('#immatriculation-validate-btn')
