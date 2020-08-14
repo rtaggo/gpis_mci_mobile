@@ -352,7 +352,8 @@
         // response.chef_groupe.features.forEach((f, i) => {
         //   f.properties['marker-size'] = 'small';
         // });
-        this._chefGroupeLayer = L.mapbox
+        //on enleve les cartouches sur les secteurs car ils sont géolocalisés maintenant
+        /* this._chefGroupeLayer = L.mapbox
           .featureLayer(response.chef_groupe, {
             pointToLayer: function (feature, latlng) {
               let geojsonMarkerOptions = {
@@ -370,7 +371,7 @@
           .addTo(this._map)
           .on('layeradd', this.onChefGroupeAdded.bind(this))
           .setGeoJSON(response.chef_groupe);
-        zoomDone = true;
+        zoomDone = true; */
       }
       if (typeof response.mission_ronde !== 'undefined') {
         response.mission_ronde.features.forEach((f) => {
@@ -445,6 +446,14 @@
             className: 'class-tooltip-vehicle',
           });
         } else if (marker.feature.properties['patrouille'].startsWith('C')) {
+          marker.bindTooltip(`${marker.feature.properties['patrouille']}`, {
+            offset: L.point(0, 3),
+            direction: 'bottom',
+            noHide: true,
+            permanent: true,
+            className: 'class-tooltip-vehicle-CG',
+          });
+        } else if (marker.feature.properties['patrouille'].startsWith('A')) {
           marker.bindTooltip(`${marker.feature.properties['patrouille']}`, {
             offset: L.point(0, 3),
             direction: 'bottom',

@@ -162,7 +162,7 @@
 			});
 			$('#logoutBtn2').click(function(e){
 				GGO.disconnect(
-					undefined, 
+					self.galigeo.getChef(), 
 					self.galigeo.getVehicule().id, 
 					{
 						userName: self.galigeo.getUserLogin(),

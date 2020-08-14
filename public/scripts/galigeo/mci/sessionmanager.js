@@ -230,7 +230,7 @@
         $('#chefs_groupe-cancel-btn')
           .off()
           .click(function (e) {
-            self.handleClickCancelSectors();
+            GGO.postLogoutForm();
           })
           .removeClass('slds-hide');
         return;
@@ -298,12 +298,13 @@
       $('#chefs_groupe-cancel-btn')
         .off()
         .click(function (e) {
-          self.handleClickCancelSectors();
+          GGO.postLogoutForm();
         })
         .removeClass('slds-hide');
     },
     handleSecteursFetched: function (response) {
       console.log(`>> handleSecteursFetched`, response);
+      $('#combobox-soussecteurs').attr('placeholder', 'Choisir 1 à 3 secteurs');
       if (response.code !== 200) {
         $('#error-message > .slds-form-element__help').text(`${response.message}`);
         $('#error-message').removeClass('slds-hide');
@@ -329,14 +330,23 @@
       }
     },
     handleClickCancelSectors: function () {
-      GGO.disconnect(undefined, {
-        userName: this._currentUserName,
-        userRole: this._currentRole,
-        baseRESTServicesURL: '/services/rest/mci',
+      let self = this;
+      GGO.revokeVehicle(this._selectedImmatriculation.id, this._selectedChefGroup.id, {
+        baseRESTServicesURL: this._options.baseRESTServicesURL,
+        callback: this.fetchImmatriculations.bind(this),
+        context: this,
       });
+      $('#sous-secteurs-form-element').addClass('slds-hide');
+      $('#sous-secteurs-validate-btn').off().addClass('slds-hide');
+      $('#sous-secteurs-cancel-btn').off().addClass('slds-hide');
+      $('#error-message').addClass('slds-hide');
+      $('#immatriculation_name').addClass('slds-hide');
+      $('#listbox-soussecteurs').empty();
+      let listSelects = $('#listbox-selections-secteurs').empty();
     },
     handleSecteursFetchedCharly: function (response) {
       let self = this;
+
       $('#combobox-soussecteurs').attr('placeholder', 'Choisir 1 à 3 secteurs');
       $('#sous-secteurs-form-element')[0].firstElementChild.innerHTML = '<abbr class="slds-required" title="required">* </abbr>Secteurs';
       let ssUL = $('<ul class="slds-listbox slds-listbox_vertical" role="presentation"></ul>');
@@ -585,12 +595,21 @@
           self.handleClickChooseImmatriculation();
         })
         .removeClass('slds-hide');
-      $('#immatriculation-cancel-btn')
-        .off()
-        .click(function (e) {
-          self.handleClickCancelImmatriculation();
-        })
-        .removeClass('slds-hide');
+      if (this._currentRole === 'india') {
+        $('#immatriculation-cancel-btn')
+          .off()
+          .click(function (e) {
+            self.handleClickCancelImmatriculation();
+          })
+          .removeClass('slds-hide');
+      } else if (this._currentRole === 'alpha' || this._currentRole === 'charly') {
+        $('#immatriculation-cancel-btn')
+          .off()
+          .click(function (e) {
+            GGO.postLogoutForm();
+          })
+          .removeClass('slds-hide');
+      }
     },
     handleClickCancelImmatriculation: function () {
       GGO.revokePatrouille(this._selectedPatrouille.id, {
@@ -612,8 +631,13 @@
       const selectCtnr = $('#select-immatriculation');
       let immatriculationId = selectCtnr.val();
       if (immatriculationId === '' || selectCtnr[0].selectedOptions.length === 0) {
+        $('#immatriculation-form-element div.slds-combobox').addClass('slds-has-error');
+        $('#error-message > .slds-form-element__help').text(`Sélection d'un véhicule obligatoire.`);
+        $('#error-message').removeClass('slds-hide');
         return;
       }
+      $('#error-message').addClass('slds-hide');
+      $('#immatriculation-form-element div.slds-combobox').removeClass('slds-has-error');
       immatriculationId = parseInt(immatriculationId);
       let selectedOption = $(selectCtnr[0].selectedOptions[0]);
       let immatriculationName = selectedOption.attr('data-immatriculationname');
