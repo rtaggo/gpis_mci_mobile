@@ -586,7 +586,7 @@
       selectCtnr.append(
         $(`
         <option value="">Sélectionner un véhicule</option> 
-        ${response.immatriculations.map((p) => `<option value="${p.id}" style="color:${p.color}; font-style:${p.fontstyle}" data-immatriculationid="${p.id}" data-immatriculationconn="${p.connexion}" data-immatriculationname="${p.name}">${p.name}</option>`).join('')}
+        ${response.immatriculations.map((p) => `<option value="${p.id}" style="color:${p.color}; font-style:${p.fontstyle}" data-immatriculationid="${p.id}" data-immatriculationconn="${p.connexion}" data-immatriculationname="${p.name}">${p.name}${p.occupied}</option>`).join('')}
       `)
       );
       $('#immatriculation-validate-btn')
