@@ -265,14 +265,14 @@
       response.features.forEach((f) => {
         f.properties['marker-size'] = 'small';
         //f.properties['marker-color'] = GGO.getColorForEtatVehicule(f.properties['etat']);
-        /* 
+
         if (parseInt(f.properties.pause) == 1) {
           f.properties['marker-color'] = '#A40DC2';
         } else {
           f.properties['marker-color'] = '#000000';
         }
-        */
-        f.properties['marker-color'] = '#000000';
+
+        //f.properties['marker-color'] = '#000000';
         f.properties['marker-symbol'] = 'car';
         f.properties['description'] = f.properties.immat;
         //console.log(f.properties.statut_mission);
