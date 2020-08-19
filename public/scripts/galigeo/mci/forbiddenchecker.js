@@ -25,7 +25,7 @@
             // filtrer en fonction de ce qui est dans le cookie
             // voir les etapes du fichier de ce matin
             // on recupere le cookie
-            let f_sites_cookies = GGO.docCookies.getItem('gpis_forbidden_sites');
+            let f_sites_cookies = localStorage.getItem('gpis_forbidden_sites');
             let sites_set = new Set();
 
             if (f_sites_cookies) {
@@ -41,7 +41,7 @@
               console.log(`Nouvelles Restrictions response: `, response);
               GGO.notifyNewMissionSound(3);
               // update du cookie
-              GGO.docCookies.setItem('gpis_forbidden_sites', JSON.stringify([...sites.map((s) => s.id), ...sites_set]), 31536e3, '/', null);
+              localStorage.setItem('gpis_forbidden_sites', JSON.stringify([...sites.map((s) => s.id), ...sites_set]));
               // afficher la popup
               /*
               GGO.AlertRestrictionsPrompt = function (title, container, options) {

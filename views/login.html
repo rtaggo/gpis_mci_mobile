@@ -141,7 +141,7 @@
       $(document).ready(function (e) {
         console.log(' >> document is ready');
         // suppression d'un cookie existant contenant la liste des sites interdits
-        GGO.docCookies.removeItem('gpis_forbidden_sites');
+        localStorage.removeItem('gpis_forbidden_sites');
         GGO.docCookies.removeItem('gpis_crisis');
         /*
       $('#login-btn').click(function(e){

@@ -550,4 +550,5 @@
     },
   };
 })();
+
 /* end GGO: put code below in galigeo.js */
