@@ -8,7 +8,7 @@
 
   GGO.ForbiddenChecker.prototype = {
     init: function () {
-      //this.check_forbidden();
+      this.check_forbidden();
     },
     check_forbidden: function (options) {
       let self = this;
