@@ -629,6 +629,7 @@
       */
     },
     handleClickChooseImmatriculation: function () {
+      let self = this;
       const selectCtnr = $('#select-immatriculation');
       let immatriculationId = selectCtnr.val();
       if (immatriculationId === '' || selectCtnr[0].selectedOptions.length === 0) {
@@ -653,6 +654,7 @@
         $('#immatriculation-validate-btn').addClass('slds-hide');
       }
       sessionStorage.immatriculation = JSON.stringify(this._selectedImmatriculation);
+
       switch (this._currentRole) {
         case 'india':
           this.assignVehicle(this._selectedImmatriculation, this._selectedPatrouille);
@@ -668,6 +670,14 @@
             id: parseInt(sessionStorage.chefGroupeConnectedId, 10),
             name: CGname,
           };
+          if (!localStorage.chefsGroupeImmat) {
+            localStorage.chefsGroupeImmat = JSON.stringify([{ immat: this._selectedImmatriculation.id, chefs_groupe: this._selectedChefGroup.name.concat(',').concat(sessionStorage.chefsGroupe) }]);
+          } else {
+            var chefsGroupeImmat = JSON.parse(localStorage.chefsGroupeImmat);
+            chefsGroupeImmat.push({ immat: this._selectedImmatriculation.id, chefs_groupe: this._selectedChefGroup.name.concat(',').concat(sessionStorage.chefsGroupe) });
+            localStorage.chefsGroupeImmat = JSON.stringify(chefsGroupeImmat);
+          }
+          console.log(chefsGroupeImmat);
           this.assignVehicle(this._selectedImmatriculation, this._selectedChefGroup);
           this.fetchSecteursChefGroup();
           break;
