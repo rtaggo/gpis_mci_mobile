@@ -691,6 +691,13 @@
             id: parseInt(sessionStorage.chefGroupeConnectedId, 10),
             name: CGname,
           };
+          if (!localStorage.chefsGroupeImmat) {
+            localStorage.chefsGroupeImmat = JSON.stringify([{ immat: this._selectedImmatriculation.id, chefs_groupe: this._selectedChefGroup.name.concat(',').concat(sessionStorage.chefsGroupe) }]);
+          } else {
+            var chefsGroupeImmat = JSON.parse(localStorage.chefsGroupeImmat);
+            chefsGroupeImmat.push({ immat: this._selectedImmatriculation.id, chefs_groupe: this._selectedChefGroup.name.concat(',').concat(sessionStorage.chefsGroupe) });
+            localStorage.chefsGroupeImmat = JSON.stringify(chefsGroupeImmat);
+          }
           this.assignVehicle(this._selectedImmatriculation, this._selectedChefGroup);
           this.fetchSecteursChefGroup();
           break;
