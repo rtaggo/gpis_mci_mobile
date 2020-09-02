@@ -519,7 +519,7 @@
         //self.openSignalementModal();
         //self.fetchTypeSignalements();
       });
-      if (!mission.properties.renfort) {
+      if (mission.properties.renfort) {
         $('#renfort_label')[0].innerHTML = 'Patrouille leader';
       }
     },
