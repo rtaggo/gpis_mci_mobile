@@ -2094,7 +2094,7 @@
       TODO: refactor
       $('#signalement_list li').click(function(e) { console.log($(this).val()); }) 
       */
-      if (!mission.properties.renfort) {
+      if (mission.properties.renfort) {
         $('#renfort_label')[0].innerHTML = 'Patrouille leader';
       }
       $('#signalements li')
