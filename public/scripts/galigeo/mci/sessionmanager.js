@@ -342,7 +342,8 @@
       $('#error-message').addClass('slds-hide');
       $('#immatriculation_name').addClass('slds-hide');
       $('#listbox-soussecteurs').empty();
-      let listSelects = $('#listbox-selections-secteurs').empty();
+      //let listSelects = $('#listbox-selections-secteurs').empty();
+      $('#combobox-soussecteurs').val('');
     },
     handleSecteursFetchedCharly: function (response) {
       let self = this;
@@ -607,7 +608,8 @@
         $('#immatriculation-cancel-btn')
           .off()
           .click(function (e) {
-            GGO.postLogoutForm();
+            //GGO.postLogoutForm();
+            self.handleClickCancelImmatriculationCharly();
           })
           .removeClass('slds-hide');
       }
@@ -623,6 +625,32 @@
       $('#immatriculation-cancel-btn').off().addClass('slds-hide');
       $('#patrouille_name').addClass('slds-hide');
       $('#error-message').addClass('slds-hide');
+
+      /*
+      $('#patrouille-form-element').removeClass('slds-hide');
+      $('#patrouille-validate-btn').removeClass('slds-hide');
+      */
+    },
+    handleClickCancelImmatriculationCharly: function () {
+      GGO.revokePatrouille(parseInt(sessionStorage.chefGroupeConnectedId, 10), {
+        baseRESTServicesURL: this._options.baseRESTServicesURL,
+        callback: this.fetchChefsGroup.bind(this),
+        context: this,
+      });
+      $('#immatriculation-form-element').addClass('slds-hide');
+      $('#immatriculation-validate-btn').off().addClass('slds-hide');
+      $('#immatriculation-cancel-btn').off().addClass('slds-hide');
+      //$('#patrouille_name').addClass('slds-hide');
+      $('#error-message').addClass('slds-hide');
+
+      //
+      $('#listbox-chefs-groupe div.slds-listbox__option.slds-is-selected').removeClass('slds-is-selected');
+      $('#listbox-selections-chefs-groupe').empty();
+      $('#combobox-chefs-groupe').val('');
+      $('#chefs_groupe-validate-btn').removeClass('slds-hide');
+      $('#chefs_groupe-cancel-btn').removeClass('slds-hide');
+      $('#combobox-chefs-groupe').attr('disabled', false);
+      $('.slds-icon_container.slds-pill__remove').removeClass('slds-hide');
       /*
       $('#patrouille-form-element').removeClass('slds-hide');
       $('#patrouille-validate-btn').removeClass('slds-hide');
