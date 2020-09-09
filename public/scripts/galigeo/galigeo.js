@@ -237,7 +237,7 @@
         name_music = '/sounds/new_crisis.mp3';
         break;
       default:
-        console.war(`code ${code} non supporté`);
+        console.warn(`code ${code} non supporté`);
     }
     if (name_music) {
       try {
