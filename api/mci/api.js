@@ -376,13 +376,13 @@ router.get('/affecter_vehicule.php', (req, res, next) => {
   //console.log(`[MCI_REST_API][GET] /liberer_patrouille.php`);
   const mcimodule = getMCIModule();
   mcimodule.affecterVehicule(req.query.immatriculation, req.query.patrouille).then((assignVehicleResponse) => {
+    res.header('Content-Type', 'application/json');
     if (assignVehicleResponse.code !== 200) {
       console.error(`MaJ Mission error with code ${assignVehicleResponse.code}: ${JSON.stringify(assignVehicleResponse)}`);
       res.status(500).json(assignVehicleResponse);
     } else {
       res.status(200).json(assignVehicleResponse);
     }
-    res.header('Content-Type', 'application/json');
   });
 });
 
