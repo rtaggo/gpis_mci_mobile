@@ -42,7 +42,7 @@
       let self = this;
       window.addEventListener('orientationchange', function (e) {
         console.log('the orientation of the device is now ' + screen.orientation.angle, e);
-        //self._handleOrientationChanged(screen.orientation.angle === 0 ? 'portrait' : 'landscape');
+        self._handleOrientationChanged(screen.orientation.angle === 0 ? 'portrait' : 'landscape');
       });
       $('#neighborhoodIcon').click(function (e) {
         GGO.EventBus.dispatch(GGO.EVENTS.NEIGHBORHOOD);
@@ -91,7 +91,7 @@
         threshold: 0,
       });
     },
-    /* _handleOrientationChanged: function (orientation) {
+    _handleOrientationChanged: function (orientation) {
       console.log('_handleOrientationChanged');
       this.updateUISizes();
     },
@@ -118,7 +118,7 @@
         height: wHalfHeight + 'px',
       });
       GGO.EventBus.dispatch(GGO.EVENTS.INVALIDATEMAPSIZE);
-    }, */
+    },
     _handleSwipeUpDownEnd: function (direction, data) {
       var self = this;
       var bCardHeight = 24;
