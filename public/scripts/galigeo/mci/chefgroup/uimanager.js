@@ -33,8 +33,8 @@
       $('#mission-card-Container .slds-card__body').css({
         //height: this._viewSize.halfHeight + 'px',
         //'max-height': this._viewSize.halfHeight + 'px',
-        height: 'calc(50%)',
-        'max-height': 'calc(50%)',
+        height: 'calc(100%)',
+        'max-height': 'calc(500%)',
       });
       this._setupListeners();
     },
