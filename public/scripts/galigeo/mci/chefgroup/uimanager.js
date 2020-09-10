@@ -16,13 +16,13 @@
       this._viewSize.thirdHeight = this._viewSize.height / 3;
       this._viewSize.heightThreshold = this._viewSize.height / 7;
       $('#map').css({
-        //height: this._viewSize.halfHeight + 'px',
-        height: 'calc(50%)',
+        height: this._viewSize.halfHeight + 'px',
+        //height: 'calc(50%)',
       });
       $('#mission-card-Container').css({
-        //'max-height': this._viewSize.halfHeight + 'px',
-        height: 'calc(50%)',
-        'max-height': 'calc(50%)',
+        'max-height': this._viewSize.halfHeight + 'px',
+        //height: 'calc(50%)',
+        //'max-height': 'calc(50%)',
       });
       /*
       $('#mission-card-Container .slds-card__body').css({
@@ -31,10 +31,10 @@
       });
       */
       $('#mission-card-Container .slds-card__body').css({
-        //height: this._viewSize.halfHeight + 'px',
-        //'max-height': this._viewSize.halfHeight + 'px',
-        height: 'calc(50%)',
-        'max-height': 'calc(50%)',
+        height: this._viewSize.halfHeight - 20 + 'px',
+        'max-height': this._viewSize.halfHeight - 20 + 'px',
+        //height: 'calc(50%)',
+        //'max-height': 'calc(50%)',
       });
       this._setupListeners();
     },
