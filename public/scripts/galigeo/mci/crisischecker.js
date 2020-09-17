@@ -11,6 +11,7 @@
       this.check_crisis();
     },
     check_crisis: function (options) {
+      console.log('check crisis');
       let self = this;
       // faire appel ajax
 
