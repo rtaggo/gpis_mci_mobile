@@ -109,7 +109,7 @@
 
     getToken: function (callback) {
       let self = this;
-      let restAuthURL = 'https://v3.oceansystem.com/ocean-3.0.0/restapi/auth/authenticate?login=galigeo1&password=GPIS03';
+      let restAuthURL = 'https://v3.oceansystem.com/ocean-3.0.0/restapi/auth/authenticate?login=galigeo1&password=MCImobile123*';
       $.ajax({
         type: 'POST',
         url: restAuthURL,
