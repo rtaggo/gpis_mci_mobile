@@ -443,14 +443,14 @@
             permanent: true,
             className: 'class-tooltip-vehicle',
           });
-          if (marker.feature.properties['patrouille'].startsWith('K')) {
-            marker.bindTooltip(`${marker.feature.properties['patrouille']}`, {
-              offset: L.point(0, 3),
-              direction: 'bottom',
-              noHide: true,
-              permanent: true,
-              className: 'class-tooltip-vehicle',
-            });
+        } else if (marker.feature.properties['patrouille'].startsWith('K')) {
+          marker.bindTooltip(`${marker.feature.properties['patrouille']}`, {
+            offset: L.point(0, 3),
+            direction: 'bottom',
+            noHide: true,
+            permanent: true,
+            className: 'class-tooltip-vehicle',
+          });  
         } else if (marker.feature.properties['patrouille'].startsWith('C')) {
           marker.bindTooltip(`${marker.feature.properties['patrouille']}`, {
             offset: L.point(0, 3),
